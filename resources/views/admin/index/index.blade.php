@@ -132,7 +132,7 @@
             <dl id="asgd">
                 <dt>网站管理</dt>
                 <dd><a href="/admin/index">查看配置</a></dd>
-                <dd><a href="/admin/users/create" >修改配置</a></dd>
+                <dd><a href="/admin/users/update" >修改配置</a></dd>
             </dl>
         </li>
 
