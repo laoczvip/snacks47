@@ -21,4 +21,22 @@ Route::get('admin/create','Admin\UserController@create');
 Route::post('admin/store','Admin\UserController@store');
 
 
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+/*路由分配*/
+
 
