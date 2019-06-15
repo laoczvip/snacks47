@@ -135,6 +135,12 @@
                 <dd><a href="/admin/users/create" >修改配置</a></dd>
             </dl>
         </li>
+         <li>
+            <dl id="asgd">
+                <dt>会员管理</dt>
+                <dd><a href="/admin/index">查看会员</a></dd>
+            </dl>
+        </li>
 
 
 
