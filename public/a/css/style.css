@@ -40,8 +40,8 @@ ul{margin:0;padding:0;list-style-type:none}
 hr{margin-top:.28rem;margin-bottom:.28rem;border:0;border-top:1px solid #DDD8CE}
 h6,p{line-height:1.41;text-align:justify;margin:-.2em 0;word-break:break-all}
 small,weak{color:#666}
-::-webkit-input-placeholder {color:#999;line-height:inherit;} 
-:-moz-placeholder {color:#999;line-height:inherit;} 
+::-webkit-input-placeholder {color:#999;line-height:inherit;}
+:-moz-placeholder {color:#999;line-height:inherit;}
 ::-moz-placeholder {color:#999;line-height:inherit;}
 @font-face {
     font-family: 'adminthemesregular';
@@ -72,8 +72,8 @@ small,weak{color:#666}
 .admin_login dt em{display:block;font-size:12px;margin-top:8px;}
 .admin_login dd{margin:5px 0;height:42px;overflow:hidden;position:relative;}
 .admin_login dd .login_txtbx{font-size:14px;height:26px;line-height:26px;padding:8px 5%;width:90%;text-indent:2em;border:none;background:#5cbdaa;color:white;}
-.admin_login dd .login_txtbx::-webkit-input-placeholder {color:#f4f4f4;line-height:inherit;} 
-.admin_login dd .login_txtbx:-moz-placeholder {color:#f4f4f4;line-height:inherit;} 
+.admin_login dd .login_txtbx::-webkit-input-placeholder {color:#f4f4f4;line-height:inherit;}
+.admin_login dd .login_txtbx:-moz-placeholder {color:#f4f4f4;line-height:inherit;}
 .admin_login dd .login_txtbx::-moz-placeholder {color:#f4f4f4;line-height:inherit;}
 .admin_login dd .login_txtbx:focus{background:#55b7a4;}
 .admin_login dd:before{font-family:'adminthemesregular';position:absolute;top:0;left:10px;height:42px;line-height:42px;font-size:20px;color:#0c9076;}
@@ -161,7 +161,8 @@ header .rt_nav li .quit_icon:before{content:"Q";}
 .textarea{display:inline-block;margin-top:5px;outline:none;resize:none;border:1px #139667 solid;padding:8px;}
 .uploadImg{display:inline-block;padding:15px;background:#f8f8f8;position:relative;border:1px #139667 solid;}
 .uploadImg input{display:none;}
-.uploadImg span{display:block;font-size:12px;text-align:center;color:#139667;}
+.uploadImg span{display:block;font-size:12px;text-align:center;color:#139667;    margin-left: 150px;
+    margin-top: -40px;}
 .uploadImg span:hover{color:#209f71;}
 .uploadImg span:before{content:"#";font-family:'adminthemesregular';display:block;font-size:40px;}
 .ulColumn2{overflow:hidden;}

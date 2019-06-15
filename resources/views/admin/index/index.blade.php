@@ -10,6 +10,10 @@
 <![endif]-->
 <script src="/a/js/jquery.js"></script>
 <script src="/a/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script>
 
     (function($){
@@ -34,7 +38,7 @@
     })(jQuery);
 </script>
 </head>
-<body>
+<body style="    line-height: 1;">
 <!--header-->
 <header>
      <h1><img src="/a/images/admin_logo.png"/></h1>
@@ -48,19 +52,115 @@
      <h2><a href="/admin">首页</a></h2>
      <ul>
         <li>
-            <dl>
+            <dl id="asgd">
                 <dt>用户管理</dt>
                 <!--当前链接则添加class:active-->
-                <dd><a href="/admin/index">用户列表</a></dd>
-                <dd><a href="/admin/create" class="active">添加用户</a></dd>
-                <dd><a href="recycle_bin.html">已删除的用户</a></dd>
+                <dd><a href="/admin/users">用户列表</a></dd>
+                <!-- <dd><a href="/admin/create" class="active">添加用户</a></dd> -->
+                <dd><a href="/admin/users/create" >添加用户</a></dd>
+                <dd><a href="/admin/softdeletion">已删除的用户</a></dd>
             </dl>
         </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>商品管理</dt>
+                <dd><a href="/admin/goods">商品列表</a></dd>
+                <dd><a href="/admin/users/create" >添加商品</a></dd>
+                <dd><a href="/admin/softdeletion">已删除的商品</a></dd>
+            </dl>
+        </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>订单管理</dt>
+                <dd><a href="/admin/index">订单列表</a></dd>
+                <dd><a href="/admin/softdeletion">已删除的订单</a></dd>
+            </dl>
+        </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>分类管理</dt>
+                <dd><a href="/admin/index">分类列表</a></dd>
+                <dd><a href="/admin/users/create" >添加分类</a></dd>
+            </dl>
+        </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>头条管理</dt>
+                <dd><a href="/admin/index">头条列表</a></dd>
+                <dd><a href="/admin/users/create" >添加头条</a></dd>
+                <dd><a href="/admin/users/create" >已删除的头条</a></dd>
+            </dl>
+        </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>活动管理</dt>
+                <dd><a href="/admin/index">活动列表</a></dd>
+                <dd><a href="/admin/users/create" >添加活动</a></dd>
+                <dd><a href="/admin/users/create" >已删除的活动</a></dd>
+            </dl>
+        </li>
+
+
+
+
+        <li>
+            <dl id="asgd">
+                <dt>友情链接管理</dt>
+                <dd><a href="/admin/index">友情链接列表</a></dd>
+                <dd><a href="/admin/users/create" >添加友情链接</a></dd>
+                <dd><a href="/admin/users/create" >已删除的友情链接</a></dd>
+            </dl>
+        </li>
+
+
+        <li>
+            <dl id="asgd">
+                <dt>轮播图管理</dt>
+                <dd><a href="/admin/index">轮播图列表</a></dd>
+                <dd><a href="/admin/users/create" >添加轮播图</a></dd>
+                <dd><a href="/admin/users/create" >已删除的轮播图</a></dd>
+            </dl>
+        </li>
+
+
+        <li>
+            <dl id="asgd">
+                <dt>网站管理</dt>
+                <dd><a href="/admin/index">查看配置</a></dd>
+                <dd><a href="/admin/users/create" >修改配置</a></dd>
+            </dl>
+        </li>
+
+
+
+
+
+
+
         <p class="btm_infor">© DeathGhost.cn 版权所有</p>
      </ul>
 </aside>
+    @if(session('error'))
+    <div class="alert  alert-danger alert-dismissible" role="alert" style="width: 92em;margin-left: 378px;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>{{session('error')}}</strong>
+    </div>
+    @endif
+
+    @if(session('success'))
+    <div class="alert  alert-info alert-dismissible" role="alert" style="width: 92em;margin-left: 378px;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>{{session('success')}}</strong>
+    </div>
+    @endif
 
 @section('center')
+
 <section class="rt_wrap content mCustomScrollbar">
     <div class="rt_content">
 <!--统计图-->
@@ -80,6 +180,10 @@
      </div>
 </section>
 @show
+
+
+
+
 <script src="/a/js/amcharts.js" type="text/javascript"></script>
 <script src="/a/js/serial.js" type="text/javascript"></script>
 <script src="/a/js/pie.js" type="text/javascript"></script>
