@@ -7,5 +7,8 @@ use App\Http\Controllers\Controller;
 
 class XController extends Controller
 {
-    //
+    public function idnex()
+    {
+        echo "string";
+    }
 }
