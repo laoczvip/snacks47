@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\goods;
 class GoodsController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        echo "string";
+        $goods = goods::all();
+        dump($goods);
     }
 
     /**
