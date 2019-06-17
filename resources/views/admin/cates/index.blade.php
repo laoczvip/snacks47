@@ -6,15 +6,8 @@
      <div class="rt_content">
         <form action="admin/cates" method="get">
           <section class="mtb">
-             <select class="select" name="cid">
-                  @forelse($cates as $k=>$v)
-                        @if($v->pid==0)
-                            <option value="0" disabled>{{$v->title}}</option>
-                        @else
-                             <option value="0">{{$v->title}}</option>
-                        @endif
-                        @empty
-                        @endforelse
+             <select class="select">
+                <option>商品类</option>
              
              </select>
              <input type="text" name="name" class="textbox textbox_225" placeholder="输入会员号/手机/电子邮件查询..."/>
@@ -31,11 +24,31 @@
                     <th>创建时间</th>
                     <th>操作</th>
                </tr>
-        
-            
+               @forelse($cates as $k=>$v)
+               <tr>
+                 <td>{{$v->id}}</td>
+                 <td>{{$v->title}}</td>
+                 <td>{{$v->pid}}</td>
+                 <td>{{$v->path}}</td>
+                 <td>
+                 @if($v->status==1)
+                 <kbd style="background:green">正常</kbd>
+                 @else
+                 <kbd>禁用</kbd>
+                 @endif
+                </td>
+                 <td>{{$v->add_time}}</td>
+                 <td>
+                    <a href="/admin/cates/show?id={{$v->id}}">查看子类</a>
+                    <a href="/admin/cates/create?id={{$v->id}}">添加子类</a>
+                    <a href="/admin/cates/delete/{{$v->id}}">删除类</a>
+                 </td>
+               </tr>
+               @empty
+               @endforelse
           </table>
           <aside class="paging">
-           
+            {{ $cates->links() }}
           </aside>
      </div>
 </section>

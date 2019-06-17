@@ -5,8 +5,33 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\goods;
+use App\Models\Cates;
 class GoodsController extends Controller
 {
+    public function tree($data,$pid)
+    {
+        static $list = [];
+        foreach($data as $k=>$v){
+            if($pid==$v->pid){
+                $list[] = $v;
+                $this->tree($data,$v->id);
+            }
+        }
+    }
+    //公共商品分类
+    public static function Cates_data($pid=0)
+    {
+        $cates  = Cates::all();
+        static $list = []; 
+        foreach($cates as $k=>$v){
+            if($pid==$v->pid){
+                $list[] = $v;
+                static::Cates_data($v->id);
+            }
+        }
+        return $list;
+        
+    } 
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +40,8 @@ class GoodsController extends Controller
     public function index()
     {
         $goods = goods::all();
-        dump($goods);
+        $cates = GoodsController::Cates_data();
+        return view('admin.goods.index',['goods'=>$goods,'cates'=>$cates]);
     }
 
     /**
@@ -25,7 +51,10 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        //
+
+        $cates = GoodsController::Cates_data();
+        
+        return view('admin.goods.create',['cates'=>$cates]);
     }
 
     /**
