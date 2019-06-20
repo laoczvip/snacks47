@@ -78,6 +78,7 @@ class UserController extends Controller
         }else{
             $file_path = "";
         }
+        
         $data = $request->all();
         $user = new Users;
         $user->number = $data['number'];
