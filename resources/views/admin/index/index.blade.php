@@ -14,38 +14,17 @@
 <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
-    (function($){
-        $(window).load(function(){
-
-            $("a[rel='load-content']").click(function(e){
-                e.preventDefault();
-                var url=$(this).attr("href");
-                $.get(url,function(data){
-                    $(".content .mCSB_container").append(data); //load new content inside .mCSB_container
-                    //scroll-to appended content
-                    $(".content").mCustomScrollbar("scrollTo","h2:last");
-                });
-            });
-
-            $(".content").delegate("a[href='top']","click",function(e){
-                e.preventDefault();
-                $(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
-            });
-
-        });
-    })(jQuery);
-</script>
 </head>
-<body style="    line-height: 1;">
+<body style="line-height: 1;">
 <!--header-->
 <header>
      <h1><img src="/a/images/admin_logo.png"/></h1>
      <ul class="rt_nav">
-      <li><a href="http://www.mycodes.net" target="_blank" class="website_icon">站点首页</a></li>
+      <li><a href="/" target="_blank" class="website_icon">站点首页</a></li>
       <li><a href="#" class="set_icon">账号设置</a></li>
-      <li><a href="login.html" class="quit_icon">安全退出</a></li>
+      <li><a href="/admin/login" class="quit_icon">安全退出</a></li>
      </ul>
 </header>
 <aside class="lt_aside_nav content mCustomScrollbar">
@@ -61,19 +40,12 @@
                 <dd><a href="/admin/softdeletion">已删除的用户</a></dd>
             </dl>
         </li>
-         <li>
-            <dl id="asgd">
-                <dt>商品分类</dt>
-                <dd><a href="/admin/cates">分类列表</a></dd>
-                <dd><a href="/admin/cates/create" >添加分类</a></dd>
-                <dd><a href="/admin/softdeletion">已删除的分类</a></dd>
-            </dl>
-        </li>
+
         <li>
             <dl id="asgd">
                 <dt>商品管理</dt>
                 <dd><a href="/admin/goods">商品列表</a></dd>
-                <dd><a href="/admin/goods/create" >添加商品</a></dd>
+                <dd><a href="/admin/users/create" >添加商品</a></dd>
                 <dd><a href="/admin/softdeletion">已删除的商品</a></dd>
             </dl>
         </li>
@@ -139,10 +111,9 @@
             <dl id="asgd">
                 <dt>网站管理</dt>
                 <dd><a href="/admin/index">查看配置</a></dd>
-                <dd><a href="/admin/users/update" >修改配置</a></dd>
+                <dd><a href="/admin/users/create" >修改配置</a></dd>
             </dl>
         </li>
-
 
 
 
@@ -166,7 +137,35 @@
       <strong>{{session('success')}}</strong>
     </div>
     @endif
+
 @section('center')
+<script>
+
+    (function($){
+        $(window).load(function(){
+
+            $("a[rel='load-content']").click(function(e){
+                e.preventDefault();
+                var url=$(this).attr("href");
+                $.get(url,function(data){
+                    $(".content .mCSB_container").append(data); //load new content inside .mCSB_container
+                    //scroll-to appended content
+                    $(".content").mCustomScrollbar("scrollTo","h2:last");
+                });
+            });
+
+            $(".content").delegate("a[href='top']","click",function(e){
+                e.preventDefault();
+                $(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
+            });
+
+        });
+    })(jQuery);
+
+
+</script>
+
+
 
 
 <section class="rt_wrap content mCustomScrollbar">
@@ -187,10 +186,6 @@
         </section>
      </div>
 </section>
-
-
-
-
 <script src="/a/js/amcharts.js" type="text/javascript"></script>
 <script src="/a/js/serial.js" type="text/javascript"></script>
 <script src="/a/js/pie.js" type="text/javascript"></script>
@@ -315,5 +310,18 @@
 </script>
 @show
 
+
+
+
+<script src="/layui/layui.js"></script>
+<script>
+//一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function(){
+      var layer = layui.layer
+      ,form = layui.form;
+
+
+    });
+</script>
 </body>
 </html>
