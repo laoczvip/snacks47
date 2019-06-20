@@ -151,6 +151,29 @@ Route::resource('admin/goods','Admin\GoodsController');
 /******************************************************************/
 
 /*************************梁伟杰***********************************/
+// 轮播图修改状态 
+Route::get('admin/banners/changeStatus','Admin\BannersController@changeStatus');
+// 轮播图删除
+Route::get('admin/banners/delete','Admin\BannersController@delete');
+// 轮播图软删除
+Route::get('admin/banners/soft','Admin\BannersController@soft');
+// 轮播图软删除
+Route::get('admin/banners/huifu/{id}','Admin\BannersController@huifu');
+// 轮播图永久删除
+Route::get('admin/banners/delete_data/{id}','Admin\BannersController@delete_data');
+// 轮播图管理
+Route::resource('admin/banners','Admin\BannersController');
+
+// 头条删除
+Route::get('admin/headlines/delete','Admin\HeadlinesController@delete');
+// 头条软删除
+Route::get('admin/headlines/soft','Admin\HeadlinesController@soft');
+// 头条软删除
+Route::get('admin/headlines/huifu/{id}','Admin\HeadlinesController@huifu');
+// 头条永久删除
+Route::get('admin/headlines/delete_data/{id}','Admin\HeadlinesController@delete_data');
+// 头条管理
+Route::resource('admin/headlines','Admin\HeadlinesController');
 
 
 
