@@ -148,7 +148,6 @@ class PersonalController extends Controller
     {
         $res = $request->all();
 
-        dump($res);
         DB::beginTransaction();
         // 获取头像
 
