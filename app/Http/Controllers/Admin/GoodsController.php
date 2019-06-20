@@ -205,7 +205,10 @@ class GoodsController extends Controller
        
         if($request->hasFile('showcase')){
             $data['showcase'] = $request->file('showcase')->store(date('Ymd'));
-           Storage::delete($request->input('showcate'));
+            if(!empty($request->input('showcase'))){
+                Storage::delete($request->input('showcate'));
+            }
+           
         } else {
             $data['showcase'] = $request->input('showcase','');
         }
@@ -213,7 +216,7 @@ class GoodsController extends Controller
         $res =  DB::table('goods_sku')->where('gid',$id)->update($data);
         if($res){
             $data_sku['title'] = $data['title'];
-            $data_sku['showcase'] = $data['showcase'];
+            
 
             $sku = DB::table('goods')->where('id',$id)->update($data_sku);
             if($sku){

@@ -1,7 +1,16 @@
 @extends('admin.index.index')
 
 @section('center')
-
+    <script type="text/javascript">
+        var ue = UE.getEditor('content',{
+          toolbars: [
+                        ['emotion','spechars','snapscreen', 
+                        'fontfamily', 'fontsize', 
+                        'simpleupload',  'insertimage',
+                        ],
+                    ]
+        });
+    </script>
 
     <section class="rt_wrap content mCustomScrollbar">
     <div class="rt_content">
