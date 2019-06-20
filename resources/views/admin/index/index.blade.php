@@ -41,11 +41,27 @@
             </dl>
         </li>
 
+        
+         <li>
+            <dl id="asgd">
+                <dt>商品分类</dt>
+                <dd><a href="/admin/cates">分类列表</a></dd>
+                <dd><a href="/admin/cates/create" >添加分类</a></dd>
+                <dd><a href="/admin/softdeletion">已删除的分类</a></dd>
+            </dl>
+        </li>
+         <li>
+            <dl id="asgd">
+                <dt>商品属性管理</dt>
+                <dd><a href="/admin/flavour/index">属性列表</a></dd>
+                <dd><a href="/admin/flavour/create" >添加属性</a></dd>
+            </dl>
+        </li>
         <li>
             <dl id="asgd">
                 <dt>商品管理</dt>
                 <dd><a href="/admin/goods">商品列表</a></dd>
-                <dd><a href="/admin/users/create" >添加商品</a></dd>
+                <dd><a href="/admin/goods/create" >添加商品</a></dd>
                 <dd><a href="/admin/softdeletion">已删除的商品</a></dd>
             </dl>
         </li>

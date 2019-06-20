@@ -122,7 +122,34 @@ Route::get('center/order','Home\PersonalController@order');
 /*************************莫薛贵***********************************/
 
 
+
+//活动
+Route::get('admin/exercise/create','Admin\ExeciseController@create');
+//删除商品
+Route::get('admin/goods/del','Admin\GoodsController@del');
+//修改商品
+Route::get('admin/goods/edit','Admin\GoodsController@edit');
+Route::post('admin/goods/update','Admin\GoodsController@update');
+Route::get('admin/goods/index','Admin\GoodsController@index');
+//商品属性
+Route::get('admin/flavour/index','Admin\FlavourController@index');
+Route::get('admin/flavour/create','Admin\FlavourController@create');
+Route::post('admin/flavour/store','Admin\FlavourController@store');
+Route::get('admin/flavour/destroy','Admin\FlavourController@destroy');
+Route::get('admin/flavour/edit','Admin\FlavourController@edit');
+Route::post('admin/flavour/update','Admin\FlavourController@update');
+//商品模型控制器
 Route::resource('admin/goods','Admin\GoodsController');
+Route::get('admin/cates/index','Admin\CatesController@index');
+Route::get('admin/cates/edit','Admin\CatesController@edit');
+Route::post('admin/cates/update','Admin\CatesController@update');
+Route::get('admin/cates/store','Admin\CatesController@store');
+//显示分类模型控制器
+Route::resource('admin/cates','Admin\CatesController');
+//插入类
+Route::post('admin/cates/insert','Admin\CatesController@insert');
+//删除类
+Route::get('admin/cates/delete/{id}','Admin\CatesController@delete');
 
 
 
