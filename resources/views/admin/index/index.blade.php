@@ -18,7 +18,6 @@
 
         <link rel="stylesheet" href="/a/css/switcher.css">
         <!-- 首页统计 -->
-        <link rel="stylesheet" type="text/css" href="/aa/layui/css/layui.css"/>
         <link rel="stylesheet" type="text/css" href="/aa/css/admin.css"/>
         <script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
         <script src="/aa/echarts/echarts.js"></script>

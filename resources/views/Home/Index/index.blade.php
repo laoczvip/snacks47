@@ -74,8 +74,9 @@
 
                                                                     <dt><span title="蛋糕">{{$val->title}}</span></dt>
                                                                      @forelse($val->sub as $v)
+                                                                    
                                                                      @if($v->status==1)
-                                                                    <dd><a title="蒸蛋糕" href="#"><span>{{$v->title}}</span></a></dd>
+                                                                    <dd><a href="/home/personal/search?id={{$v->id}}"><span>{{$v->title}}</span></a></dd>
                                                                      @endif
                                                                      @empty
                                                                      @endforelse

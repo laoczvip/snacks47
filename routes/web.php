@@ -180,7 +180,8 @@ Route::post('admin/cates/insert','Admin\CatesController@insert');
 
 //前台单件商品操作
 Route::get('home/personal/introduction','Home\PersonalController@IntroDuction');
-
+//商品搜索页面
+Route::get('home/personal/search','Home\PersonalController@Search');
 
 
 
