@@ -13,8 +13,10 @@
 use App\Models\Weds;
 
 Route::get('/', function () {
-    $weds = weds::find(1);
-    return view('home.index.index',['weds'=>$weds]);
+    // $weds = weds::find(1);
+    // return view('home.index.index',['weds'=>$weds]);
+Route::get('home/personal/introduction','Home\PersonalController@IntroDuction');
+
 });
 
 // 前台首页

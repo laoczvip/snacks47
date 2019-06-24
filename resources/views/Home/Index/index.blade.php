@@ -16,6 +16,7 @@
 
 <body>
         @include('home.public.hmtop')
+
         <div class="clear"></div>
         </div>
         <div class="banner">
@@ -397,63 +398,7 @@
                                 </div>
                                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
                             </div>
-<<<<<<< HEAD
-                            <a href="# "><img src="/h/images/1.jpg" /></a>
-                        </div>
-
-
-
-                    <div class="am-u-sm-3 am-u-md-2 text-three big">
-                        <div class="outer-con ">
-                            <div class="title ">
-                                小优布丁
-                            </div>
-                            <div class="sub-title ">
-                                ¥4.8
-                            </div>
-                            <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-                        </div>
-                        <a href="# "><img src="/h/images/5.jpg" /></a>
-                    </div>
-
-                    <div class="am-u-sm-3 am-u-md-2 text-three sug">
-                        <div class="outer-con ">
-                            <div class="title ">
-                                小优布丁
-                            </div>
-                            <div class="sub-title ">
-                                ¥4.8
-                            </div>
-                            <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-                        </div>
-                        <a href="# "><img src="/h/images/3.jpg" /></a>
-                    </div>
-
-                    <div class="am-u-sm-3 am-u-md-2 text-three ">
-                        <div class="outer-con ">
-                            <div class="title ">
-                                小优布丁
-                            </div>
-                            <div class="sub-title ">
-                                ¥4.8
-                            </div>
-                            <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-                        </div>
-                        <a href="# "><img src="/h/images/4.jpg" /></a>
-                    </div>
-
-                    <div class="am-u-sm-3 am-u-md-2 text-three last big ">
-                        <div class="outer-con ">
-                            <div class="title ">
-                                小优布丁
-                            </div>
-                            <div class="sub-title ">
-                                ¥4.8
-                            </div>
-                            <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-=======
                             <a href="/home/personal/introduction?id={{$goods_data->gid}}&cid={{$goods_data->cid}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
->>>>>>> origin/qz
                         </div>
 
 
