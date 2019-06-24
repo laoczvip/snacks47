@@ -41,13 +41,15 @@
                       {{ csrf_field() }}
             <ul class="ulColumn2">
                  <li>
-                    <span class="item_name" style="width:120px;">会员等级:</span>
+                    <span class="item_name" style="width:120px;">商品类:</span>
                         <select name="cid" class="select">
                         @forelse($cates as $k=>$v)
-                        @if($v->pid==0)
+                        @if($v->pid==0)  
+                            <option value="0" disabled>{{$v->title}}</option>                      
+                        @elseif(substr_count($v->title,'|--')==2)
                             <option value="0" disabled>{{$v->title}}</option>
                         @else
-                             <option value="{{$v->id}}">{{$v->title}}</option>
+                             <option value="{{$v->id}}">{{$v->title}}</option>  
                         @endif
                         @empty
                         @endforelse
