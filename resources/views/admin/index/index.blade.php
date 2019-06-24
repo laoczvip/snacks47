@@ -118,9 +118,9 @@
         <li>
             <dl id="asgd">
                 <dt>友情链接管理</dt>
-                <dd><a href="/admin/index">友情链接列表</a></dd>
-                <dd><a href="/admin/users/create" >添加友情链接</a></dd>
-                <dd><a href="/admin/users/create" >已删除的友情链接</a></dd>
+                <dd><a href="/admin/friendly">友情链接列表</a></dd>
+                <dd><a href="/admin/friendly/create" >添加友情链接</a></dd>
+                <dd><a href="/admin/friendly/create" >已删除的友情链接</a></dd>
             </dl>
         </li>
 
