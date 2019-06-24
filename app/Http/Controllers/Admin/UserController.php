@@ -20,7 +20,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function Index(Request $request)
-    {
+    { 
+        
         // 接收搜索参数
         $value = $request->input('value');
         $type = $request->input('type');

@@ -168,31 +168,6 @@
             </dl>
         </li>
 
-        <li>
-            <dl id="asgd">
-                <dt>分类管理</dt>
-                <dd><a href="/admin/index">分类列表</a></dd>
-                <dd><a href="/admin/users/create" >添加分类</a></dd>
-            </dl>
-        </li>
-
-        <li>
-            <dl id="asgd">
-                <dt>头条管理</dt>
-                <dd><a href="/admin/index">头条列表</a></dd>
-                <dd><a href="/admin/users/create" >添加头条</a></dd>
-                <dd><a href="/admin/users/create" >已删除的头条</a></dd>
-            </dl>
-        </li>
-
-        <li>
-            <dl id="asgd">
-                <dt>活动管理</dt>
-                <dd><a href="/admin/index">活动列表</a></dd>
-                <dd><a href="/admin/users/create" >添加活动</a></dd>
-                <dd><a href="/admin/users/create" >已删除的活动</a></dd>
-            </dl>
-        </li>
 
 
 
@@ -243,28 +218,6 @@
             </li>
         </ul>
     <!-- 左边栏折叠 -->
-
-
-
-        <li>
-            <dl id="asgd">
-                <dt>轮播图管理</dt>
-                <dd><a href="/admin/index">轮播图列表</a></dd>
-                <dd><a href="/admin/users/create" >添加轮播图</a></dd>
-                <dd><a href="/admin/users/create" >已删除的轮播图</a></dd>
-            </dl>
-        </li>
-
-
-        <li>
-            <dl id="asgd">
-                <dt>网站管理</dt>
-                <dd><a href="/admin/index">查看配置</a></dd>
-                <dd><a href="/admin/users/update" >修改配置</a></dd>
-            </dl>
-        </li>
-
-
  <script>
        $(".sidebar-title").live('click', function() {
             if ($(this).parent(".sidebar-nav").hasClass("sidebar-nav-fold")) {
@@ -519,6 +472,9 @@
 </script>
 @show
 
+
+
+<script src="/layui/layui.js"></script>
 <script>
     //一般直接写在一个js文件中
     layui.use(['layer', 'form'], function(){
