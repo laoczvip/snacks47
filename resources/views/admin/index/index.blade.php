@@ -170,14 +170,6 @@
 
         <li>
             <dl id="asgd">
-                <dt>订单管理</dt>
-                <dd><a href="/admin/index">订单列表</a></dd>
-                <dd><a href="/admin/softdeletion">已删除的订单</a></dd>
-            </dl>
-        </li>
-
-        <li>
-            <dl id="asgd">
                 <dt>分类管理</dt>
                 <dd><a href="/admin/index">分类列表</a></dd>
                 <dd><a href="/admin/users/create" >添加分类</a></dd>
@@ -212,9 +204,8 @@
                                 <dt>友情链接管理</dt>
                             </div>
                             <ul class="sidebar-trans">
-                                <dd><a href="/admin/index">友情链接列表</a></dd>
-                                <dd><a href="/admin/users/create" >添加友情链接</a></dd>
-                                <dd><a href="/admin/users/create" >已删除的友情链接</a></dd>
+                                <dd><a href="/admin/friendly">友情链接列表</a></dd>
+                                <dd><a href="/admin/friendly/create" >添加友情链接</a></dd>
                             </ul>
                     </div>
                 </dl>
@@ -252,24 +243,7 @@
             </li>
         </ul>
     <!-- 左边栏折叠 -->
-  <script>
-           $(".sidebar-title").live('click', function() {
-                if ($(this).parent(".sidebar-nav").hasClass("sidebar-nav-fold")) {
-                    $(this).next().slideDown(200);
-                    $(this).parent(".sidebar-nav").removeClass("sidebar-nav-fold");
-                } else {
-                    $(this).next().slideUp(200);
-                    $(this).parent(".sidebar-nav").addClass("sidebar-nav-fold");
-                }
 
-        <li>
-            <dl id="asgd">
-                <dt>友情链接管理</dt>
-                <dd><a href="/admin/friendly">友情链接列表</a></dd>
-                <dd><a href="/admin/friendly/create" >添加友情链接</a></dd>
-                <dd><a href="/admin/friendly/create" >已删除的友情链接</a></dd>
-            </dl>
-        </li>
 
 
         <li>
@@ -291,10 +265,17 @@
         </li>
 
 
->>>>>>> origin/yandao
-
-            });
-    </script>
+ <script>
+       $(".sidebar-title").live('click', function() {
+            if ($(this).parent(".sidebar-nav").hasClass("sidebar-nav-fold")) {
+                $(this).next().slideDown(200);
+                $(this).parent(".sidebar-nav").removeClass("sidebar-nav-fold");
+            } else {
+                $(this).next().slideUp(200);
+                $(this).parent(".sidebar-nav").addClass("sidebar-nav-fold");
+            }
+        });
+</script>
 
 
 
