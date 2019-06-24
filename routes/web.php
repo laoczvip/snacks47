@@ -153,6 +153,8 @@ Route::get('admin/flavour/edit','Admin\FlavourController@edit');
 Route::post('admin/flavour/update','Admin\FlavourController@update');
 //商品模型控制器
 Route::resource('admin/goods','Admin\GoodsController');
+//删除类
+Route::get('admin/cates/delete','Admin\CatesController@delete');
 Route::get('admin/cates/index','Admin\CatesController@index');
 Route::get('admin/cates/edit','Admin\CatesController@edit');
 Route::post('admin/cates/update','Admin\CatesController@update');
@@ -161,8 +163,11 @@ Route::get('admin/cates/store','Admin\CatesController@store');
 Route::resource('admin/cates','Admin\CatesController');
 //插入类
 Route::post('admin/cates/insert','Admin\CatesController@insert');
-//删除类
-Route::get('admin/cates/delete/{id}','Admin\CatesController@delete');
+
+
+
+//前台单件商品操作
+Route::get('home/personal/introduction','Home\PersonalController@IntroDuction');
 
 
 

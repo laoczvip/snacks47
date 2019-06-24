@@ -17,7 +17,7 @@ class GoodsController extends Controller
         foreach($data as $k=>$v){
             if($pid==$v->pid){
                 $list[] = $v;
-                $this->tree($data,$v->id);
+                return $this->tree($data,$v->id);
             }
         }
     }
@@ -51,7 +51,7 @@ class GoodsController extends Controller
     {
         $flavour = DB::table('flavour')->get();
         $list = [];
-        foreach($flavour as $k=>$v){
+        foreach($flavour as $k=>$v){ 
             $list[$v->id] = $v->fname;
         }
 
@@ -103,6 +103,11 @@ class GoodsController extends Controller
     {
 
         $cates = GoodsController::Cates_data();
+        
+        foreach($cates as $k=>$v){
+            $n = substr_count($v->path,',');
+            $cates[$k]->title = str_repeat('|--', $n).$v->title; 
+        }
         $flavour = DB::table('flavour')->get();
         
         return view('admin.goods.create',['cates'=>$cates,'flavour'=>$flavour]);
@@ -118,9 +123,9 @@ class GoodsController extends Controller
     {
         //商品添加
        
-        $goods_data['title'] = $request->input('title',0); 
+        $goods_data['title'] = $request->input('title',''); 
         $goods_data['created_at'] = date('Y-m-d H:i:s',time());
-
+       
 
        
        
@@ -132,6 +137,8 @@ class GoodsController extends Controller
         if($goods){
              $goodssku_data = $request->all('title','flavorties','price','stock','weight','status','desc');
              $goodssku_data['gid'] = $gid;
+             $goodssku_data['original'] = $request->input('original',0);
+             $goodssku_data['parameter'] = $request->input('parameter','');
              if($request->hasFile('showcase')){
              $goodssku_data['showcase'] = $request->file('showcase')->store(date('Ymd'));
              } else {
@@ -173,6 +180,10 @@ class GoodsController extends Controller
         $id = $request->input('id',0);
         $goods_sku = DB::table('goods_sku')->where('cid',$id)->first();
         $cates = GoodsController::Cates_data();
+         foreach($cates as $k=>$v){
+            $n = substr_count($v->path,',');
+            $cates[$k]->title = str_repeat('|--', $n).$v->title; 
+        }
         $cates_name = GoodsController::Cates_name();
         $flavour = DB::table('flavour')->get();
         $flavour_data = GoodsController::Flavour();
@@ -199,7 +210,8 @@ class GoodsController extends Controller
         $data['weight'] = $request->input('weight',0);
         $data['status'] = $request->input('status',-1);
         $data['desc'] = $request->input('desc','');
-
+        $data['original'] = $request->input('original',0);
+        $data['parameter'] = $request->input('parameter',0);
         //类id
         $data['cid'] = $request->input('cid','');
        
@@ -207,16 +219,14 @@ class GoodsController extends Controller
             $data['showcase'] = $request->file('showcase')->store(date('Ymd'));
             if(!empty($request->input('showcase'))){
                 Storage::delete($request->input('showcate'));
-            }
-           
+            }         
         } else {
             $data['showcase'] = $request->input('showcase','');
-        }
-      
+        }   
         $res =  DB::table('goods_sku')->where('gid',$id)->update($data);
         if($res){
-            $data_sku['title'] = $data['title'];
-            
+            $data_sku['title'] = $request->input('title','');
+           
 
             $sku = DB::table('goods')->where('id',$id)->update($data_sku);
             if($sku){
@@ -225,7 +235,7 @@ class GoodsController extends Controller
                 return back()->with('error','插入goods修改失败');
             }
         } else {
-            return back()->with('error','插入goods_sku修改失败');
+            return back()->with('error','goods_sku没修改');
         }
     }
 
@@ -242,7 +252,9 @@ class GoodsController extends Controller
     public function del(Request $request)
     {
        $id = $request->input('id',0);
+
        $store = DB::table('goods_sku')->where('id',$id)->first();
+       dd($store);
        $sto = $store->stock; 
        if($sto==0){
             DB::table('goods_sku')->delete($id);
