@@ -11,15 +11,17 @@ use Illuminate\Support\Facades\Storage;
 class BannersController extends Controller
 {   
     /**
+     * 
      * 修改状态
      * @param  [type] $id [description]
      * @return [type]     [description]
      */
     public function ChangeStatus(Request $request)
     {
-        
+        // 获取状态
         $status = $request->input('status');
 
+        // 获取id
         $id = $request->input('id');
        
 
@@ -40,8 +42,11 @@ class BannersController extends Controller
      */
     public function Delete(Request $request)
     {   
+
+    // 获取要删除的id
     $id = $request->input('id');
     
+    // 执行删除
     $res = Banners::destroy($id);
     // $res = DB::table('banners')->where('id',$id)->delete();
 
@@ -101,6 +106,7 @@ class BannersController extends Controller
     {
         
         $banner = Banners::find($id);
+        
         $res2 = DB::table('banners')->where('id',$id)->delete();
 
          if($res2){
@@ -116,11 +122,13 @@ class BannersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function Index()
-    {
-        $banners = Banners::paginate(5);
+    public function Index(Request $request)
+    {   
+        $search = $request->input('search');
+        $banners = Banners::where('title','like','%'.$search.'%')->paginate(5);
         return view('admin.banners.index',[
                     'banners'=>$banners,
+                    'search'=>$search,
             ]);
        
     }

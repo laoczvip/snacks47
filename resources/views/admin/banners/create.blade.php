@@ -39,7 +39,17 @@
                     &nbsp;&nbsp;&nbsp;未开启:<input type="radio" name="status" value="0" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     开启:<input type="radio" name="status" value="1">
                  </div> 
-                  
+                 <div class="form-group"> 
+                    <label for="content" style="width:120px";>文章内容</label> 
+                   <!-- 加载编辑器的容器 -->
+                      <script style="height:150px"; id="container" name="content" type="text/plain">
+                          
+                      </script>
+                     
+                   </div> 
+                                       
+                                 
+                   
                 </li>
 
                 
@@ -49,6 +59,20 @@
                 </li>
             </ul>
         </form>
+<!-- 配置文件 -->
+                <script type="text/javascript" src="/utf8-php/ueditor.config.js"></script>
+                <!-- 编辑器源码文件 -->
+                <script type="text/javascript" src="/utf8-php/ueditor.all.js"></script>
+
+
+                <!-- 实例化编辑器 -->
+                <script type="text/javascript">
+                    var ue = UE.getEditor('container',{toolbars: [
+    ['fullscreen', 'source', 'undo', 'redo', 'bold', 'emotion','simpleupload']
+]});
+                </script>
+          
+        </div></div>
     </div>
 </section>
 @endsection
