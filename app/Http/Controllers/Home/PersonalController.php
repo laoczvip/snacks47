@@ -25,6 +25,22 @@ class PersonalController extends Controller
         return view('home.personal.center');
     }
 
+    
+    /**
+     * 加载购买页面
+     * @return [type] [HTML页面]
+     */
+    public function IntroDuction(Request $request)
+    {
+        //商品id
+        $gid = $request->input('id',0);
+        //所属类Id
+        $cid = $request->input('cid',0);
+        $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
+        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
+        // dd($goods_sku);
+        return view('home.personal.introduction',['goods_sku'=>$goods_sku,'goods_all'=>$goods_all]);
+    }
     /**
      * 加载收货地址页面
      * @return [type] [HTML页面]

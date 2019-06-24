@@ -159,14 +159,18 @@ class CatesController extends Controller
      * @param  int  $id
      * @return [type] [cates] [delete]
      */
-    public function Delete($id)
+    public function Delete(Request $request)
     {
+        $id = $request->input('id',0);
+        $case_data =Cates::where('id',$id)->first();
+       
         $cate = Cates::where('pid',$id)->first();
-        
+       
+       
         if(empty($cate)){
              $cates =Cates::destroy($id);
                if($cates){
-                    return redirect('admin/cates/show?id='.$cate->pid)->with('success','删除成功');
+                    return redirect('admin/cates/show?id='.$case_data->pid)->with('success','删除成功');
                } else{
                     return back()->with('error','删除失败');
                }

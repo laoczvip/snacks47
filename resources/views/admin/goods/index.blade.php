@@ -41,10 +41,10 @@
           </script>
           <table class="table" style="text-align:center;">
           
-               <tr>
+               <tr >
                     <th style="width:100px;">商品Id</th>
                     <th style="width:100px;">商品类</th>
-                    <th style="width:100px;">商品名称</th>
+                    <th style="width:100px; ">商品名称</th>
                     <th style="width:100px;">展示图</th>
                     <th style="width:100px;">商品属性</th>
                     <th style="width:60px;">商品价格</th>
@@ -59,7 +59,7 @@
                <tr>
                  <td>{{$v->id}}</td>
                  <td>{{$cates_name[$v->cid]}}</td>
-                 <td>{{$v->title}}</td>
+                 <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap; ">{{$v->title}}</td>
                  <td><img src="/uploads/{{$v->showcase}}" style="width:30px;"></td>
                  <td>{{$flavour_data[$v->flavorties]}}</td>
                  <td>{{$v->price}}</td>
