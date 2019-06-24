@@ -13,10 +13,8 @@
     <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
     <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
 </head>
-
 <body>
         @include('home.public.hmtop')
-
         <div class="clear"></div>
         </div>
         <div class="banner">
