@@ -138,6 +138,7 @@ Route::get('center/order','Home\PersonalController@order');
 
 
 
+
 //活动
 Route::get('admin/exercise/create','Admin\ExeciseController@create');
 //删除商品
@@ -162,9 +163,15 @@ Route::get('admin/cates/edit','Admin\CatesController@edit');
 Route::post('admin/cates/update','Admin\CatesController@update');
 Route::get('admin/cates/store','Admin\CatesController@store');
 //显示分类模型控制器
+
+// 显示商品控制器
+Route::resource('admin/goods','Admin\GoodsController');
+// 显示分类控制器
+
 Route::resource('admin/cates','Admin\CatesController');
-//插入类
+// 插入类
 Route::post('admin/cates/insert','Admin\CatesController@insert');
+
 
 
 
@@ -172,6 +179,10 @@ Route::post('admin/cates/insert','Admin\CatesController@insert');
 Route::get('home/personal/introduction','Home\PersonalController@IntroDuction');
 
 
+
+
+// 删除类
+Route::get('admin/cates/delete/{id}','Admin\CatesController@delete');
 
 
 
@@ -213,6 +224,20 @@ Route::get('home/personal/introduction','Home\PersonalController@IntroDuction');
 
 
 /*************************谢肇韬***********************************/
+Route::group(['prefix'=>'admin'],function(){
+
+    // 后台 友情链接 删除
+    Route::get('friendly/destroy','Admin\FriendlyController@destroy');
+
+    // 后台 友情链接 快速激活 状态
+    Route::get('friendly/ChangeStatus','Admin\FriendlyController@ChangeStatus');
+
+});
+
+// 后台 友情链接
+Route::resource('admin/friendly','Admin\FriendlyController');
+
+
 
 
 

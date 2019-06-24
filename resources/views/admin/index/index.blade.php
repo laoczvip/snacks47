@@ -97,6 +97,7 @@
                             <dd><a href="/admin/goods">商品列表</a></dd>
                             <dd><a href="/admin/goods/create" >添加商品</a></dd>
                 <dd><a href="/admin/softdeletion">已删除的商品</a></dd>
+
                         </ul>
                     </div>
                 </dl>
@@ -161,6 +162,43 @@
                 </dl>
             </li>
 
+            </dl>
+        </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>订单管理</dt>
+                <dd><a href="/admin/index">订单列表</a></dd>
+                <dd><a href="/admin/softdeletion">已删除的订单</a></dd>
+            </dl>
+        </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>分类管理</dt>
+                <dd><a href="/admin/index">分类列表</a></dd>
+                <dd><a href="/admin/users/create" >添加分类</a></dd>
+            </dl>
+        </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>头条管理</dt>
+                <dd><a href="/admin/index">头条列表</a></dd>
+                <dd><a href="/admin/users/create" >添加头条</a></dd>
+                <dd><a href="/admin/users/create" >已删除的头条</a></dd>
+            </dl>
+        </li>
+
+        <li>
+            <dl id="asgd">
+                <dt>活动管理</dt>
+                <dd><a href="/admin/index">活动列表</a></dd>
+                <dd><a href="/admin/users/create" >添加活动</a></dd>
+                <dd><a href="/admin/users/create" >已删除的活动</a></dd>
+            </dl>
+        </li>
+
 
 
 
@@ -220,6 +258,37 @@
                     $(this).next().slideUp(200);
                     $(this).parent(".sidebar-nav").addClass("sidebar-nav-fold");
                 }
+
+        <li>
+            <dl id="asgd">
+                <dt>友情链接管理</dt>
+                <dd><a href="/admin/friendly">友情链接列表</a></dd>
+                <dd><a href="/admin/friendly/create" >添加友情链接</a></dd>
+                <dd><a href="/admin/friendly/create" >已删除的友情链接</a></dd>
+            </dl>
+        </li>
+
+
+        <li>
+            <dl id="asgd">
+                <dt>轮播图管理</dt>
+                <dd><a href="/admin/index">轮播图列表</a></dd>
+                <dd><a href="/admin/users/create" >添加轮播图</a></dd>
+                <dd><a href="/admin/users/create" >已删除的轮播图</a></dd>
+            </dl>
+        </li>
+
+
+        <li>
+            <dl id="asgd">
+                <dt>网站管理</dt>
+                <dd><a href="/admin/index">查看配置</a></dd>
+                <dd><a href="/admin/users/update" >修改配置</a></dd>
+            </dl>
+        </li>
+
+
+>>>>>>> origin/yandao
 
             });
     </script>
