@@ -10,7 +10,7 @@
         <link href="/h/css/infstyle.css" rel="stylesheet" type="text/css">
         <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
         <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
-        @include('home.public.inco')
+    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
     </head>
     <body>
         <!--头 -->

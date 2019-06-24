@@ -11,6 +11,7 @@
         <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
         <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
         <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
     </head>
     <body>
         <!--头 -->

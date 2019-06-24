@@ -20,7 +20,7 @@
 		<script type="text/javascript" src="/h/js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="/h/js/jquery.flexslider.js"></script>
 		<script type="text/javascript" src="/h/js/list.js"></script>
-		@include('home.public.inco')
+    	<link rel="icon" href="/uploads/{{ $weds->icon }}"/>
 	</head>
 
 	<body>
