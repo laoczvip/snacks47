@@ -366,7 +366,7 @@
 						     	@forelse($goods_all as $good_child)
 							      <li class="first">
 							      	<div class="p-img">                    
-							      		<a  href="/home/personal/introduction?id={{$good_child->id}}&cid={{$good_child->cid}}"> <img class="" src="/uploads/{{$good_child->showcase}}"> </a>               
+							      		<a  href="/home/personal/introduction?id={{$good_child->gid}}&cid={{$good_child->cid}}"> <img class="" src="/uploads/{{$good_child->showcase}}"> </a>               
 							      	</div>
 							      	<div class="p-name"><a href="/h/#">
 							      		{{$good_child->title}}
