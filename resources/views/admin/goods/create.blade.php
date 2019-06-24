@@ -3,11 +3,9 @@
 @section('center')
     <script type="text/javascript">
         var ue = UE.getEditor('content',{
-          toolbars: [
-                        ['emotion','spechars','snapscreen', 
-                        'fontfamily', 'fontsize', 
-                        'simpleupload',  'insertimage',
-                        ],
+          toolbars: [[
+                'fontfamily', 'fontsize', 
+                ],
                     ]
         });
     </script>
@@ -110,11 +108,12 @@
                     <span class="item_name" style="width:120px;">商品参数:</span>
                                    <!-- 实例化编辑器 -->
                          <div style="width:800px; 
+                                    margin-left:60px;
                                      display: -webkit-box;
                                     -webkit-box-orient: vertical;             
                                     -webkit-line-clamp: 3;
                                     overflow: hidden;">
-                        <script id="content" name="parameter" type="text/plain"></script>
+                        <script id="content" name="parameter" type="text/plain" style="height:150px;"></script>
                         </div>
                    
                 </li>
@@ -122,11 +121,12 @@
                     <span class="item_name" style="width:120px;">商品描述:</span>
                                    <!-- 实例化编辑器 -->
                          <div style="width:800px; 
+                                    margin-left:60px;
                                      display: -webkit-box;
                                     -webkit-box-orient: vertical;             
                                     -webkit-line-clamp: 3;
                                     overflow: hidden;">
-                        <script id="content1" name="desc" type="text/plain"></script>
+                        <script id="content1" name="desc" type="text/plain" style="height:200px;"></script>
                         </div>
                    
                 </li>

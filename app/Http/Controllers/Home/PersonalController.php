@@ -40,10 +40,30 @@ class PersonalController extends Controller
         //所属类Id
         $cid = $request->input('cid',0);
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
-        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
-        // dd($goods_sku);
+        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();       
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
+                'goods_all'=>$goods_all,
+                'weds'=>$weds]
+                );
+    }
+        /**
+     * 加载搜索商品页面
+     * @return [type] [HTML页面]
+     */
+    public function Search(Request $request)
+    {
+        $weds = weds::find(1);
+        //商品id
+        $id = $request->input('id',0);
+        //所属类Id 
+        $goods_all = DB::table('goods_sku')->where('cid',$id)->paginate(4);
+        $goods_count= DB::table('goods_sku')->where('cid',$id)->get();
+        $num = count($goods_count);
+      
+        return view('home.personal.search',[
+                'num'=>$num,
+                'id'=>$id,
                 'goods_all'=>$goods_all,
                 'weds'=>$weds]
                 );

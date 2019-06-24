@@ -19,8 +19,7 @@
 		<script type="text/javascript" src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 		<script type="text/javascript" src="/h/js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="/h/js/jquery.flexslider.js"></script>
-		<script type="text/javascript" src="/h/js/list.js"></script>
-		@include('home.public.inco')
+		<script type="text/javascript" src="/h/js/list.js"></script>	
 	</head>
 
 	<body>
@@ -38,7 +37,7 @@
 			</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
-					<div class="menu-hd"><a href="/h/#" target="_top" class="h">商城首页</a></div>
+					<div class="menu-hd"><a href="/home" target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
 					<div class="menu-hd MyShangcheng"><a href="/h/#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
