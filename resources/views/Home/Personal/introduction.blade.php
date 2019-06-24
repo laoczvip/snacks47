@@ -262,7 +262,8 @@
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/h/#">立即购买</a>
+
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/payment/{{$goods_sku->id}}">立即购买</a>
 								</div>
 							</li>
 							<li>

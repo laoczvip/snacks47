@@ -13,9 +13,8 @@
 use App\Models\Weds;
 
 Route::get('/', function () {
-    // $weds = weds::find(1);
-    // return view('home.index.index',['weds'=>$weds]);
-Route::get('home/personal/introduction','Home\PersonalController@IntroDuction');
+    $weds = weds::find(1);
+    return view('home.index.index',['weds'=>$weds]);
 
 });
 
@@ -101,7 +100,11 @@ Route::get('center/collection','Home\PersonalController@collection');
 Route::get('center/comment','Home\PersonalController@comment');
 
 Route::get('center/order','Home\PersonalController@order');
-
+// 下单页面
+Route::get('payment/{id}','Home\PurchaseController@index');
+// 执行购买
+Route::get('add','Home\PurchaseController@ExecutePurchase');
+Route::get('jia','Home\PurchaseController@jia');
 
 
 

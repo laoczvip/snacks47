@@ -10,7 +10,7 @@
         <link href="/h/css/stepstyle.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="/h/js/jquery-1.7.2.min.js"></script>
         <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
-    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
+        <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
     </head>
 
     <body>

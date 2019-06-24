@@ -7,7 +7,7 @@
         <link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
         <link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
         <link href="/h/css/personal.css" rel="stylesheet" type="text/css">
-    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
+        <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
         <link href="/h/css/colstyle.css" rel="stylesheet" type="text/css">
     </head>
 

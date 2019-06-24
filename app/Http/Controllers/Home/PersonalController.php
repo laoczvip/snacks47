@@ -41,7 +41,6 @@ class PersonalController extends Controller
         $cid = $request->input('cid',0);
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
         $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
-        // dd($goods_sku);
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
                 'goods_all'=>$goods_all,
@@ -107,7 +106,7 @@ class PersonalController extends Controller
         $weds = weds::find(1);
         $addres = Address::where('id',$id)->first();
 
-        return view('home.personal.updateaddress',['addres'=>$addres]);
+        return view('home.personal.updateaddress',['addres'=>$addres,'weds'=>$weds]);
     }
 
     /**

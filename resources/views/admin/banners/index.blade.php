@@ -11,7 +11,7 @@
         <section class="mtb">
           <select class="select">
              <option>会员等级</option>
-              <option>普通会员</option> 
+              <option>普通会员</option>
               <option>高级会员</option>
           </select>
           <input type="text" name="search" value="{{ $search }}" class="textbox textbox_225" placeholder="输入头条标题查询..."/>
@@ -19,7 +19,7 @@
         </section>
       </form>
       <table class="table" style="text-align:center;">
-           <tr> 
+           <tr>
               <th style="text-align:center;">轮播图</th>
               <th style="text-align:center;">轮播图标题</th>
               <th style="text-align:center;">轮播图描述</th>
@@ -57,7 +57,7 @@
         <script type="text/javascript">
               // 删除
             function del(id,obj){
-                
+
               if(!window.confirm('你确定要删除吗?')){
                   return false;
               }
@@ -87,7 +87,7 @@
               }
         </script>
         <aside class="paging">
-           
+
         </aside>
       </div>
         <!-- Modal -->
@@ -95,20 +95,20 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">轮播图状态</h4>
               </div>
               <div class="modal-body">
                 <form action="/admin/banners/changeStatus" method="get">
                   <input type="hidden" name="id" value="">
-                  <div class="form-group">                      
+                  <div class="form-group">
                   <br>
                         未开启:<input type="radio" name="status" value="0" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         开启:<input type="radio" name="status" value="1">
-                  </div> 
+                  </div>
                   <input type="submit" class="btn btn-success">
                 </form>
-              </div>       
+              </div>
             </div>
           </div>
         </div>
