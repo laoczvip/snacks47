@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8"/>
-<title>后台管理系统</title>
-<meta name="author" content="DeathGhost" />
-<link rel="stylesheet" type="text/css" href="/a/css/style.css">
-<!--[if lt IE 9]>
-<script src="js/html5.js"></script>
-<![endif]-->
-<script src="/a/js/jquery.js"></script>
-<script src="/a/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <head>
+        <meta charset="utf-8"/>
+        <title>后台管理系统</title>
+        <meta name="author" content="DeathGhost" />
+        <link rel="stylesheet" type="text/css" href="/a/css/style.css">
+        <script src="/a/js/jquery.js"></script>
+        <script src="/a/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <style type="text/css">a{text-decoration:none}</style>
+        <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+        <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<meta name="csrf-token" content="{{ csrf_token() }}">
-    <script id="container" name="content" type="text/plain">
-        这里写你的初始化内容
-    </script>
-    <!-- 配置文件 -->
-    <script type="text/javascript" src="/utf8-php/ueditor.config.js"></script>
-    <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="/utf8-php/ueditor.all.js"></script>
-    <!-- 实例化编辑器 -->
-</head>
+        <script type="text/javascript" src="/a/js/jquery-1.7.2.min.js"></script>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <link rel="stylesheet" href="/a/css/switcher.css">
+        <!-- 首页统计 -->
+        <link rel="stylesheet" type="text/css" href="/aa/layui/css/layui.css"/>
+        <link rel="stylesheet" type="text/css" href="/aa/css/admin.css"/>
+        <script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/aa/echarts/echarts.js"></script>
+    </head>
 <body style="line-height: 1;">
 <!--header-->
 <header>
@@ -36,109 +35,194 @@
 </header>
 <aside class="lt_aside_nav content mCustomScrollbar">
      <h2><a href="/admin">首页</a></h2>
-     <ul>
-        <li>
-            <dl id="asgd">
-                <dt>用户管理</dt>
-                <!--当前链接则添加class:active-->
-                <dd><a href="/admin/users">用户列表</a></dd>
-                <!-- <dd><a href="/admin/create" class="active">添加用户</a></dd> -->
-                <dd><a href="/admin/users/create" >添加用户</a></dd>
-                <dd><a href="/admin/softdeletion">已删除的用户</a></dd>
-            </dl>
-        </li>
+         <ul>
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                        <div class="sidebar-title">
+                            <dt>用户管理</dt>
+                        </div>
+                        <ul class="sidebar-trans">
+                            <!--当前链接则添加class:active-->
+                            <dd><a href="/admin/users">用户列表</a></dd>
+                            <!-- <dd><a href="/admin/create" class="active">添加用户</a></dd> -->
+                            <dd><a href="/admin/users/create" >添加用户</a></dd>
+                            <dd><a href="/admin/softdeletion">已删除的用户</a></dd>
+                        </ul>
+                    </div>
+                </dl>
+            </li>
 
-        
-         <li>
-            <dl id="asgd">
-                <dt>商品分类</dt>
-                <dd><a href="/admin/cates">分类列表</a></dd>
-                <dd><a href="/admin/cates/create" >添加分类</a></dd>
-                <dd><a href="/admin/softdeletion">已删除的分类</a></dd>
-            </dl>
-        </li>
-         <li>
-            <dl id="asgd">
-                <dt>商品属性管理</dt>
-                <dd><a href="/admin/flavour/index">属性列表</a></dd>
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                        <div class="sidebar-title">
+                            <dt>商品分类</dt>
+                        </div>
+                        <ul class="sidebar-trans">
+                            <dd><a href="/admin/cates">分类列表</a></dd>
+                            <dd><a href="/admin/cates/create" >添加分类</a></dd>
+                            <dd><a href="/admin/softdeletion">已删除的分类</a></dd>
+                        </ul>
+                    </div>
+                </dl>
+                </dl>
+            </li>
+
+
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                        <div class="sidebar-title">
+                            <dt>商品属性管理</dt>
+                        </div>
+                        <ul class="sidebar-trans">
+                             <dd><a href="/admin/flavour/index">属性列表</a></dd>
                 <dd><a href="/admin/flavour/create" >添加属性</a></dd>
-            </dl>
-        </li>
-        <li>
-            <dl id="asgd">
-                <dt>商品管理</dt>
-                <dd><a href="/admin/goods">商品列表</a></dd>
-                <dd><a href="/admin/goods/create" >添加商品</a></dd>
+                        </ul>
+                    </div>
+                </dl>
+                </dl>
+            </li>
+
+
+
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                        <div class="sidebar-title">
+                            <dt>商品管理</dt>
+                        </div>
+                        <ul class="sidebar-trans">
+                            <dd><a href="/admin/goods">商品列表</a></dd>
+                            <dd><a href="/admin/goods/create" >添加商品</a></dd>
                 <dd><a href="/admin/softdeletion">已删除的商品</a></dd>
-            </dl>
-        </li>
+                        </ul>
+                    </div>
+                </dl>
+                </dl>
+            </li>
 
-        <li>
-            <dl id="asgd">
-                <dt>订单管理</dt>
-                <dd><a href="/admin/index">订单列表</a></dd>
-                <dd><a href="/admin/softdeletion">已删除的订单</a></dd>
-            </dl>
-        </li>
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                            <div class="sidebar-title">
+                                <dt>订单管理</dt>
+                            </div>
+                            <ul class="sidebar-trans">
+                                <dd><a href="/admin/index">订单列表</a></dd>
+                                <dd><a href="/admin/softdeletion">已删除的订单</a></dd>
+                            </ul>
+                    </div>
+                </dl>
+            </li>
 
-        <li>
-            <dl id="asgd">
-                <dt>分类管理</dt>
-                <dd><a href="/admin/index">分类列表</a></dd>
-                <dd><a href="/admin/users/create" >添加分类</a></dd>
-            </dl>
-        </li>
+            <li>
+                <dl id="asgd">
+                <div class="sidebar-nav ">
+                        <div class="sidebar-title">
+                            <dt>分类管理</dt>
+                        </div>
+                        <ul class="sidebar-trans">
+                            <dd><a href="/admin/index">分类列表</a></dd>
+                            <dd><a href="/admin/users/create" >添加分类</a></dd>
+                        </ul>
+                </div>
+                </dl>
+            </li>
 
-        <li>
-            <dl id="asgd">
-                <dt>头条管理</dt>
-                <dd><a href="/admin/headlines">头条列表</a></dd>
-                <dd><a href="/admin/headlines/create" >添加头条</a></dd>
-                <dd><a href="/admin/headlines/soft" >已删除的头条</a></dd>
-            </dl>
-        </li>
+            <li>
+                <dl id="asgd">
+                <div class="sidebar-nav ">
+                        <div class="sidebar-title">
+                            <dt>头条管理</dt>
+                        </div>
+                        <ul class="sidebar-trans">
+                            <dd><a href="/admin/headlines">头条列表</a></dd>
+                            <dd><a href="/admin/headlines/create" >添加头条</a></dd>
+                            <dd><a href="/admin/headlines/soft" >已删除的头条</a></dd>
+                        </ul>
+                </div>
+                </dl>
+            </li>
 
-        <li>
-            <dl id="asgd">
-                <dt>活动管理</dt>
-                <dd><a href="/admin/index">活动列表</a></dd>
-                <dd><a href="/admin/users/create" >添加活动</a></dd>
-                <dd><a href="/admin/users/create" >已删除的活动</a></dd>
-            </dl>
-        </li>
-
-
-
-
-        <li>
-            <dl id="asgd">
-                <dt>友情链接管理</dt>
-                <dd><a href="/admin/index">友情链接列表</a></dd>
-                <dd><a href="/admin/users/create" >添加友情链接</a></dd>
-                <dd><a href="/admin/users/create" >已删除的友情链接</a></dd>
-            </dl>
-        </li>
-
-
-        <li>
-            <dl id="asgd">
-                <dt>轮播图管理</dt>
-                <dd><a href="/admin/banners">轮播图列表</a></dd>
-                <dd><a href="/admin/banners/create" >添加轮播图</a></dd>
-                <dd><a href="/admin/banners/soft" >已删除的轮播图</a></dd>
-            </dl>
-        </li>
-
-
-        <li>
-            <dl id="asgd">
-                <dt>网站管理</dt>
-                <dd><a href="/admin/index">查看配置</a></dd>
-                <dd><a href="/admin/users/create" >修改配置</a></dd>
-            </dl>
-        </li>
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                            <div class="sidebar-title">
+                                <dt>活动管理</dt>
+                            </div>
+                            <ul class="sidebar-trans">
+                                <dd><a href="/admin/index">活动列表</a></dd>
+                                <dd><a href="/admin/users/create" >添加活动</a></dd>
+                                <dd><a href="/admin/users/create" >已删除的活动</a></dd>
+                            </ul>
+                    </div>
+                </dl>
+            </li>
 
 
+
+
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                            <div class="sidebar-title">
+                                <dt>友情链接管理</dt>
+                            </div>
+                            <ul class="sidebar-trans">
+                                <dd><a href="/admin/index">友情链接列表</a></dd>
+                                <dd><a href="/admin/users/create" >添加友情链接</a></dd>
+                                <dd><a href="/admin/users/create" >已删除的友情链接</a></dd>
+                            </ul>
+                    </div>
+                </dl>
+            </li>
+
+
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                        <div class="sidebar-title">
+                            <dt>轮播图管理</dt>
+                        </div>
+                        <ul class="sidebar-trans">
+                            <dd><a href="/admin/banners">轮播图列表</a></dd>
+                            <dd><a href="/admin/banners/create" >添加轮播图</a></dd>
+                            <dd><a href="/admin/banners/soft" >已删除的轮播图</a></dd>
+                        </ul>
+                    </div>
+                </dl>
+            </li>
+
+
+            <li>
+                <dl id="asgd">
+                    <div class="sidebar-nav ">
+                        <div class="sidebar-title">
+                            <dt>网站信息</dt>
+                        </div>
+                        <ul class="sidebar-trans">
+                            <dd><a href="/admin/configure/index">查看配置</a></dd>
+                            <dd><a href="/admin/users/create" >修改配置</a></dd>
+                        </ul>
+                    </div>
+                </dl>
+            </li>
+        </ul>
+    <!-- 左边栏折叠 -->
+  <script>
+           $(".sidebar-title").live('click', function() {
+                if ($(this).parent(".sidebar-nav").hasClass("sidebar-nav-fold")) {
+                    $(this).next().slideDown(200);
+                    $(this).parent(".sidebar-nav").removeClass("sidebar-nav-fold");
+                } else {
+                    $(this).next().slideUp(200);
+                    $(this).parent(".sidebar-nav").addClass("sidebar-nav-fold");
+                }
+
+            });
+    </script>
 
 
 
@@ -147,6 +231,7 @@
         <p class="btm_infor">© DeathGhost.cn 版权所有</p>
      </ul>
 </aside>
+    <!-- 错误提示 -->
     @if(session('error'))
     <div class="alert  alert-danger alert-dismissible" role="alert" style="width: 92em;margin-left: 378px;">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -161,190 +246,233 @@
     </div>
     @endif
 
+
+
+
 @section('center')
-<script>
-
-    (function($){
-        $(window).load(function(){
-
-            $("a[rel='load-content']").click(function(e){
-                e.preventDefault();
-                var url=$(this).attr("href");
-                $.get(url,function(data){
-                    $(".content .mCSB_container").append(data); //load new content inside .mCSB_container
-                    //scroll-to appended content
-                    $(".content").mCustomScrollbar("scrollTo","h2:last");
-                });
-            });
-
-            $(".content").delegate("a[href='top']","click",function(e){
-                e.preventDefault();
-                $(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
-            });
-
-        });
-    })(jQuery);
-
-
-</script>
-
-
-
-
-<section class="rt_wrap content mCustomScrollbar">
-    <div class="rt_content">
-<!--统计图-->
-        <section style="overflow:hidden">
-
-            <!--柱状图-->
-            <div class="dataStatistic fl">
-             <div id="cylindrical">
-             </div>
+<div class="wrap-container welcome-container" style="margin-left:215px;">
+        <div class="row">
+            <div class="welcome-left-container col-lg-9">
+                <div class="data-show">
+                    <ul class="clearfix">
+                        <li class="col-sm-12 col-md-4 col-xs-12">
+                            <a style="text-decoration:none" href="javascript:;" class="clearfix">
+                                <div class="icon-bg bg-org f-l">
+                                    <span class="iconfont">&#xe606;</span>
+                                </div>
+                                <div class="right-text-con">
+                                    <p class="name">会员数</p>
+                                    <p><span class="color-org">
+                                    @if(Request::path() == 'admin')
+                                        {{$num}}
+                                    @endif
+                                    </span>数据<span class="iconfont">&#xe628;</span></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="col-sm-12 col-md-4 col-xs-12">
+                            <a style="text-decoration:none" href="javascript:;" class="clearfix">
+                                <div class="icon-bg bg-blue f-l">
+                                    <span class="iconfont">&#xe602;</span>
+                                </div>
+                                <div class="right-text-con">
+                                    <p class="name">商品数量</p>
+                                    <p><span class="color-blue">
+                                    @if(Request::path() == 'admin')
+                                        {{$goods_num}}
+                                    @endif</span>数据<span class="iconfont">&#xe628;</span></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="col-sm-12 col-md-4 col-xs-12">
+                            <a style="text-decoration:none" href="javascript:;" class="clearfix">
+                                <div class="icon-bg bg-green f-l">
+                                    <span class="iconfont">&#xe605;</span>
+                                </div>
+                                <div class="right-text-con">
+                                    <p class="name">评论数</p>
+                                    <p><span class="color-green">221</span>数据<span class="iconfont">&#xe60f;</span></p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--图表-->
+                <div class="chart-panel panel panel-default">
+                    <div class="panel-body" id="chart" style="height: 376px;">
+                    </div>
+                </div>
+                <!--服务器信息-->
+                <div class="server-panel panel panel-default">
+                    <div class="panel-header">服务器信息</div>
+                    <div class="panel-body clearfix">
+                        <div class="col-md-2">
+                            <p class="title">服务器环境</p>
+                            <span class="info">{{ $_SERVER['SERVER_SOFTWARE'] }}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="title">服务器IP地址</p>
+                            <span class="info">{{ $_SERVER['SERVER_ADDR'] }}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="title">服务器域名</p>
+                            <span class="info">{{ $_SERVER['SERVER_NAME'] }}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="title"> PHP版本</p>
+                            <span class="info">{{ $_SERVER['DOCUMENT_ROOT'] }}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="title">数据库信息</p>
+                            <span class="info">5.6.12-log </span>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="title">服务器当前时间</p>
+                            <span class="info">{{  date("Y-m-d H:i:s",time()) }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--线性图-->
-            <div class="dataStatistic fl">
-             <div id="line">
-             </div>
-            </div>
-        </section>
-     </div>
-</section>
-<script src="/a/js/amcharts.js" type="text/javascript"></script>
-<script src="/a/js/serial.js" type="text/javascript"></script>
-<script src="/a/js/pie.js" type="text/javascript"></script>
+        </div>
+    </div>
 <script type="text/javascript">
-    $(document).ready(function (e) {
-        GetSerialChart();
-        MakeChart(json);
-    });
-    var json = [
-  { "name": "数据1", "value": "100" },
-  { "name": "数据2", "value": "0" },
-  { "name": "数据3", "value": "0" },
-  { "name": "数据4", "value": "0" },
-  { "name": "数据5", "value": "0" },
-  { "name": "数据6", "value": "0" },
-  { "name": "数据7", "value": "0" },
-  { "name": "数据8", "value": "0" }
-  ]
-    //柱状图
-    function GetSerialChart() {
-
-        chart = new AmCharts.AmSerialChart();
-        chart.dataProvider = json;
-        //json数据的key
-        chart.categoryField = "name";
-        //不选择
-        chart.rotate = false;
-        //值越大柱状图面积越大
-        chart.depth3D = 20;
-        //柱子旋转角度角度
-        chart.angle = 30;
-        var mCtCategoryAxis = chart.categoryAxis;
-        mCtCategoryAxis.axisColor = "#efefef";
-        //背景颜色透明度
-        mCtCategoryAxis.fillAlpha = 0.5;
-        //背景边框线透明度
-        mCtCategoryAxis.gridAlpha = 0;
-        mCtCategoryAxis.fillColor = "#efefef";
-        var valueAxis = new AmCharts.ValueAxis();
-        //左边刻度线颜色
-        valueAxis.axisColor = "#ccc";
-        //标题
-        valueAxis.title = "网站总访问量";
-        //刻度线透明度
-        valueAxis.gridAlpha = 0.2;
-        chart.addValueAxis(valueAxis);
-        var graph = new AmCharts.AmGraph();
-        graph.title = "value";
-        graph.valueField = "value";
-        graph.type = "column";
-        //鼠标移入提示信息
-        graph.balloonText = "总访问量[[category]] [[value]]";
-        //边框透明度
-        graph.lineAlpha = 0.3;
-        //填充颜色
-        graph.fillColors = "#b9121b";
-        graph.fillAlphas = 1;
-
-        chart.addGraph(graph);
-
-        // CURSOR
-        var chartCursor = new AmCharts.ChartCursor();
-        chartCursor.cursorAlpha = 0;
-        chartCursor.zoomable = false;
-        chartCursor.categoryBalloonEnabled = false;
-        chart.addChartCursor(chartCursor);
-
-        chart.creditsPosition = "top-right";
-
-        //显示在Main div中
-        chart.write("cylindrical");
-    }
-    //折线图
-    AmCharts.ready(function () {
-        var chart = new AmCharts.AmSerialChart();
-        chart.dataProvider = json;
-        chart.categoryField = "name";
-        chart.angle = 30;
-        chart.depth3D = 20;
-        //标题
-        //chart.addTitle("3D折线图Demo", 15);
-        var graph = new AmCharts.AmGraph();
-        chart.addGraph(graph);
-        graph.valueField = "value";
-        //背景颜色透明度
-        graph.fillAlphas = 0.3;
-        //类型
-        graph.type = "line";
-        //圆角
-        graph.bullet = "round";
-        //线颜色
-        graph.lineColor = "#8e3e1f";
-        //提示信息
-        graph.balloonText = "[[name]]: [[value]]";
-        var categoryAxis = chart.categoryAxis;
-        categoryAxis.autoGridCount = false;
-        categoryAxis.gridCount = json.length;
-        categoryAxis.gridPosition = "start";
-        chart.write("line");
-    });
-    //饼图
-    //根据json数据生成饼状图，并将饼状图显示到div中
-    function MakeChart(value) {
-        chartData = eval(value);
-        //饼状图
-        chart = new AmCharts.AmPieChart();
-        chart.dataProvider = chartData;
-        //标题数据
-        chart.titleField = "name";
-        //值数据
-        chart.valueField = "value";
-        //边框线颜色
-        chart.outlineColor = "#fff";
-        //边框线的透明度
-        chart.outlineAlpha = .8;
-        //边框线的狂宽度
-        chart.outlineThickness = 1;
-        chart.depth3D = 20;
-        chart.angle = 30;
-        chart.write("pie");
-    }
+            layui.use(['layer','jquery'], function(){
+                var layer = layui.layer;
+                var $=layui.jquery;
+                //图表
+                var myChart;
+                require.config({
+                    paths: {
+                        echarts: '/aa/lib/echarts'
+                    }
+                });
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/bar',
+                        'echarts/chart/line',
+                        'echarts/chart/map'
+                    ],
+                    function (ec) {
+                        //--- 折柱 ---
+                        myChart = ec.init(document.getElementById('chart'));
+                        myChart.setOption(
+                            {
+                             title: {
+                                text: "数据统计",
+                                textStyle: {
+                                    color: "rgb(85, 85, 85)",
+                                    fontSize: 18,
+                                    fontStyle: "normal",
+                                    fontWeight: "normal"
+                                }
+                            },
+                            tooltip: {
+                                trigger: "axis"
+                            },
+                            legend: {
+                                data: ["会员", "文章", "评论"],
+                                selectedMode: false,
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    dataView: {
+                                        show: false,
+                                        readOnly: true
+                                    },
+                                    magicType: {
+                                        show: false,
+                                        type: ["line", "bar", "stack", "tiled"]
+                                    },
+                                    restore: {
+                                        show: true
+                                    },
+                                    saveAsImage: {
+                                        show: true
+                                    },
+                                    mark: {
+                                        show: false
+                                    }
+                                }
+                            },
+                            calculable: false,
+                            xAxis: [
+                                {
+                                    type: "category",
+                                    boundaryGap: false,
+                                    data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: "value"
+                                }
+                            ],
+                             grid: {
+                                x2: 30,
+                                x: 50
+                            },
+                            series: [
+                                {
+                                    name: "会员",
+                                    type: "line",
+                                    smooth: true,
+                                    itemStyle: {
+                                        normal: {
+                                            areaStyle: {
+                                                type: "default"
+                                            }
+                                        }
+                                    },
+                                    data: [10, 12, 21, 54, 260, 830, 710]
+                                },
+                                {
+                                    name: "文章",
+                                    type: "line",
+                                    smooth: true,
+                                    itemStyle: {
+                                        normal: {
+                                            areaStyle: {
+                                                type: "default"
+                                            }
+                                        }
+                                    },
+                                    data: [30, 182, 434, 791, 390, 30, 10]
+                                },
+                                {
+                                    name: "评论",
+                                    type: "line",
+                                    smooth: true,
+                                    itemStyle: {
+                                        normal: {
+                                            areaStyle: {
+                                                type: "default"
+                                            },
+                                            color: "rgb(110, 211, 199)"
+                                        }
+                                    },
+                                    data: [1320, 1132, 601, 234, 120, 90, 20]
+                                }
+                            ]
+                        }
+                        );
+                    }
+                );
+                $(window).resize(function(){
+                    myChart.resize();
+                })
+            });
 </script>
 @show
 
-
-
-
-<script src="/layui/layui.js"></script>
 <script>
-//一般直接写在一个js文件中
+    //一般直接写在一个js文件中
     layui.use(['layer', 'form'], function(){
       var layer = layui.layer
       ,form = layui.form;
-
-
     });
 </script>
+
 </body>
 </html>

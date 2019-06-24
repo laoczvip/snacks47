@@ -14,7 +14,7 @@
         <ul class="message-l">
             <div class="topMessage">
                 <div class="menu-hd">
-                    <a href="/login" target="_top" class="h">您好!&nbsp;&nbsp;{{session('home_user')->number }}</a>
+                    <a href="/login" target="_top" class="h">您好!&nbsp;&nbsp;{{session('home_user')->name }}</a>
                 </div>
             </div>
         </ul>
@@ -40,7 +40,7 @@
             <div class="nav white">
                 <!-- <div class="logo"><img src="/h/images/logo.png" /></div> -->
                 <div class="logoBig">
-                    <li><a href="/"><img src="/h/images/logobig.png" /></a></li>
+                    <li><a href="/"><img src="/uploads/{{$weds->logo}}" /></a></li>
                 </div>
 
                 <div class="search-bar pr">

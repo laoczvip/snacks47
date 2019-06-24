@@ -10,10 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\Models\Home\Users;
+use App\Models\Weds;
 
 Route::get('/', function () {
-    return view('home.index.index' );
+    $weds = weds::find(1);
+    return view('home.index.index',['weds'=>$weds]);
 });
 
 // 前台首页
@@ -36,6 +37,18 @@ Route::group(['middleware'=>'login'],function(){
     Route::get('admin/user/huifu/{id}','Admin\UserController@huifu');
     // 永久删除用户
     Route::get('admin/user/permanent/{id}','Admin\UserController@permanent');
+
+    // 网站配置
+    Route::get('admin/configure/index','Admin\ConfigureController@index');
+    // 网站状态(关闭)
+    Route::get('admin/configure/off','Admin\ConfigureController@off');
+    // 网站状态(开启)
+    Route::get('admin/configure/kaiqi','Admin\ConfigureController@kaiqi');
+    // 修改网站信息(加载页面)
+    Route::get('admin/configure/edit','Admin\ConfigureController@edit');
+    // 修改网站信息(执行修改)
+    Route::post('admin/configure/update','Admin\ConfigureController@update');
+
 });
 
 
@@ -236,7 +249,7 @@ Route::get('admin/cates/delete/{id}','Admin\CatesController@delete');
 /******************************************************************/
 
 /*************************梁伟杰***********************************/
-// 轮播图修改状态 
+// 轮播图修改状态
 Route::get('admin/banners/changeStatus','Admin\BannersController@changeStatus');
 // 轮播图删除
 Route::get('admin/banners/delete','Admin\BannersController@delete');

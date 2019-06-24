@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>首页</title>
+    <title>{{ $weds->name  }}</title>
     <link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
     <link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
     <link href="/h/basic/css/demo.css" rel="stylesheet" type="text/css" />
@@ -11,11 +11,11 @@
     <link href="/h/css/skin.css" rel="stylesheet" type="text/css" />
     <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
     <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
 </head>
 
 <body>
         @include('home.public.hmtop')
-
         <div class="clear"></div>
         </div>
         <div class="banner">
@@ -843,6 +843,8 @@
                     </div>
                 </div>
 
+
+
                 <div class="am-g am-g-fixed floodFour">
                     <div class="am-u-sm-5 am-u-md-4 text-one list ">
                         <div class="word">
@@ -892,6 +894,7 @@
                             </div>
                             <a href="# "><img src="/h/images/1.jpg" /></a>
                         </div>
+
 
 
                     <div class="am-u-sm-3 am-u-md-2 text-three big">

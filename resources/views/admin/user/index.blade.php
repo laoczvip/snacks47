@@ -37,7 +37,7 @@
             <td>{{ $v->name }}</td>
             <td class="center">{{ $v->number }}</td>
             <td class="center">{{ $v->userinfo->tel or '暂无数据'   }}</td>
-            <td class="center">{{ $v->userinfo->email  or '暂无数据' }}</td>
+            <td class="center"><p>{{ $v->userinfo->email  or '暂无数据' }}</p></td>
             <td class="center">{{ $v->created_at }}</td>
             <td class="center">
                  <a href="/admin/users/{{ $v->id }}/edit" title="编辑" class="link_icon">&#101;</a>

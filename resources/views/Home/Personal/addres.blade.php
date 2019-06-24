@@ -10,6 +10,7 @@
         <link href="/h/css/addstyle.css" rel="stylesheet" type="text/css">
         <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
         <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
         <script language="javascript" >
              // JS省市县三级联动
 
