@@ -8,7 +8,8 @@
         <link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
         <link href="/h/css/personal.css" rel="stylesheet" type="text/css">
         <link href="/h/css/systyle.css" rel="stylesheet" type="text/css">
-    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
+        @include('home.public.inco')
+
     </head>
     <body>
         <!--头 -->

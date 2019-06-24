@@ -20,7 +20,7 @@
 		<script type="text/javascript" src="/h/js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="/h/js/jquery.flexslider.js"></script>
 		<script type="text/javascript" src="/h/js/list.js"></script>
-
+		@include('home.public.inco')
 	</head>
 
 	<body>
@@ -142,7 +142,7 @@
 							<div class="tb-booth tb-pic tb-s310">
 								<a href="/uploads/{{$goods_sku->showcase}}"><img src="/uploads/{{$goods_sku->showcase}}" alt="细节展示放大镜特效" rel="/uploads/{{$goods_sku->showcase}}" class="jqzoom" /></a>
 							</div>
-							
+
 						</div>
 
 						<div class="clear"></div>
@@ -153,7 +153,7 @@
 						<!--规格属性-->
 						<!--名称-->
 						<div class="tb-detail-hd">
-							<h1>	
+							<h1>
 				{{$goods_sku->title}}
 	          </h1>
 						</div>
@@ -162,11 +162,11 @@
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">{{$goods_sku->price}}</b>  </dd>                                 
+									<dd><em>¥</em><b class="sys_item_price">{{$goods_sku->price}}</b>  </dd>
 								</li>
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-									<dd><em>¥</em><b class="sys_item_mktprice">{{$goods_sku->original}}</b></dd>									
+									<dd><em>¥</em><b class="sys_item_mktprice">{{$goods_sku->original}}</b></dd>
 								</li>
 								<div class="clear"></div>
 							</div>
@@ -305,7 +305,7 @@
 							<div class="pay-opt">
 							<a href="/h/home.html"><span class="am-icon-home am-icon-fw">首页</span></a>
 							<a><span class="am-icon-heart am-icon-fw">收藏</span></a>
-							
+
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
@@ -352,21 +352,21 @@
 					</div>
 				</div>
 				<div class="clear"></div>
-				
-							
+
+
 				<!-- introduce-->
 
 				<div class="introduce">
 					<div class="browse">
-					    <div class="mc"> 
-						     <ul>					    
-						     	<div class="mt">            
-						            <h2>看了又看</h2>        
+					    <div class="mc">
+						     <ul>
+						     	<div class="mt">
+						            <h2>看了又看</h2>
 					            </div>
 						     	@forelse($goods_all as $good_child)
 							      <li class="first">
-							      	<div class="p-img">                    
-							      		<a  href="/home/personal/introduction?id={{$good_child->gid}}&cid={{$good_child->cid}}"> <img class="" src="/uploads/{{$good_child->showcase}}"> </a>               
+							      	<div class="p-img">
+							      		<a  href="/home/personal/introduction?id={{$good_child->gid}}&cid={{$good_child->cid}}"> <img class="" src="/uploads/{{$good_child->showcase}}"> </a>
 							      	</div>
 							      	<div class="p-name"><a href="/h/#">
 							      		{{$good_child->title}}
@@ -375,9 +375,9 @@
 							      	<div class="p-price"><strong>{{$good_child->price}}</strong></div>
 							      </li>
 							     @empty
-							     @endforelse      
-					      
-						     </ul>					
+							     @endforelse
+
+						     </ul>
 					    </div>
 					</div>
 					<div class="introduceMain">
@@ -429,13 +429,13 @@
 								</div>
 
 								<div class="am-tab-panel am-fade">
-									
+
                                     <div class="actor-new">
-                                    	<div class="rate">                
-                                    		<strong>100<span>%</span></strong><br> <span>好评度</span>            
+                                    	<div class="rate">
+                                    		<strong>100<span>%</span></strong><br> <span>好评度</span>
                                     	</div>
-                                        <dl>                    
-                                            <dt>买家印象</dt>                    
+                                        <dl>
+                                            <dt>买家印象</dt>
                                             <dd class="p-bfc">
                                             			<q class="comm-tags"><span>味道不错</span><em>(2177)</em></q>
                                             			<q class="comm-tags"><span>颗粒饱满</span><em>(1860)</em></q>
@@ -445,10 +445,10 @@
                                             			<q class="comm-tags"><span>个个开口</span><em>(1392)</em></q>
                                             			<q class="comm-tags"><span>价格便宜</span><em>(1119)</em></q>
                                             			<q class="comm-tags"><span>特价买的</span><em>(865)</em></q>
-                                            			<q class="comm-tags"><span>皮很薄</span><em>(831)</em></q> 
-                                            </dd>                                           
-                                         </dl> 
-                                    </div>	
+                                            			<q class="comm-tags"><span>皮很薄</span><em>(831)</em></q>
+                                            </dd>
+                                         </dl>
+                                    </div>
                                     <div class="clear"></div>
 									<div class="tb-r-filter-bar">
 										<ul class=" tb-taglist am-avg-sm-4">

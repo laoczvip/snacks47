@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Models\Usersinfo;
 use App\Models\Address;
+use App\Models\Weds;
 use DB;
 use Hash;
 
@@ -22,16 +23,18 @@ class PersonalController extends Controller
      */
     public function Index()
     {
-        return view('home.personal.center');
+        $weds = weds::find(1);
+        return view('home.personal.center',['weds'=>$weds]);
     }
 
-    
+
     /**
      * 加载购买页面
      * @return [type] [HTML页面]
      */
     public function IntroDuction(Request $request)
     {
+        $weds = weds::find(1);
         //商品id
         $gid = $request->input('id',0);
         //所属类Id
@@ -39,7 +42,11 @@ class PersonalController extends Controller
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
         $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
         // dd($goods_sku);
-        return view('home.personal.introduction',['goods_sku'=>$goods_sku,'goods_all'=>$goods_all]);
+        return view('home.personal.introduction',[
+                'goods_sku'=>$goods_sku,
+                'goods_all'=>$goods_all,
+                'weds'=>$weds]
+                );
     }
     /**
      * 加载收货地址页面
@@ -47,10 +54,11 @@ class PersonalController extends Controller
      */
     public function Addres()
     {
+        $weds = weds::find(1);
         $id = session('home_user')->id;
         $user = Address::where('uid',$id)->get();
         $address = json_decode($user,true);
-        return view('home.personal.addres',['address'=>$address]);
+        return view('home.personal.addres',['address'=>$address,'weds'=>$weds]);
     }
 
     /**
@@ -96,6 +104,7 @@ class PersonalController extends Controller
      */
     public function UpdateAddress($id)
     {
+        $weds = weds::find(1);
         $addres = Address::where('id',$id)->first();
 
         return view('home.personal.updateaddress',['addres'=>$addres]);
@@ -128,6 +137,7 @@ class PersonalController extends Controller
      */
     public function DefaultAddress(Request $request,$id)
     {
+
         $diz = DB::table('address')->where('default', '1')->first();
 
         $data = Address::find($diz->id);
@@ -153,7 +163,8 @@ class PersonalController extends Controller
      */
     public function Information()
     {
-        return view('home.personal.information');
+        $weds = weds::find(1);
+        return view('home.personal.information',['weds'=>$weds]);
     }
 
     /**
@@ -211,7 +222,8 @@ class PersonalController extends Controller
      */
     public function Password()
     {
-        return view('home.personal.password');
+        $weds = weds::find(1);
+        return view('home.personal.password',['weds'=>$weds]);
     }
 
     /**
@@ -254,7 +266,8 @@ class PersonalController extends Controller
      */
     public function Collection()
     {
-        return view('home.personal.collection');
+        $weds = weds::find(1);
+        return view('home.personal.collection',['weds'=>$weds]);
     }
 
     /**
@@ -263,7 +276,8 @@ class PersonalController extends Controller
      */
     public function Order()
     {
-        return view('home.personal.order');
+        $weds = weds::find(1);
+        return view('home.personal.order',['weds'=>$weds]);
     }
 
     /**
@@ -272,7 +286,8 @@ class PersonalController extends Controller
      */
     public function Comment()
     {
-        return view('home.personal.comment');
+        $weds = weds::find(1);
+        return view('home.personal.comment',['weds'=>$weds]);
     }
 
 }
