@@ -22,6 +22,10 @@
 	<body>
 	@include('home.public.hmtop')
 
+
+            <b class="line"></b>
+			<div class="listMain">
+
 	<body>
 				<!--分类-->
 			<div class="nav-table">
@@ -372,7 +376,9 @@
 										<div class="attr-list-hd after-market-hd">
 											<h4>商品细节</h4>
 										</div>
-										<div class="twlistNews">
+										<div class="twlistNews" style="
+									background-size: cover;-webkit-background-size: cover;-o-background-size: cover;
+									   ">
 											{!!$goods_sku->desc!!}
 										</div>
 									</div>

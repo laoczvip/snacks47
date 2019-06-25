@@ -41,8 +41,8 @@ class PersonalController extends Controller
         $cid = $request->input('cid',0);
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
 
-        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
 
+        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
 
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,

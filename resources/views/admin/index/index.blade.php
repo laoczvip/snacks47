@@ -157,8 +157,8 @@
                             </div>
                             <ul class="sidebar-trans">
                                 <dd><a href="/admin/index">活动列表</a></dd>
-                                <dd><a href="/admin/users/create" >添加活动</a></dd>
-                                <dd><a href="/admin/users/create" >已删除的活动</a></dd>
+                                <dd><a href="/admin/shaky/create" >添加活动</a></dd>
+                                <dd><a href="/admin/shaky/create" >已删除的活动</a></dd>
                             </ul>
                     </div>
                 </dl>
