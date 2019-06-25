@@ -338,22 +338,21 @@
 							<ul class="am-avg-sm-3 am-tabs-nav am-nav am-nav-tabs">
 								<li class="am-active">
 									<a href="/h/#">
-
-										<span class="index-needs-dt-txt">宝贝详情</span></a>
-
-								</li>
-
-								<li>
-									<a href="/h/#">
-
-										<span class="index-needs-dt-txt">全部评价</span></a>
+										<span class="index-needs-dt-txt">宝贝详情</span>
+									</a>
 
 								</li>
 
 								<li>
 									<a href="/h/#">
+										<span class="index-needs-dt-txt">全部评价</span>
+									</a>
 
-										<span class="index-needs-dt-txt">猜你喜欢</span></a>
+								</li>
+								<li>
+									<a href="/h/#">
+										<span class="index-needs-dt-txt">猜你喜欢</span>.
+									</a>
 								</li>
 							</ul>
 
