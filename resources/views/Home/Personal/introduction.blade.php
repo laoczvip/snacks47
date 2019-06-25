@@ -4,18 +4,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 		<title>商品页面</title>
-
 		<link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 		<link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 		<link href="/h/basic/css/demo.css" rel="stylesheet" type="text/css" />
 		<link type="text/css" href="/h/css/optstyle.css" rel="stylesheet" />
 		<link type="text/css" href="/h/css/style.css" rel="stylesheet" />
-
 		<script type="text/javascript" src="/h/basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/h/basic/js/quick_links.js"></script>
-
 		<script type="text/javascript" src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 		<script type="text/javascript" src="/h/js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="/h/js/jquery.flexslider.js"></script>
@@ -67,6 +63,13 @@
 			</div>
 
 			<div class="clear"></div>
+
+		<script type="text/javascript" src="/h/js/list.js"></script>
+    	<link rel="icon" href="/uploads/{{ $weds->icon }}"/>
+	</head>
+
+	<body>
+
             <b class="line"></b>
 			<div class="listMain">
 
@@ -308,7 +311,8 @@
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/h/#">立即购买</a>
+
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/payment/{{$goods_sku->id}}">立即购买</a>
 								</div>
 							</li>
 							<li>
@@ -419,7 +423,9 @@
 										<div class="attr-list-hd after-market-hd">
 											<h4>商品细节</h4>
 										</div>
-										<div class="twlistNews">
+										<div class="twlistNews" style="
+									background-size: cover;-webkit-background-size: cover;-o-background-size: cover;
+									   ">
 											{!!$goods_sku->desc!!}
 										</div>
 									</div>
@@ -435,7 +441,7 @@
                                     	</div>
                                         <dl>
                                             <dt>买家印象</dt>
-                                            <dd class="p-bfc">
+                                            <dd class="p-bfc"> 
                                             			<q class="comm-tags"><span>味道不错</span><em>(2177)</em></q>
                                             			<q class="comm-tags"><span>颗粒饱满</span><em>(1860)</em></q>
                                             			<q class="comm-tags"><span>口感好</span><em>(1823)</em></q>

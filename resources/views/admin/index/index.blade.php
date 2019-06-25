@@ -9,10 +9,10 @@
         <script src="/a/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <style type="text/css">a{text-decoration:none}</style>
         <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+        <script type="text/javascript" src="/a/js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="/a/js/jquery-1.7.2.min.js"></script>
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -157,8 +157,8 @@
                             </div>
                             <ul class="sidebar-trans">
                                 <dd><a href="/admin/index">活动列表</a></dd>
-                                <dd><a href="/admin/users/create" >添加活动</a></dd>
-                                <dd><a href="/admin/users/create" >已删除的活动</a></dd>
+                                <dd><a href="/admin/shaky/create" >添加活动</a></dd>
+                                <dd><a href="/admin/shaky/create" >已删除的活动</a></dd>
                             </ul>
                     </div>
                 </dl>

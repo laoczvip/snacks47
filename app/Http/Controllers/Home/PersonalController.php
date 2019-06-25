@@ -40,7 +40,7 @@ class PersonalController extends Controller
         //所属类Id
         $cid = $request->input('cid',0);
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
-        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();       
+        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
                 'goods_all'=>$goods_all,
@@ -127,7 +127,7 @@ class PersonalController extends Controller
         $weds = weds::find(1);
         $addres = Address::where('id',$id)->first();
 
-        return view('home.personal.updateaddress',['addres'=>$addres]);
+        return view('home.personal.updateaddress',['addres'=>$addres,'weds'=>$weds]);
     }
 
     /**
