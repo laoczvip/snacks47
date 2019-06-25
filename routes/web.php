@@ -10,16 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\Models\Weds;
+// use App\Models\Weds;
 
-Route::get('/', function () {
-    $weds = weds::find(1);
-    return view('home.index.index',['weds'=>$weds]);
+// Route::get('/', function () {
+//     $weds = weds::find(1);
+//     return view('home.index.index',['weds'=>$weds]);
 
-});
+// });
 
 // 前台首页
-Route::get('home','home\IndexController@index');
+Route::get('/','home\IndexController@index');
 /*************************李锦龙***********************************/
 
 Route::get('admin/login','Admin\LoginController@login');

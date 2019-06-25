@@ -40,7 +40,7 @@
             <div class="nav white">
                 <!-- <div class="logo"><img src="/h/images/logo.png" /></div> -->
                 <div class="logoBig">
-                    <li><a href="/home"><img src="/uploads/{{$weds->logo}}" /></a></li>
+                    <li><a href="/"><img src="/uploads/{{$weds->logo}}" /></a></li>
                 </div>
 
                 <div class="search-bar pr">
