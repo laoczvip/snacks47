@@ -152,7 +152,6 @@ class IndexController extends Controller
             'goods'=>$goods,
             'weds'=>$weds,
             'banners_data'=>$banners_data,
-            'headlines_data'=>$headlines_data,
             'headlines_asc'=>$headlines_asc,
             'headlines_desc'=>$headlines_desc,
             'friendly'=>$friendly,
