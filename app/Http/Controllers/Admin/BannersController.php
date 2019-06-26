@@ -167,6 +167,7 @@ class BannersController extends Controller
         $banners->desc = $data['desc'];
         $banners->url = $file_path;
         $banners->status = $data['status'];
+        $banners->jump = $data['jump'];
         $res = $banners->save();
  
        // if($res){
@@ -237,6 +238,7 @@ class BannersController extends Controller
       // 接受用户提交的值
       $data['title'] = $request->input('title','');
       $data['desc'] = $request->input('desc','');
+      $data['jump'] = $request->input('jump','');
       $data['url'] = $path;
       $data['updated_at'] = date('Y-m-d H:i:s',time());
       //dd($data);exit;

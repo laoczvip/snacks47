@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Models\Weds;
-
+ 
 
 class IndexController extends Controller
 {
@@ -105,7 +105,10 @@ class IndexController extends Controller
 
     /*************************梁伟杰***********************************/
 
-
+    $banners_data = DB::table('banners')->where('status',1)->get();
+    $headlines_data = DB::table('headlines')->get(); 
+    $headlines_asc = DB::select("select  * from headlines order By id asc limit 2");
+    $headlines_desc = DB::select("select  * from headlines order By id asc limit 2,4");
 
 
 

@@ -32,6 +32,11 @@
                     <input type="text" name="desc" class="textbox textbox_225" value="{{ old('desc') }}" placeholder="请输入轮播图的描述"/>
                     <!-- <span class="errorTips">错误提示信息...</span> -->
                 </li>
+                <li> 
+                    <span class="item_name" style="width:120px;">轮播图跳转地址:</span>
+                    <input type="text" name="jump" class="textbox textbox_225" value="{{ old('jump') }}" placeholder="请输入轮播图跳转的地址"/>
+                    <!-- <span class="errorTips">错误提示信息...</span> -->
+                </li>
                 <li>
                  <div class="form-group" style="padding-left:46px;"> 
                     <label for="desc">轮播图状态:</label> 

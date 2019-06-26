@@ -24,6 +24,7 @@
                 <th style="text-align:center;">轮播图</th>
                 <th style="text-align:center;">轮播图标题</th>
                 <th style="text-align:center;">轮播图描述</th>
+                <th style="text-align:center;">轮播图跳转的地址</th>
                 <th style="text-align:center;">创建时间</th>
                 <th style="text-align:center;">状态</th>
                 <th style="text-align:center;">操作</th>
@@ -34,7 +35,7 @@
             <td class="center"><img src="/uploads/{{ $v->url }}" width="50" height="50"/></td>
             <td>{{$v->title}}</td>
             <td class="center">{{$v->desc}}</td>
-            
+            <td class="center">{{$v->jump}}</td>
             <td class="center">{{$v->created_at}}</td>
             <td>
                   @if($v->status == 0)

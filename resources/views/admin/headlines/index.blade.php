@@ -27,7 +27,7 @@
       </form>
       <table class="table" style="text-align:center;">
         <tr> 
-            <th style="text-align:center;">头条标题</th>
+            <th style="text-align:center;">头条标题</th> 
             <th style="text-align:center;">头条作者</th>
             <th style="text-align:center;">头条内容</th>
             <th style="text-align:center;">操作</th>
@@ -105,7 +105,10 @@
       </aside>
     </div>
       <!-- 显示页码 -->
+      <div style="margin-bottom: 20px">
       {{ $headlines->appends(['search'=>$search])->links() }}
+      </div>
+
   </section>
 
 @endsection

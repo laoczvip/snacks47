@@ -305,8 +305,8 @@ Route::get('admin/headlines/delete_data/{id}','Admin\HeadlinesController@delete_
 // 头条管理
 Route::resource('admin/headlines','Admin\HeadlinesController');
 
-
-
+// 前台头条详情
+Route::get('home/headlines_data/index','Home\Headlines_dataController@index');
 
 
 

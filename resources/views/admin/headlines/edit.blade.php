@@ -39,7 +39,7 @@
                     <input type="text" name="auth" class="textbox textbox_225" value="{{ $data->auth }}" placeholder="请输入头条的描述"/>
                     <!-- <span class="errorTips">错误提示信息...</span> -->
                 </li>
-                
+                   
                     
                     <!-- <span class="errorTips">错误提示信息...</span> -->
                      <div class="form-group" style="position:relative;"> 
@@ -48,18 +48,18 @@
 						<!-- 加载编辑器的容器 -->
 						</div>
 						
-						<div style="margin-left: 60px;margin-top: 10px;">
+						<div style="margin-left: 60px;margin-top: 10px;width: 70%">
 						<script style="height:150px;width:800px"; id="container" name="hcontent" type="text/plain">{!! $data->hcontent !!}			        
 						</script>
 						</div>								   
-	
+	                   <div style="position:fixed;bottom:15px;left:80%;float: bottom;">
+                            <input  type="submit" class="link_btn" value="提交">
+                       </div>
                 
             </ul>
-
                     
-                    <div style="margin-left:60px;margin-bottom:10px";>
-                    <input  type="submit" class="link_btn" value="提交">
-                    </div>
+                    
+                    
         </form>
     
 
