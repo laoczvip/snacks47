@@ -161,7 +161,7 @@ class PersonalController extends Controller
 
     /**
      * 设置默认地址
-     * @param Request $request [description]
+     * @param Request $request
      * @param [type]  $id      [需要设为默认的ID]
      */
     public function DefaultAddress(Request $request,$id)

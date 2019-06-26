@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\GoodsSku;
 use App\Models\OrderDetails;
 use DB;
 class OrdersController extends Controller
@@ -16,22 +17,24 @@ class OrdersController extends Controller
     public function Index()
     {
         $order = Order::orderBy('created_at', 'desc')->get();
-        foreach ($order as $key => $v) {
-
-        }
         return view('admin.orders.index',['order'=>$order]);
     }
     /**
      * [订单详情页]
-     * @param [type] $id [description]
+     * @param [type] $id [接收订单的ID查询订单详情]
      */
     public function Details($id)
     {
-        $order = OrderDetails::where('oid',$id)->get();
-        foreach ($order as $key => $v) {
-            dump($v->usergood);
-        }
-        return view('admin.orders.details',['order'=>$order]);
+        $order = OrderDetails::where('oid',$id)->first();
+        $gid = $order->gid;
+        $aid = $order->aid;
+        $goods = GoodsSku::find($gid);
+        $address = Address::find($aid);
+        return view('admin.orders.details',[
+            'order'=>$order,
+            'goods'=>$goods,
+            'address'=>$address,
+            ]);
 
     }
 }

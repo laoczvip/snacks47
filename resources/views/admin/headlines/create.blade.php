@@ -80,7 +80,7 @@
 
             </ul>
 
-            <div style="margin-left:60px;margin-bottom:10px";>
+            <div style="margin: -2px;margin-left: 59px;margin-bottom:10px;" >
                     <input  type="submit" class="link_btn" value="添加头条">
                     </div>
         </form>

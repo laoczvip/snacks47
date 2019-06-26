@@ -21,11 +21,9 @@
                   <!--轮播 -->
                     <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
                         <ul class="am-slides">
-                            <li class="banner1"><a href="introduction.html"><img src="/h/images/ad1.jpg" /></a></li>
-                            <li class="banner2"><a><img src="/h/images/ad2.jpg" /></a></li>
-                            <li class="banner3"><a><img src="/h/images/ad3.jpg" /></a></li>
-                            <li class="banner4"><a><img src="/h/images/ad4.jpg" /></a></li>
-
+                            @foreach($banners_data as $k=>$v)
+                            <li class="banner1" style="background-color: #fff;width:100px;"><a href="{{ $v->jump }}"><img src="/uploads/{{ $v->url }}"; style="width:60%;height:100%;"></a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="clear"></div>
@@ -74,7 +72,7 @@
 
                                                                     <dt><span title="蛋糕">{{$val->title}}</span></dt>
                                                                      @forelse($val->sub as $v)
-                                                                    
+
                                                                      @if($v->status==1)
                                                                     <dd><a href="/home/personal/search?id={{$v->id}}"><span>{{$v->title}}</span></a></dd>
                                                                      @endif
@@ -152,20 +150,18 @@
 
                 <!--走马灯 -->
 
-                <div class="marqueen">
+                <div class="marqueen" style="margin-left: 1px;">
                     <span class="marqueen-title">商城头条</span>
                     <div class="demo">
 
                         <ul>
-                            <li class="title-first"><a target="_blank" href="#">
+                            @foreach($headlines_asc as $k=>$v)
+
+                            <li class="title-first"><a target="_blank" href="/home/headlines_data/index?id={{ $v->id }}">
                                 <img src="/h/images/TJ2.jpg"></img>
-                                <span>[特惠]</span>商城爆品1分秒
+                                <span>[头条]</span>{{ $v->htitle }}
                             </a></li>
-                            <li class="title-first"><a target="_blank" href="#">
-                                <span>[公告]</span>商城与广州市签署战略合作协议
-                                 <img src="/h/images/TJ.jpg"></img>
-                                 <p>XXXXXXXXXXXXXXXXXX</p>
-                            </a></li>
+                           @endforeach
                     @if(!session('home_login'))
                     <div class="mod-vip">
                         <div class="m-baseinfo">
@@ -213,9 +209,9 @@
                         <div class="clear"></div>
                     </div>
                     @endif
-                            <li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
-                            <li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
-                            <li><a target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
+                            @foreach($headlines_desc as $k=>$v)
+                            <li><a target="_blank" href="/home/headlines_data/index?id={{ $v->id }}"><span>[特惠]</span>{{ $v->htitle }}</a></li>
+                            @endforeach
 
                         </ul>
                     <div class="advTip"><img src="/h/images/advTip.jpg"/></div>

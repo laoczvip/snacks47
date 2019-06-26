@@ -105,7 +105,10 @@ class IndexController extends Controller
 
     /*************************梁伟杰***********************************/
 
-
+    $banners_data = DB::table('banners')->where('status',1)->get();
+    $headlines_data = DB::table('headlines')->get();
+    $headlines_asc = DB::select("select  * from headlines order By id asc limit 2");
+    $headlines_desc = DB::select("select  * from headlines order By id asc limit 2,4");
 
 
 
@@ -142,8 +145,15 @@ class IndexController extends Controller
 
 
 
-        return view('home.index.index',['cates'=>$cates,'goods'=>$goods,'weds'=>$weds]);
-
+        return view('home.index.index',[
+            'cates'=>$cates,
+            'goods'=>$goods,
+            'weds'=>$weds,
+            'banners_data'=>$banners_data,
+            'headlines_data'=>$headlines_data,
+            'headlines_asc'=>$headlines_asc,
+            'headlines_desc'=>$headlines_desc,
+            ]);
     /**
      * 加载首页商品遍历
      * @return [type] [cates] [goods]

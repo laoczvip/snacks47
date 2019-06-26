@@ -10,6 +10,6 @@ class OrderDetails extends Model
 
     public function usergood()
     {
-        return $this->hasOne('App\Models\GoodsSku','gid');
+        return $this->hasOne('App\Models\GoodsSku','id');
     }
 }

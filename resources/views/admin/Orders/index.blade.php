@@ -34,10 +34,10 @@
             <td class="center"><a href="/admin/order/details/{{ $v->id }}">查看详情</a></td>
             <td class="center">
                  <a href="/admin/users//edit" title="编辑" class="link_icon">&#101;</a>
-                 <a href="javascript:;" title="删除" onclick="del( ,this )" class="link_icon">&#100;</a>
             </td>
         </tr>
         @empty
+        暂无数据
         @endforelse
       </table>
       <aside class="paging">
@@ -45,33 +45,5 @@
       </aside>
  </div>
 </section>
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    function del(id,obj){
-        var url = '/admin/user/del/'+id;
-
-        layer.confirm('你确定要删除吗', {
-          btn: ['确定','再考虑'] //按钮
-        }, function(){
-            $.get(url,function(res){
-                if (res == 1) {
-                    $(obj).parent().parent().remove();
-                    layer.msg('删除成功');
-                };
-            },'html');
-
-        }, function(){
-           layer.msg('删除可以在已删除列表恢复', {
-            time: 20000, //20s后自动关闭
-            btn: ['明白了', '知道了']
-          });
-        });
-
-    }
-</script>
 
 @endsection

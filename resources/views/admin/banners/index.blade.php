@@ -1,6 +1,13 @@
 @extends('admin.index.index')
 
 @section('center')
+<style type="text/css">
+    .hides{
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+</style>
     <section class="rt_wrap content mCustomScrollbar">
       <div class="rt_content">
       <div class="page_title">
@@ -23,6 +30,7 @@
               <th style="text-align:center;">轮播图</th>
               <th style="text-align:center;">轮播图标题</th>
               <th style="text-align:center;">轮播图描述</th>
+              <th style="text-align:center;">轮播图跳转的地址</th>
               <th style="text-align:center;">创建时间</th>
               <th style="text-align:center;">状态</th>
               <th style="text-align:center;">操作</th>
@@ -31,7 +39,8 @@
            <tr>
               <td class="center"><img src="/uploads/{{ $v->url }}" width="50" height="50"/></td>
               <td>{{$v->title}}</td>
-              <td class="center">{{$v->desc}}</td>
+              <td><p class="hides">{{$v->desc}}</p></td>
+              <td><p class="hides">{{$v->jump}}</p></td>
               <td class="center">{{$v->created_at}}</td>
               <td>
                   @if($v->status == 0)
