@@ -71,7 +71,8 @@ class IndexController extends Controller
     /******************************************************************/
 
     /*************************谢肇韬***********************************/
-
+        // 获取友情链接数据
+        $friendly = DB::table('friendly')->where('lstatus',1)->get();
 
 
 
@@ -142,7 +143,7 @@ class IndexController extends Controller
 
 
 
-        return view('home.index.index',['cates'=>$cates,'goods'=>$goods,'weds'=>$weds]);
+        return view('home.index.index',['cates'=>$cates,'goods'=>$goods,'weds'=>$weds,'friendly'=>$friendly]);
 
     /**
      * 加载首页商品遍历
