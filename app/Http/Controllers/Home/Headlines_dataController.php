@@ -16,9 +16,9 @@ class Headlines_dataController extends Controller
       if($data){
          return $data;
        }else{
-          return false; 
+          return false;
        }
-     
+
     }
 
     // 下一篇
@@ -30,15 +30,15 @@ class Headlines_dataController extends Controller
        }else{
           return false;
        }
-     
-    } 
 
-    
+    }
+
+
 
     //
     public function Index(Request $request)
-    {	
-    	
+    {
+
     	$id = $request->input('id',0);
     	// 上一条
       $article_prev = self::prev($id,$request->input('id',0));
@@ -46,12 +46,16 @@ class Headlines_dataController extends Controller
       // 下一条
       $article_next = self::next($id,$request->input('id',0));
     	$headlines_data = DB::table('headlines')->where('id',$id)->first();
-    	$weds = weds::find(1);  
+    	$weds = weds::find(1);
     	$datas = DB::select("select  * from headlines order By id desc limit 1,6");
+      $friendly = DB::table('friendly')->where('lstatus',1)->get();
 
-    	return view('home.headlines_data.index',['weds'=>$weds,'headlines_data'=>$headlines_data,'datas'=>$datas,'article_prev'=>$article_prev,'article_next'=>$article_next,]); 
+    	return view('home.headlines_data.index',[
+        'weds'=>$weds,
+        'headlines_data'=>$headlines_data,
+        'friendly'=>$friendly,
+        'datas'=>$datas,'article_prev'=>$article_prev,'article_next'=>$article_next,]);
     }
 
-    
+
 }
- 
