@@ -20,6 +20,13 @@ use Hash;
 
 class PersonalController extends Controller
 {
+
+    public function Friendly()
+    {
+        return $friendly = DB::table('friendly')->where('lstatus',1)->get();
+    }
+
+
     /**
      * 加载个人中心页面
      * @return [type] [HTML页面]
@@ -27,10 +34,15 @@ class PersonalController extends Controller
     public function Index(Request $request)
     {
         session_start();
+        $friendly = self::Friendly();
+
         $kouwei = $request->input('a',0);
         $_SESSION ['flavor'] = $kouwei;
         $weds = weds::find(1);
-        return view('home.personal.center',['weds'=>$weds]);
+        return view('home.personal.center',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
 
@@ -40,6 +52,8 @@ class PersonalController extends Controller
      */
     public function IntroDuction(Request $request)
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
         //商品id
         $gid = $request->input('id',0);
@@ -53,8 +67,9 @@ class PersonalController extends Controller
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
                 'goods_all'=>$goods_all,
-                'weds'=>$weds]
-                );
+                'weds'=>$weds,
+                'friendly'=>$friendly
+                ]);
     }
         /**
      * 加载搜索商品页面
@@ -62,6 +77,8 @@ class PersonalController extends Controller
      */
     public function Search(Request $request)
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
         //商品id
         $id = $request->input('id',0);
@@ -75,6 +92,7 @@ class PersonalController extends Controller
                 'id'=>$id,
                 'goods_all'=>$goods_all,
                 'weds'=>$weds,
+                'friendly'=>$friendly,
                 ]);
     }
     /**
@@ -83,11 +101,17 @@ class PersonalController extends Controller
      */
     public function Addres()
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
         $id = session('home_user')->id;
         $user = Address::where('uid',$id)->get();
         $address = json_decode($user,true);
-        return view('home.personal.addres',['address'=>$address,'weds'=>$weds]);
+        return view('home.personal.addres',[
+            'address'=>$address,
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -133,10 +157,16 @@ class PersonalController extends Controller
      */
     public function UpdateAddress($id)
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
         $addres = Address::where('id',$id)->first();
 
-        return view('home.personal.updateaddress',['addres'=>$addres,'weds'=>$weds]);
+        return view('home.personal.updateaddress',[
+            'addres'=>$addres,
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -147,7 +177,6 @@ class PersonalController extends Controller
     {
         $data = $request->all();
         $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];
-
         $flight = Address::find($data['id']);
         $flight->address = $address;
         $flight->consignee = $data['consignee'];
@@ -192,8 +221,13 @@ class PersonalController extends Controller
      */
     public function Information()
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
-        return view('home.personal.information',['weds'=>$weds]);
+        return view('home.personal.information',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -251,8 +285,13 @@ class PersonalController extends Controller
      */
     public function Password()
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
-        return view('home.personal.password',['weds'=>$weds]);
+        return view('home.personal.password',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -295,8 +334,12 @@ class PersonalController extends Controller
      */
     public function Collection()
     {
+        $friendly = self::Friendly();
         $weds = weds::find(1);
-        return view('home.personal.collection',['weds'=>$weds]);
+        return view('home.personal.collection',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -305,14 +348,16 @@ class PersonalController extends Controller
      */
     public function Order()
     {
+        $friendly = self::Friendly();
         $weds = weds::find(1);
         $uid = session('home_user')->id;
-        $order = Order::where('uid',$uid)->orderBy('created_at', 'desc')->paginate(5);
+        $order = Order::where('uid',$uid)->orderBy('created_at', 'desc')->paginate(99);
         $goods = GoodsSku::get();
         return view('home.personal.order',[
             'weds'=>$weds,
             'order'=>$order,
             'goods'=>$goods,
+            'friendly'=>$friendly,
             ]);
     }
 
@@ -322,8 +367,12 @@ class PersonalController extends Controller
      */
     public function Comment()
     {
+        $friendly = self::Friendly();
         $weds = weds::find(1);
-        return view('home.personal.comment',['weds'=>$weds]);
+        return view('home.personal.comment',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -335,7 +384,7 @@ class PersonalController extends Controller
      */
     public function Commoditydetails($id)
     {
-
+        $friendly = self::Friendly();
         $weds = weds::find(1);
         $order = Order::find($id);
         $aid = $order->orderdetails->aid;
@@ -346,6 +395,7 @@ class PersonalController extends Controller
             'weds'=>$weds,
             'order'=>$order,
             'goods'=>$goods,
+            'friendly'=>$friendly,
             'address'=>$address,
             ]);
     }

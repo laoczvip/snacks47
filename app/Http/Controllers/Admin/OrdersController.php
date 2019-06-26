@@ -37,4 +37,14 @@ class OrdersController extends Controller
             ]);
 
     }
+
+    public function DeliverGoods($id)
+    {
+        $order = DB::table('order_details')->where('id',$id)->update(['dtype' => 1]);
+        if ($order) {
+            return 1;
+        }else{
+            return 2;
+        }
+    }
 }

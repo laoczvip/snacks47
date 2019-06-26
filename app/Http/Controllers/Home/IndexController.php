@@ -14,7 +14,6 @@ class IndexController extends Controller
     public  function Cates_child()
     {
         $cates = DB::table('cates')->orderBy('path','asc')->get()->toArray();
-
         $ss = $this->tree($cates);
         return $ss;
 

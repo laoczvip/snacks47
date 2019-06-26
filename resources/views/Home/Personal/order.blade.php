@@ -102,6 +102,7 @@
                                 <li><a href="#tab4">待收货</a></li>
                                 <li><a href="#tab5">待评价</a></li>
                             </ul>
+                       <!--  全部订单 开始   -->
 
                             <div class="am-tabs-bd">
                                 <div class="am-tab-panel am-fade am-in am-active" id="tab1">
@@ -193,7 +194,7 @@
                                                                 <p>含运费：<span>10.00</span></p>
                                                             </div>
                                                         </li>
-                                                        @if($v->orderdetails->dtype == 2)
+                                                        @if($v->orderdetails->dtype == 3)
                                                         <div class="move-right">
                                                             <li class="td td-status">
                                                                 <div class="item-status">
@@ -234,7 +235,7 @@
                                                                 <div class="am-btn am-btn-danger anniu" disabled>已完成交易</div>
                                                             </li>
                                                         </div>
-                                                        @else
+                                                        @elseif($v->orderdetails->dtype == 1)
                                                         <div class="move-right">
                                                             <li class="td td-status">
                                                                 <div class="item-status">
@@ -245,8 +246,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="td td-change">
-                                                                <div class="am-btn am-btn-danger anniu">
-                                                                    确认收货</div>
+                                                                <div class="am-btn am-btn-danger anniu">确认收货</div>
                                                             </li>
                                                         </div>
                                                         @endif
@@ -260,6 +260,9 @@
                                         </div>
                                     </div>
                                 </div>
+                       <!--  全部订单 结束   -->
+
+                       <!--  待发货订单 开始   -->
                                 <div class="am-tab-panel am-fade" id="tab3">
                                    <div class="order-top">
                                         <div class="th th-item">
@@ -283,8 +286,7 @@
                                         <div class="th th-change">
                                             <td class="td-inner">交易操作</td>
                                         </div>
-                                    </div>
-
+                                     </div>
 
 
                                     <div class="order-main">
@@ -364,6 +366,10 @@
                                         </div>
                                     </div>
                                 </div>
+                       <!--  待发货订单 结束   -->
+
+
+                       <!--  已发货订单 开始   -->
                                  <div class="am-tab-panel am-fade" id="tab4">
                                     <div class="order-top">
                                         <div class="th th-item">
@@ -391,88 +397,91 @@
 
 
                                     <div class="order-main">
-                                        <div class="order-list">
-                                            <div class="order-status3">
-                                                    @foreach($order as $k=>$v)
-                                            @if($v->orderdetails->dtype == 1)
-                                            <div class="order-status2">
-                                                <div class="order-title">
-                                                    <div class="dd-num">订单编号：<a href="javascript:;">{{$v->onum}}</a></div>
-                                                    <span>成交时间：{{  $v->orderdetails->created_at}}</span>
-                                                </div>
-                                                <div class="order-content">
-                                                    <div class="order-left">
-
-                                                       <ul class="item-list">
-                                                                @foreach($goods as $kk=>$vv)
-                                                                    @if($v->orderdetails->gid == $vv->id)
-                                                            <li class="td td-item">
-                                                                <div class="item-pic">
-                                                                    <a href="#" class="J_MakePoint">
-                                                                        <img src="/uploads/{{$vv->showcase}}" class="itempic J_ItemImg">
-                                                                    </a>
-                                                                </div>
-
-                                                                    <div class="item-info">
-                                                                        <div class="item-basic-info">
-                                                                            <a href="#">
-                                                                                <p>{{$vv->title}}</p>
-                                                                                <p class="info-little">口味：{{$v->orderdetails->flavor}}
-                                                                                    <br/>包装：裸装 </p>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                            </li>
-                                                            <li class="td td-price">
-                                                                <div class="item-price">
-                                                                    {{ $vv->price }}
-                                                                </div>
-                                                            </li>
-                                                                    @endif
-                                                            @endforeach
-                                                            <li class="td td-number">
-                                                                <div class="item-number">
-                                                                    <span>×</span>{{ $v->orderdetails->number }}
-                                                                </div>
-                                                            </li>
-                                                            <li class="td td-operation">
-                                                                <div class="item-operation">
-                                                                    <a href="/commoditydetails/{{ $v->id }}">查看详情</a>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
+                                            <div class="order-list">
+                                                <div class="order-status3">
+                                                        @foreach($order as $k=>$v)
+                                                @if($v->orderdetails->dtype == 1)
+                                                <div class="order-status2">
+                                                    <div class="order-title">
+                                                        <div class="dd-num">订单编号：<a href="javascript:;">{{$v->onum}}</a></div>
+                                                        <span>成交时间：{{  $v->orderdetails->created_at}}</span>
                                                     </div>
-                                                    <div class="order-right">
-                                                        <li class="td td-amount">
-                                                            <div class="item-amount">
-                                                                合计：{{ $v->orderdetails->price }}
-                                                                <p>含运费：<span>10.00</span></p>
-                                                            </div>
-                                                        </li>
-                                                        <div class="move-right">
-                                                            <li class="td td-status">
-                                                                <div class="item-status">
-                                                                    <p class="Mystatus">卖家已发货</p>
-                                                                    <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
-                                                                    <p class="order-info"><a href="logistics.html">查看物流</a></p>
-                                                                    <p class="order-info"><a href="#">延长收货</a></p>
+                                                    <div class="order-content">
+                                                        <div class="order-left">
+
+                                                           <ul class="item-list">
+                                                                    @foreach($goods as $kk=>$vv)
+                                                                        @if($v->orderdetails->gid == $vv->id)
+                                                                <li class="td td-item">
+                                                                    <div class="item-pic">
+                                                                        <a href="#" class="J_MakePoint">
+                                                                            <img src="/uploads/{{$vv->showcase}}" class="itempic J_ItemImg">
+                                                                        </a>
+                                                                    </div>
+
+                                                                        <div class="item-info">
+                                                                            <div class="item-basic-info">
+                                                                                <a href="#">
+                                                                                    <p>{{$vv->title}}</p>
+                                                                                    <p class="info-little">口味：{{$v->orderdetails->flavor}}
+                                                                                        <br/>包装：裸装 </p>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                </li>
+                                                                <li class="td td-price">
+                                                                    <div class="item-price">
+                                                                        {{ $vv->price }}
+                                                                    </div>
+                                                                </li>
+                                                                        @endif
+                                                                @endforeach
+                                                                <li class="td td-number">
+                                                                    <div class="item-number">
+                                                                        <span>×</span>{{ $v->orderdetails->number }}
+                                                                    </div>
+                                                                </li>
+                                                                <li class="td td-operation">
+                                                                    <div class="item-operation">
+                                                                        <a href="/commoditydetails/{{ $v->id }}">查看详情</a>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="order-right">
+                                                            <li class="td td-amount">
+                                                                <div class="item-amount">
+                                                                    合计：{{ $v->orderdetails->price }}
+                                                                    <p>含运费：<span>10.00</span></p>
                                                                 </div>
                                                             </li>
-                                                            <li class="td td-change">
-                                                                <div class="am-btn am-btn-danger anniu">
-                                                                    确认收货</div>
-                                                            </li>
+                                                            <div class="move-right">
+                                                                <li class="td td-status">
+                                                                    <div class="item-status">
+                                                                        <p class="Mystatus">卖家已发货</p>
+                                                                        <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+                                                                        <p class="order-info"><a href="logistics.html">查看物流</a></p>
+                                                                        <p class="order-info"><a href="#">延长收货</a></p>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="td td-change">
+                                                                    <div class="am-btn am-btn-danger anniu">
+                                                                        确认收货</div>
+                                                                </li>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endif
-                                    @endforeach
+                                            @endif
+                                        @endforeach
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                       <!--  已发货订单 结束   -->
 
+
+                       <!--  已完成订单 开始   -->
                                 <div class="am-tab-panel am-fade" id="tab5">
                                     <div class="order-top">
                                         <div class="th th-item">
@@ -580,6 +589,8 @@
                                     @endforeach
                                             </div>
                                             </div>
+                       <!--  已完成订单 结束   -->
+
                                         </div>
                                     </div>
                                 </div>

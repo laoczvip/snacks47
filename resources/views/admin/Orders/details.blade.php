@@ -15,31 +15,33 @@
                 <th class="center">商品图片</th>
                 <th class="center">商品口味</th>
                 <th class="center">收取金额</th>
+                <th class="center">数量</th>
+                <th class="center">留言</th>
                 <th class="center">收货地址</th>
                 <th class="center">收货人</th>
                 <th class="center">联系电话</th>
-                <th class="center">数量</th>
-                <th class="center">留言</th>
                 <th class="center">操作</th>
            </tr>
         <tr>
             <td class="center">{{ $order->id }}</td>
             <td class="center">{{$goods->title}}</td>
-            <td class="center"><img src="/uploads/{{$goods->showcase}}" width="100px"></td>
+            <td class="center"><img src="/uploads/{{$goods->showcase}}" width="50px"></td>
             <td class="center">{{ $order->flavor }}</td>
             <td class="center">¥{{ $order->price }}</td>
 
+
+            <td class="center">X{{$order->number}}</td>
+            <td class="center">{{$order->lam or '暂无留言' }}</td>
             <td class="center">{{ $address->address.$address->detailed }}</td>
             <td class="center">{{ $address->consignee }}</td>
             <td class="center">{{ $address->atel }}</td>
-            <td class="center">X{{$order->number}}</td>
-            <td class="center">{{$order->lam or '暂无留言' }}</td>
             <td class="center">
                 @if( $order->dtype == 0)
-                    待发货
-                    <button type="button" class="btn btn-success" onclick="Delivergoods()">已发货</button>
+                    <p id="asjhd" style="margin-left:45px;">待发货</p>
+                    <button type="button" class="btn btn-success"  onclick="Delivergoods({{$order->id}}) " id="qdsh">已发货</button>
                 @elseif( $order->dtype == 1)
                     已发货
+
                 @elseif( $order->dtype == 2)
                     买家已收货
                 @else
@@ -53,8 +55,15 @@
       </aside>
  </div>
  <script>
-     function Delivergoods(){
-        console.log(1)
+     function Delivergoods(id){
+        let url = '/admin/order/dlivergoods/'+id
+        $.get(url,function(res){
+            if (res == 1) {
+                $('#qdsh').attr('disabled','disabled');
+                $('#asjhd').text('已发货');
+                layer.alert('已发货,等待买家收货', {icon: 6});
+            };
+        })
      }
  </script>
 </section>

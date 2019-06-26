@@ -54,6 +54,8 @@ Route::group(['middleware'=>'login'],function(){
     Route::get('admin/order','Admin\OrdersController@index');
     // 订单详情
     Route::get('admin/order/details/{id}','Admin\OrdersController@details');
+    // 修改订单状态
+    Route::get('admin/order/dlivergoods/{id}','Admin\OrdersController@DeliverGoods');
 
 
 });
