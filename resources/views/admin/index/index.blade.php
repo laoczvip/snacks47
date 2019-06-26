@@ -8,6 +8,7 @@
         <script src="/a/js/jquery.js"></script>
         <script src="/a/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <style type="text/css">a{text-decoration:none}</style>
+        <script type="text/javascript" src="/a/js/jquery-1.7.2.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
         <script type="text/javascript" src="/a/js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>

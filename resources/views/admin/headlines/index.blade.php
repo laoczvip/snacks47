@@ -100,8 +100,7 @@
 							    </div>
 							  </div>
 						</div>
-
-      <!-- 加载分页-->
+      <!-- 显示页码 -->
       <aside class="paging">
         {{ $headlines->appends(['search'=>$search])->links() }}
       </aside>
