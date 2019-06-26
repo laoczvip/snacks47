@@ -187,10 +187,10 @@
 													<div class="theme-options">
 														<div class="cart-title">口味</div>
 														<ul>
-															<li class="sku-line selected">原味<i></i></li>
-															<li class="sku-line">奶油<i></i></li>
-															<li class="sku-line">炭烧<i></i></li>
-															<li class="sku-line">咸香<i></i></li>
+															<li class="sku-line selected" onclick="kouwei(this)">原味<i></i></li>
+															<li class="sku-line" onclick="kouwei(this)">奶油<i></i></li>
+															<li class="sku-line" onclick="kouwei(this)">炭烧<i></i></li>
+															<li class="sku-line" onclick="kouwei(this)">咸香<i></i></li>
 														</ul>
 													</div>
 													<div class="theme-options">
@@ -1218,4 +1218,13 @@
 
 	</body>
 
+	<script>
+	    function kouwei(obj){
+	    	let a = $(obj).text();
+	    	$.get('/center/index',{a},function(res){
+	    		console.log(res)
+
+	    	})
+	    }
+	</script>
 </html>

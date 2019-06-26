@@ -113,8 +113,7 @@
                                 <dt>订单管理</dt>
                             </div>
                             <ul class="sidebar-trans">
-                                <dd><a href="/admin/index">订单列表</a></dd>
-                                <dd><a href="/admin/softdeletion">已删除的订单</a></dd>
+                                <dd><a href="/admin/order">订单列表</a></dd>
                             </ul>
                     </div>
                 </dl>

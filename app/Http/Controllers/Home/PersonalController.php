@@ -11,6 +11,9 @@ use App\Models\Users;
 use App\Models\Usersinfo;
 use App\Models\Address;
 use App\Models\Weds;
+use App\Models\Order;
+use App\Models\OrderDetails;
+use App\Models\GoodsSku;
 use DB;
 use Hash;
 
@@ -21,8 +24,11 @@ class PersonalController extends Controller
      * 加载个人中心页面
      * @return [type] [HTML页面]
      */
-    public function Index()
+    public function Index(Request $request)
     {
+        session_start();
+        $kouwei = $request->input('a',0);
+        $_SESSION ['flavor'] = $kouwei;
         $weds = weds::find(1);
         return view('home.personal.center',['weds'=>$weds]);
     }
@@ -68,8 +74,8 @@ class PersonalController extends Controller
                 'num'=>$num,
                 'id'=>$id,
                 'goods_all'=>$goods_all,
-                'weds'=>$weds]
-                );
+                'weds'=>$weds,
+                ]);
     }
     /**
      * 加载收货地址页面
@@ -300,7 +306,14 @@ class PersonalController extends Controller
     public function Order()
     {
         $weds = weds::find(1);
-        return view('home.personal.order',['weds'=>$weds]);
+        $uid = session('home_user')->id;
+        $order = Order::where('uid',$uid)->orderBy('created_at', 'desc')->paginate(5);
+        $goods = GoodsSku::get();
+        return view('home.personal.order',[
+            'weds'=>$weds,
+            'order'=>$order,
+            'goods'=>$goods,
+            ]);
     }
 
     /**
@@ -311,6 +324,45 @@ class PersonalController extends Controller
     {
         $weds = weds::find(1);
         return view('home.personal.comment',['weds'=>$weds]);
+    }
+
+    /**
+     *
+     */
+    /**
+     * [用户订单详情页面]
+     * @param [type] $id [订单ID]
+     */
+    public function Commoditydetails($id)
+    {
+
+        $weds = weds::find(1);
+        $order = Order::find($id);
+        $aid = $order->orderdetails->aid;
+        // 收货地址
+        $address = Address::find($aid);
+        $goods = GoodsSku::get();
+        return view('home.personal.commoditydetails',[
+            'weds'=>$weds,
+            'order'=>$order,
+            'goods'=>$goods,
+            'address'=>$address,
+            ]);
+    }
+    /**
+     * 用户确定收货
+     * @param [type] $id [订单ID]
+     */
+    public function ConfirmReceipt($id)
+    {
+        $order = OrderDetails::find($id);
+        $order->dtype = 3;
+        $res = $order->save();
+        if ($res) {
+            return 1;
+        }else{
+            return 2;
+        }
     }
 
 }

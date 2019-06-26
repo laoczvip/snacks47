@@ -50,6 +50,12 @@ Route::group(['middleware'=>'login'],function(){
     // 修改网站信息(执行修改)
     Route::post('admin/configure/update','Admin\ConfigureController@update');
 
+    // 订单管理
+    Route::get('admin/order','Admin\OrdersController@index');
+    // 订单详情
+    Route::get('admin/order/details/{id}','Admin\OrdersController@details');
+
+
 });
 
 
@@ -103,10 +109,13 @@ Route::get('center/order','Home\PersonalController@order');
 // 下单页面
 Route::get('payment/{id}','Home\PurchaseController@index');
 // 执行购买
-Route::get('add','Home\PurchaseController@ExecutePurchase');
-Route::get('jia','Home\PurchaseController@jia');
-
-
+Route::post('add','Home\PurchaseController@ExecutePurchase');
+// 付款成功页面
+Route::get('ok ','Home\PurchaseController@Fukuancg');
+// 用户查看商品详情
+Route::get('commoditydetails/{id} ','Home\PersonalController@Commoditydetails');
+// 用户确定收货
+Route::get('confirmreceipt/{id} ','Home\PersonalController@ConfirmReceipt');
 
 
 

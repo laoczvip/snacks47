@@ -20,8 +20,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function Index(Request $request)
-    { 
-        
+    {
+
         // 接收搜索参数
         $value = $request->input('value');
         $type = $request->input('type');
@@ -50,26 +50,6 @@ class UserController extends Controller
      */
     public function Store(StoreUsers $request)
     {
-        /*$this->validate($request, [
-                'number' => 'required|regex:/^[a-zA-Z0-9]{4,16}$/',
-                'ufile' => 'required',
-                'email' => 'required',
-                'pass' => 'required|regex:/^[\w]{6,18}/',
-                'upass' => 'required|same:pass',
-                'tel' => 'required|regex:/^1{1}[3-9]{1}[\d]{9}$/',
-            ],[
-                'number.required'=>'请输入用户名',
-                'number.regex'=>'用户名格式错误',
-                'email.required'=>'请输入邮箱',
-                'upass.required'=>'请输入确认密码',
-                'upass.same'=>'两次密码不一致',
-                'tel.required'=>'请输入电话',
-                'tel.regex'=>'手机号格式错误',
-                'pass.regex'=>'密码格式错误',
-                'pass.required'=>'请输入密码',
-                'ufile.required'=>'请选择头像',
-            ]);
-        */
         DB::beginTransaction();
 
         //上传头像
@@ -79,7 +59,7 @@ class UserController extends Controller
         }else{
             $file_path = "";
         }
-        
+
         $data = $request->all();
         $user = new Users;
         $user->number = $data['number'];

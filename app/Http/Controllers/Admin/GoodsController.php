@@ -25,7 +25,7 @@ class GoodsController extends Controller
     public static function Cates_data($pid=0)
     {
         $cates  = Cates::all();
-        static $list = []; 
+        static $list = [];
         foreach($cates as $k=>$v){
             if($pid==$v->pid){
                 $list[] = $v;
@@ -33,7 +33,7 @@ class GoodsController extends Controller
             }
         }
         return $list;
-        
+
     }
     //分类名
     public static function Cates_name()
@@ -51,7 +51,7 @@ class GoodsController extends Controller
     {
         $flavour = DB::table('flavour')->get();
         $list = [];
-        foreach($flavour as $k=>$v){ 
+        foreach($flavour as $k=>$v){
             $list[$v->id] = $v->fname;
         }
 
@@ -65,20 +65,20 @@ class GoodsController extends Controller
     public function index(Request $request)
     {
         //搜索cid
-        $cid = $request->input('cid',0); 
+        $cid = $request->input('cid',0);
         //搜索商品名称
         $name = $request->input('name','');
         if($name!=null){
-          
+
             $goods_sku = DB::table('goods_sku')->orderBy('created_at','desc')->where('title','like','%'.$name.'%')->paginate(5);
-           
+
         } else if($cid!=0){
-           
+
              $goods_sku = DB::table('goods_sku')->where('cid',$cid)->orderBy('created_at','desc')->paginate(5);
         } else {
              $goods_sku = DB::table('goods_sku')->orderBy('created_at','desc')->paginate(5);
         }
-       
+
         //显示所有类，排序
         $cates = GoodsController::Cates_data();
         //显示已id为键 名字为值的类
@@ -103,13 +103,13 @@ class GoodsController extends Controller
     {
 
         $cates = GoodsController::Cates_data();
-        
+
         foreach($cates as $k=>$v){
             $n = substr_count($v->path,',');
-            $cates[$k]->title = str_repeat('|--', $n).$v->title; 
+            $cates[$k]->title = str_repeat('|--', $n).$v->title;
         }
         $flavour = DB::table('flavour')->get();
-        
+
         return view('admin.goods.create',['cates'=>$cates,'flavour'=>$flavour]);
     }
 
@@ -122,18 +122,18 @@ class GoodsController extends Controller
     public function store(Request $request)
     {
         //商品添加
-       
-        $goods_data['title'] = $request->input('title',''); 
-        $goods_data['created_at'] = date('Y-m-d H:i:s',time());
-       
 
-       
-       
+        $goods_data['title'] = $request->input('title','');
+        $goods_data['created_at'] = date('Y-m-d H:i:s',time());
+
+
+
+
         $goods = goods::insert($goods_data);
 
         $goods_sel = goods::orderBy('id','desc')->first();
         $gid = $goods_sel->id;
-       
+
         if($goods){
              $goodssku_data = $request->all('title','flavorties','price','stock','weight','status','desc');
              $goodssku_data['gid'] = $gid;
@@ -153,9 +153,9 @@ class GoodsController extends Controller
                 return back()->with('error','添加失败');
              }
         }
-       
-        
-       
+
+
+
     }
 
     /**
@@ -182,7 +182,7 @@ class GoodsController extends Controller
         $cates = GoodsController::Cates_data();
          foreach($cates as $k=>$v){
             $n = substr_count($v->path,',');
-            $cates[$k]->title = str_repeat('|--', $n).$v->title; 
+            $cates[$k]->title = str_repeat('|--', $n).$v->title;
         }
         $cates_name = GoodsController::Cates_name();
         $flavour = DB::table('flavour')->get();
@@ -201,7 +201,7 @@ class GoodsController extends Controller
     {
         //商品id
         $id = $request->input('id',0);
-        
+
          //接收值
         $data['title'] = $request->input('title','');
         $data['flavorties'] = $request->input('flavorties','');
@@ -214,19 +214,19 @@ class GoodsController extends Controller
         $data['parameter'] = $request->input('parameter',0);
         //类id
         $data['cid'] = $request->input('cid','');
-       
+
         if($request->hasFile('showcase')){
             $data['showcase'] = $request->file('showcase')->store(date('Ymd'));
             if(!empty($request->input('showcase'))){
                 Storage::delete($request->input('showcate'));
-            }         
+            }
         } else {
             $data['showcase'] = $request->input('showcase','');
-        }   
+        }
         $res =  DB::table('goods_sku')->where('gid',$id)->update($data);
         if($res){
             $data_sku['title'] = $request->input('title','');
-           
+
 
             $sku = DB::table('goods')->where('id',$id)->update($data_sku);
             if($sku){
@@ -246,8 +246,8 @@ class GoodsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy()
-    {   
-      
+    {
+
     }
     public function del(Request $request)
     {
@@ -255,14 +255,14 @@ class GoodsController extends Controller
 
        $store = DB::table('goods_sku')->where('id',$id)->first();
        dd($store);
-       $sto = $store->stock; 
+       $sto = $store->stock;
        if($sto==0){
             DB::table('goods_sku')->delete($id);
             echo json_encode('ok');
        } else {
             echo json_encode('err');
        }
-       
+
 
     }
 }

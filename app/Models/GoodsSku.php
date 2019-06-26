@@ -4,10 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class goods extends Model
+class GoodsSku extends Model
 {
-    //分类
-   	public $table = "goods";
-
-
+    public $table = 'goods_sku';
 }

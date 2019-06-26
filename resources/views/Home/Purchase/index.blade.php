@@ -143,8 +143,7 @@
                                 </div>
                             </div>
                             <div class="clear"></div>
-       <form action="/add" method="post" accept-charset="utf-8">
-
+                        <form action="/add" method="post" accept-charset="utf-8">
                             <tr class="item-list">
                                     <div class="bundle  bundle-last">
                                      {{ csrf_field() }}
@@ -163,15 +162,18 @@
                                                         </div>
                                                     </li>
                                                     <li class="td td-info">
+
                                                         <div class="item-props">
-                                                            <span class="sku-line">颜色：12#川南玛瑙</span>
-                                                            <span class="sku-line">包装：裸装</span>
+                                                            <span class="sku-line">口味：{{ $flavor}}</span>
+                                                            <span class="sku-line">包装：袋装</span>
                                                         </div>
                                                     </li>
                                                     <li class="td td-price">
                                                         <div class="item-price price-promo-promo">
                                                             <div class="price-content">
-                                                                <em class="J_Price price-now">{{$goods_sku->price }}</em>
+                                                                <em class="J_Price price-now" >{{$goods_sku->price }}</em>
+                                                              <input type="hidden" value="{{$goods_sku->price }}" id="price" />
+
                                                             </div>
                                                         </div>
                                                     </li>
@@ -181,16 +183,23 @@
                                                         <div class="item-amount ">
                                                             <span class="phone-title">购买数量</span>
                                                             <div class="sl">
-                                                                <input class="min am-btn" type="button" value="-" onclick="jian()"/>
-                                                                <input class="text_box" name="" id="num" type="text" value="1" style="width:30px;" />
-                                                                <input class="add am-btn"  type="button" onclick="jia()" value="+" />
+                                                                <input type="button" onclick="numDec()" value="-">
+                                                                <input type="text" id="quantity" value="1" readonly style="width:40px; ">
+                                                                <input type="button" onclick="numAdd()" value="+">
+                                                                <input type="hidden" name="num" id="number" value="">
+                                                                <input type="hidden" name="price" id="pprice" value="">
+                                                                <input type="hidden" name="address" id="addresss" value="">
+                                                                <input type="hidden" name="flavor"  value="{{ $flavor}}">
+                                                                <input type="hidden" name="gid" value="{{ $goods_sku->id }}">
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li class="td td-sum">
                                                     <div class="td-inner">
-                                                        <em tabindex="0" class="J_ItemSum number">{{$goods_sku->price}}</em>
+                                                        <em tabindex="0" class="J_ItemSum number" id="totalPrice">{{$goods_sku->price}}</em>
+                                                    <input type="hidden" id="stock" value="{{$goods_sku->stock}}">
                                                     </div>
                                                 </li>
                                                 <li class="td td-oplist">
@@ -230,18 +239,16 @@
                             <!--含运费小计 -->
                             <div class="buy-point-discharge ">
                                 <p class="price g_price ">
-                                    合计（含运费） <span>¥</span><em class="pay-sum">{{$goods_sku->price + 10 }}</em>
+                                    合计（含运费） <span>¥</span><em class="pay-sum" id="pprasdsaice">{{$goods_sku->price + 10 }}.00</em>
                                 </p>
                             </div>
-
                             <div id="holyshit269" class="submitOrder">
                                 <div class="go-btn-wrap">
-                                    <button style="float:right"  id="J_Go" type="submit" class="btn btn-danger" class="btn-go" tabindex="0">提交订单</button>
+                                    <button style="float:right"   type="submit" class="btn btn-danger" >提交订单</button>
                                 </div>
                             </div>
                             <div class="clear"></div>
                         </div>
-                        <input type="hidden" name="num" id="num" value="">
 
                     </div>
                 </div>
@@ -322,23 +329,111 @@
 
 </html>
 <script>
-    function asjh(id,obj){
+    let price = $('#price').text();
+    $('#pprice').val(price);
 
-        // Ajax发送买家的地址id
-        $.get('/add',{id},function(res){})
+    function asjh(id){
+         $('#addresss').val(id);
     }
 
     function jia(){
+        let price = $('#danjia').text();
+
         let num = $('#num').val()
-        $('num').find(num);
+        let a = (price * num++ )
+        $('#number').val(num);
+        $('#pprice').val(a);
+        $('#price').text(a);
+        $('#danjia').text(a);
+        console.log(a,num)
+    }
+
+
+
+
+    function keyup(){
+
+    var quantity = document.getElementById("quantity").value;
+
+    if(isNaN(quantity) ||  parseInt(quantity)!=quantity || parseInt(quantity)<1){
+
+        quantity = 1;
+
+        return;
 
     }
 
-    function jian(){
-        let num = $('#num').val()
-        console.log(num)
+    if(quantity>=10){
+
+        document.getElementById("quantity").value=quantity.substring(0,quantity.length-1);
+
+        alert("商品数量不能大于10");
 
     }
 
+}
 
+
+
+    /*商品数量+1*/
+
+    function numAdd(){
+
+        var quantity = document.getElementById("quantity").value;
+        console.log(quantity)
+        var num_add = parseInt(quantity)+1;
+
+        var price=document.getElementById("price").value;
+
+        if(quantity==""){
+
+            num_add = 1;
+
+        }
+        let stock = $('#stock').val();
+        if(num_add>=stock){
+
+            document.getElementById("quantity").value=num_add-1;
+
+            layer.msg('库存不足', function(){});
+            return false;
+
+        }else{
+
+            document.getElementById("quantity").value=num_add;
+
+            var Num=price*num_add;
+
+            let a =  document.getElementById("totalPrice").innerHTML=Num.toFixed(2);
+            $('#pprice').val(a);
+            $('#pprasdsaice').text(a);
+            $('#number').val(quantity);
+
+        }
+
+    }
+
+    /*商品数量-1*/
+
+    function numDec(){
+
+        var quantity = document.getElementById("quantity").value;
+
+        var price=document.getElementById("price").value;
+
+        var num_dec = parseInt(quantity)-1;
+
+        if(num_dec>0){
+
+        document.getElementById("quantity").value=num_dec;
+
+        var Num=price*num_dec;
+
+        let a = document.getElementById("totalPrice").innerHTML=Num.toFixed(2);
+            $('#pprice').val(a);
+            $('#pprasdsaice').text(a);
+            $('#number').val(quantity);
+    }
+
+}
 </script>
