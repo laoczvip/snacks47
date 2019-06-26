@@ -104,11 +104,12 @@ class IndexController extends Controller
 
 
     /*************************梁伟杰***********************************/
-
+    // 获取轮播图数据
     $banners_data = DB::table('banners')->where('status',1)->get();
-    $headlines_data = DB::table('headlines')->get(); 
+    // 获取最前两条头条 
     $headlines_asc = DB::select("select  * from headlines order By id asc limit 2");
-    $headlines_desc = DB::select("select  * from headlines order By id asc limit 2,4");
+    // 跳过最前两条信息,显示三条信息
+    $headlines_desc = DB::select("select  * from headlines order By id asc limit 2,3");
 
 
 

@@ -101,14 +101,11 @@
 							  </div>
 						</div>
       
+      <!-- 显示页码 -->
       <aside class="paging">
+        {{ $headlines->appends(['search'=>$search])->links() }}
       </aside>
     </div>
-      <!-- 显示页码 -->
-      <div style="margin-bottom: 20px">
-      {{ $headlines->appends(['search'=>$search])->links() }}
-      </div>
-
   </section>
 
 @endsection
