@@ -71,7 +71,8 @@ class IndexController extends Controller
     /******************************************************************/
 
     /*************************谢肇韬***********************************/
-
+        // 获取友情链接数据
+        $friendly = DB::table('friendly')->where('lstatus',1)->get();
 
 
 
@@ -153,7 +154,9 @@ class IndexController extends Controller
             'headlines_data'=>$headlines_data,
             'headlines_asc'=>$headlines_asc,
             'headlines_desc'=>$headlines_desc,
+            'friendly'=>$friendly,
             ]);
+
     /**
      * 加载首页商品遍历
      * @return [type] [cates] [goods]

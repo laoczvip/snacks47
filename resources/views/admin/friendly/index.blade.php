@@ -46,9 +46,9 @@
                   <a href="javascript:;" title="删除" class="link_icon" onclick="del({{ $v->id }},this)">&#100;</a>
 
                   @if($v->lstatus == 0)
-                    <a href="javascript:;" class="btn btn-success" style="color:white" onclick="changeStatus({{ $v->id }},0)">激活</a>
+                    <a href="javascript:;" class="btn btn-success" style="color:white" onclick="ChangeStatus({{ $v->id }},0)">激活</a>
                   @else
-                    <a href="javascript:;" class="btn btn-danger" style="color:white" onclick="changeStatus({{ $v->id }},1)">关闭</a>
+                    <a href="javascript:;" class="btn btn-danger" style="color:white" onclick="ChangeStatus({{ $v->id }},1)">关闭</a>
                   @endif
 
                 </td>
@@ -77,7 +77,7 @@
 
               }
 
-              function changeStatus(id,sta)
+              function ChangeStatus(id,sta)
               {
                 if(sta == 1){
                   $('#myModal form input[type=radio]').eq(1).attr('checked',true);

@@ -19,6 +19,20 @@
             <em>© 2015-2025 Hengwang.com 版权所有</em>
         </p>
     </div>
+    <!-- 友情链接 开始 -->
+    <div class="footer-bd" >
+        @foreach($friendly as $k=>$v)
+        
+            <a href="{{ $v->lurl }}">
+                <img src="/uploads/{{ $v->limg }}" style="width:150px;height:50px;
+                -webkit-box-shadow:10px 10px 5px #888888; /*老的For Chrome5+, Safari5+*/
+                -moz-box-shadow: 10px 10px 5px #888888; /* 老的 firefox */
+                box-shadow: 10px 10px 5px #888888;">
+            </a>
+        
+        @endforeach
+    </div>
+    <!-- 友情链接 结束 -->
 </div>
 <script src="/layui/layui.js"></script>
 <script>

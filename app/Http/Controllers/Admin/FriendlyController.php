@@ -75,7 +75,7 @@ class FriendlyController extends Controller
         // 接收数据
         $friendly = new Friendly;
         $friendly->lname = $data['lname'];
-        $friendly->lurl = $data['lurl'];
+        $friendly->lurl = 'http://'.$data['lurl'];
         $friendly->limg = $limg;
         $friendly->lstatus = $data['lstatus'];
         $res = $friendly->save();

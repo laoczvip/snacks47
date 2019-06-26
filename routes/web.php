@@ -250,8 +250,8 @@ Route::group(['prefix'=>'admin'],function(){
 // 后台 友情链接
 Route::resource('admin/friendly','Admin\FriendlyController');
 
-
-
+// 后台 评论
+Route::resource('admin/comment','Admin\CommentController');
 
 
 
