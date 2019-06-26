@@ -37,7 +37,7 @@
             <td class="center">
                 @if( $order->dtype == 0)
                     待发货
-                    <button type="button" class="btn btn-success">已发货</button>
+                    <button type="button" class="btn btn-success" onclick="Delivergoods()">已发货</button>
                 @elseif( $order->dtype == 1)
                     已发货
                 @elseif( $order->dtype == 2)
@@ -52,5 +52,10 @@
            {{-- $users->appends($params)->links() --}}
       </aside>
  </div>
+ <script>
+     function Delivergoods(){
+        console.log(1)
+     }
+ </script>
 </section>
 @endsection
