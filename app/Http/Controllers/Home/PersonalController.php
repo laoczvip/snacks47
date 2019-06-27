@@ -413,7 +413,7 @@ class PersonalController extends Controller
             ]);
     }
     /**
-     * 用户确定收货
+     * [用户确定收货]
      * @param [type] $id [订单ID]
      */
     public function ConfirmReceipt($id)
@@ -422,6 +422,21 @@ class PersonalController extends Controller
         $order->dtype = 3;
         $res = $order->save();
         if ($res) {
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+
+    /**
+     * [用户删除订单]
+     * @param [int] $id [订单ID]
+     */
+    public function DeleteOrders($id)
+    {
+        $res1 = DB::table('order')->where('id',$id)->delete();
+        $res2 = DB::table('order_details')->where('oid',$id)->delete();
+        if ($res1 && $res2) {
             return 1;
         }else{
             return 2;

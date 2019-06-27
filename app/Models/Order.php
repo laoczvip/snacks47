@@ -14,4 +14,15 @@ class Order extends Model
         return $this->hasOne('App\Models\OrderDetails','oid');
     }
 
+    /**
+     * [用户收藏]
+     * @return [type] [description]
+     */
+
+
+    public function address()
+    {
+        return $this->belongsToMany('App\Models\Address','order_details','oid','aid');
+    }
+
 }

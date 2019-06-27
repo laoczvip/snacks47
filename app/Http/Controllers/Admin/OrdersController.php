@@ -13,10 +13,22 @@ class OrdersController extends Controller
 {
     /**
      * [订单页]
+     * @param Request $request [接收搜索内容]
      */
-    public function Index()
+    public function Index(Request $request)
     {
-        $order = Order::orderBy('created_at', 'desc')->get();
+        $value = $request->input('onum');
+        $order = Order::where('onum','like','%'.$value.'%')->paginate(5);
+
+
+        /*foreach ($order as $k => $v) {
+            $diz = $v->address;
+            foreach ($diz as $kk => $value) {
+                dump($v->orderdetails->flavor);
+            }
+        }*/
+
+
         return view('admin.orders.index',['order'=>$order]);
     }
     /**
@@ -37,7 +49,10 @@ class OrdersController extends Controller
             ]);
 
     }
-
+    /**
+     * [后台发货按钮]
+     * @param [type] $id [订单ID]
+     */
     public function DeliverGoods($id)
     {
         $order = DB::table('order_details')->where('id',$id)->update(['dtype' => 1]);

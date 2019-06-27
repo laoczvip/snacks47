@@ -307,8 +307,11 @@
                                     <span class="iconfont">&#xe605;</span>
                                 </div>
                                 <div class="right-text-con">
-                                    <p class="name">评论数</p>
-                                    <p><span class="color-green">221</span>数据<span class="iconfont">&#xe60f;</span></p>
+                                    <p class="name">总营业额</p>
+                                    <p><span class="color-green">
+                                     @if(Request::path() == 'admin')
+                                        {{$menuy}}
+                                    @endif</span>数据<span class="iconfont">&#xe60f;</span></p>
                                 </div>
                             </a>
                         </li>

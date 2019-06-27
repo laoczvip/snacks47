@@ -24,7 +24,6 @@ class UserController extends Controller
 
         // 接收搜索参数
         $value = $request->input('value');
-        $type = $request->input('type');
         $users = Users::where('number','like','%'.$value.'%')->paginate(5);
         return view('admin.user.index',[
                     'users'=>$users,

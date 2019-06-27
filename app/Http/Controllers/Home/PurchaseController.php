@@ -12,6 +12,11 @@ use DB;
 
 class PurchaseController extends Controller
 {
+    public function Friendly()
+    {
+        return $friendly = DB::table('friendly')->where('lstatus',1)->get();
+    }
+
     /**
      * [加载下单页]
      * @param Request $request [description]
@@ -19,7 +24,8 @@ class PurchaseController extends Controller
      */
     public function Index(Request $request,$id)
     {
-        $friendly = DB::table('friendly')->where('lstatus',1)->get();
+        $friendly = self::Friendly();
+
 
         session_start();
         $flavor = $_SESSION['flavor'];
@@ -68,6 +74,7 @@ class PurchaseController extends Controller
         $orderdetails->lam = $data['lam'];
         $orderdetails->flavor = $data['flavor'];
 
+        DB::update("update salesvolume set menuy=menuy+".$data['price']."where id=1");
         $res2  = $orderdetails->save();
         if ($res1 && $res2) {
             DB::commit();
@@ -88,10 +95,12 @@ class PurchaseController extends Controller
      */
     public function Fukuancg(Request $request)
     {
+        $friendly = self::Friendly();
         $address = DB::table('address')->find(session('aid'));
         $weds = weds::find(1);
         return view('home.purchase.fukuancg',[
             'weds'=>$weds,
+            'friendly'=>$friendly,
             'address'=>$address,
             ]);
     }

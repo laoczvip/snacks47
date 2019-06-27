@@ -204,8 +204,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="td td-change">
-                                                                <div class="am-btn am-btn-danger anniu">
-                                                                    删除订单</div>
+                                                                <div class="am-btn am-btn-danger anniu" onclick="del({{$v->id}},this)">删除订单</div>
                                                             </li>
                                                         </div>
                                                         @elseif($v->orderdetails->dtype == 0)
@@ -217,8 +216,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="td td-change">
-                                                                <div class="am-btn am-btn-danger anniu">
-                                                                    提醒发货</div>
+                                                                <div class="am-btn am-btn-danger anniu" onclick="remind()">提醒发货</div>
                                                             </li>
                                                         </div>
                                                         @elseif($v->orderdetails->dtype == 3)
@@ -246,7 +244,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="td td-change">
-                                                                <div class="am-btn am-btn-danger anniu">确认收货</div>
+                                                                <div class="am-btn am-btn-danger anniu" onclick="qdingshouhuo({{ $v->orderdetails->id }})" id="qdsh">确认收货</div>
                                                             </li>
                                                         </div>
                                                         @endif
@@ -355,7 +353,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="td td-change">
-                                                                <div class="am-btn am-btn-danger anniu">提醒发货</div>
+                                                                <div class="am-btn am-btn-danger anniu" onclick="remind()">提醒发货</div>
                                                             </li>
                                                         </div>
                                                     </div>
@@ -603,6 +601,49 @@
             </div>
         @include('home.public.list')
         </div>
+        <script>
+             function qdingshouhuo(id){
+            layer.msg('确保自己已经收到货了', {
+              time: 0 //不自动关闭
+              ,btn: ['好的', '取消']
+              ,yes: function(index){
+                $("#step-3").addClass("step-2");
+                $("#step-4").addClass("step-2");
+                let url = '/confirmreceipt/'+id;
+                $.get(url,function(res){
+                    if (res == 1) {
+                        layer.close(index);
+                        $('#qdsh').attr('disabled','disabled');
+
+                        layer.alert('感谢你本次的购物', {icon: 6});
+                    };
+                })
+              }
+            });
+        }
+
+        function del(id,obj){
+            layer.msg('确保自己已经收到货了', {
+              time: 0 //不自动关闭
+              ,btn: ['好的', '取消']
+              ,yes: function(index){
+                    layer.close(index);
+                    let url = '/del/'+id
+                    $.get(url,function(res){
+                        console.log(res)
+                        if (res == 1) {
+                            $(obj).parent().parent().parent().parent().parent().remove();
+                            layer.msg('删除成功', {icon: 1});
+                        };
+                    })
+              }
+            });
+        }
+
+        function remind(){
+            layer.msg('我们会尽快发货的', {icon: 6});
+        }
+        </script>
 
     </body>
 

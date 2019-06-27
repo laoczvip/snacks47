@@ -18,7 +18,16 @@ class IndexController extends Controller
         $num = self::num('users');
         // 商品总数
         $goods_num = self::num('goods');
-        return view('admin.index.index',['num'=>$num,'goods_num'=>$goods_num]);
+        $menuy = DB::table('Salesvolume')->get();
+        foreach ($menuy as $key => $v) {
+            $menuy = $v->menuy;
+        }
+
+        return view('admin.index.index',[
+            'num'=>$num,
+            'goods_num'=>$goods_num,
+            'menuy'=>$menuy,
+            ]);
     }
 
     /**
