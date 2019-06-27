@@ -13,6 +13,7 @@ use App\Models\Address;
 use App\Models\Weds;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\Collect;
 use App\Models\GoodsSku;
 use DB;
 use Hash;
@@ -51,9 +52,15 @@ class PersonalController extends Controller
      * @return [type] [HTML页面]
      */
     public function IntroDuction(Request $request)
-    {
+    {error_reporting(0);
         $friendly = self::Friendly();
 
+        $user = Users::find(session('home_user')->id);
+
+        $asd = $user->collect;
+        foreach ($asd as $key => $v) {
+            $collect[] = $v->gid;
+        }
         $weds = weds::find(1);
         //商品id
         $gid = $request->input('id',0);
@@ -68,7 +75,8 @@ class PersonalController extends Controller
                 'goods_sku'=>$goods_sku,
                 'goods_all'=>$goods_all,
                 'weds'=>$weds,
-                'friendly'=>$friendly
+                'friendly'=>$friendly,
+                'collect'=>$collect,
                 ]);
     }
         /**
@@ -334,11 +342,16 @@ class PersonalController extends Controller
      */
     public function Collection()
     {
+        $user = Users::find(session('home_user')->id);
+        $good = GoodsSku::get();
+        $collect = $user->collect;
         $friendly = self::Friendly();
         $weds = weds::find(1);
         return view('home.personal.collection',[
             'weds'=>$weds,
             'friendly'=>$friendly,
+            'collect'=>$collect,
+            'good'=>$good,
             ]);
     }
 

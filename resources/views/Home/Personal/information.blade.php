@@ -82,20 +82,6 @@
 
                                     </div>
                                 </div>
-                                                                <!-- div class="am-form-group">
-                                    <label class="am-form-label">性别</label>
-                                    <div class="am-form-content sex">
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="male" data-am-ucheck> 男
-                                        </label>
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="female" data-am-ucheck> 女
-                                        </label>
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="secret" data-am-ucheck> 保密
-                                        </label>
-                                    </div>
-                                </div> -->
                                 <div class="am-form-group">
                                     <label for="user-phone" class="am-form-label">电话</label>
                                     <div class="am-form-content">

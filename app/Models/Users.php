@@ -24,8 +24,19 @@ class Users extends Model
      * @return [obj] [同一个用户的地址]
      */
     public function useraddres(){
-        return $this->hasOne('App\Models\Address','uid');
+        return $this->hasMany('App\Models\Address','uid');
     }
+
+    /**
+     * [用户收藏]
+     * @return [type] [description]
+     */
+    public function collect()
+    {
+        return $this->hasMany('App\Models\Collect','uid');
+    }
+
+
 
 
 }

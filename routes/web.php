@@ -118,7 +118,10 @@ Route::get('ok ','Home\PurchaseController@Fukuancg');
 Route::get('commoditydetails/{id} ','Home\PersonalController@Commoditydetails');
 // 用户确定收货
 Route::get('confirmreceipt/{id} ','Home\PersonalController@ConfirmReceipt');
-
+// 用户收藏
+Route::get('collection/{id} ','Home\CollectionController@Collection');
+// 用户取消收藏
+Route::get('collection/del/{id} ','Home\CollectionController@Del');
 
 
 

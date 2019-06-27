@@ -12,8 +12,15 @@ use DB;
 
 class PurchaseController extends Controller
 {
+    /**
+     * [加载下单页]
+     * @param Request $request [description]
+     * @param [type]  $id      [description]
+     */
     public function Index(Request $request,$id)
     {
+        $friendly = DB::table('friendly')->where('lstatus',1)->get();
+
         session_start();
         $flavor = $_SESSION['flavor'];
         $gid = $id;
@@ -26,6 +33,7 @@ class PurchaseController extends Controller
             'weds'=>$weds,
             'address'=>$address,
             'goods_sku'=>$goods_sku,
+            'friendly'=>$friendly,
             'flavor'=>$flavor,
             ]);
     }

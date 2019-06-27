@@ -14,7 +14,12 @@
 		<script type="text/javascript" src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 		<script type="text/javascript" src="/h/js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="/h/js/jquery.flexslider.js"></script>
-
+		<style type="text/css">
+			.des_share .d_care {
+				background: url(/h/images/care.png) no-repeat left center;
+				padding-left: 22px;
+			}
+		</style>
 		<script type="text/javascript" src="/h/js/list.js"></script>
     	<link rel="icon" href="/uploads/{{ $weds->icon }}"/>
 	</head>
@@ -163,6 +168,24 @@
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
 									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
 								</li>
+								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
+									<div class="des_share" style="width:82px;margin-left:35px;"
+							        @if(!in_array($goods_sku->id,$collect))
+									 onclick="ShowDiv({{ $goods_sku->id }}) "
+									@endif
+									 >
+							        <div class="d_care" >
+							        @if(in_array($goods_sku->id,$collect))
+							            	<p id="asdas" onclick="del({{$goods_sku->id}})">取消收藏</p>
+									@else
+							            <a id="shouc">收藏</a>
+									@endif
+
+							        </div>
+							    </div>
+								</li>
+<input type="hidden" id="url" value="{{$_SERVER['REQUEST_URI']. $_SERVER['QUERY_STRING'] }}">
+
 							</ul>
 							<div class="clear"></div>
 
@@ -273,6 +296,9 @@
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
 									<a id="LikBasket" title="加入购物车" href="/h/#"><i></i>加入购物车</a>
 								</div>
+							</li>
+							<li>
+
 							</li>
 						</div>
 
@@ -1218,12 +1244,53 @@
 
 	</body>
 
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use('layer', function(){
+  var layer = layui.layer;
+
+});
+</script>
 	<script>
+
+		// 口味选择
 	    function kouwei(obj){
 	    	let a = $(obj).text();
 	    	$.get('/center/index',{a},function(res){
 	    		console.log(res)
 
+	    	})
+	    }
+	    // 用户收藏
+	    function ShowDiv(id){
+	    	let urll = $('#url').val();
+	    	let url = '/collection/'+id
+	    	$.get(url,function(res){
+	    		if (res == 1) {
+	    			layer.msg('收藏成功<font color="red">❤</font>');
+			    	$('#shouc').text('已收藏')
+			    	setTimeout(function(){
+                        window.location.href = urll;
+                    },1000)
+	    		}else{
+	    			layer.msg('收藏失败,请稍后重试', {icon: 5});
+	    		}
+	    	})
+	    }
+
+	    //用户取消收藏
+	    function del(id){
+	    	let urll = $('#url').val();
+	    	let url = '/collection/del/'+id
+	    	$.get(url,function(res){
+	    		console.log(res)
+	    		if (res == 1) {
+	    			layer.msg('已取消');
+			    	$('#asdas').text('收藏')
+			    	setTimeout(function(){
+                        window.location.href = urll;
+                    },1000)
+	    		}
 	    	})
 	    }
 	</script>
