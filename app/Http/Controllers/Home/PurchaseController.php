@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Http\Controllers\Home\ShopcartController;
 use DB;
 
 class PurchaseController extends Controller
@@ -26,8 +27,9 @@ class PurchaseController extends Controller
     {
         $friendly = self::Friendly();
 
+        $count = ShopcartController::CountCar();
 
-        session_start();
+
         $flavor = $_SESSION['flavor'];
         $gid = $id;
         $weds = weds::find(1);
@@ -41,6 +43,7 @@ class PurchaseController extends Controller
             'goods_sku'=>$goods_sku,
             'friendly'=>$friendly,
             'flavor'=>$flavor,
+            'count'=>$count,
             ]);
     }
 
@@ -55,7 +58,7 @@ class PurchaseController extends Controller
         $data = $request->all();
         $uid = session('home_user')->id;
         // 生成订单号
-        $onum = date('YmdHis') . str_pad(mt_rand(1, 99999999), 5, '0', STR_PAD_LEFT);
+        $onum = date('YmdHis').str_pad(mt_rand(1, 99999999),5,'0',STR_PAD_LEFT);
         $order = new Order;
         $order->uid = $uid;
         $order->onum = $onum;
@@ -75,6 +78,7 @@ class PurchaseController extends Controller
         $orderdetails->flavor = $data['flavor'];
 
         DB::update("update salesvolume set menuy=menuy+".$data['price']."where id=1");
+        DB::update("update goods_sku set buy=buy+1 where id=".$data['gid']);
         $res2  = $orderdetails->save();
         if ($res1 && $res2) {
             DB::commit();
