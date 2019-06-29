@@ -58,10 +58,12 @@ class PurchaseController extends Controller
         $data = $request->all();
         $uid = session('home_user')->id;
         // 生成订单号
-        $onum = date('YmdHis').str_pad(mt_rand(1, 99999999),5,'0',STR_PAD_LEFT);
+        $onum = date('Ymd').str_pad(mt_rand(1, 99999999),5,'0',STR_PAD_LEFT);
         $order = new Order;
         $order->uid = $uid;
         $order->onum = $onum;
+        $order->aid = $data['address'];
+        $order->money = $data['price'];
         $res1  = $order->save();
         if ($res1) {
             // 获取uid
@@ -72,7 +74,6 @@ class PurchaseController extends Controller
         $orderdetails->oid = $oid;
         $orderdetails->gid = $data['gid'];
         $orderdetails->number = $data['num'];
-        $orderdetails->aid = $data['address'];
         $orderdetails->price = $data['price'];
         $orderdetails->lam = $data['lam'];
         $orderdetails->flavor = $data['flavor'];
@@ -99,6 +100,8 @@ class PurchaseController extends Controller
      */
     public function Fukuancg(Request $request)
     {
+        $count = ShopcartController::CountCar();
+
         $friendly = self::Friendly();
         $address = DB::table('address')->find(session('aid'));
         $weds = weds::find(1);
@@ -106,6 +109,7 @@ class PurchaseController extends Controller
             'weds'=>$weds,
             'friendly'=>$friendly,
             'address'=>$address,
+            'count'=>$count,
             ]);
     }
 

@@ -44,7 +44,7 @@
                         </div>
                         <hr/>
                         <!--进度条-->
-                        @if($order->orderdetails->dtype == 0)
+                        @if($dtype == 0)
                         <div class="m-progress">
                             <div class="m-progress-list">
                                 <span class="step-1 step">
@@ -74,7 +74,7 @@
                                 <div class="u-progress-bar-inner"></div>
                             </div>
                         </div>
-                        @elseif($order->orderdetails->dtype == 1)
+                        @elseif($dtype == 1)
                         <div class="m-progress">
                             <div class="m-progress-list">
                                 <span class="step-1 step">
@@ -135,7 +135,6 @@
                             </div>
                         </div>
                         @endif
-
                         <div class="order-infoaside">
                             <div class="order-logistics">
 
@@ -144,30 +143,28 @@
                                     </div>
                                     <div class="latest-logistics">
                                         <p class="text">
-                                            @if($order->orderdetails->dtype == 0)
+                                            @if($dtype == 0)
                                                 商家正在努力备货中...
-                                            @elseif($order->orderdetails->dtype == 1)
+                                            @elseif($dtype == 1)
                                                 商家已发货,宝贝已经在路上了
-                                            @elseif($order->orderdetails->dtype == 3)
+                                            @elseif($dtype == 3)
                                                 已签收,签收人是青年城签收，感谢使用天天快递，期待再次为您服务
                                             @endif
                                         </p>
                                         <div class="time-list">
-                                            <span class="date">{{ $order->orderdetails->updated_at }}</span>
+                                            <span class="date">{{$updated_at}}</span>
                                         </div>
-                                        @if($order->orderdetails->dtype == 1)
                                         <div class="inquire">
                                             <span class="package-detail">物流：天天快递</span>
                                             <span class="package-detail">快递单号: </span>
-                                            <span class="package-number">373269427868</span>
+                                            <span class="package-number">{{$onum}}</span>
                                             查看
                                         </div>
-                                        @endif
                                     </div>
                                     <span class="am-icon-angle-right icon"></span>
                                 <div class="clear"></div>
                             </div>
-                            <div class="order-addresslist">
+                        <div class="order-addresslist">
                                 <div class="order-address">
                                     <div class="icon-add">
                                     </div>
@@ -213,53 +210,55 @@
 
                                 <div class="order-status3">
                                     <div class="order-title">
-                                        <div class="dd-num">订单编号：<a href="javascript:;">{{  $order->onum }}</a></div>
-                                        <span>成交时间：{{ $order->created_at }}</span>
+                                        <div class="dd-num">订单编号：<a href="javascript:;">{{$onum}}</a></div>
+                                        <span>成交时间</span>
+                                        <!--    <em>店铺：小桔灯</em>-->
                                     </div>
                                     <div class="order-content">
                                         <div class="order-left">
-                                            @foreach($goods as $k=>$v)
-                                                @if($order->orderdetails->gid == $v->id)
-                                                    <ul class="item-list">
-                                                        <li class="td td-item">
-                                                            <div class="item-pic">
-                                                                <a href="#" class="J_MakePoint">
-                                                                    <img src="/uploads/{{ $v->showcase }}" class="itempic J_ItemImg">
-                                                                </a>
-                                                            </div>
-                                                            <div class="item-info">
-                                                                <div class="item-basic-info">
-                                                                    <a href="#">
-                                                                        <p>{{ $v->title }}</p>
-                                                                        <p class="info-little">颜色：12#川南玛瑙
-                                                                            <br/>包装：裸装 </p>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="td td-price">
-                                                            <div class="item-price">
-                                                                {{ $v->price }}
-                                                            </div>
-                                                        </li>
-                                                        <li class="td td-number">
-                                                            <div class="item-number">
-                                                                <span>×</span>{{ $order->orderdetails->number }}
-                                                            </div>
-                                                        </li>
-                                                        <li class="td td-operation">
-                                                            <div class="item-operation">
-                                                                退款/退货
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            @endif
+                                        @foreach($order as $k=>$v)
+                                            @foreach($v->usergood as $kk=>$goods)
+                                            <ul class="item-list">
+                                                <li class="td td-item">
+                                                    <div class="item-pic">
+                                                        <a href="#" class="J_MakePoint">
+                                                            <img src="/uploads/{{ $goods->showcase}}" width="100px" class="itempic J_ItemImg">
+                                                        </a>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="item-basic-info">
+                                                            <a href="#">
+                                                                <p>{{$goods->title}}</p>
+                                                                <p class="info-little">口味：{{ $v->flavor }}
+                                                                    <br/>包装：袋装 </p>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="td td-price">
+                                                    <div class="item-price">
+                                                        {{$goods->price}}
+                                                    </div>
+                                                </li>
+                                                <li class="td td-number">
+                                                    <div class="item-number">
+                                                        <span>×</span>{{$v->number}}
+                                                    </div>
+                                                </li>
+                                                <li class="td td-operation">
+                                                    <div class="item-operation">
+                                                        退款/退货
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            @endforeach
                                         @endforeach
+
+                                        </div>
                                         <div class="order-right">
                                             <li class="td td-amount">
                                                 <div class="item-amount">
-                                                    合计：{{  $order->orderdetails->price}}
+                                                    合计：676.00
                                                     <p>含运费：<span>10.00</span></p>
                                                 </div>
                                             </li>
@@ -272,8 +271,8 @@
                                                     </div>
                                                 </li>
                                                 <li class="td td-change">
-                                                @if($order->orderdetails->dtype != 3)
-                                                    <div id="qdsh" class="am-btn am-btn-danger anniu" onclick="qdingshouhuo({{ $order->orderdetails->id }})">确认收货</div>
+                                                    @if($dtype != 3)
+                                                    <div id="qdsh" class="am-btn am-btn-danger anniu" onclick="qdingshouhuo({{$id}})">确认收货</div>
                                                 @else
                                                     <div id="qdsh" class="am-btn am-btn-danger anniu" disabled>确认收货</div>
                                                 @endif
@@ -286,6 +285,7 @@
                             </div>
                         </div>
                     </div>
+
 
                 </div>
                 <!--底部-->

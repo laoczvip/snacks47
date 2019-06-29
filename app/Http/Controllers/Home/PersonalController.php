@@ -15,6 +15,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Collect;
 use App\Models\GoodsSku;
+use App\Http\Controllers\Home\ShopcartController;
 use DB;
 use Hash;
 
@@ -22,6 +23,9 @@ use Hash;
 class PersonalController extends Controller
 {
 
+    /**
+     * [ 友情链接 ]
+     */
     public function Friendly()
     {
         return $friendly = DB::table('friendly')->where('lstatus',1)->get();
@@ -29,13 +33,14 @@ class PersonalController extends Controller
 
 
     /**
-     * 加载个人中心页面
-     * @return [type] [HTML页面]
+     * [ 加载个人中心页面 ]
+     * @return [type] [ HTML页面 ]
      */
     public function Index(Request $request)
     {
-        session_start();
+
         $friendly = self::Friendly();
+        $count = ShopcartController::CountCar();
 
         $kouwei = $request->input('a',0);
         $_SESSION ['flavor'] = $kouwei;
@@ -43,19 +48,22 @@ class PersonalController extends Controller
         return view('home.personal.center',[
             'weds'=>$weds,
             'friendly'=>$friendly,
+            'count'=>$count,
             ]);
     }
 
 
     /**
-     * 加载购买页面
-     * @return [type] [HTML页面]
+     * [ 加载购买页面 ]
+     * @return [ 视图 ] [ HTML页面 ]
      */
     public function IntroDuction(Request $request)
-    {error_reporting(0);
+    {   error_reporting(0);
         $friendly = self::Friendly();
 
         $user = Users::find(session('home_user')->id);
+        $count = ShopcartController::CountCar();
+
 
         $asd = $user->collect;
         foreach ($asd as $key => $v) {
@@ -76,16 +84,21 @@ class PersonalController extends Controller
                 'goods_all'=>$goods_all,
                 'weds'=>$weds,
                 'friendly'=>$friendly,
+                'count'=>$count,
                 'collect'=>$collect,
                 ]);
     }
-        /**
-     * 加载搜索商品页面
-     * @return [type] [HTML页面]
+     /**
+     * [ 加载搜索商品页面 ]
+     * @return [ 视图 ] [ HTML页面 ]
      */
     public function Search(Request $request)
     {
         $friendly = self::Friendly();
+
+        $count = ShopcartController::CountCar();
+
+
 
         $weds = weds::find(1);
         //商品id
@@ -101,15 +114,19 @@ class PersonalController extends Controller
                 'goods_all'=>$goods_all,
                 'weds'=>$weds,
                 'friendly'=>$friendly,
+                'count'=>$count,
                 ]);
     }
     /**
-     * 加载收货地址页面
-     * @return [type] [HTML页面]
+     * [ 加载收货地址页面 ]
+     * @return [ 视图 ] [ HTML页面 ]
      */
     public function Addres()
     {
         $friendly = self::Friendly();
+
+        $count = ShopcartController::CountCar();
+
 
         $weds = weds::find(1);
         $id = session('home_user')->id;
@@ -119,12 +136,13 @@ class PersonalController extends Controller
             'address'=>$address,
             'weds'=>$weds,
             'friendly'=>$friendly,
+            'count'=>$count,
             ]);
     }
 
     /**
-     * 添加收货地址
-     * @param Request $request [description]
+     * [ 添加收货地址 ]
+     * @param Request $request [ 接收用户的新地址 ]
      */
     public function ImplementAddres(Request $request)
     {
@@ -146,8 +164,8 @@ class PersonalController extends Controller
 
 
     /**
-     * 删除收货地址
-     * @param [type] $id [description]
+     * [ 删除收货地址 ]
+     * @param [ int ] $id [ 地址的ID ]
      */
     public function DeleteAddress($id)
     {
@@ -166,6 +184,7 @@ class PersonalController extends Controller
     public function UpdateAddress($id)
     {
         $friendly = self::Friendly();
+        $count = ShopcartController::CountCar();
 
         $weds = weds::find(1);
         $addres = Address::where('id',$id)->first();
@@ -174,6 +193,7 @@ class PersonalController extends Controller
             'addres'=>$addres,
             'weds'=>$weds,
             'friendly'=>$friendly,
+            'count'=>$count,
             ]);
     }
 
@@ -230,11 +250,13 @@ class PersonalController extends Controller
     public function Information()
     {
         $friendly = self::Friendly();
+        $count = ShopcartController::CountCar();
 
         $weds = weds::find(1);
         return view('home.personal.information',[
             'weds'=>$weds,
             'friendly'=>$friendly,
+            'count'=>$count,
             ]);
     }
 
@@ -294,18 +316,21 @@ class PersonalController extends Controller
     public function Password()
     {
         $friendly = self::Friendly();
+        $count = ShopcartController::CountCar();
 
         $weds = weds::find(1);
         return view('home.personal.password',[
             'weds'=>$weds,
             'friendly'=>$friendly,
+            'count'=>$count,
             ]);
     }
 
     /**
-     * 执行修改密码
-     * @param Request $request [description]
+     * [ 执行修改密码 ]
+     * @param Request $request [ 接收用户的新密码 ]
      */
+
     public function ImplementPassword(Request $request)
     {
         $data = $request->all();
@@ -343,6 +368,9 @@ class PersonalController extends Controller
     public function Collection()
     {
         $user = Users::find(session('home_user')->id);
+
+        $count = ShopcartController::CountCar();
+
         $good = GoodsSku::get();
         $collect = $user->collect;
         $friendly = self::Friendly();
@@ -352,6 +380,7 @@ class PersonalController extends Controller
             'friendly'=>$friendly,
             'collect'=>$collect,
             'good'=>$good,
+            'count'=>$count,
             ]);
     }
 
@@ -362,15 +391,30 @@ class PersonalController extends Controller
     public function Order()
     {
         $friendly = self::Friendly();
+        $count = ShopcartController::CountCar();
         $weds = weds::find(1);
         $uid = session('home_user')->id;
+
         $order = Order::where('uid',$uid)->orderBy('created_at', 'desc')->paginate(99);
-        $goods = GoodsSku::get();
+
+
+        // foreach ($order as $k => $v) {
+            // echo '单号<br>';
+           // foreach ($v->orderdetails as $key => $value) {
+            // $dtype = $value->dtype;
+            // dump($dtype);
+                // foreach ($value->usergood as $key => $good) {
+                //     // echo '&nbsp;----商品详情<br>';
+                // }
+           // }
+        // }
+
         return view('home.personal.order',[
+            // 'dtype'=>$dtype,
             'weds'=>$weds,
             'order'=>$order,
-            'goods'=>$goods,
             'friendly'=>$friendly,
+            'count'=>$count,
             ]);
     }
 
@@ -380,57 +424,73 @@ class PersonalController extends Controller
      */
     public function Comment()
     {
+        $count = ShopcartController::CountCar();
         $friendly = self::Friendly();
         $weds = weds::find(1);
         return view('home.personal.comment',[
             'weds'=>$weds,
             'friendly'=>$friendly,
+            'count'=>$count,
             ]);
     }
 
+
     /**
-     *
+     * [ 用户订单详情页面 ]
+     * @param [int] $id  [ 订单ID ]
+     * @param [int] $aid [ 地址ID ]
      */
-    /**
-     * [用户订单详情页面]
-     * @param [type] $id [订单ID]
-     */
-    public function Commoditydetails($id)
+    public function Commoditydetails($id,$aid)
     {
+        $count = ShopcartController::CountCar();
+
         $friendly = self::Friendly();
+
         $weds = weds::find(1);
-        $order = Order::find($id);
-        $aid = $order->orderdetails->aid;
         // 收货地址
+
         $address = Address::find($aid);
-        $goods = GoodsSku::get();
+
+        $order = OrderDetails::where('oid',$id)->get();
+
+        foreach ($order as $key => $v) {
+            $dtype = $v->dtype;
+            $updated_at = $v->updated_at;
+            $onum = $v->onum;
+        }
+
         return view('home.personal.commoditydetails',[
             'weds'=>$weds,
             'order'=>$order,
-            'goods'=>$goods,
             'friendly'=>$friendly,
             'address'=>$address,
+            'dtype'=>$dtype,
+            'count'=>$count,
+            'onum'=>$onum,
+            'id'=>$id,
+            'updated_at'=>$updated_at,
             ]);
     }
     /**
-     * [用户确定收货]
-     * @param [type] $id [订单ID]
+     * [ 用户确定收货 ]
+     * @param [ int ] $id [订单ID]
      */
     public function ConfirmReceipt($id)
     {
-        $order = OrderDetails::find($id);
-        $order->dtype = 3;
+        $order = Order::find($id);
+        $order->otype = '3';
         $res = $order->save();
-        if ($res) {
-            return 1;
+        $res2 = DB::table('order_details')->where('oid',$id)->update(['dtype' => '3']);
+        if ($res && $res2) {
+            return  1;
         }else{
             return 2;
         }
     }
 
     /**
-     * [用户删除订单]
-     * @param [int] $id [订单ID]
+     * [ 用户删除订单 ]
+     * @param [ int ] $id [ 订单ID ]
      */
     public function DeleteOrders($id)
     {

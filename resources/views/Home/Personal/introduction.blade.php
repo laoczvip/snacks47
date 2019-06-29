@@ -184,7 +184,8 @@
 							        </div>
 							    </div>
 								</li>
-<input type="hidden" id="url" value="{{$_SERVER['REQUEST_URI']. $_SERVER['QUERY_STRING'] }}">
+								<!-- 获取当前URL -->
+								<input type="hidden" id="url" value="{{$_SERVER['REQUEST_URI']. $_SERVER['QUERY_STRING'] }}">
 
 							</ul>
 							<div class="clear"></div>
@@ -294,7 +295,7 @@
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="/h/#"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" onclick="add({{$goods_sku->id}})"><i></i>加入购物车</a>
 								</div>
 							</li>
 							<li>
@@ -1256,10 +1257,7 @@
 		// 口味选择
 	    function kouwei(obj){
 	    	let a = $(obj).text();
-	    	$.get('/center/index',{a},function(res){
-	    		console.log(res)
-
-	    	})
+	    	$.get('/center/index',{a},function(res){})
 	    }
 	    // 用户收藏
 	    function ShowDiv(id){
@@ -1291,6 +1289,14 @@
                         window.location.href = urll;
                     },1000)
 	    		}
+	    	})
+	    }
+
+	    // 添加购物车
+	    function add(id){
+	    	let url = '/shopcartadd/'+id
+	    	$.get(url,function(res){
+				layer.alert('已加入购物车', {icon: 6});
 	    	})
 	    }
 	</script>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Models\Weds;
-
+use App\Http\Controllers\Home\ShopcartController;
 
 class IndexController extends Controller
 {
@@ -43,6 +43,7 @@ class IndexController extends Controller
 
     public function Index()
     {
+        $count = ShopcartController::CountCar();
         $weds = weds::find(1);
         //菜单栏分类
         $cates = IndexController::Cates_child();
@@ -142,6 +143,9 @@ class IndexController extends Controller
     /******************************************************************/
 
 
+        // $countCar = ShopcartController::CountCar();
+//
+        // dump($countCar);
 
 
 
@@ -154,6 +158,7 @@ class IndexController extends Controller
             'headlines_asc'=>$headlines_asc,
             'headlines_desc'=>$headlines_desc,
             'friendly'=>$friendly,
+            'count'=>$count,
             ]);
 
     /**

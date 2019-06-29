@@ -21,7 +21,6 @@ class UserController extends Controller
      */
     public function Index(Request $request)
     {
-
         // 接收搜索参数
         $value = $request->input('value');
         $users = Users::where('number','like','%'.$value.'%')->paginate(5);

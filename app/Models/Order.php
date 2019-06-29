@@ -11,18 +11,17 @@ class Order extends Model
 
     // 个人中心订单详情
     public function orderdetails(){
-        return $this->hasOne('App\Models\OrderDetails','oid');
+        return $this->hasMany('App\Models\OrderDetails','oid');
     }
 
     /**
-     * [用户收藏]
+     * [ 用户地址 ]
      * @return [type] [description]
      */
 
-
-    public function address()
+    public function addresss()
     {
-        return $this->belongsToMany('App\Models\Address','order_details','oid','aid');
+        return $this->hasOne('App\Models\Address','id','aid');
     }
 
 }

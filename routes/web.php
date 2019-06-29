@@ -53,7 +53,7 @@ Route::group(['middleware'=>'login'],function(){
     // 订单管理
     Route::get('admin/order','Admin\OrdersController@index');
     // 订单详情
-    Route::get('admin/order/details/{id}','Admin\OrdersController@details');
+    Route::get('admin/order/details/{id}/{aid}','Admin\OrdersController@details');
     // 修改订单状态
     Route::get('admin/order/dlivergoods/{id}','Admin\OrdersController@DeliverGoods');
 
@@ -100,13 +100,13 @@ Route::get('center/DefaultAddress/{id}','Home\PersonalController@DefaultAddress'
 
 // 用户修改密码
 Route::get('center/password','Home\PersonalController@password');
+// 执行修改密码
 Route::get('center/ImplementPassword','Home\PersonalController@ImplementPassword');
 
-
+// 收藏页面
 Route::get('center/collection','Home\PersonalController@collection');
-
 Route::get('center/comment','Home\PersonalController@comment');
-
+// 个人中心订单页面
 Route::get('center/order','Home\PersonalController@order');
 // 下单页面
 Route::get('payment/{id}','Home\PurchaseController@index');
@@ -115,7 +115,7 @@ Route::post('add','Home\PurchaseController@ExecutePurchase');
 // 付款成功页面
 Route::get('ok ','Home\PurchaseController@Fukuancg');
 // 用户查看商品详情
-Route::get('commoditydetails/{id} ','Home\PersonalController@Commoditydetails');
+Route::get('commoditydetails/{id}/{aid} ','Home\PersonalController@Commoditydetails');
 // 用户确定收货
 Route::get('confirmreceipt/{id} ','Home\PersonalController@ConfirmReceipt');
 Route::get('del/{id} ','Home\PersonalController@DeleteOrders');
@@ -123,6 +123,20 @@ Route::get('del/{id} ','Home\PersonalController@DeleteOrders');
 Route::get('collection/{id} ','Home\CollectionController@Collection');
 // 用户取消收藏
 Route::get('collection/del/{id} ','Home\CollectionController@Del');
+
+// 加载购物车页面
+Route::get('shopcart','Home\ShopcartController@Index');
+// 加入购物车
+Route::get('shopcartadd/{id}','Home\ShopcartController@ShopcartAdd');
+// 购物车数量加一
+Route::get('addnum','Home\ShopcartController@AddNum');
+// 购物车数量减一
+Route::get('descnum','Home\ShopcartController@DescNum');
+// 购物车商品删除
+Route::get('delete','Home\ShopcartController@Delete');
+// 购物车付款
+Route::get('payment','Home\ShopcartController@Payment');
+Route::post('adddatabase','Home\ShopcartController@AddDatabase');
 
 
 
