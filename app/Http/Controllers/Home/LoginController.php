@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Models\Usersinfo;
+use App\Models\Weds;
 use Hash;
 use Mail;
 use DB;
@@ -17,7 +18,13 @@ class LoginController extends Controller
      */
     public function Index()
     {
-        return view('home.login.login');
+        $friendly = DB::table('friendly')->where('lstatus',1)->get();
+        $weds = weds::find(1);
+
+        return view('home.login.login',[
+                'weds'=>$weds,
+                'friendly'=>$friendly,
+                ]);
     }
 
     /**
@@ -41,6 +48,77 @@ class LoginController extends Controller
 
         session(['home_login'=>true]);
         session(['home_user'=>$user_data]);
+        session(['type'=>true]);
+
+    }
+
+    /**
+     * [ 找回密码页面 ]
+     */
+    public function ChangePassword()
+    {
+        $friendly = DB::table('friendly')->where('lstatus',1)->get();
+        $weds = weds::find(1);
+        return view('home.login.changepassword',[
+                'weds'=>$weds,
+                'friendly'=>$friendly,
+                ]);
+
+    }
+
+    /**
+     * [ 用户找回密码 ]
+     * @param Request $request [description]
+     */
+    public function CarriedChangePassword(Request $request)
+    {
+        $number = $request->input('number');
+        $phone = $request->input('phone');
+        // 查询对应的账号
+        $user = Users::where('number',$number)->first();
+        $tel =  $user->userinfo->tel;
+        // 判断密码是否跟数据库一致
+        if ($phone != $tel) {
+            return 0;
+            die;
+        }else{
+            return 1;
+            die;
+        }
+    }
+
+    /**
+     * 手机验证码匹配
+     * @param  Request $request [ 用户的手机号码 ]
+     * @return [视图]           [ 返回登录页面 ]
+     */
+    public function PasswordStore(Request $request)
+    {
+
+        // 验证手机验证码
+        $phone =  $request->input('phone',0);
+        $number =  $request->input('number');
+        // 获取发送到手机上的验证码
+        $k = $phone.'_code';
+        $phone_code = session($k);
+        $code = $request->input('code');
+
+        if ($phone_code != $code) {
+            echo "<script>alert('验证码错误');location.href='/changepassword'</script>";
+
+        }
+        $phone = $request->input('phone');
+        $token = str_random(30);
+        // 修改用户密码
+        $user = Users::where('number',$number)->first();
+        $user->password = Hash::make( $request->input('repass') );
+        $user->token  = $token;
+        $res = $user->save();
+        if($res){
+            return "<script>alert('修改成功,返回登录');location.href='/login'</script>";
+        }else{
+            return "<script>alert('修改失败,请稍后重试!!!');location.href='/login'</script>";
+        }
 
     }
 
@@ -54,11 +132,18 @@ class LoginController extends Controller
         // 清空session
         session(['home_login'=>false]);
         session(['home_user'=>null]);
+        session(['type'=>false]);
+
         return redirect("/");
     }
 
 
-    // 激活 用户 (邮件)
+    //
+    /**
+     * [ 激活 用户 (邮件) ]
+     * @param [iit] $id    [用户的ID]
+     * @param [script] $token [用户的token]
+     */
     public function ChangeStatus($id,$token)
     {
 
@@ -80,8 +165,8 @@ class LoginController extends Controller
     }
 
     /**
-     * 执行邮箱注册
-     * @return [type] [description]
+     * [ 执行邮箱注册 ]
+     * @param Request $request [ 用户的注册数据 ]
      */
     public function Inert(Request $request)
     {
@@ -132,23 +217,28 @@ class LoginController extends Controller
 
 
     /**
-     * 加载注册页面
+     * [ 加载注册页面 ]
      *
      * @return \Illuminate\Http\Response
      */
     public function Register()
     {
-        return view('home.login.register');
+        $friendly = DB::table('friendly')->where('lstatus',1)->get();
+        $weds = weds::find(1);
+
+        return view('home.login.register',[
+                'weds'=>$weds,
+                'friendly'=>$friendly,
+            ]);
     }
 
     /**
      * 手机验证码匹配
-     * @param  Request $request [description]
-     * @return [type]           [description]
+     * @param  Request $request [ 用户的手机号码 ]
+     * @return [视图]           [ 返回登录页面 ]
      */
     public function Store(Request $request)
     {
-
 
         $res = DB::table('users')->where('number',$request->input('phone'))->get();
         if(!empty($res[0])){
@@ -197,9 +287,10 @@ class LoginController extends Controller
 
 
     /**
-     * 发送验证码 手机号
+     * [ 发送验证码 手机号 ]
      * @return [type] [description]
      */
+
     public function SendPhome(Request $request)
     {
         // 接收手机号
@@ -211,7 +302,7 @@ class LoginController extends Controller
         $k = $phone.'_code';
 
         session([$k => $code]);
-        die;
+
         $url = "http://v.juhe.cn/sms/send";
         $params = array(
             'key'   => '118c98bbbdb267100345e44c158053a0', //您申请的APPKEY
@@ -223,7 +314,6 @@ class LoginController extends Controller
 
         $paramstring = http_build_query($params);
         $content = self::juheCurl($url, $paramstring);
-        echo $content;
     }
 
     /**

@@ -66,6 +66,7 @@ Route::group(['middleware'=>'login'],function(){
 // 登录页面
 Route::get('login','home\LoginController@index');
 Route::get('dologin','home\LoginController@dologin');
+// 用户退出
 Route::get('out','home\LoginController@out');
 
 
@@ -73,7 +74,14 @@ Route::get('out','home\LoginController@out');
 Route::get('register','Home\LoginController@register');
 // 接收手机号验证码
 Route::get('sendPhome','Home\LoginController@sendPhome');
+// 执行电话注册
 Route::post('store','Home\LoginController@store');
+// 找回密码页面
+Route::get('changepassword','Home\LoginController@ChangePassword');
+// 找回密码
+Route::post('carriedchangepassword','Home\LoginController@CarriedChangePassword');
+// 执行找回密码
+Route::post('updatepassword','Home\LoginController@PasswordStore');
 
 // 邮箱注册
 Route::post('inert','Home\LoginController@inert');
@@ -84,6 +92,7 @@ Route::get('center/index','Home\PersonalController@index');
 
 // 个人信息修改
 Route::get('center/information','Home\PersonalController@information');
+// 执行个人信息修改
 Route::post('center/ImplementInformation','Home\PersonalController@ImplementInformation');
 
 // 收货地址
@@ -96,6 +105,7 @@ Route::get('center/DeleteAddress/{id}','Home\PersonalController@DeleteAddress');
 Route::get('center/UpdateAddress/{id}','Home\PersonalController@UpdateAddress');
 //执行修改地址
 Route::post('center/ImplementUpdateAddress','Home\PersonalController@ImplementUpdateAddress');
+// 设置默认地址
 Route::get('center/DefaultAddress/{id}','Home\PersonalController@DefaultAddress');
 
 // 用户修改密码
@@ -136,9 +146,9 @@ Route::get('descnum','Home\ShopcartController@DescNum');
 Route::get('delete','Home\ShopcartController@Delete');
 // 购物车付款
 Route::get('payment','Home\ShopcartController@Payment');
-
+// 购物车添加地址
 Route::post('adddatabase','Home\ShopcartController@AddDatabase');
-
+// 加载收货地址页面
 Route::post('addres','Home\PurchaseController@Addres');
 
 

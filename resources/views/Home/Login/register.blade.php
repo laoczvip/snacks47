@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>注册</title>
+    <title>{{ $weds->name }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
@@ -12,6 +12,7 @@
     <link href="/h/css/dlstyle.css" rel="stylesheet" type="text/css">
     <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
     <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
     <script src="/layui/layui.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -21,7 +22,7 @@
 
     <div class="login-boxtitle">
         <a href="/">
-            <img alt="" src="/h/images/logobig.png" />
+            <img alt="" src="/uploads/{{ $weds->logo }}" />
         </a>
     </div>
     <div class="res-banner">
@@ -215,7 +216,6 @@
                                         };
 
 
-
                                         if (res == 1) {
                                             layer.alert('用户注册成功,注意查看邮箱,请尽快完成激活', {icon: 6});
                                             setTimeout(function(){
@@ -225,43 +225,19 @@
                                    },'html');
                             }
                         // 邮箱注册结束
-
-
-
                     </script>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer ">
-        <div class="footer-hd ">
-            <p>
-                <a href="# ">恒望科技</a>
-                <b>|</b>
-                <a href="# ">商城首页</a>
-                <b>|</b>
-                <a href="# ">支付宝</a>
-                <b>|</b>
-                <a href="# ">物流</a>
-            </p>
-        </div>
-        <div class="footer-bd ">
-            <p>
-                <a href="# ">关于恒望</a>
-                <a href="# ">合作伙伴</a>
-                <a href="# ">联系我们</a>
-                <a href="# ">网站地图</a>
-                <em>© 2015-2025 Hengwang.com 版权所有</em>
-            </p>
-        </div>
-    </div>
+   <!-- 网站底部 -->
+   @include('home.public.footer')
 </body>
 <script>
 //一般直接写在一个js文件中
     layui.use(['layer', 'form'], function(){
       var layer = layui.layer
       ,form = layui.form;
-      // layer.alert('见到你真的很高兴', {icon: 6});
     });
 </script>
 </html>

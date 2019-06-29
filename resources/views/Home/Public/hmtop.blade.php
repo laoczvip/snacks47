@@ -1,7 +1,7 @@
 <div class="hmtop">
         <!--顶部导航条 -->
         <div class="am-container header">
-        @if(!session('home_login'))
+        @if(!session('type'))
             <ul class="message-l">
                 <div class="topMessage">
                     <div class="menu-hd">

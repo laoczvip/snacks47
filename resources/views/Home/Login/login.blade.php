@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>{{ $weds->name }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
@@ -12,6 +12,7 @@
     <link href="/h/css/dlstyle.css" rel="stylesheet" type="text/css">
     <script src="/a/js/jquery.js"></script>
     <script src="/a/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
     <script src="/layui/layui.js"></script>
 </head>
 
@@ -38,12 +39,17 @@
                                 <label for="password"><i class="am-icon-lock"></i></label>
                                 <input type="password" name="password" id="password" placeholder="请输入密码">
                             </div>
+                            <div class="user-pass" style="margin-top:1px ;">
+                                <label for="password" style="margin-top:2px ;><i class="am-icon-lock"></i></label>
+                                <input type="password" name="password"  placeholder="验证码" style="width: 194px;">
+                                <img src="{{captcha_src()}}"  " onclick="this.src='{{captcha_src()}}'+Math.random()">
+                            </div>
                       </form>
                    </div>
 
                     <div class="login-links">
                         <label for="remember-me"><input id="remember-me" type="checkbox">记住密码</label>
-                            <a href="#" class="am-fr">忘记密码</a>
+                            <a href="/changepassword" class="am-fr">忘记密码</a>
                             <a href="/register" class="zcnext am-fr am-btn-default">注册</a>
                             <br />
                     </div>
@@ -61,28 +67,7 @@
             </div>
         </div>
     </div>
-        <div class="footer ">
-            <div class="footer-hd ">
-                <p>
-                    <a href="# ">恒望科技</a>
-                    <b>|</b>
-                    <a href="# ">商城首页</a>
-                    <b>|</b>
-                    <a href="# ">支付宝</a>
-                    <b>|</b>
-                    <a href="# ">物流</a>
-                </p>
-            </div>
-            <div class="footer-bd ">
-                <p>
-                    <a href="# ">关于恒望</a>
-                    <a href="# ">合作伙伴</a>
-                    <a href="# ">联系我们</a>
-                    <a href="# ">网站地图</a>
-                    <em>© 2015-2025 Hengwang.com 版权所有</em>
-                </p>
-            </div>
-        </div>
+        @include('home.public.footer')
 </body>
 <script>
 //一般直接写在一个js文件中
@@ -107,6 +92,8 @@
                 window.location.href = '/';
             },'html');
         }
+
+
 </script>
 
 </html>1
