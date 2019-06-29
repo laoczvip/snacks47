@@ -113,5 +113,27 @@ class PurchaseController extends Controller
             ]);
     }
 
+    /**
+     * [添加新的收货地址]
+     * @param Request $request [description]
+     */
+    public function Addres(Request $request)
+    {
+        $data = $request->all();
+        $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];
+        $detailed = $data['address'];
+        $addres = new Address;
+        $addres->uid = session('home_user')->id;
+        $addres->address = $address;
+        $addres->detailed = $detailed;
+        $addres->consignee = $data['consignee'];
+        $addres->atel = $data['atel'];
+        $addres->default = 0;
+        $res = $addres->save();
+        if ($res) {
+            return back();
+        }
+    }
+
 
 }

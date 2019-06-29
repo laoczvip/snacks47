@@ -136,7 +136,10 @@ Route::get('descnum','Home\ShopcartController@DescNum');
 Route::get('delete','Home\ShopcartController@Delete');
 // 购物车付款
 Route::get('payment','Home\ShopcartController@Payment');
+
 Route::post('adddatabase','Home\ShopcartController@AddDatabase');
+
+Route::post('addres','Home\PurchaseController@Addres');
 
 
 

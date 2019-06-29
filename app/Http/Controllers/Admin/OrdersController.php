@@ -27,14 +27,16 @@ class OrdersController extends Controller
             $order = Order::where('otype','1')->where('onum','like','%'.$value.'%')->orderBy('created_at','desc')->paginate(8);
         }else if($type == 4) {
             $order = Order::where('otype','3')->where('onum','like','%'.$value.'%')->orderBy('created_at','desc')->paginate(8);
+        }else{
+            $order = Order::where('onum','like','%'.$value.'%')->orderBy('created_at','desc')->paginate(8);
         }
 
-        foreach($order as $k=>$v){
-        }
+
         return view('admin.orders.index',[
             'order'=>$order,
             'params'=>$request->all(),
             'value'=>$value,
+            'type'=>$type,
             ]);
     }
     /**

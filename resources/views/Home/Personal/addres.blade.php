@@ -192,7 +192,7 @@
 
                                         <div class="am-form-group">
                                             <div class="am-u-sm-9 am-u-sm-push-3">
-                                                <input type="button"  onclick="ashjgdj()" class="am-btn am-btn-danger" value="保存">
+                                                <input type="submit"  onclick="ashjgdj()" class="am-btn am-btn-danger" value="保存">
                                                 <input type="reset"  class="am-close am-btn am-btn-danger" data-am-modal-close value="取消">
                                             </div>
                                         </div>

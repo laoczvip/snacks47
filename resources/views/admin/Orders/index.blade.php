@@ -10,22 +10,22 @@
             <section class="mtb">
                  <select class="select" name="type">
                       <option  value="1"
-                        @if($_GET['type'] == 1)
+                        @if($type == 1)
                           selected
                         @endif
                       >全部订单</option>
                       <option value="2"
-                        @if($_GET['type'] == 2)
+                        @if($type == 2)
                           selected
                         @endif
                       >待发货</option>
                       <option value="3"
-                        @if($_GET['type'] == 3)
+                        @if($type == 3)
                           selected
                         @endif
                       >待收货</option>
                       <option value="4"
-                        @if($_GET['type'] == 4)
+                        @if($type == 4)
                           selected
                         @endif
                       >待评价</option>
