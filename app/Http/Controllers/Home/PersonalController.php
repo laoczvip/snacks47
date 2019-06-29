@@ -11,20 +11,39 @@ use App\Models\Users;
 use App\Models\Usersinfo;
 use App\Models\Address;
 use App\Models\Weds;
+use App\Models\Order;
+use App\Models\OrderDetails;
+use App\Models\Collect;
+use App\Models\GoodsSku;
 use DB;
 use Hash;
 
 
 class PersonalController extends Controller
 {
+
+    public function Friendly()
+    {
+        return $friendly = DB::table('friendly')->where('lstatus',1)->get();
+    }
+
+
     /**
      * 加载个人中心页面
      * @return [type] [HTML页面]
      */
-    public function Index()
+    public function Index(Request $request)
     {
+        session_start();
+        $friendly = self::Friendly();
+
+        $kouwei = $request->input('a',0);
+        $_SESSION ['flavor'] = $kouwei;
         $weds = weds::find(1);
-        return view('home.personal.center',['weds'=>$weds]);
+        return view('home.personal.center',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
 
@@ -33,52 +52,162 @@ class PersonalController extends Controller
      * @return [type] [HTML页面]
      */
     public function IntroDuction(Request $request)
-    {
+    {error_reporting(0);
+        $friendly = self::Friendly();
+
+        $user = Users::find(session('home_user')->id);
+
+        $asd = $user->collect;
+        foreach ($asd as $key => $v) {
+            $collect[] = $v->gid;
+        }
         $weds = weds::find(1);
-        //商品id
-        $gid = $request->input('id',0);
-        //所属类Id
-        $cid = $request->input('cid',0);
+         //商品id
+        $gid = $request->input('ids',0);
+        $gids = $request->input('gids',0);
+        //活动类id
+        $sid = $request->input('sid',0);
+        //判断条件：是否为活动商品
+        if($sid!=0){
+        $shaky_one = DB::table('shaky')->where('id',$sid)->first();
+        $date = date('Y-m-d H:i:s',time());
+        $ctime = $shaky_one->ctime;
+        $jtime = $shaky_one->jtime;
+        if($ctime>$date){
+            echo json_encode('活动未开启');
+
+        } else if($ctime<$date&&$jtime<$date){
+            echo json_encode('活动已结束');
+        } 
+    }
+     if($gid!=0){
+         //所属类Id
+       
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
+       
+        $cid = $goods_sku->cid;
+        $shaky_sku = false;
         $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
+        //商品属性
+        $flavour = DB::table('flavour')->get(); 
+        $list = [];
+        foreach($flavour as $k=> $val){
+            $list[ $val->touch][] = $val->fname;
+        }
+        
+         return view('home.personal.introduction',[
+                'goods_sku'=>$goods_sku,
+                'goods_all'=>$goods_all,
+                'shaky_sku'=>$shaky_sku,
+                'list'=>$list,
+                'weds'=>$weds]
+                );
+        }
+     if($gids!=0){
+         //所属类Id
+        
+        $goods_sku = DB::table('goods_sku')->where('gid',$gids)->first();
+        $shaky_sku = DB::table('shaky_sku')->where('gid',$gids)->first();
+        //商品属性
+        $flavour = DB::table('flavour')->get(); 
+        $list = [];
+        foreach($flavour as $k=> $val){
+            $list[ $val->touch][] = $val->fname;
+        }
+       
+        $cid = $goods_sku->cid;
+
+        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
+
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
                 'goods_all'=>$goods_all,
-                'weds'=>$weds]
-                );
+                'weds'=>$weds,
+                'friendly'=>$friendly,
+                'collect'=>$collect,
+                'list'=>$list,
+                'shaky_sku'=>$shaky_sku,
+                ]);
+        }
     }
-        /**
+    /**
      * 加载搜索商品页面
      * @return [type] [HTML页面]
      */
     public function Search(Request $request)
     {
+        // 接收搜索框信息
+        $title =$request->input('title','');
+        // 接收销量
+        $buys = $request->input('buy',0);
+       // 接收价格
+        $prices = $request->input('price',0);
+        // 接收评价
+        $assess = $request->input('assess',0);
+
+        
+        $friendly = self::Friendly();
+        
         $weds = weds::find(1);
         //商品id
         $id = $request->input('id',0);
-        //所属类Id 
-        $goods_all = DB::table('goods_sku')->where('cid',$id)->paginate(4);
-        $goods_count= DB::table('goods_sku')->where('cid',$id)->get();
+        if($title!=''){
+            //名称搜索
+            $goods_all = DB::table('goods_sku')->where('title','like','%'.$title.'%')->paginate(20);
+        } else if($id!=0){
+            // 类搜索
+            $goods_all = DB::table('goods_sku')->where('cid',$id)->paginate(20);
+        } else if($buys!=0){
+            $goods_all = DB::table('goods_sku')->orderBy('buy','desc')->paginate(20);
+           
+        } else {
+            //搜索所有
+            $goods_all = DB::table('goods_sku')->paginate(20); 
+        }
+        if($prices!=0){
+
+            $goods_all = DB::table('goods_sku')->orderBy('price','asc')->paginate(20);           
+        }
+        if($assess!=0){
+
+            $goods_all = DB::table('goods_sku')->orderBy('assess','desc')->paginate(20);     
+        }
+        //所属类Id
+        if($id!=0){
+            $goods_count= DB::table('goods_sku')->where('cid',$id)->get();
+        } else{
+             $goods_count= DB::table('goods_sku')->where('title','like','%'.$title.'%')->get();
+        }
+       
         $num = count($goods_count);
-      
+
         return view('home.personal.search',[
                 'num'=>$num,
                 'id'=>$id,
                 'goods_all'=>$goods_all,
-                'weds'=>$weds]
-                );
+                'weds'=>$weds,
+                'friendly'=>$friendly,
+                'title'=>$title,    
+                ]);
     }
+    
     /**
      * 加载收货地址页面
      * @return [type] [HTML页面]
      */
     public function Addres()
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
         $id = session('home_user')->id;
         $user = Address::where('uid',$id)->get();
         $address = json_decode($user,true);
-        return view('home.personal.addres',['address'=>$address,'weds'=>$weds]);
+        return view('home.personal.addres',[
+            'address'=>$address,
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -124,10 +253,16 @@ class PersonalController extends Controller
      */
     public function UpdateAddress($id)
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
         $addres = Address::where('id',$id)->first();
 
-        return view('home.personal.updateaddress',['addres'=>$addres,'weds'=>$weds]);
+        return view('home.personal.updateaddress',[
+            'addres'=>$addres,
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -138,7 +273,6 @@ class PersonalController extends Controller
     {
         $data = $request->all();
         $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];
-
         $flight = Address::find($data['id']);
         $flight->address = $address;
         $flight->consignee = $data['consignee'];
@@ -152,7 +286,7 @@ class PersonalController extends Controller
 
     /**
      * 设置默认地址
-     * @param Request $request [description]
+     * @param Request $request
      * @param [type]  $id      [需要设为默认的ID]
      */
     public function DefaultAddress(Request $request,$id)
@@ -183,8 +317,13 @@ class PersonalController extends Controller
      */
     public function Information()
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
-        return view('home.personal.information',['weds'=>$weds]);
+        return view('home.personal.information',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -242,8 +381,13 @@ class PersonalController extends Controller
      */
     public function Password()
     {
+        $friendly = self::Friendly();
+
         $weds = weds::find(1);
-        return view('home.personal.password',['weds'=>$weds]);
+        return view('home.personal.password',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -286,8 +430,17 @@ class PersonalController extends Controller
      */
     public function Collection()
     {
+        $user = Users::find(session('home_user')->id);
+        $good = GoodsSku::get();
+        $collect = $user->collect;
+        $friendly = self::Friendly();
         $weds = weds::find(1);
-        return view('home.personal.collection',['weds'=>$weds]);
+        return view('home.personal.collection',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            'collect'=>$collect,
+            'good'=>$good,
+            ]);
     }
 
     /**
@@ -296,8 +449,17 @@ class PersonalController extends Controller
      */
     public function Order()
     {
+        $friendly = self::Friendly();
         $weds = weds::find(1);
-        return view('home.personal.order',['weds'=>$weds]);
+        $uid = session('home_user')->id;
+        $order = Order::where('uid',$uid)->orderBy('created_at', 'desc')->paginate(99);
+        $goods = GoodsSku::get();
+        return view('home.personal.order',[
+            'weds'=>$weds,
+            'order'=>$order,
+            'goods'=>$goods,
+            'friendly'=>$friendly,
+            ]);
     }
 
     /**
@@ -306,8 +468,67 @@ class PersonalController extends Controller
      */
     public function Comment()
     {
+        $friendly = self::Friendly();
         $weds = weds::find(1);
-        return view('home.personal.comment',['weds'=>$weds]);
+        return view('home.personal.comment',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
+    }
+
+    /**
+     *
+     */
+    /**
+     * [用户订单详情页面]
+     * @param [type] $id [订单ID]
+     */
+    public function Commoditydetails($id)
+    {
+        $friendly = self::Friendly();
+        $weds = weds::find(1);
+        $order = Order::find($id);
+        $aid = $order->orderdetails->aid;
+        // 收货地址
+        $address = Address::find($aid);
+        $goods = GoodsSku::get();
+        return view('home.personal.commoditydetails',[
+            'weds'=>$weds,
+            'order'=>$order,
+            'goods'=>$goods,
+            'friendly'=>$friendly,
+            'address'=>$address,
+            ]);
+    }
+    /**
+     * [用户确定收货]
+     * @param [type] $id [订单ID]
+     */
+    public function ConfirmReceipt($id)
+    {
+        $order = OrderDetails::find($id);
+        $order->dtype = 3;
+        $res = $order->save();
+        if ($res) {
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+
+    /**
+     * [用户删除订单]
+     * @param [int] $id [订单ID]
+     */
+    public function DeleteOrders($id)
+    {
+        $res1 = DB::table('order')->where('id',$id)->delete();
+        $res2 = DB::table('order_details')->where('oid',$id)->delete();
+        if ($res1 && $res2) {
+            return 1;
+        }else{
+            return 2;
+        }
     }
 
 }
