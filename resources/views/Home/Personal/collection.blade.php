@@ -87,6 +87,7 @@
                                 @endif
                                 @endforeach
                             @empty
+                                              <img src="/h/images/kkry.jpg" width="500px">
                             @endforelse
                             </div>
                         </div>
