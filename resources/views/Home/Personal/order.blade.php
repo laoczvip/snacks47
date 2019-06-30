@@ -82,6 +82,7 @@
                                     <div class="order-main">
                                         <div class="order-list">
                                             @forelse($order as $k => $v)
+                                            {{ dump($v->id) }}
                                             <!--交易成功-->
                                             <div class="order-status5">
                                                 <div class="order-title">
@@ -539,6 +540,7 @@
                                                             </li>
                                                             <li class="td td-change">
                                                                 <div class="am-btn am-btn-danger anniu" onclick="del({{$v->id}},this)">删除订单</div>
+                                                                <div class="am-btn am-btn-danger anniu" >评价商品</div>
                                                             </li>
                                                         </div>
                                                     </div>

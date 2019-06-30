@@ -22,7 +22,7 @@
                     <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
                         <ul class="am-slides">
                             @foreach($banners_data as $k=>$v)
-                            <li class="banner1" style="background-color: #fff;width:100px;"><a href="{{ $v->jump }}"><img src="/uploads/{{ $v->url }}"; style="width:60%;height:100%;"></a></li>
+                            <li class="banner1" style="background-color: #fff;width:100px;"><a href="{{ $v->jump }}"><img src="/uploads/{{ $v->url }}"; style="width:42%;height:100%;"></a></li>
                             @endforeach
                         </ul>
                     </div>

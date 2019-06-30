@@ -19,7 +19,7 @@
 
 <body>
     <div class="login-boxtitle">
-        <a href="/home"><img alt="logo" src="/h/images/logobig.png" /></a>
+        <a href="/"><img alt="logo" src="/h/images/logobig.png" /></a>
     </div>
     <div class="login-banner">
         <div class="login-main">
@@ -89,23 +89,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-    document.onkeydown = function(){
-
-        if(window.event && window.event.keyCode == 123) {
-            alert("F12被禁用");
-            event.keyCode=0;
-            event.returnValue=false;
-        }
-        if(window.event && window.event.keyCode == 13) {
-            window.event.keyCode = 505;
-        }
-        if(window.event && window.event.keyCode == 8) {
-            alert(str+"\n请使用Del键进行字符的删除操作！");
-            window.event.returnValue=false;
-        }
-
-    }
 
 
     // 用户名/手机号码 验证  发送短信
