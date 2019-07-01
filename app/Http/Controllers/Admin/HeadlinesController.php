@@ -9,7 +9,26 @@ use DB;
 use Illuminate\Support\Facades\Storage;
 
 class HeadlinesController extends Controller
-{   
+{    
+    public function ChangeStatus(Request $request)
+    {
+        // 获取状态
+        $status = $request->input('status');
+
+        // 获取id
+        $id = $request->input('id');
+       
+
+        // 执行修改
+        $res = DB::table('headlines')->where('id',$id)->update(['status'=>$status]);
+        if($res){
+                return redirect('/admin/headlines')->with('success','修改成功');
+            }else{
+                return back()->with('error','修改失败');
+            }
+
+    }
+
     /**
      * 删除
      * @param  [type] $id [description]
@@ -94,7 +113,7 @@ class HeadlinesController extends Controller
         $search = $request->input('search');
 
          // 接收数据
-        $headlines = Headlines::where('htitle','like','%'.$search.'%')->paginate(5);
+        $headlines = Headlines::where('htitle','like','%'.$search.'%')->paginate(4);
 
         return view('admin.headlines.index',[
                      'headlines'=>$headlines,
@@ -127,6 +146,7 @@ class HeadlinesController extends Controller
             'htitle' => 'required|max:128',
             'auth' => 'required|max:32',
             'hcontent' => 'required',
+            'thumb' => 'required',
 
          ],[
             'htitle.required'=>'标题必填',
@@ -134,13 +154,24 @@ class HeadlinesController extends Controller
             'auth.required'=>'作者必填',
              'auth.max'=>'作者过长',
             'hcontent.required'=>'文章必填',
+            'thumb.required'=>'请选择缩略图',
             
          ]);
+
+
+           //检查文件上传
+        if($request->hasFile('thumb')){
+             $file_path = $request->file('thumb')->store(date('Ymd'));
+        }else{
+            $file_path = "";
+        }
 
         $headlines = new Headlines;
         $headlines->auth = $request['auth'];
         $headlines->htitle = $request['htitle'];
         $headlines->hcontent = $request['hcontent'];
+        $headlines->status = $request['status'];
+        $headlines->thumb = $file_path;
         $res = $headlines->save();
 
         if ($res) {
@@ -189,11 +220,21 @@ class HeadlinesController extends Controller
      */
     public function Update(Request $request, $id)
     {
+         if($request->hasFile('thumb')){
+
+        // 删除以前旧图片
+        Storage::delete($request->input('thumb_path'));
+
+        $path = $request->file('thumb')->store(date('Ymd'));
+      }else{
+        $path =  $request->input('thumb_path');
+
+      }
          // 接受用户提交的值
         $data['htitle'] = $request->input('htitle','');
         $data['auth'] = $request->input('auth','');
         $data['hcontent'] = $request->input('hcontent','');
-     
+        $data['thumb'] = $path; 
         //dd($data);exit;
         // 执行修改
         $res = DB::table('headlines')->where('id',$id)->update($data);

@@ -188,12 +188,12 @@
 
 
 							</div>
-<nav aria-label="Page navigation">
 							<!--分页 -->
-
+						<nav aria-label="Page navigation">
+							<aside>
 								{{$goods_all->appends(['id'=>$id])->links()}}
 							</aside>
-</nav>
+						</nav>
 						</div>
 					</div>
 				@include('home.public.footer')

@@ -30,6 +30,8 @@
             <th style="text-align:center;">头条标题</th>
             <th style="text-align:center;">头条作者</th>
             <th style="text-align:center;">头条内容</th>
+            <th style="text-align:center;">缩略图</th>
+            <th style="text-align:center;">状态</th>
             <th style="text-align:center;">操作</th>
         </tr>
            @foreach($headlines as $k=>$v)
@@ -44,10 +46,23 @@
 			      	<span>{{ $v->htitle }}</span>
 			      	<div>{!! $v->hcontent !!}</div>
 			      </td>
+            <td class="center"><img src="/uploads/{{ $v->thumb }}" width="50" height="50"/></td>
+            <td>
+                  @if($v->status == 0)
+                  <kbd>未激活</kbd>
+                  @else
+                  <kbd style="background: green";>激活</kbd>
+                  @endif
+                </td>
             <td class="center">
                 <a href="/admin/headlines/{{$v->id}}/edit" title="编辑" class="link_icon">&#101;</a>
                 <a href="javascript:;" title="删除" class="link_icon" onclick="del({{ $v->id }},this)">&#100;</a>
                  <!-- <a href="#" title="删除" class="link_icon">&#100;</a> -->
+                 @if($v->status == 0)
+                 <a href="javascript:;" class="btn btn-success" style="color: white" onclick="changeStatus({{ $v->id }},0)">激活</a>
+                 @else
+                  <a href="javascript:;" class="btn btn-primary" style="color: black"; onclick="changeStatus({{ $v->id }},1)">停止</a>
+                 @endif
 
             </td>
 
@@ -87,6 +102,21 @@
 								$('#myModal').modal('show')
 							}
 						</script>
+
+            <script type="text/javascript">
+            function changeStatus(id,sta)
+            {
+              if(sta == 1){
+                $('#myModal form input[type=radio]').eq(1).attr('checked',true);
+              }else{
+                $('#myModal form input[type=radio]').eq(0).attr('checked',true);
+              }
+              // 赋值
+              $('#myModal form input[type=hidden]').eq(0).val(id);
+              $('#myModal').modal('show')
+              }
+        </script>
+
 				<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							  <div class="modal-dialog" role="document">
@@ -96,6 +126,15 @@
 							        <h4 class="modal-title" id="myModalLabel">文章状态</h4>
 							      </div>
 							      <div class="modal-body">
+                    <form action="/admin/headlines/changeStatus" method="get">
+                  <input type="hidden" name="id" value="">
+                  <div class="form-group">
+                  <br>
+                        未开启:<input type="radio" name="status" value="0" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        开启:<input type="radio" name="status" value="1">
+                  </div>
+                  <input type="submit" class="btn btn-success">
+                </form>
 							      </div>
 							    </div>
 							  </div>

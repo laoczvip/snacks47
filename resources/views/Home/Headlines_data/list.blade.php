@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
+
+    <style type="text/css">
+    .hides {
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      height:250px;/*需要配合宽度来使用*/
+    }
+    </style>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
-        <title>头条详情</title>
+        <title>头条列表</title>
+        <link href="/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
         <link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
         <link href="/h/css/personal.css" rel="stylesheet" type="text/css">
@@ -39,40 +49,39 @@
       </div>
       
       <b class="line"></b> 
-      
-<!--文章 -->
+     
+
 <div class="am-g am-g-fixed blog-g-fixed bloglist">
-  <div class="am-u-md-9">
+  <div class="am-u-md-9" >
     <article class="blog-main">
-      <h3 class="am-article-title blog-title">
-        <a href="#" style="font-size: 35px">{{ $headlines_data->htitle}}</a>
-      </h3>
-      <h4 class="am-article-meta blog-meta">作者:&nbsp;{{ $headlines_data->auth}}&nbsp;&nbsp;&nbsp;{{ $headlines_data->created_at}}</h4>
-
-      <div class="am-g blog-content">
-        <div class="am-u-sm-12">
-          <p>{!! $headlines_data->hcontent !!}！</p>
-          
-          
-
-        </div>
-  
-      </div>
-
-    </article>
-
-
+    @foreach($data as $k=>$v)
+    <div style="float:left; width:250px;height:200px;margin-left:-70px;">
+      <a href="/home/headlines_data/index?id={{ $v->id }}"><img style="width:250px;height:200px;"
+      src="/uploads/{{ $v->thumb}}"</a>
+    </div>
+    <div class="hides" style="float:left; width:560px;height:35px;margin-left:20px;">
+      <a href="/home/headlines_data/index?id={{ $v->id }}" style="font-size:25px;color:black;">{{ $v->htitle }}</a>
+    </div> 
+    <div class="hides" style="float:left; width:560px;height:25px;margin-left:20px;">
+      <a><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a><a style="padding-left:355px;font-size:13px;color:#868686;">作者:{{ $v->auth }}&nbsp;{{ $v->created_at }}</a>
+    </div>
+   <div class="hides" style="font-size:15px;float:left; width:560px;height:118px;margin-left:20px;margin-top:8px;margin-bottom:50px;">
+      <a href="/home/headlines_data/index?id={{ $v->id }}" class="hides" style="color:black;">{!! $v->hcontent !!}</a>
+    </div>
+    
+    @endforeach
+    
     <hr class="am-article-divider blog-hr">
-    <ul class="am-pagination blog-pagination">
-      @if($article_prev)
-      <li class="am-pagination-prev"><a href="/home/headlines_data/index?id={{ $article_prev->id }}">&laquo; 上一篇</a></li>
-      @endif
-      
-      @if($article_next)
-      <li class="am-pagination-next"><a href="/home/headlines_data/index?id={{ $article_next->id }}">下一篇 &raquo;</a></li>
-      @endif
-    </ul>
+    <div style="width:100px;height:35px;margin-top: 20px;margin-left: 450px">
+      <nav aria-label="Page navigation">
+        <aside>
+            {{ $data->links() }}
+        </aside>
+      </nav>
+    </div>
   </div>
+  
+
 
   <div class="am-u-md-3 blog-sidebar">
     <div class="am-panel-group">
@@ -80,15 +89,18 @@
       <section class="am-panel am-panel-default">
         <div style="color: black" class="am-panel-hd">热门话题 <a style="font-size:15px;color: #868686;padding-left: 140px"; href="/home/headlines_data/list">更多...</a></div> 
         <ul class="am-list blog-list">
-        @foreach($datas as $k=>$v)
-          <li><a href="/home/headlines_data/index?id={{ $v->id }}"><p>[公告]{{ $v->htitle}}</p></a></li> 
+        @foreach($datas as $k=>$v) 
+          <li><a href="/home/headlines_data/index?id={{ $v->id }}"><p>[公告]{{ $v->htitle }}</p></a></li> 
 
         @endforeach  
-        
+         
         </ul>
       </section>
 
     </div>
+    
+
+      
 
   </div>
 
