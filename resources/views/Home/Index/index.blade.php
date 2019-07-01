@@ -204,8 +204,13 @@
                         </div>
                         <div class="member-logout">
                             <a class="am-btn-warning btn" href="/center/index">个人中心</a>
+                        </div>
+
+                        <div class="member-logout" style="margin-top: -24px;margin-left: 99px;"">
                             <a class="am-btn-warning btn" href="/out">退出登陆</a>
                         </div>
+
+
                         <div class="member-login">
                             <a href="#"><strong>0</strong>待收货</a>
                             <a href="#"><strong>0</strong>待发货</a>
