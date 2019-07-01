@@ -84,28 +84,16 @@
                  @endif
                  </td>
                  <td>{{$v->created_at}}</td>
+                  <td class="template" style="display:none;">
+                  <span>{{ $v->title }}</span>
+                  <div>{!! $v->desc !!}</div>
+            </td>
                  <td>
                    <a href="javascript:;"  onclick="del({{$v->id}},this)" class="link_icon"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span></a>
                    <a href="/admin/goods/edit?id={{$v->cid}}" class="link_icon"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="修改"></span></a>
                
-                   <a href="" type="button"  data-toggle="modal" data-target="#select" class="link_icon"><span class="glyphicon glyphicon-search" aria-hidden="true" title="查看活动商品"></span></a>
-                   <!-- 查看商品详情模态框Model -->
-                  <div class="modal fade" id="select" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document" >
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title" id="myModalLabel">{{$v->title}}</h4>
-                        </div>
-                        <div class="modal-body" style="overflow:hidden;font-size:em;">
-                          {!!$v->desc!!}
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                   <a href="javascript:;" onclick="shows(this)"  class="link_icon"><span class="glyphicon glyphicon-search" aria-hidden="true" title="查看活动商品"></span></a>
+              
                  </td>
                </tr>
                @empty
@@ -145,5 +133,36 @@
        
     }
 </script>
+    <script type="text/javascript">
+              function shows(obj){
+              
+                //  获取标题
+                let title = $(obj).parents('tr').find('span').html();
+               
+                let desc = $(obj).parents('tr').find('div').html();
+                // 赋值
+                $('#myModal .modal-title').html(title);
+                $('#myModal .modal-body').html(desc);
 
+                // 显示模态框
+                $('#myModal').modal('show')
+              }
+            </script>
+
+          
+
+        <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">文章状态</h4>
+                    </div>
+                    <div class="modal-body">
+                  
+                    </div>
+                  </div>
+                </div>
+            </div>
 @endsection

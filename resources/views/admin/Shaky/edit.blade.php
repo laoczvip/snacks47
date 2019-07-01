@@ -37,6 +37,7 @@
                         <input type="file" name="profile" class="textbox textbox_225"  style="background-color:#eee;height:40px;" value="" />
                         <img src="/uploads/{{$shaky->profile}}" style="margin-top:10px;">
                         <input type="hidden" name="profile" value="{{$shaky->profile}}" />
+                        <input type="hidden" name="id" value="{{$shaky->id}}" />
                     </td>
                 </tr>
                 <tr>
