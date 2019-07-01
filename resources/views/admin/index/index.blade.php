@@ -65,7 +65,6 @@
                         <ul class="sidebar-trans">
                             <dd><a href="/admin/cates">分类列表</a></dd>
                             <dd><a href="/admin/cates/create" >添加分类</a></dd>
-                            <dd><a href="/admin/softdeletion">已删除的分类</a></dd>
                         </ul>
                     </div>
                 </dl>
@@ -120,19 +119,6 @@
                 </dl>
             </li>
 
-            <li>
-                <dl id="asgd">
-                <div class="sidebar-nav ">
-                        <div class="sidebar-title">
-                            <dt>分类管理</dt>
-                        </div>
-                        <ul class="sidebar-trans">
-                            <dd><a href="/admin/index">分类列表</a></dd>
-                            <dd><a href="/admin/users/create" >添加分类</a></dd>
-                        </ul>
-                </div>
-                </dl>
-            </li>
 
             <li>
                 <dl id="asgd">
