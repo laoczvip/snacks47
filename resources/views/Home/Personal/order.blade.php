@@ -82,7 +82,6 @@
                                     <div class="order-main">
                                         <div class="order-list">
                                             @forelse($order as $k => $v)
-                                            {{ dump($v->id) }}
                                             <!--交易成功-->
                                             <div class="order-status5">
                                                 <div class="order-title">

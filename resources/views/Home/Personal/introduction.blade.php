@@ -131,9 +131,10 @@
 								</li>
 								<div class="clear"></div>
 							</div>
-
+							<br>
+							<br>
 							<!--地址-->
-							<dl class="iteminfo_parameter freight">
+							<!-- <dl class="iteminfo_parameter freight">
 								<dt>配送至</dt>
 								<div class="iteminfo_freprice">
 									<div class="am-form-content address">
@@ -154,9 +155,8 @@
 										快递<b class="sys_item_freprice">10</b>元
 									</div>
 								</div>
-							</dl>
+							</dl> -->
 							<div class="clear"></div>
-
 							<!--销量-->
 							<ul class="tm-ind-panel">
 								<li class="tm-ind-item tm-ind-sellCount canClick">
@@ -170,23 +170,20 @@
 								</li>
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
 									<div class="des_share" style="width:82px;margin-left:35px;"
-							        @if(!in_array($goods_sku->id,$collect))
-									 onclick="ShowDiv({{ $goods_sku->id }}) "
-									@endif
 									 >
 							        <div class="d_care" >
-							        @if(in_array($goods_sku->id,$collect))
-							            	<p id="asdas" onclick="del({{$goods_sku->id}})">取消收藏</p>
+
+							        @if(in_array($goods_sku->gid,$collect))
+							            	<p id="asdas" onclick="del({{$goods_sku->gid}})">取消收藏</p>
 									@else
-							            <a id="shouc">收藏</a>
+							            <a id="shouc" onclick="ShowDiv({{ $goods_sku->gid }})">收藏</a>
 									@endif
 
 							        </div>
 							    </div>
 								</li>
 								<!-- 获取当前URL -->
-								<input type="hidden" id="url" value="{{$_SERVER['REQUEST_URI']. $_SERVER['QUERY_STRING'] }}">
-
+								<input type="hidden" id="url" value="{{$_SERVER['REQUEST_URI']}}">
 							</ul>
 							<div class="clear"></div>
 
@@ -207,8 +204,18 @@
 											<form class="theme-signin" name="loginform" action="" method="post">
 
 												<div class="theme-signin-left">
-
 													<div class="theme-options">
+											              <div class="cart-title">口味</div>
+												              <ul>
+
+
+												              @forelse($list[$goods_sku->touch] as $val)
+												               <li class="sku-line" onclick="kouwei(this)">{{$val}}<i></i></li>
+												              @empty
+												              @endforelse
+											              </ul>
+										             </div>
+													<!-- <div class="theme-options">
 														<div class="cart-title">口味</div>
 														<ul>
 															<li class="sku-line selected" onclick="kouwei(this)">原味<i></i></li>
@@ -216,7 +223,7 @@
 															<li class="sku-line" onclick="kouwei(this)">炭烧<i></i></li>
 															<li class="sku-line" onclick="kouwei(this)">咸香<i></i></li>
 														</ul>
-													</div>
+													</div> -->
 													<div class="theme-options">
 														<div class="cart-title">包装</div>
 														<ul>
@@ -1057,28 +1064,7 @@
 
 						<div class="clear"></div>
 
-						<div class="footer">
-							<div class="footer-hd">
-								<p>
-									<a href="/h/#">恒望科技</a>
-									<b>|</b>
-									<a href="/h/#">商城首页</a>
-									<b>|</b>
-									<a href="/h/#">支付宝</a>
-									<b>|</b>
-									<a href="/h/#">物流</a>
-								</p>
-							</div>
-							<div class="footer-bd">
-								<p>
-									<a href="/h/#">关于恒望</a>
-									<a href="/h/#">合作伙伴</a>
-									<a href="/h/#">联系我们</a>
-									<a href="/h/#">网站地图</a>
-									<em>© 2015-2025 Hengwang.com 版权所有</em>
-								</p>
-							</div>
-						</div>
+						@include('home.public.footer')
 					</div>
 
 				</div>
@@ -1125,7 +1111,6 @@
 	    	let urll = $('#url').val();
 	    	let url = '/collection/del/'+id
 	    	$.get(url,function(res){
-	    		console.log(res)
 	    		if (res == 1) {
 	    			layer.msg('已取消');
 			    	$('#asdas').text('收藏')

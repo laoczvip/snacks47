@@ -277,7 +277,9 @@
                 </div>
                 <div class="clear "></div>
                 <!--热门活动 -->
-
+                        <style>
+                          .mytime{ line-height: 20px; width: 300px; margin: 0 auto;color:red;padding: :0px;}
+                         </style>
                 <div class="am-container activity ">
                     <div class="shopTitle ">
                         <h4>活动</h4>
@@ -286,53 +288,138 @@
                           <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
                     </span>
                     </div>
-                  <div class="am-g am-g-fixed ">
-                    <div class="am-u-sm-3 ">
-                        <div class="icon-sale one "></div>
-                            <h4>秒杀</h4>
-                        <div class="activityMain ">
-                            <img src="/h/images/activity1.jpg "></img>
-                        </div>
-                        <div class="info ">
-                            <h3>春节送礼优选</h3>
-                        </div>
-                    </div>
+                 <div class="am-g am-g-fixed ">
+                  @forelse($shaky as $shaky_data)
 
-                    <div class="am-u-sm-3 ">
-                      <div class="icon-sale two "></div>
-                        <h4>特惠</h4>
-                        <div class="activityMain ">
-                            <img src="/h/images/activity2.jpg "></img>
-                        </div>
-                        <div class="info ">
-                            <h3>春节送礼优选</h3>
-                        </div>
-                    </div>
 
-                    <div class="am-u-sm-3 ">
-                        <div class="icon-sale three "></div>
-                        <h4>团购</h4>
-                        <div class="activityMain ">
-                            <img src="/h/images/activity3.jpg "></img>
-                        </div>
-                        <div class="info ">
-                            <h3>春节送礼优选</h3>
-                        </div>
-                    </div>
+                        <div class="am-u-sm-3">
+                            <div class="icon-sale one "></div>
+                                <a href="javascript:;" onclick="urls({{$shaky_data->id}})"><h4>{{$shaky_data->sname}}</h4> </a>
+                            <div class="activityMain ">
+                            @if($shaky_data->profile == null)
+                            <img src="/uploads/{{$shaky_data->profile}} " height="100%">
+                            @else
+                                <img src="/h/images/kkry.jpg " height="100%">
+                            @endif
+                            </div>
 
-                    <div class="am-u-sm-3 last ">
-                        <div class="icon-sale "></div>
-                        <h4>超值</h4>
-                        <div class="activityMain ">
-                            <img src="/h/images/activity.jpg "></img>
-                        </div>
-                        <div class="info ">
-                            <h3>春节送礼优选</h3>
-                        </div>
-                    </div>
 
-                  </div>
+                        <div class="mytime jsTime" data-time="{{$shaky_data->ctime}}" id="kaiqi"></div>
+
+                        <div class="mytime jsTime2" data-time="{{$shaky_data->jtime}}">时间1</div>
+                      </div>
+                 @empty
+                 @endforelse
+
                </div>
+               <script src="/layui/layui.js">
+               layui.use('layer',
+                    function(){
+                        var layer = layui.layer;
+                });
+                </script>
+
+               <!-- 验证时间是否符合条件，符合跳转到商品页面 -->
+<script>
+
+    function urls(id){
+        $.get('home/shakys/show',{id:id},function(res){
+            if(res=='活动未开启'|| res=='活动已结束'){
+                layer.msg(res, {icon: 5});
+
+            } else{
+
+                document.location.href = "/home/shakys/show?ids="+id;
+            }
+        },'json');
+    }
+
+</script>
+        </div>
+<script>
+     const countdown = {
+      domList : document.querySelectorAll('.jsTime'),
+      formatNumber(n){
+       // return n.toString().padStart(2, '0'); // 用padStart方法要注意兼容问题
+       n = n.toString();
+       return n[1] ? n : '0' + n;
+      },
+      setTime(dom){
+       //获取设置的时间 如：2019-3-28 14:00:00 ios系统得加正则.replace(/\-/g, '/');
+       const leftTime = new Date(dom.getAttribute('data-time').replace(/\-/g, '/')) - new Date();
+       if (leftTime >= 0) {
+        const d = Math.floor(leftTime / 1000 / 60 / 60 / 24);
+        const h = Math.floor(leftTime / 1000 / 60 / 60 % 24);
+        const m = Math.floor(leftTime / 1000 / 60 % 60);
+        const s = Math.floor(leftTime / 1000 % 60);
+        dom.innerHTML = `剩余${ d > 0 ? d + '天' : '' }${ [h, m, s].map(this.formatNumber).join(':') }`;
+       } else {
+        clearInterval(dom.$timer);
+        dom.innerHTML = '秒杀已开启';
+       }
+      },
+      start(){
+       this.domList.forEach((dom) => {
+        this.setTime(dom);
+        dom.$timer = setInterval(() => {
+         this.setTime(dom);
+        }, 1e3);
+       });
+      },
+     };
+     countdown.start();
+</script>
+<script>
+     //时间格式处理
+     const formatNumber = n => {
+     n = n.toString();
+     return n[1] ? n : '0' + n;
+     };
+     //团购倒计时
+     const teamCountTime = (obj) => {
+     var timer = null;
+     function fn(){
+
+      //获取设置的时间 如：2019-3-28 14:00:00 ios系统得加正则.replace(/\-/g, '/');
+      var setTime = obj.getAttribute('data-time').replace(/\-/g, '/');
+      //获取当前时间
+      var date = new Date(),
+       now  = date.getTime(),
+       endDate = new Date(setTime),
+       end  = endDate.getTime();
+      //时间差
+      var leftTime = end - now;
+      //d,h,m,s 天时分秒
+      var d, h,m,s;
+      var otime = '';
+      if (leftTime >= 0) {
+      d = Math.floor(leftTime / 1000 / 60 / 60 / 24);
+      h = Math.floor(leftTime / 1000 / 60 / 60 % 24);
+      m = Math.floor(leftTime / 1000 / 60 % 60);
+      s = Math.floor(leftTime / 1000 % 60);
+      if (d <= 0) {
+       otime = [h, m, s].map(formatNumber).join(':');
+      } else {
+       otime = d + '天' + [h, m, s].map(formatNumber).join(':');
+      }
+      obj.innerHTML = '秒杀活动离结束还有' + otime;
+      //
+      timer = setTimeout(fn, 1e3);
+      } else {
+      clearTimeout(timer);
+      obj.innerHTML = '秒杀已结束';
+      if(obj.innerHTML=='秒杀已结束'){
+        $('#kaiqi').css('display','none');
+      }
+      }
+     }
+     fn();
+     };
+     let jsTimes = document.querySelectorAll('.jsTime2');
+     jsTimes.forEach((obj) => {
+     teamCountTime(obj);
+     });
+</script>
                 <div class="clear "></div>
 
                 @forelse($cates as $cate)
@@ -393,7 +480,7 @@
                                 </div>
                                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
                             </div>
-                            <a href="/home/personal/introduction?id={{$goods_data->gid}}&cid={{$goods_data->cid}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
+                            <a href="/home/personal/introduction?ids={{$goods_data->gid}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
                         </div>
 
 

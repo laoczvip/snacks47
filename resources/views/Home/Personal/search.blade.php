@@ -16,7 +16,10 @@
 	</head>
 
 	<body>
-	        @include('home.public.hmtop')
+
+		<!--顶部导航条 -->
+		@include('home.public.hmtop')
+
 			<div class="clear"></div>
 			<b class="line"></b>
            <div class="search">
@@ -109,10 +112,10 @@
                         </div>
 							<div class="search-content">
 								<div class="sort">
-									<li class="first"><a title="综合">综合排序</a></li>
-									<li><a title="销量">销量排序</a></li>
-									<li><a title="价格">价格优先</a></li>
-									<li class="big"><a title="评价" href="/h/#">评价为主</a></li>
+									<li class="first" ><a title="综合" href="/home/personal/search?title=">综合排序</a></li>
+									<li><a title="销量" href="/home/personal/search?buy=1">销量排序</a></li>
+									<li><a title="价格" href="/home/personal/search?price=1">价格优先</a></li>
+									<li class="big"><a title="评价" href="/home/personal/search?assess=1">评价为主</a></li>
 								</div>
 								<div class="clear"></div>
 
@@ -193,9 +196,7 @@
 </nav>
 						</div>
 					</div>
-        @include('home.public.footer')
-
-				</div>
+				@include('home.public.footer')
 
 			</div>
 

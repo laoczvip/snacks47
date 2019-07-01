@@ -52,18 +52,19 @@ class GoodsController extends Controller
         $flavour = DB::table('flavour')->get();
         $list = [];
         foreach($flavour as $k=>$v){
-            $list[$v->id] = $v->fname;
+            $list[$v->touch][] = $v->fname;
         }
 
         return $list;
     }
     /**
-     * Display a listing of the resource.
+     * 显示商品
      *
-     * @return \Illuminate\Http\Response
+     * @return [type] [index]
      */
     public function index(Request $request)
     {
+
         //搜索cid
         $cid = $request->input('cid',0);
         //搜索商品名称
@@ -84,6 +85,8 @@ class GoodsController extends Controller
         //显示已id为键 名字为值的类
         $cates_name = GoodsController::Cates_name();
         $flavour_data = GoodsController::Flavour();
+
+
         return view('admin.goods.index',[
             'cates'=>$cates,
             'cates_name'=>$cates_name,
@@ -114,48 +117,81 @@ class GoodsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 压入商品
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return [type] [goods , goods_sku , flavour] [insert]
      */
     public function store(Request $request)
     {
+        $data = $this->validate($request,[
+                'title' => 'required|regex:/^\D{6,255}$/',
+                'showcase' => 'required',
+                'fname' => 'required',
+                'price' => 'required',
+                'stock' => 'required',
+                'status' => 'required',
+                'parameter' => 'required',
+                'desc' => 'required',
+            ],[
+                'title.required'=>'商品名称不能为空',
+                'title.regex'=>'输入的值不能为数字且6-255字节之间(一个汉字为三个字节)',
+                'showcase.required'=>'展示图不能为空',
+                'fname.required'=>'商品属性不能为空',
+                'price.required'=>'商品价格不能为空',
+                'stock.required'=>'商品库存不能为空',
+                'status.required'=>'商品名称不能为空',
+                'parameter.required'=>'商品参数不能为空',
+                'desc.required'=>'商品详情不能为空',
+            ]);
+
         //商品添加
 
         $goods_data['title'] = $request->input('title','');
         $goods_data['created_at'] = date('Y-m-d H:i:s',time());
 
+        $touch = date('YmdHis');
+        $goodssku_data = $touch;
+        $touchs = $request->except('cid','title','price','stock','status','desc','_token','showcase','parameter');
 
 
-
+        $list = $touchs['fname'];
+        $count = count($list);
+        $lists = [];
+        for($i=0;$i<$count;$i++){
+            $lists[]['fname'] = $list[$i];
+            $lists[$i]['touch']=$touch;
+        }
+        $flavours = DB::table('flavour')->insert($lists);
+        if($flavours){
+            $goods_data['sid'] = 0;
         $goods = goods::insert($goods_data);
 
         $goods_sel = goods::orderBy('id','desc')->first();
         $gid = $goods_sel->id;
 
         if($goods){
-             $goodssku_data = $request->all('title','flavorties','price','stock','weight','status','desc');
+             $goodssku_data = $request->all('title','price','stock','status','desc','parameter');
              $goodssku_data['gid'] = $gid;
-             $goodssku_data['original'] = $request->input('original',0);
+
              $goodssku_data['parameter'] = $request->input('parameter','');
              if($request->hasFile('showcase')){
              $goodssku_data['showcase'] = $request->file('showcase')->store(date('Ymd'));
              } else {
                  $goodssku_data['showcase'] = 0;
              }
+             $goodssku_data['touch'] = $touch;
              $goodssku_data['created_at'] = $goods_data['created_at'];
              $goodssku_data['cid'] = $request->input('cid',0);
              $goodssku = DB::table('goods_sku')->insert($goodssku_data);
+
              if($goodssku){
                 return redirect('/admin/goods/create')->with('success','添加成功');
              } else {
                 return back()->with('error','添加失败');
              }
+           }
         }
-
-
-
     }
 
     /**
@@ -179,6 +215,7 @@ class GoodsController extends Controller
     {
         $id = $request->input('id',0);
         $goods_sku = DB::table('goods_sku')->where('cid',$id)->first();
+
         $cates = GoodsController::Cates_data();
          foreach($cates as $k=>$v){
             $n = substr_count($v->path,',');
@@ -187,7 +224,7 @@ class GoodsController extends Controller
         $cates_name = GoodsController::Cates_name();
         $flavour = DB::table('flavour')->get();
         $flavour_data = GoodsController::Flavour();
-        return view('admin.goods.edit',['cates'=>$cates,'goods_sku'=>$goods_sku,'cates_name'=>$cates_name,'flavour'=>$flavour,'flavour_data'=>$flavour_data]);
+        return view('admin.goods.edit',['cates'=>$cates,'goods_sku'=>$goods_sku,'cates_name'=>$cates_name]);
     }
 
     /**
@@ -199,18 +236,32 @@ class GoodsController extends Controller
      */
     public function update(Request $request)
     {
+          $data = $this->validate($request,[
+                'title' => 'required|regex:/^\D{6,255}$/',
+                'price' => 'required',
+                'stock' => 'required',
+                'status' => 'required',
+                'parameter' => 'required',
+                'desc' => 'required',
+            ],[
+                'title.required'=>'商品名称不能为空',
+                'title.regex'=>'输入的值不能为数字且6-255字节之间(一个汉字为三个字节)',
+                'price.required'=>'商品价格不能为空',
+                'stock.required'=>'商品库存不能为空',
+                'status.required'=>'商品名称不能为空',
+                'parameter.required'=>'商品参数不能为空',
+                'desc.required'=>'商品详情不能为空',
+            ]);
         //商品id
         $id = $request->input('id',0);
 
          //接收值
         $data['title'] = $request->input('title','');
-        $data['flavorties'] = $request->input('flavorties','');
+
         $data['price'] = $request->input('price',0);
         $data['stock'] = $request->input('stock',0);
-        $data['weight'] = $request->input('weight',0);
         $data['status'] = $request->input('status',-1);
         $data['desc'] = $request->input('desc','');
-        $data['original'] = $request->input('original',0);
         $data['parameter'] = $request->input('parameter',0);
         //类id
         $data['cid'] = $request->input('cid','');
@@ -223,14 +274,16 @@ class GoodsController extends Controller
         } else {
             $data['showcase'] = $request->input('showcase','');
         }
+
         $res =  DB::table('goods_sku')->where('gid',$id)->update($data);
+
         if($res){
             $data_sku['title'] = $request->input('title','');
-
+            $data_sku['sid'] = 0;
 
             $sku = DB::table('goods')->where('id',$id)->update($data_sku);
             if($sku){
-                return redirect('admin/goods/create')->with('success','修改成功');
+                return redirect("admin/goods/edit?id=".$request->input('cid',0))->with('success','修改成功');
             } else {
                 return back()->with('error','插入goods修改失败');
             }
@@ -266,3 +319,4 @@ class GoodsController extends Controller
 
     }
 }
+

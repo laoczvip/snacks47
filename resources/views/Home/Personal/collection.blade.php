@@ -52,12 +52,12 @@
                             <div class="s-content">
                             @forelse($collect as $k=>$v)
                                 @foreach($good as $kk=>$vv)
-                                @if($v->gid == $vv->id)
+                                @if($v->gid == $vv->gid)
                                 <div class="s-item-wrap">
                                     <div class="s-item">
 
                                         <div class="s-pic">
-                                            <a href="/home/personal/introduction?id={{ $vv->gid }}&cid={{ $vv->cid }}" class="s-pic-link">
+                                            <a href="http://lamp.com/home/personal/introduction?ids={{ $v->gid }}" class="s-pic-link">
                                                 <img height="150px" src="/uploads/{{ $vv->showcase }}" alt="{{ $vv->title }}" title="{{ $vv->title }}" class="s-pic-img s-guess-item-img" >
                                             </a>
                                         </div>

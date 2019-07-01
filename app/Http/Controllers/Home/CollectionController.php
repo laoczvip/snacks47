@@ -26,16 +26,18 @@ class CollectionController extends Controller
         }
     }
 
+    /**
+     * [ 用户取消收藏 ]
+     * @param [ type ] $id [ 商品的ID ]
+     */
     public function Del($id)
     {
         $uid = session('home_user')->id;
         $res = Collect::where('uid',$uid)->where('gid',$id)->get();
-
         foreach ($res as $k => $v) {
             $cid = $v->id;
         }
         $res = DB::delete('delete from collect where id ='.$cid);
-
         if ($res) {
             return 1;
         }else{

@@ -224,11 +224,43 @@ Route::post('admin/cates/insert','Admin\CatesController@insert');
 Route::get('home/personal/introduction','Home\PersonalController@IntroDuction');
 //商品搜索页面
 Route::get('home/personal/search','Home\PersonalController@Search');
-
+//秒杀商品搜索页面
+Route::get('home/shakys/show','Home\ShakyController@index');
 
 
 // 删除类
 Route::get('admin/cates/delete/{id}','Admin\CatesController@delete');
+
+
+
+
+//后台活动操作
+//活动类显示
+Route::get('admin/shaky/index','Admin\ShakyController@index');
+//活动类添加加载页面
+Route::get('admin/shaky/create','Admin\ShakyController@create');
+//活动类插入
+Route::post('admin/shaky/shore','Admin\ShakyController@shore');
+//活动类修改页
+Route::get('admin/shaky/edit','Admin\ShakyController@edit');
+//活动类修改
+Route::post('admin/shaky/update','Admin\ShakyController@update');
+//活动类删除
+Route::get('admin/shaky/del','Admin\ShakyController@del');
+//活动添加商品显示页面
+Route::get('admin/shakys/index','Admin\ShakysController@index');
+//活动商品添加详情
+Route::get('admin/shakys/create','Admin\ShakysController@create');
+//活动商品添加插入
+Route::post('admin/shakys/shore','Admin\ShakysController@shore');
+//显示活动页面
+Route::get('admin/shakys/show','Admin\ShakysController@show');
+//活动商品修改页
+Route::get('admin/shakys/edit','Admin\ShakysController@edit');
+//活动商品修改
+Route::post('admin/shakys/update','Admin\ShakysController@update');
+//活动商品删除
+Route::get('admin/shakys/del','Admin\ShakysController@del');
 
 
 

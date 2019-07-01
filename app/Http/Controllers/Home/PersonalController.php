@@ -38,9 +38,9 @@ class PersonalController extends Controller
      */
     public function Index(Request $request)
     {
-
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
+        $friendly = self::Friendly();
 
         $kouwei = $request->input('a',0);
         $_SESSION ['flavor'] = $kouwei;
@@ -58,26 +58,52 @@ class PersonalController extends Controller
      * @return [ 视图 ] [ HTML页面 ]
      */
     public function IntroDuction(Request $request)
-    {   error_reporting(0);
+    {
+        error_reporting(0);
         $friendly = self::Friendly();
 
         $user = Users::find(session('home_user')->id);
         $count = ShopcartController::CountCar();
-
-
         $asd = $user->collect;
+
         foreach ($asd as $key => $v) {
             $collect[] = $v->gid;
         }
+
+
         $weds = weds::find(1);
-        //商品id
-        $gid = $request->input('id',0);
-        //所属类Id
-        $cid = $request->input('cid',0);
+         //商品id
+        $gid = $request->input('ids',0);
+        $gids = $request->input('gids',0);
+        //活动类id
+        $sid = $request->input('sid',0);
+        //判断条件：是否为活动商品
+        if($sid!=0){
+            $shaky_one = DB::table('shaky')->where('id',$sid)->first();
+            $date = date('Y-m-d H:i:s',time());
+            $ctime = $shaky_one->ctime;
+            $jtime = $shaky_one->jtime;
+            if($ctime>$date){
+                echo json_encode('活动未开启');
+
+            } else if($ctime<$date&&$jtime<$date){
+                echo json_encode('活动已结束');
+            }
+        }
+        if($gid!=0){
+         //所属类Id
+
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
 
-
+        $cid = $goods_sku->cid;
+        $shaky_sku = false;
         $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
+        //商品属性
+        $flavour = DB::table('flavour')->get();
+        $list = [];
+        foreach($flavour as $k=> $val){
+            $list[ $val->touch][] = $val->fname;
+        }
 
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
@@ -86,26 +112,62 @@ class PersonalController extends Controller
                 'friendly'=>$friendly,
                 'count'=>$count,
                 'collect'=>$collect,
+                'list'=>$list,
                 ]);
+        }
     }
-     /**
-     * [ 加载搜索商品页面 ]
-     * @return [ 视图 ] [ HTML页面 ]
+
+    /**
+     * 加载搜索商品页面
+     * @return [type] [HTML页面]
      */
     public function Search(Request $request)
     {
+        // 接收搜索框信息
+        $title =$request->input('title','');
+        // 接收销量
+        $buys = $request->input('buy',0);
+       // 接收价格
+        $prices = $request->input('price',0);
+        // 接收评价
+        $assess = $request->input('assess',0);
+
+
         $friendly = self::Friendly();
-
-        $count = ShopcartController::CountCar();
-
-
 
         $weds = weds::find(1);
         //商品id
         $id = $request->input('id',0);
+        if($title!=''){
+            //名称搜索
+            $goods_all = DB::table('goods_sku')->where('title','like','%'.$title.'%')->paginate(20);
+        } else if($id!=0){
+            // 类搜索
+            $goods_all = DB::table('goods_sku')->where('cid',$id)->paginate(20);
+        } else if($buys!=0){
+            $goods_all = DB::table('goods_sku')->orderBy('buy','desc')->paginate(20);
+
+        } else {
+            //搜索所有
+            $goods_all = DB::table('goods_sku')->paginate(20);
+        }
+        if($prices!=0){
+
+            $goods_all = DB::table('goods_sku')->orderBy('price','asc')->paginate(20);
+        }
+        if($assess!=0){
+
+            $goods_all = DB::table('goods_sku')->orderBy('assess','desc')->paginate(20);
+        }
         //所属类Id
-        $goods_all = DB::table('goods_sku')->where('cid',$id)->paginate(4);
-        $goods_count= DB::table('goods_sku')->where('cid',$id)->get();
+        if($id!=0){
+            $goods_count= DB::table('goods_sku')->where('cid',$id)->get();
+        } else{
+             $goods_count= DB::table('goods_sku')->where('title','like','%'.$title.'%')->get();
+        }
+        $count = ShopcartController::CountCar();
+
+        // 购物车数量
         $num = count($goods_count);
 
         return view('home.personal.search',[
@@ -115,8 +177,10 @@ class PersonalController extends Controller
                 'weds'=>$weds,
                 'friendly'=>$friendly,
                 'count'=>$count,
+                'title'=>$title,
                 ]);
     }
+
     /**
      * [ 加载收货地址页面 ]
      * @return [ 视图 ] [ HTML页面 ]
@@ -124,10 +188,7 @@ class PersonalController extends Controller
     public function Addres()
     {
         $friendly = self::Friendly();
-
         $count = ShopcartController::CountCar();
-
-
         $weds = weds::find(1);
         $id = session('home_user')->id;
         $user = Address::where('uid',$id)->get();
@@ -185,7 +246,6 @@ class PersonalController extends Controller
     {
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
-
         $weds = weds::find(1);
         $addres = Address::where('id',$id)->first();
 
@@ -251,7 +311,6 @@ class PersonalController extends Controller
     {
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
-
         $weds = weds::find(1);
         return view('home.personal.information',[
             'weds'=>$weds,
@@ -317,7 +376,6 @@ class PersonalController extends Controller
     {
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
-
         $weds = weds::find(1);
         return view('home.personal.password',[
             'weds'=>$weds,
@@ -368,9 +426,7 @@ class PersonalController extends Controller
     public function Collection()
     {
         $user = Users::find(session('home_user')->id);
-
         $count = ShopcartController::CountCar();
-
         $good = GoodsSku::get();
         $collect = $user->collect;
         $friendly = self::Friendly();
@@ -394,27 +450,15 @@ class PersonalController extends Controller
         $count = ShopcartController::CountCar();
         $weds = weds::find(1);
         $uid = session('home_user')->id;
-
         $order = Order::where('uid',$uid)->orderBy('created_at', 'desc')->paginate(99);
 
-
-        // foreach ($order as $k => $v) {
-            // echo '单号<br>';
-           // foreach ($v->orderdetails as $key => $value) {
-            // $dtype = $value->dtype;
-            // dump($dtype);
-                // foreach ($value->usergood as $key => $good) {
-                //     // echo '&nbsp;----商品详情<br>';
-                // }
-           // }
-        // }
-
+        $goods = GoodsSku::get();
         return view('home.personal.order',[
-            // 'dtype'=>$dtype,
             'weds'=>$weds,
             'order'=>$order,
-            'friendly'=>$friendly,
+            'goods'=>$goods,
             'count'=>$count,
+            'friendly'=>$friendly,
             ]);
     }
 
@@ -486,8 +530,39 @@ class PersonalController extends Controller
         }else{
             return 2;
         }
+        $friendly = self::Friendly();
+        $weds = weds::find(1);
+        return view('home.personal.comment',[
+            'weds'=>$weds,
+            'friendly'=>$friendly,
+            ]);
     }
 
+    /**
+     *
+     */
+    /**
+     * [用户订单详情页面]
+     * @param [type] $id [订单ID]
+     */
+/*    public function Commoditydetails($id)
+    {
+        $friendly = self::Friendly();
+        $weds = weds::find(1);
+        $order = Order::find($id);
+        $aid = $order->orderdetails->aid;
+        // 收货地址
+        $address = Address::find($aid);
+        $goods = GoodsSku::get();
+        return view('home.personal.commoditydetails',[
+            'weds'=>$weds,
+            'order'=>$order,
+            'goods'=>$goods,
+            'friendly'=>$friendly,
+            'address'=>$address,
+            ]);
+    }
+*/
     /**
      * [ 用户删除订单 ]
      * @param [ int ] $id [ 订单ID ]

@@ -51,7 +51,7 @@ class IndexController extends Controller
         $goods = DB::table('goods_sku')->get()->toArray();
 
     /*************************莫薛贵***********************************/
-
+    $shaky = DB::table('shaky')->get();
 
 
 
@@ -159,6 +159,7 @@ class IndexController extends Controller
             'headlines_desc'=>$headlines_desc,
             'friendly'=>$friendly,
             'count'=>$count,
+            'shaky'=>$shaky,
             ]);
 
     /**
