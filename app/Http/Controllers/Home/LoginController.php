@@ -8,7 +8,7 @@ use App\Models\Weds;
 use Hash;
 use Mail;
 use DB;
-
+use Captcha;
 class LoginController extends Controller
 {
     /**
@@ -33,6 +33,11 @@ class LoginController extends Controller
      */
     public function Dologin(Request $request)
     {
+
+        if(!Captcha::check($request->input('code'))){
+                return 2;
+        }
+
         $number = $request->input('number','');
         $password = $request->input('password','');
 

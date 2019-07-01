@@ -171,7 +171,7 @@
                     @if(!session('home_login'))
                     <div class="mod-vip">
                         <div class="m-baseinfo">
-                            <a href="person/index.html">
+                            <a href="/login">
                                 <img src="/h/images/getAvatar.do.jpg">
                             </a>
                             <em>
