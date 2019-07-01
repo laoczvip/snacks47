@@ -121,14 +121,23 @@
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
+							@if($shaky_sku)
 								<li class="price iteminfo_price">
+									<dt>促销价</dt>
+									<dd><em>¥</em><b class="sys_item_price">{{$shaky_sku->original-$shaky_sku->preferential}}</b>  </dd>
+								</li>
+							@else
+							<li class="price iteminfo_price">
 									<dt>促销价</dt>
 									<dd><em>¥</em><b class="sys_item_price">{{$goods_sku->price}}</b>  </dd>
 								</li>
+							@endif
+								@if($shaky_sku)
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-									<dd><em>¥</em><b class="sys_item_mktprice">{{$goods_sku->original}}</b></dd>
+									<dd><em>¥</em><b class="sys_item_mktprice">{{$shaky_sku->original}}</b></dd>
 								</li>
+								@endif
 								<div class="clear"></div>
 							</div>
 							<br>

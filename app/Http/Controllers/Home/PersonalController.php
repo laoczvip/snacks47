@@ -105,6 +105,7 @@ class PersonalController extends Controller
             $list[ $val->touch][] = $val->fname;
         }
 
+        
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
                 'goods_all'=>$goods_all,
@@ -113,6 +114,33 @@ class PersonalController extends Controller
                 'count'=>$count,
                 'collect'=>$collect,
                 'list'=>$list,
+                'shaky_sku'=>$shaky_sku,
+                ]);
+        }
+        if($gids!=0){
+         //所属类Id
+        
+        $goods_sku = DB::table('goods_sku')->where('gid',$gids)->first();
+        $shaky_sku = DB::table('shaky_sku')->where('gid',$gids)->first();
+        //商品属性
+        $flavour = DB::table('flavour')->get(); 
+        $list = [];
+        foreach($flavour as $k=> $val){
+            $list[ $val->touch][] = $val->fname;
+        }
+        
+        $cid = $goods_sku->cid;
+        
+        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
+         return view('home.personal.introduction',[
+                'goods_sku'=>$goods_sku,
+                'goods_all'=>$goods_all,
+                'weds'=>$weds,
+                'friendly'=>$friendly,
+                'count'=>$count,
+                'collect'=>$collect,
+                'list'=>$list,
+                'shaky_sku'=>$shaky_sku,
                 ]);
         }
     }
