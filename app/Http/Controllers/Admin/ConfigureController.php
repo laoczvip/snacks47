@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Storage;
 class ConfigureController extends Controller
 {
     /**
-     * 网站配置页面
-     * @return [HTML] [HTML]
+     * [ 网站配置页面 ]
+     * @return [ 视图 ]
      */
     public function index()
     {
@@ -20,8 +20,8 @@ class ConfigureController extends Controller
     }
 
     /**
-     * 关闭网站
-     * @return [int] [成功]
+     * [ 关闭网站 ]
+     * @return [ int ] [ 成功 ]
      */
     public function  off()
     {
@@ -31,7 +31,7 @@ class ConfigureController extends Controller
         return  1;
     }
     /**
-     * 开启网站
+     * [ 开启网站 ]
      * @return [int] [成功]
      */
     public function kaiqi()
@@ -43,8 +43,8 @@ class ConfigureController extends Controller
     }
 
     /**
-     * [加载修改页面]
-     * @return [HTML] [description]
+     * [ 加载修改页面 ]
+     * @return [HTML]
      */
     public function edit()
     {
@@ -53,7 +53,7 @@ class ConfigureController extends Controller
     }
 
     /**
-     * 执行修改网站信息
+     * [ 执行修改网站信息 ]
      * @param  Request $request [description]
      * @return [bool]           [受影响行数]
      */
@@ -77,6 +77,7 @@ class ConfigureController extends Controller
                 'filing.required'=>'请输入网站备案号',
         ]);
 
+        // 判断是否换网站logo
         if ($request->hasFile('logo')) {
             Storage::delete($request->input('ulogo'));
             $logo = $request->file('logo')->store('Logo');
@@ -84,6 +85,7 @@ class ConfigureController extends Controller
             $logo = $request->input('ulogo');
         }
 
+        // 判断是否换网站图标
         if ($request->hasFile('icon')) {
             Storage::delete($request->input('uicon'));
             $icon = $request->file('icon')->store('Logo');
@@ -93,7 +95,7 @@ class ConfigureController extends Controller
 
         $data = $request->all();
 
-
+        // 执行修改
         $weds = Weds::find(1);
         $weds->tel = $data['tel'];
         $weds->name = $data['name'];

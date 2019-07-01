@@ -8,24 +8,29 @@ use App\Models\Cates;
 use DB;
 class CatesController extends Controller
 {
+
     /**
-     * Index a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * [ 商品分类列表 ]
+     * @param Request $request [ 查询所有的数据 ]
      */
     public function Index(Request $request)
     {
         //显示商品分类列表
         $cid = $request->input('cid',0);
 
-        if($cid!=0){
+        if ($cid != 0) {
          $cates = Cates::where('id',$cid)->paginate(2);
         } else {
          $cates = Cates::where('pid',0)->paginate(5);
         }
-       
+
         $cates_data = GoodsController::Cates_data();
-        return view('admin.cates.index',['cates'=>$cates,'cates_data'=>$cates_data,'cid'=>$cid]);
+
+        return view('admin.cates.index',[
+                    'cates'=>$cates,
+                    'cates_data'=>$cates_data,
+                    'cid'=>$cid,
+                    ]);
     }
 
     /**
@@ -34,7 +39,7 @@ class CatesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function Create(Request $request)
-    {   
+    {
         $pid = $request->input('id',0);
 
         if($pid){
@@ -64,10 +69,10 @@ class CatesController extends Controller
             $path = Cates::find($pid);
             $data['pid'] = $pid;
              $data['path'] = $path->path.$path->id.',';
-           
+
         }
-       
-        
+
+
         $data['status'] = 1;
         $data['add_time'] = date('Y-m-d H:i:s');
         $title = $request->input('title','');
@@ -82,7 +87,7 @@ class CatesController extends Controller
         } else{
             return back()->with('error','类名已存在');
         }
-        
+
 
     }
     /**
@@ -102,8 +107,8 @@ class CatesController extends Controller
             $cate = Cates::where('pid',$pid)->paginate(5);
         }
 
-        
-      
+
+
         return view('admin.cates.show',['cate'=>$cate,'cid'=>$cid]);
     }
 
@@ -151,7 +156,7 @@ class CatesController extends Controller
         } else{
             return back();
         }
-        
+
     }
     /**
      * Delete the specified resource from storage.
@@ -163,10 +168,10 @@ class CatesController extends Controller
     {
         $id = $request->input('id',0);
         $case_data =Cates::where('id',$id)->first();
-       
+
         $cate = Cates::where('pid',$id)->first();
-       
-       
+
+
         if(empty($cate)){
              $cates =Cates::destroy($id);
                if($cates){
@@ -177,8 +182,8 @@ class CatesController extends Controller
         } else {
             return back()->with('error','该类含有子类');
         }
-      
-        
+
+
     }
     /**
      * @param     status
@@ -188,13 +193,13 @@ class CatesController extends Controller
     {
         $id['id'] = $request->input('id',0);
         $sta = $request->input('status',0);
-        
+
         if($sta==1){
             $status['status'] = 0;
         } else {
             $status['status'] = 1;
         }
-        
+
         $res = DB::table('cates')->where('id',$id)->update($status);
         if($res){
             $data = DB::table('cates')->find($id);

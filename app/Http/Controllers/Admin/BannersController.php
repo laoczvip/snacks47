@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Banners;
@@ -9,12 +8,30 @@ use DB;
 use Illuminate\Support\Facades\Storage;
 
 class BannersController extends Controller
-{   
+{
+
     /**
-     * 
-     * 修改状态
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     * [ 轮播图列表 ]
+     * @param Request $request [ 查询全部的轮播图 ]
+     */
+    public function Index(Request $request)
+    {
+        $search = $request->input('search');
+        $banners = Banners::where('title','like','%'.$search.'%')->paginate(5);
+        return view('admin.banners.index',[
+                    'banners'=>$banners,
+                    'search'=>$search,
+            ]);
+
+    }
+
+
+    /**
+     *
+     * [ 修改状态 ]
+     *
+     * @param  [ int ] $id [ 轮播图ID ]
+     * @return [ bool ]     [ 修改轮播图状态 ]
      */
     public function ChangeStatus(Request $request)
     {
@@ -23,7 +40,7 @@ class BannersController extends Controller
 
         // 获取id
         $id = $request->input('id');
-       
+
 
         // 执行修改
         $res = DB::table('banners')->where('id',$id)->update(['status'=>$status]);
@@ -35,20 +52,19 @@ class BannersController extends Controller
 
     }
 
+
     /**
-     * 删除
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     * [ 删除 ]
+     * @param Request $request [ 接收轮播图ID ]
      */
     public function Delete(Request $request)
-    {   
+    {
 
     // 获取要删除的id
     $id = $request->input('id');
-    
+
     // 执行删除
     $res = Banners::destroy($id);
-    // $res = DB::table('banners')->where('id',$id)->delete();
 
     if($res){
             return "ok";
@@ -56,20 +72,10 @@ class BannersController extends Controller
             return "err";
         }
 
-       // if ($res) {
-           
-       //      return redirect('admin/banners')->with('success','删除成功');
-       //  }else{
-           
-       //      return back()->with('error','删除失败');
-       //  }
-       
     }
 
     /**
-     * 获取软删除
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     * [ 软删除列表 ]
      */
     public function Soft()
     {
@@ -80,15 +86,15 @@ class BannersController extends Controller
             ]);
     }
 
+
     /**
-     * 恢复删除
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     * [ 恢复软删除 ]
+     * @param [ int ] $id [ 需要恢复的ID ]
      */
     public function HuiFu($id)
     {
         $res = Banners::withTrashed()->where('id',$id)->restore();
-        
+
         if($res){
                 return redirect('/admin/banners')->with('success','恢复成功');
             }else{
@@ -98,15 +104,14 @@ class BannersController extends Controller
     }
 
     /**
-     * 永久删除
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     * [ 永久删除 ]
+     * @param [ int ] $id [ 轮播图ID ]
      */
     public function Delete_data($id)
     {
-        
+
         $banner = Banners::find($id);
-        
+
         $res2 = DB::table('banners')->where('id',$id)->delete();
 
          if($res2){
@@ -117,37 +122,19 @@ class BannersController extends Controller
 
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function Index(Request $request)
-    {   
-        $search = $request->input('search');
-        $banners = Banners::where('title','like','%'.$search.'%')->paginate(5);
-        return view('admin.banners.index',[
-                    'banners'=>$banners,
-                    'search'=>$search,
-            ]);
-       
-    }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * [ 显示添加轮播图页面 ]
      */
     public function Create()
     {
         return view('admin.banners.create');
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * [ 执行添加新的轮播图 ]
+     * @param Request $request [ 需要添加的数据 ]
      */
     public function Store(Request $request)
     {
@@ -160,8 +147,7 @@ class BannersController extends Controller
         }
 
         $data = $request->all();
-        // dd($data);
-        
+
         $banners = new Banners;
         $banners->title = $data['title'];
         $banners->desc = $data['desc'];
@@ -169,62 +155,39 @@ class BannersController extends Controller
         $banners->status = $data['status'];
         $banners->jump = $data['jump'];
         $res = $banners->save();
- 
-       // if($res){
-       //          return redirect('admin/banners')->with('success','添加成功');
-       //      }else{
-       //          return back()->with('error','添加失败');
-       //      }
 
          if ($res) {
-           
+
             return redirect('admin/banners')->with('success','添加成功');
         }else{
-           
+
             return back()->with('error','添加失败');
         }
-     
+
      }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function Show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * [ 加载轮播图修改页面 ]
+     * @param [ int ] $id [ 轮播图ID ]
      */
     public function Edit($id)
     {
-        //
         // 获取当前要修改的数据
         $data = DB::table('banners')->where('id',$id)->first();
-        return view('admin.banners.edit',['data'=>$data]); 
+        return view('admin.banners.edit',['data'=>$data]);
 
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * [ 执行修改 ]
+     * @param Request $request [ 接收需要更新的数据 ]
+     * @param [ int ]  $id      [ 需要修改的ID ]
      */
     public function Update(Request $request, $id)
     {
-        //
-        // 执行文件上传
-
-      if($request->hasFile('url')){
+      // 执行文件上传
+      if ($request->hasFile('url')) {
 
         // 删除以前旧图片
         Storage::delete($request->input('url_path'));
@@ -235,16 +198,14 @@ class BannersController extends Controller
 
       }
 
-      // 接受用户提交的值
+      // 接受提交的值
       $data['title'] = $request->input('title','');
       $data['desc'] = $request->input('desc','');
       $data['jump'] = $request->input('jump','');
       $data['url'] = $path;
       $data['updated_at'] = date('Y-m-d H:i:s',time());
-      //dd($data);exit;
       // 执行修改
       $res = DB::table('banners')->where('id',$id)->update($data);
-      //dd($res);
       // 判断逻辑
       if($res){
         return redirect('admin/banners')->with('success','修改成功');
@@ -252,29 +213,5 @@ class BannersController extends Controller
         return back()->with('error','修改失败');
       }
     }
-    
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function Destroy($id)
-    {
-      
-       
-    }
-
-    
-
-    //  public function SoftDeletion()
-    // {
-    //     // 获取软删除
-    
-    //     return view('admin.banners.soft');
-    // }
-
-
 
 }

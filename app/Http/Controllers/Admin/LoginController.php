@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Hash;
+use Captcha;
+
+
 class LoginController extends Controller
 {
     /**
      * 加载登陆页面
-     * @return [type] [description]
+     * @return [ 视图 ]
      */
     public function login()
     {
@@ -21,16 +23,22 @@ class LoginController extends Controller
 
     /**
      * 执行登陆操作
-     * @return [type] [description]
+     * @return [ string ] [ 账号密码 ]
      */
     public function dologin(Request $request)
     {
+        // 验证码验证
+        if (!Captcha::check($request->input('code'))) {
+                return 2;
+        }
+
+
         $number = $request->input('number','');
         $password = $request->input('password','');
-
+        // 获取对应的信息
         $user_data = DB::table('users')->where('number',$number)->first();
 
-
+        // 否
         if (!$user_data) {
             echo 1;
             exit;
@@ -41,6 +49,7 @@ class LoginController extends Controller
             echo 1;
             exit;
         }
+
         session(['admin_login'=>true]);
         session(['admin_user'=>$user_data]);
 

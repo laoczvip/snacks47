@@ -30,10 +30,11 @@ class IndexController extends Controller
             ]);
     }
 
+
     /**
      * 统计数据库总条数
-     * @param  [type] $table [数据表名称]
-     * @return [type]        [itn]
+     * @param  [ string ] $table [ 数据表名称 ]
+     * @return [ itn ]  [ 总条数 ]
      */
     public static function num($table)
     {

@@ -9,7 +9,32 @@ use DB;
 use Illuminate\Support\Facades\Storage;
 
 class HeadlinesController extends Controller
-{    
+{
+     /**
+     *  头条列表
+     * @param Request $request [ 所有的头条数据 ]
+     */
+    public function Index(Request $request)
+    {
+        // 接收搜索条件
+        $search = $request->input('search');
+
+         // 接收数据
+        $headlines = Headlines::where('htitle','like','%'.$search.'%')->paginate(4);
+
+        return view('admin.headlines.index',[
+                     'headlines'=>$headlines,
+                     'search'=>$search,
+            ]);
+
+    }
+
+
+    /**
+     *  修改头条状态 ( 是否显示 )
+     *
+     * @param Request $request [ 头条ID ]
+     */
     public function ChangeStatus(Request $request)
     {
         // 获取状态
@@ -17,7 +42,7 @@ class HeadlinesController extends Controller
 
         // 获取id
         $id = $request->input('id');
-       
+
 
         // 执行修改
         $res = DB::table('headlines')->where('id',$id)->update(['status'=>$status]);
@@ -29,15 +54,16 @@ class HeadlinesController extends Controller
 
     }
 
+
     /**
-     * 删除
-     * @param  [type] $id [description]
-     * @return [type]     [description]
-     */ 
+     *  删除头条
+     *
+     * @param Request $request [ 接收头条ID ]
+     */
     public function Delete(Request $request)
-    {   
+    {
         $id = $request->input('id');
-    
+
         $res = Headlines::destroy($id);
         // $res = DB::table('banners')->where('id',$id)->delete();
 
@@ -50,47 +76,47 @@ class HeadlinesController extends Controller
 
 
     /**
-     * 获取软删除
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     *  获取软删除
+     *
      */
     public function Soft()
     {
         // 获取软删除.
         $del_headlines = Headlines::onlyTrashed()->get();
 
-        return view('admin.headlines.soft',[
-                    'del_headlines'=>$del_headlines,
-            ]);
+        return view('admin.headlines.soft',['del_headlines'=>$del_headlines,]);
     }
 
+
     /**
-     * 恢复删除
-     * @param  [type] $id [description]
-     * @return [type]     [description]
-     */ 
+     *  恢复删除
+     *
+     * @param [ int ] $id [ 需要恢复的ID ]
+     */
     public function HuiFu($id)
     {
         $res = Headlines::withTrashed()->where('id',$id)->restore();
-        
-        if($res){
-                return redirect('/admin/headlines')->with('success','恢复成功');
-            }else{
-                return back()->with('error','恢复失败');
-            }
 
-    } 
+        if($res){
+            return redirect('/admin/headlines')->with('success','恢复成功');
+        }else{
+            return back()->with('error','恢复失败');
+        }
+
+    }
+
+
 
     /**
-     * 永久删除
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     *  永久删除
+     *
+     *  @param [ int ] $id [ 需要删除的ID ]
      */
     public function Delete_data($id)
     {
-        
+
         $banner = Headlines::find($id);
-        
+
         $res2 = DB::table('headlines')->where('id',$id)->delete();
 
         if($res2){
@@ -102,41 +128,20 @@ class HeadlinesController extends Controller
     }
 
 
-    /**
-     * Display a listing of the resource.
-     * 显示头条列表
-     * @return \Illuminate\Http\Response
-     */
-    public function Index(Request $request)
-    {
-        // 接收搜索条件
-        $search = $request->input('search');
-
-         // 接收数据
-        $headlines = Headlines::where('htitle','like','%'.$search.'%')->paginate(4);
-
-        return view('admin.headlines.index',[
-                     'headlines'=>$headlines,
-                     'search'=>$search, 
-            ]); 
-         
-    }
 
     /**
-     * Show the form for creating a new resource.
-     *加载添加头条页面
-     * @return \Illuminate\Http\Response
+     * 加载添加头条页面
+     *
      */
     public function Create()
     {
         return view('admin.headlines.create');
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *执行添加头条
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     *  执行添加头条
+     * @param Request $request [ 接收新的数据 ]
      */
     public function Store(Request $request)
     {
@@ -155,7 +160,7 @@ class HeadlinesController extends Controller
              'auth.max'=>'作者过长',
             'hcontent.required'=>'文章必填',
             'thumb.required'=>'请选择缩略图',
-            
+
          ]);
 
 
@@ -166,6 +171,7 @@ class HeadlinesController extends Controller
             $file_path = "";
         }
 
+        // 添加到数据表
         $headlines = new Headlines;
         $headlines->auth = $request['auth'];
         $headlines->htitle = $request['htitle'];
@@ -175,35 +181,22 @@ class HeadlinesController extends Controller
         $res = $headlines->save();
 
         if ($res) {
-           
             return redirect('admin/headlines')->with('success','添加成功');
         }else{
-           
             return back()->with('error','添加失败');
         }
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function Show($id)
-    {
-        //
-    }
+
 
     /**
-     * Show the form for editing the specified resource.
-     *显示修改头条的页面
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 显示修改页面
+     * @param [ int ] $id [ 需要修改的ID ]
      */
     public function Edit($id)
     {
-        
+
         // 获取要修改的数据
         $data = DB::table('headlines')->where('id',$id)->first();
         return view('admin.headlines.edit',[
@@ -211,12 +204,11 @@ class HeadlinesController extends Controller
             ]);
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *执行头条修改
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 执行头条修改
+     * @param Request $request [ 接收需要更新的内容 ]
+     * @param [ int ]  $id      [ 需要修改的ID ]
      */
     public function Update(Request $request, $id)
     {
@@ -226,19 +218,20 @@ class HeadlinesController extends Controller
         Storage::delete($request->input('thumb_path'));
 
         $path = $request->file('thumb')->store(date('Ymd'));
-      }else{
-        $path =  $request->input('thumb_path');
+        }else{
+            $path =  $request->input('thumb_path');
 
-      }
-         // 接受用户提交的值
+        }
+
+         // 接受提交的值
         $data['htitle'] = $request->input('htitle','');
         $data['auth'] = $request->input('auth','');
         $data['hcontent'] = $request->input('hcontent','');
-        $data['thumb'] = $path; 
-        //dd($data);exit;
+        $data['thumb'] = $path;
+
         // 执行修改
         $res = DB::table('headlines')->where('id',$id)->update($data);
-        //dd($res);
+
          // 判断逻辑
         if($res){
           return redirect('admin/headlines')->with('success','修改成功');
@@ -247,14 +240,4 @@ class HeadlinesController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function Destroy($id)
-    {
-        //
-    }
 }

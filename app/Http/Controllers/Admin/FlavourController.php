@@ -8,7 +8,7 @@ use DB;
 class FlavourController extends Controller
 {
     /**
-     * 显示 index
+     * [ 显示 index ]
      * @param   $[name] [商品属性]
      * @return   [flavour]
      */

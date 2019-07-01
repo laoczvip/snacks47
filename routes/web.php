@@ -1,22 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-// use App\Models\Weds;
 
-// Route::get('/', function () {
-//     $weds = weds::find(1);
-//     return view('home.index.index',['weds'=>$weds]);
-
-// });
 
 // 前台首页
 Route::get('/','home\IndexController@index');

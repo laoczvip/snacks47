@@ -293,11 +293,7 @@
                             <div class="icon-sale one "></div>
                                 <a href="javascript:;" onclick="urls({{$shaky_data->id}})"><h4>{{$shaky_data->sname}}</h4> </a>
                             <div class="activityMain ">
-                            @if($shaky_data->profile == null)
-                            <img src="/uploads/{{$shaky_data->profile}} " height="100%">
-                            @else
-                                <img src="/h/images/kkry.jpg " height="100%">
-                            @endif
+                                <img src="/uploads/{{$shaky_data->profile}} " height="100%">
                             </div>
 
 
