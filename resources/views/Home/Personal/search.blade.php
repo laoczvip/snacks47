@@ -234,7 +234,7 @@
 							</div>
 <nav aria-label="Page navigation">
 							<!--分页 -->
-							
+							<aside>
 								{{$goods_all->appends(['id'=>$id])->links()}}
 							</aside>
 </nav>

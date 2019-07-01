@@ -12,6 +12,12 @@
     <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
     <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
     <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
+     <style type="text/css">
+    .hides {
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+     </style>
 </head>
 <body>
         @include('home.public.hmtop')
@@ -246,33 +252,19 @@
                         <img src="/h/images/2016.png "></img>
                         <p>今日<br>推荐</p>
                     </div>
-                    <div class="am-u-sm-4 am-u-lg-3 ">
-                        <div class="info ">
-                            <h3>真的有鱼</h3>
-                            <h4>开年福利篇</h4>
-                        </div>
-                        <div class="recommendationMain one">
-                            <a href="introduction.html"><img src="/h/images/tj.png "></img></a>
-                        </div>
-                    </div>
-                    <div class="am-u-sm-4 am-u-lg-3 ">
-                        <div class="info ">
-                            <h3>囤货过冬</h3>
-                            <h4>让爱早回家</h4>
-                        </div>
-                        <div class="recommendationMain two">
-                            <img src="/h/images/tj1.png "></img>
-                        </div>
-                    </div>
-                    <div class="am-u-sm-4 am-u-lg-3 ">
-                        <div class="info ">
-                            <h3>浪漫情人节</h3>
-                            <h4>甜甜蜜蜜</h4>
-                        </div>
-                        <div class="recommendationMain three">
-                            <img src="/h/images/tj2.png "></img>
-                        </div>
-                    </div>
+             
+                    @foreach($buy as $k=>$v)
+                     <div class="am-u-sm-4 am-u-lg-3 ">
+                            <div class="info"; style="width:150px;">
+                                <h3 class="hides";>{{ $v->title }}</h3>
+                                <h4>暑假福利篇</h4>
+                            </div>
+                            <div class="recommendationMain one">
+                                <a href="/home/personal/introduction?id={{ $v->gid}}&cid={{ $v->cid }}"><img style="width:120px;height:110px;" src="/uploads/{{ $v->showcase }} "></img></a>
+                            </div>
+                     </div> 
+                     @endforeach      
+                    
 
                 </div>
                 <div class="clear "></div>

@@ -294,6 +294,7 @@ Route::resource('admin/comment','Admin\CommentController');
 /******************************************************************/
 
 /*************************梁伟杰***********************************/
+Route::group(['middleware'=>'login'],function(){
 // 轮播图修改状态
 Route::get('admin/banners/changeStatus','Admin\BannersController@changeStatus');
 // 轮播图删除
@@ -307,6 +308,8 @@ Route::get('admin/banners/delete_data/{id}','Admin\BannersController@delete_data
 // 轮播图管理
 Route::resource('admin/banners','Admin\BannersController');
 
+// 头条修改状态
+Route::get('admin/headlines/changeStatus','Admin\HeadlinesController@changeStatus');
 // 头条删除
 Route::get('admin/headlines/delete','Admin\HeadlinesController@delete');
 // 头条软删除
@@ -317,9 +320,12 @@ Route::get('admin/headlines/huifu/{id}','Admin\HeadlinesController@huifu');
 Route::get('admin/headlines/delete_data/{id}','Admin\HeadlinesController@delete_data');
 // 头条管理
 Route::resource('admin/headlines','Admin\HeadlinesController');
-
+});
 // 前台头条详情
 Route::get('home/headlines_data/index','Home\Headlines_dataController@index');
+// 前台头条详情
+Route::get('home/headlines_data/list','Home\Headlines_dataController@list');
+
 
 
 
