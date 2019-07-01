@@ -17,7 +17,7 @@ class Headlines_dataController extends Controller
     private  function Prev($id)
     {
       $data = DB::table('headlines')->where('id','<',$id)->orderBy('id','desc')->first();
-      if($data){
+      if ($data) {
          return $data;
        }else{
           return false;

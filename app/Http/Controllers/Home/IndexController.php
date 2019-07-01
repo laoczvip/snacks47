@@ -28,7 +28,7 @@ class IndexController extends Controller
     {
             $list = [];
             foreach ($cates_data as $k=>$v){
-                if ($v->pid == $pid){
+                if ($v->pid == $pid) {
                         $list[]= $v;
                         $v->sub = $this->tree($cates_data,$v->id);
                 }
@@ -40,7 +40,6 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function Index()
     {
         $count = ShopcartController::CountCar();

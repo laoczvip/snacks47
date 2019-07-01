@@ -57,6 +57,7 @@ class PersonalController extends Controller
      */
     public function IntroDuction(Request $request)
     {
+        $weds = weds::find(1);
         error_reporting(0);
         $friendly = self::Friendly();
 
@@ -65,12 +66,13 @@ class PersonalController extends Controller
 
         // 获取商品收藏
         $asd = $user->collect;
+
+        // 分配变量,用于判断用户是否已经收藏该商品
         foreach ($asd as $key => $v) {
             $collect[] = $v->gid;
         }
 
 
-        $weds = weds::find(1);
 
          //商品id
         $gid = $request->input('ids',0);
@@ -80,21 +82,21 @@ class PersonalController extends Controller
         $sid = $request->input('sid',0);
 
         //判断条件：是否为活动商品
-        if($sid != 0){
+        if ($sid != 0) {
             $shaky_one = DB::table('shaky')->where('id',$sid)->first();
             $date = date('Y-m-d H:i:s',time());
             $ctime = $shaky_one->ctime;
             $jtime = $shaky_one->jtime;
 
-            if($ctime > $date){
+            if ($ctime > $date) {
                 echo json_encode('活动未开启');
 
-            } else if($ctime<$date&&$jtime<$date){
+            }else if($ctime<$date&&$jtime<$date){
                 echo json_encode('活动已结束');
             }
         }
 
-        if($gid != 0){
+        if ($gid != 0) {
         //所属类Id
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
 
@@ -109,7 +111,7 @@ class PersonalController extends Controller
             $list[ $val->touch][] = $val->fname;
         }
 
-        
+
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
                 'goods_all'=>$goods_all,
@@ -121,20 +123,20 @@ class PersonalController extends Controller
                 'shaky_sku'=>$shaky_sku,
                 ]);
         }
-        if($gids!=0){
+        if ($gids != 0) {
          //所属类Id
-        
+
         $goods_sku = DB::table('goods_sku')->where('gid',$gids)->first();
         $shaky_sku = DB::table('shaky_sku')->where('gid',$gids)->first();
         //商品属性
-        $flavour = DB::table('flavour')->get(); 
+        $flavour = DB::table('flavour')->get();
         $list = [];
         foreach($flavour as $k=> $val){
             $list[ $val->touch][] = $val->fname;
         }
-        
+
         $cid = $goods_sku->cid;
-        
+
         $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
          return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
@@ -170,7 +172,7 @@ class PersonalController extends Controller
         $weds = weds::find(1);
         //商品id
         $id = $request->input('id',0);
-        if($title!=''){
+        if ($title!='') {
             //名称搜索
             $goods_all = DB::table('goods_sku')->where('title','like','%'.$title.'%')->paginate(20);
         } else if($id!=0){
@@ -183,16 +185,16 @@ class PersonalController extends Controller
             //搜索所有
             $goods_all = DB::table('goods_sku')->paginate(20);
         }
-        if($prices!=0){
+        if($prices != 0){
 
             $goods_all = DB::table('goods_sku')->orderBy('price','asc')->paginate(20);
         }
-        if($assess!=0){
+        if($assess != 0){
 
             $goods_all = DB::table('goods_sku')->orderBy('assess','desc')->paginate(20);
         }
         //所属类Id
-        if($id!=0){
+        if($id !=0 ){
             $goods_count= DB::table('goods_sku')->where('cid',$id)->get();
         } else{
              $goods_count= DB::table('goods_sku')->where('title','like','%'.$title.'%')->get();

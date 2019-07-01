@@ -35,7 +35,7 @@ class LoginController extends Controller
     {
 
         // 验证码验证
-        if(!Captcha::check($request->input('code'))){
+        if (!Captcha::check($request->input('code'))) {
                 return 2;
         }
 
@@ -120,7 +120,7 @@ class LoginController extends Controller
         $user->password = Hash::make( $request->input('repass') );
         $user->token  = $token;
         $res = $user->save();
-        if($res){
+        if ($res) {
             return "<script>alert('修改成功,返回登录');location.href='/login'</script>";
         }else{
             return "<script>alert('修改失败,请稍后重试!!!');location.href='/login'</script>";
@@ -139,12 +139,10 @@ class LoginController extends Controller
         session(['home_login'=>false]);
         session(['home_user'=>null]);
         session(['type'=>false]);
-
         return redirect("/");
     }
 
 
-    //
     /**
      * [ 激活 用户 (邮件) ]
      * @param [iit] $id    [用户的ID]
@@ -176,7 +174,6 @@ class LoginController extends Controller
      */
     public function Inert(Request $request)
     {
-
         $upass = $request->input( 'upass' );
         $email = $request->input( 'email' );
         $repass = $request->input( 'repass' );
@@ -188,12 +185,13 @@ class LoginController extends Controller
             exit;
         }
 
+        //检测用户密码的长度是否小于6
         if(strlen($upass)<6){
-            //检测用户密码的长度是否小于6
             echo "no";
             exit;
         }
 
+        // 添加数据
         $user = new Users;
         $user->password = Hash::make( $upass );
         $user->email = $request->input( 'email' );
