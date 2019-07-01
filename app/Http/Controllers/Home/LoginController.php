@@ -12,7 +12,7 @@ use Captcha;
 class LoginController extends Controller
 {
     /**
-     * 加载登陆页面
+     * [ 加载登陆页面 ]
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,12 +28,13 @@ class LoginController extends Controller
     }
 
     /**
-     * 登陆验证
-     * @return [type] [description]
+     * [ 登陆验证 ]
+     * @return [ type ] [ 接收登录信息 ]
      */
     public function Dologin(Request $request)
     {
 
+        // 验证码验证
         if(!Captcha::check($request->input('code'))){
                 return 2;
         }
@@ -41,7 +42,7 @@ class LoginController extends Controller
         $number = $request->input('number','');
         $password = $request->input('password','');
 
-        // 获取用户输入的数据,进行匹配+
+        // 获取用户输入的数据,进行匹配
         $user_data = Users::where('number', $number)->first();
         if (!$user_data) {
             echo 1;
@@ -93,7 +94,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 手机验证码匹配
+     * [ 手机验证码匹配 ]
      * @param  Request $request [ 用户的手机号码 ]
      * @return [视图]           [ 返回登录页面 ]
      */
@@ -129,8 +130,8 @@ class LoginController extends Controller
 
 
     /**
-     * 用户退出
-     * @return [type] [description]
+     * [ 用户退出 ]
+     * @return [ 视图 ] [ 执行后跳到首页 ]
      */
     public function out()
     {
@@ -238,7 +239,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 手机验证码匹配
+     * [ 手机验证码匹配 ]
      * @param  Request $request [ 用户的手机号码 ]
      * @return [视图]           [ 返回登录页面 ]
      */
@@ -322,7 +323,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 请求接口返回内容
+     * [ 请求接口返回内容 ]
      * @param  string $url [请求的URL地址]
      * @param  string $params [请求的参数]
      * @param  int $ipost [是否采用POST形式]

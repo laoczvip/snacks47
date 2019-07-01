@@ -10,12 +10,13 @@ use DB;
 class CollectionController extends Controller
 {
     /**
-     * [用户收藏]
+     * [ 用户收藏 ]
      * @param [int] $gid [商品ID]
      */
     public function Collection($gid)
     {
         $collect = new Collect;
+        // 添加数据
         $collect->uid = session('home_user')->id;
         $collect->gid = $gid;
         $res = $collect->save();
@@ -28,15 +29,19 @@ class CollectionController extends Controller
 
     /**
      * [ 用户取消收藏 ]
-     * @param [ type ] $id [ 商品的ID ]
+     * @param [ int ] $id [ 商品的ID ]
      */
     public function Del($id)
     {
         $uid = session('home_user')->id;
+        // 查询用户已收藏的商品
         $res = Collect::where('uid',$uid)->where('gid',$id)->get();
+
         foreach ($res as $k => $v) {
             $cid = $v->id;
         }
+
+        // 删除已收藏的商品
         $res = DB::delete('delete from collect where id ='.$cid);
         if ($res) {
             return 1;
