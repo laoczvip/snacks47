@@ -46,9 +46,9 @@
                     <th style="width:100px;">Id</th>
                     <th style="width:100px;">类名</th>
                     <th style="width:100px;">父类id</th>
-                    <th style="width:200px;">类排序</th>
+                    <th >类排序</th>
                     <th style="width:100px;">状态</th>
-                    <th style="width:150px;">创建时间</th>
+                    <th style="width:250px;">创建时间</th>
                     <th>操作</th>
                </tr>
                @forelse($cate as $k=>$v)
@@ -63,15 +63,17 @@
                  @else
                  <kbd>禁用</kbd>
                  @endif
-                   <a href="/admin/cates/store?id={{$v->id}}&status={{$v->status}}">修改</a>
+                   <a href="/admin/cates/store?id={{$v->id}}&status={{$v->status}}" title="切换"><span class="glyphicon glyphicon-refresh" aria-hidden="true" ></span></a>
                 </td>
                  <td>{{$v->add_time}}</td>
                  <td>
-                    <a href="/admin/cates/show?id={{$v->id}}">查看子类</a>
-                    <a href="/admin/cates/create?id={{$v->id}}">添加子类</a>
-                    <a href="/admin/cates/delete?id={{$v->id}}" title="删除" class="link_icon">&#100;</a>
-                    <a href="/admin/cates/edit?cid={{$v->id}}" title="修改" class="link_icon">&#101;</a>
-                    <a  onclick="javascript:history.back(-1)">返回上一级</a>
+                 <a href="/admin/cates/delete?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span></a>
+                    <a href="/admin/cates/edit?cid={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="修改"></span></a>
+                    <a href="/admin/cates/create?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="加入子类"></span></a>
+                    <a href="/admin/cates/show?id={{$v->id}}" class ="link_icon"><span class="glyphicon glyphicon-search" aria-hidden="true" title="查看子类"></span></a>
+                    
+                    
+                    <a  onclick="javascript:history.back(-1)" ><span class="glyphicon glyphicon-share-alt" aria-hidden="true" title="返回"></span></a>
                  </td>
                </tr>
                @empty
@@ -83,7 +85,7 @@
                @endforelse
           </table>
           <aside class="paging">
-            {{ $cate->links() }}
+            {{ $cate->appends(['id'=>$cid])->links() }}
           </aside>
      </div>
 </section>

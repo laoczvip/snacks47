@@ -4,14 +4,14 @@
 
 <section class="rt_wrap content mCustomScrollbar">
      <div class="rt_content">
-        <form action="/admin/cates/index" method="get">
+        <form action="/admin/flavour/index" method="get">
           <section class="mtb">
-             <select class="select" name="cid" id="test" onchange="tt(this.id)">
+             <select class="select" name="touch" id="test" onchange="tt(this.id)">
               <option value="">---请选择---</option>
-                  @forelse($data as $k=>$v)
-                  @if($v->id==0)
-                  <option value="{{$v->id}}">{{$v->fname}}</option>
-                  @endif
+                  @forelse($list as $k=>$v)
+                  
+                  <option value="{{$v}}">{{$v}}</option>
+                 
                   @empty
                   @endforelse                
              </select>
@@ -46,18 +46,22 @@
                </tr>
                @forelse($data as $k=>$v)
                <tr>
-                 <td>{{$v->id}}</td>
+                 <td>{{$v->touch}}</td>
                  <td>{{$v->fname}}</td>
                  <td>
-                    <a href="javascript:;" onclick="del({{$v->id}},this)">删除属性</a>
-                    <a href="/admin/flavour/edit?id={{$v->id}}">修改类名</a>
+                    <a href="javascript:;" onclick="del({{$v->id}},this)" class="link_icon"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span></a>
+                    <a href="/admin/flavour/edit?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="修改"></span></a>
                  </td>
                </tr>
                @empty
                @endforelse
           </table>
           <aside class="paging">
-         
+            @if($touch!='')
+            {{$data->appends(['touch'=>$touch])->links()}}
+            @else
+            {{$data->links()}}
+            @endif
           </aside>
      </div>
 </section>

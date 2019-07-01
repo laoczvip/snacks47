@@ -5,7 +5,8 @@
 <section class="rt_wrap content mCustomScrollbar">
      <div class="rt_content">
       <div class="page_title">
-       <h2 class="fl">分类列表</h2>     
+       <h2 class="fl">分类列表</h2> 
+        <a href="/admin/cates/create" class="fr top_rt_btn add_icon">添加分类</a>   
       </div>
                <form action="/admin/cates/index" method="get">
           <section class="mtb">
@@ -47,7 +48,7 @@
                     <th style="width:100px;">父类id</th>
                     <th>类排序</th>
                     <th style="width:100px;">状态</th>
-                    <th>创建时间</th>
+                    <th style="width:250px;">创建时间</th>
                     <th>操作</th>
                </tr>
                @forelse($cates as $k=>$v)
@@ -62,14 +63,14 @@
                  @else
                  <kbd>禁用</kbd>
                  @endif
-                   <a href="/admin/cates/store?id={{$v->id}}&status={{$v->status}}">修改</a>
+                   <a href="/admin/cates/store?id={{$v->id}}&status={{$v->status}}" ><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a>
                 </td>
                  <td>{{$v->add_time}}</td>
                  <td>
-                    <a href="/admin/cates/show?id={{$v->id}}">查看子类</a>
-                    <a href="/admin/cates/create?id={{$v->id}}">添加子类</a>
-                    <a href="/admin/cates/delete?id={{$v->id}}" class="link_icon">&#100;</a>
-                    <a href="/admin/cates/edit?cid={{$v->id}}" class="link_icon">&#101;</a>
+                    <a href="/admin/cates/delete?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span></a>
+                    <a href="/admin/cates/edit?cid={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="修改"></span></a>
+                    <a href="/admin/cates/create?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="加入子类"></span></a>
+                    <a href="/admin/cates/show?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-search" aria-hidden="true" title="查看子类"></span></a>    
                  </td>
                </tr>
                @empty

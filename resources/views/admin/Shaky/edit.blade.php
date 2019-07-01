@@ -51,7 +51,7 @@
                     <td></td>
                     <td><input type="submit" class="link_btn" value="确认修改"></td>
                 </tr>
-            </table>
+            </table>           
         </form>
     </div>
 </section>

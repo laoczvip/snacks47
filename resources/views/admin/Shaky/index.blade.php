@@ -5,16 +5,16 @@
 <section class="rt_wrap content mCustomScrollbar">
      <div class="rt_content">
         <div class="page_title">
-         <h2 class="fl">活动类列表</h2>
+         <h2 class="fl">活动类列表</h2>     
         </div>
           <table class="table" style="text-align:center;">
-
+          
                <tr style="text-align:center;">
                     <th style="text-align:center;">活动Id</th>
                     <th style="text-align:center;">活动类</th>
                     <th style="text-align:center;">活动展示图</th>
                     <th style="text-align:center;">活动开启时间</th>
-                    <th style="text-align:center;">活动结束时间</th>
+                    <th style="text-align:center;">活动结束时间</th>                    
                     <th style="text-align:center;">操作</th>
                </tr>
                  @forelse($shaky as $k=>$v)
@@ -33,10 +33,10 @@
                </tr>
                  @empty
                  @endforelse
-          </table>
+          </table>         
           <aside class="paging">
-
-
+         
+        
           </aside>
      </div>
 </section>

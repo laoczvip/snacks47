@@ -25,7 +25,7 @@
             <ul class="ulColumn2">
                 <li>
                     <span class="item_name" style="width:120px;">父类</span>
-                    <select name="pid" id="" class="textbox textbox_225; text-align:center;">
+                    <select name="pid" id="" >
                     
                         @if($cates['pid'] !==null)
 

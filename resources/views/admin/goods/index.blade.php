@@ -11,9 +11,9 @@
                   @if($v->pid==0)
                   <option value="0" disabled="disabled">{{$v->title}}</option>
                   @else
-
+                  
                   <option value="{{$v->id}}">{{$v->title}}</option>
-                  @endif
+                  @endif      
                   @empty
                   @endforelse
                   <option value="0">----手动输入----</option>
@@ -40,7 +40,7 @@
 
           </script>
           <table class="table" >
-
+          
                <tr >
                     <th style="width:100px;">商品Id</th>
                     <th style="width:100px;">商品类</th>
@@ -55,12 +55,12 @@
                     <th>创建时间</th>
                     <th>操作</th>
                </tr>
-               @forelse($goods_sku as $k=>$v)
+               @forelse($goods_sku as $k=>$v)               
                <tr>
                  <td>{{$v->id}}</td>
                  <td>{{$cates_name[$v->cid]}}</td>
-                 <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{$v->title}}</td>
-                 <td><img src="/uploads/{{$v->showcase}}" style="width:100px;" class="img-thumbnail"></td>
+                 <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap; ">{{$v->title}}</td>
+                 <td><img src="/uploads/{{$v->showcase}}" style="width:30px;" class="img-thumbnail"></td>
 
                  <td>
                   @forelse($flavour_data[$v->touch] as $val)
@@ -68,11 +68,11 @@
                   </br>
                   @empty
                   @endforelse
-
+                    
                   </td>
                  <td>{{$v->price}}</td>
                  <td>{{$v->stock}}</td>
-
+                 
                  <td>{{$v->buy}}</td>
                  <td>
                  @if($v->status==0)
@@ -87,7 +87,7 @@
                  <td>
                    <a href="javascript:;"  onclick="del({{$v->id}},this)" class="link_icon"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span></a>
                    <a href="/admin/goods/edit?id={{$v->cid}}" class="link_icon"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="修改"></span></a>
-
+               
                    <a href="" type="button"  data-toggle="modal" data-target="#select" class="link_icon"><span class="glyphicon glyphicon-search" aria-hidden="true" title="查看活动商品"></span></a>
                    <!-- 查看商品详情模态框Model -->
                   <div class="modal fade" id="select" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -110,11 +110,11 @@
                </tr>
                @empty
                @endforelse
-          </table>
+          </table>         
           <aside class="paging">
-
+         
               {{$goods_sku->appends(['cid'=>$cid,'name'=>$name])->links()}}
-
+        
           </aside>
      </div>
 </section>
@@ -141,8 +141,8 @@
           alert('删除失败');
         }
         },'json')
-        }
-
+        } 
+       
     }
 </script>
 
