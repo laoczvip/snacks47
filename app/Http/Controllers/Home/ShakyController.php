@@ -28,6 +28,7 @@ class ShakyController extends Controller
     {
         $sid = $request->input('id',0);
         $sids = $request->input('ids',0);
+
         if($sid != 0){
                 $shaky_one = DB::table('shaky')->where('id',$sid)->first();
                 $date = date('Y-m-d H:i:s',time());
@@ -43,15 +44,18 @@ class ShakyController extends Controller
             }
 
         }else if($sids != 0){
+
             $goods_sku = ShakyController::Goods_data();
             $shaky_one = DB::table('shaky')->where('id',$sids)->first();
             $shaky = DB::table('shaky_sku')->where('sid',$sids)->paginate(1);
-
+            $shaky_one1 = DB::table('shaky_sku')->where('sid',$sids)->first();
+            
             return view('home.shakys.show',[
                     'shaky'=>$shaky,
                     'sids'=>$sids,
                     'goods_sku'=>$goods_sku,
-                    'shaky_one'=>$shaky_one，
+                    'shaky_one'=>$shaky_one,
+                    'shaky_one1'=>$shaky_one1,
                     ]);
         }
 
