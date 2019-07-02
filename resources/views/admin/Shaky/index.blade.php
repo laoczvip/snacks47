@@ -6,6 +6,7 @@
      <div class="rt_content">
         <div class="page_title">
          <h2 class="fl">活动类列表</h2>
+         <a href="/admin/shaky/create" class="fr top_rt_btn add_icon">添加活动</a>
         </div>
           <table class="table" style="text-align:center;">
 

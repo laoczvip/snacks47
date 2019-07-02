@@ -7,7 +7,7 @@
     <div class="rt_content">
             <div class="page_title">
                 <h2 class="fl">修改商品属性</h2>
-                <a href="/admin/flavour/index" class="fr top_rt_btn add_icon">返回</a>
+                <a href="/admin/flavour/index" style="text-decoration:none" class="fr top_rt_btn add_icon">返回</a>
             </div>
         @if (count($errors) > 0)
         <div class="alert alert-danger" role="alert">

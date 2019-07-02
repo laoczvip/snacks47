@@ -5,7 +5,7 @@
  <div class="rt_content">
       <div class="page_title">
        <h2 class="fl">网站信息</h2>
-       <a href="/admin/configure/edit" class="fr top_rt_btn add_icon">修改网站信息</a>
+       <a href="/admin/configure/edit" style="text-decoration:none" class="fr top_rt_btn add_icon">修改网站信息</a>
 
       </div>
       <table id="tsadsd" class="table" style="width:500px;height:515px;">

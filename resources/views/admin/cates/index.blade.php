@@ -6,7 +6,7 @@
      <div class="rt_content">
       <div class="page_title">
        <h2 class="fl">分类列表</h2>
-        <a href="/admin/cates/create" class="fr top_rt_btn add_icon">添加分类</a>
+        <a href="/admin/cates/create" style="text-decoration:none" class="fr top_rt_btn add_icon">添加分类</a>
       </div>
                <form action="/admin/cates/index" method="get">
           <section class="mtb">

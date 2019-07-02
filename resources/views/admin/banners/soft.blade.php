@@ -5,7 +5,7 @@
  <div class="rt_content">
       <div class="page_title">
        <h2 class="fl">会员列表</h2>
-       <a href="/admin/banners" class="fr top_rt_btn add_icon">添加新会员</a>
+       <a href="/admin/banners" style="text-decoration:none" class="fr top_rt_btn add_icon">添加新会员</a>
       </div>
       <form action="admin/index" method="get">
       <section class="mtb">
@@ -20,7 +20,7 @@
       </form>
       <table class="table" style="text-align:center;">
            <tr>
-                
+
                 <th style="text-align:center;">轮播图</th>
                 <th style="text-align:center;">轮播图标题</th>
                 <th style="text-align:center;">轮播图描述</th>
@@ -31,7 +31,7 @@
            </tr>
            @foreach($del_banners as $k=>$v)
         <tr>
-            
+
             <td class="center"><img src="/uploads/{{ $v->url }}" width="50" height="50"/></td>
             <td>{{$v->title}}</td>
             <td class="center">{{$v->desc}}</td>
@@ -48,7 +48,7 @@
                  <a href="/admin/banners/huifu/{{ $v->id }}" style="color: black" class="btn btn-info">恢复</a>
                   <a href="/admin/banners/delete_data/{{ $v->id }}" style="color: white";  class="btn btn-danger" >永久删除</a>
                  <!-- <a href="#" title="删除" class="link_icon">&#100;</a> -->
-                 
+
             </td>
 
         </tr>
@@ -57,7 +57,7 @@
           <script type="text/javascript">
               // 删除
               function del(id,obj){
-                
+
                 if(!window.confirm('你确定要删除吗?')){
                   return false;
                 }
@@ -87,7 +87,7 @@
               }
       </script>
       <aside class="paging">
-           
+
       </aside>
  </div>
       <!-- Modal -->
@@ -101,17 +101,17 @@
                     <div class="modal-body">
                       <form action="/admin/banners/changeStatus" method="get">
                         <input type="hidden" name="id" value="">
-                      <div class="form-group"> 
-                       
+                      <div class="form-group">
+
                         <br>
                         未开启:<input type="radio" name="status" value="0" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         开启:<input type="radio" name="status" value="1">
-                     </div> 
+                     </div>
                      <input type="submit" class="btn btn-success">
                       </form>
                     </div>
-                    
-                    
+
+
                   </div>
                 </div>
               </div>

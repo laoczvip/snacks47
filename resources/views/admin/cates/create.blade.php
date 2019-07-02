@@ -7,7 +7,7 @@
     <div class="rt_content">
             <div class="page_title">
                 <h2 class="fl">添加商品类</h2>
-                <a href="/admin/cates/index" class="fr top_rt_btn add_icon">返回类首页</a>
+                <a href="/admin/cates/index" style="text-decoration:none" class="fr top_rt_btn add_icon">返回类首页</a>
                 <a  onclick="javascript:history.back(-1)" class="fr top_rt_btn add_icon">返回上一级</a>
             </div>
         @if (count($errors) > 0)
@@ -26,7 +26,7 @@
                 <li>
                     <span class="item_name" style="width:120px;">父类</span>
                     <select name="pid" id="" >
-                    
+
                         @if($cates['pid'] !==null)
 
                         <option value="{{$cates->id}}" >----{{$cates->title}}----</option>
@@ -34,7 +34,7 @@
                         <option value="">----请选择----</option>
                         @endif
                     </select>
-                   
+
                 </li>
                 <li>
                     <span class="item_name" style="width:120px;">类名</span>

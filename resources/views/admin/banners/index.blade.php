@@ -12,32 +12,32 @@
       <div class="rt_content">
       <div class="page_title">
         <h2 class="fl">轮播图列表</h2>
-        <a href="/admin/banners" class="fr top_rt_btn add_icon">添加新轮播图</a>
+        <a href="/admin/banners/create" style="text-decoration:none" class="fr top_rt_btn add_icon">添加新轮播图</a>
       </div>
       <form action="/admin/banners" method="get">
         <section class="mtb">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="search" value="{{ $search }}" class="textbox textbox_225" placeholder="输入头条标题查询..."/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="search" value="{{ $search }}" class="textbox textbox_225" style="height:35px;" placeholder="输入头条标题查询..."/>
           <input type="submit" value="查询" class="group_btn"/>
         </section>
       </form>
       <table class="table" style="text-align:center;">
            <tr>
-              <th style="text-align:center;">轮播图</th>
-              <th style="text-align:center;">轮播图标题</th>
-              <th style="text-align:center;">轮播图描述</th>
-              <th style="text-align:center;">轮播图跳转的地址</th>
-              <th style="text-align:center;">创建时间</th>
-              <th style="text-align:center;">状态</th>
-              <th style="text-align:center;">操作</th>
+              <th class="center">轮播图</th>
+              <th class="center">轮播图标题</th>
+              <th class="center">轮播图描述</th>
+              <th class="center">轮播图跳转的地址</th>
+              <th class="center">创建时间</th>
+              <th class="center">状态</th>
+              <th class="center">操作</th>
            </tr>
            @foreach($banners as $k=>$v)
            <tr>
               <td class="center"><img src="/uploads/{{ $v->url }}" width="150" height="100" /></td>
-              <td><p>{{$v->title}}</td>
-              <td><p class="hides">{{$v->desc}}</p></td>
-              <td><p class="hides" title="{{$v->jump}}">{{$v->jump}}</p></td>
+              <td class="center"><p>{{$v->title}}</td>
+              <td class="center"><p class="hides">{{$v->desc}}</p></td>
+              <td class="center"><p class="hides" title="{{$v->jump}}">{{$v->jump}}</p></td>
               <td class="center">{{$v->created_at}}</td>
-              <td>
+              <td class="center">
                   @if($v->status == 0)
                   <kbd>未激活</kbd>
                   @else

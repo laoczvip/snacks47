@@ -5,7 +5,7 @@
      <div class="rt_content">
        <div class="page_title">
        <h2 class="fl">子分类列表</h2>
-       <a href="/admin/cates/index" class="fr top_rt_btn add_icon">返回类首页</a>
+       <a href="/admin/cates/index" style="text-decoration:none" class="fr top_rt_btn add_icon">返回类首页</a>
       </div>
         <form action="/admin/cates/show" method="get">
           <section class="mtb">
