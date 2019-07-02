@@ -42,18 +42,22 @@
           </aside>
      </div>
 </section>
+<script src="/layui/layui.js">
+               layui.use('layer',
+                    function(){
+                        var layer = layui.layer;
+                });
+                </script>
 <script>
   function dels(id,obj){
      var a = confirm('您确认删除吗');
      if(a){
         $.get('/admin/shakys/del',{id:id},function(res){
-            if(res=='ok'){
+            if(res=='删除成功'){
+              layer.msg(res, {icon: 1});
               $(obj).parent().parent().remove();
-              alert('成功删除');
-            } else if(res=='errr'){
-              alert('对不起，库存不为0,删除失败');
-            } else{
-              alert('删除失败');
+            }  else{
+              layer.msg(res, {icon: 5});
             }
         },'json');
      }
