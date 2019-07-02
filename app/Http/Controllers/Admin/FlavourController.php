@@ -12,7 +12,7 @@ class FlavourController extends Controller
      * @param   $[name] [商品属性]
      * @return   [flavour]
      */
-    public function index(Request $request)
+    public function Index(Request $request)
     {
       $touch = $request->input('touch','');
 
@@ -35,7 +35,7 @@ class FlavourController extends Controller
      * @return [type] [destroy]
      */
 
-    public function destroy(Request $request)
+    public function Destroy(Request $request)
     {
       $id = $request->input('id',0);
       if($id!=0){
@@ -55,7 +55,7 @@ class FlavourController extends Controller
      * @param [type] $[name] [修改]
      * @return   [type] [视图跳转]
      */
-    public function edit(Request $request)
+    public function Edit(Request $request)
     {
       $id = $request->input('id',0);
       $data = DB::table('flavour')->where('id',$id)->first();
@@ -68,7 +68,7 @@ class FlavourController extends Controller
      * @return   [type] [视图跳转]
      */
 
-    public function update(Request $request)
+    public function Update(Request $request)
     {
       $id = $request->input('id',0);
       $data['fname'] = $request->input('fname','');

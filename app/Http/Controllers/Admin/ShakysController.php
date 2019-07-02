@@ -181,12 +181,12 @@ class ShakysController extends Controller
             if($shaky_sku->stock==0){
                 $shaky = DB::table('shaky_sku')->where('id',$id)->delete();
              if($shaky){
-                echo json_encode('ok');
+                echo json_encode('删除成功');
              } else{
-                echo json_encode('err');
+                echo json_encode('删除失败');
              }
             } else{
-                echo json_encode('errr');
+                echo json_encode('库存大于0');
             }
 
 

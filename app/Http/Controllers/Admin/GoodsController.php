@@ -76,7 +76,7 @@ class GoodsController extends Controller
      *
      * @return [type] [视图]
      */
-    public function index(Request $request)
+    public function Index(Request $request)
     {
 
         //搜索cid
@@ -116,7 +116,7 @@ class GoodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function Create()
     {
 
         $cates = GoodsController::Cates_data();
@@ -136,7 +136,7 @@ class GoodsController extends Controller
      * @param  Request  $request [接收新商品数据]
      * @return [bool] [视图跳转]
      */
-    public function store(Request $request)
+    public function Store(Request $request)
     {
         $data = $this->validate($request,[
                 'title' => 'required|regex:/^.{1,255}$/',
@@ -213,7 +213,7 @@ class GoodsController extends Controller
      * @param  Request $request [商品id]
      * @return [view]           [视图跳转]
      */
-    public function edit(Request $request)
+    public function Edit(Request $request)
     {
         $id = $request->input('id',0);
         $goods_sku = DB::table('goods_sku')->where('gid',$id)->first();
@@ -238,7 +238,7 @@ class GoodsController extends Controller
        * @param  Request $request [需要更新的字段]
        * @return [view]           [视图跳转]
        */
-    public function update(Request $request)
+    public function Update(Request $request)
     {
           $data = $this->validate($request,[
                 'title' => 'required|regex:/^\D{6,255}$/',
@@ -307,7 +307,7 @@ class GoodsController extends Controller
      * @param  Request $request [商品id]
      * @return [json]           [是否删除成功]
      */
-    public function del(Request $request)
+    public function Del(Request $request)
     {
        $id = $request->input('id',0);
 
