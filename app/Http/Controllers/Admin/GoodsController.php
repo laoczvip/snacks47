@@ -315,9 +315,9 @@ class GoodsController extends Controller
        $sto = $store->status;
        if($sto != 0){
             DB::table('goods_sku')->delete($id);
-            echo json_encode('ok');
+            echo json_encode('成功删除');
        } else {
-            echo json_encode('err');
+            echo json_encode('商品正上架中');
        }
 
 
