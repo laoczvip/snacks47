@@ -51,7 +51,7 @@ class ShakyController extends Controller
 
             $goods_sku = ShakyController::Goods_data();
             $shaky_one = DB::table('shaky')->where('id',$sids)->first();
-            $shaky = DB::table('shaky_sku')->where('sid',$sids)->paginate(1);
+            $shaky = DB::table('shaky_sku')->where('sid',$sids)->paginate(20);
             $shaky_one1 = DB::table('shaky_sku')->where('sid',$sids)->first();
             $count = ShopcartController::CountCar();
             $friendly = DB::table('friendly')->where('lstatus',1)->get();

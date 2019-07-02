@@ -116,7 +116,9 @@
 						<div class="tb-detail-hd">
 							<h1>
 				{{$goods_sku->title}}
+
 	          </h1>
+
 						</div>
 						<div class="tb-detail-list">
 							<!--价格-->
@@ -274,14 +276,18 @@
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
 
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/payment/{{$goods_sku->id}}">立即购买</a>
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/payment/{{$goods_sku->gid}}">立即购买</a>
 								</div>
 							</li>
+							@if(!$shaky_sku)
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" onclick="add({{$goods_sku->id}})"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" onclick="add({{$goods_sku->gid}})"><i></i>加入购物车</a>
 								</div>
 							</li>
+							@endif
+
+
 							<li>
 
 							</li>

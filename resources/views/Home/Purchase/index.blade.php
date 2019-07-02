@@ -144,6 +144,8 @@
                             </div>
                             <div class="clear"></div>
                         <form action="/add" method="post" accept-charset="utf-8">
+                            <!-- 如果不是促销商品 -->
+
                             <tr class="item-list">
                                     <div class="bundle  bundle-last">
                                      {{ csrf_field() }}
@@ -171,8 +173,15 @@
                                                     <li class="td td-price">
                                                         <div class="item-price price-promo-promo">
                                                             <div class="price-content">
-                                                                <em class="J_Price price-now" >{{$goods_sku->price }}</em>
+                                                                <em class="J_Price price-now" >
+                                                                @if($shaky_sku!=null)
+                                                                    {{$shaky_sku->original-$shaky_sku->preferential }}
+                                                              <input type="hidden" value="{{$shaky_sku->original-$shaky_sku->preferential  }}" id="price" />
+                                                                @else
+                                                                {{$goods_sku->price }}
                                                               <input type="hidden" value="{{$goods_sku->price }}" id="price" />
+                                                                @endif
+                                                                </em>
 
                                                             </div>
                                                         </div>
@@ -198,7 +207,13 @@
                                                 </li>
                                                 <li class="td td-sum">
                                                     <div class="td-inner">
-                                                        <em tabindex="0" class="J_ItemSum number" id="totalPrice">{{$goods_sku->price}}</em>
+                                                        <em tabindex="0" class="J_ItemSum number" id="totalPrice">
+                                                        @if($shaky_sku!=null)
+                                                        {{$shaky_sku->original-$shaky_sku->preferential }}
+                                                        @else
+                                                        {{$goods_sku->price}}
+                                                        @endif
+                                                        </em>
                                                     <input type="hidden" id="stock" value="{{$goods_sku->stock}}">
                                                     </div>
                                                 </li>
@@ -215,6 +230,8 @@
                                             <div class="clear"></div>
                                         </div>
                                 </tr>
+
+                                <!-- 如果不是促销商品 -->
                             <div class="clear"></div>
                             </div>
 

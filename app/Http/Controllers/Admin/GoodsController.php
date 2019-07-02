@@ -139,7 +139,7 @@ class GoodsController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request,[
-                'title' => 'required|regex:/^.*?{6,255}$/',
+                'title' => 'required|regex:/^.{1,255}$/',
                 'showcase' => 'required',
                 'fname' => 'required',
                 'price' => 'required',
@@ -301,7 +301,7 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     /**
      * 删除商品
      * @param  Request $request [商品id]

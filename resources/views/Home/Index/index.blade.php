@@ -457,31 +457,32 @@
 
 
                      @forelse($goods as $goods_data)
-                     @forelse($cate->sub as $cate_data)
-                     @forelse($cate_data->sub as $cate_datas)
 
-                     @if($goods_data->cid==$cate_datas->id)
+                         @forelse($cate->sub as $cate_data)
+                             @forelse($cate_data->sub as $cate_datas)
 
+                                 @if($goods_data->cid==$cate_datas->id)
+                                     @if($goods_data->sid == 0)
 
-                        <div class="am-u-sm-3 am-u-md-2 text-two">
-                            <div class="outer-con">
-                                <div class="title " style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:100px;">
-                                   {{$goods_data->title}}
-                                </div>
-                                <div class="sub-title ">
-                                    ¥{{$goods_data->price}}
-                                </div>
-                                <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-                            </div>
-                            <a href="/home/personal/introduction?ids={{$goods_data->gid}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
-                        </div>
+                                        <div class="am-u-sm-3 am-u-md-2 text-two">
+                                            <div class="outer-con">
+                                                <div class="title " style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:100px;">
+                                                   {{$goods_data->title}}
+                                                </div>
+                                                <div class="sub-title ">
+                                                    ¥{{$goods_data->price}}
+                                                </div>
+                                                <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+                                            </div>
+                                            <a href="/home/personal/introduction?ids={{$goods_data->gid}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
+                                        </div>
 
-
-                    @endif
-                    @empty
-                    @endforelse
-                     @empty
-                    @endforelse
+                                    @endif
+                                @endif
+                            @empty
+                            @endforelse
+                         @empty
+                        @endforelse
                      @empty
                     @endforelse
 

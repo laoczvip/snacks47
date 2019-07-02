@@ -35,10 +35,13 @@ class PurchaseController extends Controller
 
         $flavor = $_SESSION['flavor'];
         $gid = $id;
+
         $weds = weds::find(1);
         $id = session('home_user')->id;
         $user = Address::where('uid',$id)->get();
-        $goods_sku = DB::table('goods_sku')->where('id',$gid)->first();
+        $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
+        $shaky_sku = DB::table('shaky_sku')->where('gid',$gid)->first();
+
         $address = json_decode($user,true);
         return view('home.purchase.index',[
             'weds'=>$weds,
@@ -47,6 +50,7 @@ class PurchaseController extends Controller
             'friendly'=>$friendly,
             'flavor'=>$flavor,
             'count'=>$count,
+            'shaky_sku'=>$shaky_sku,
             ]);
     }
 
