@@ -65,19 +65,23 @@
           </aside>
      </div>
 </section>
+<script src="/layui/layui.js">
+               layui.use('layer',
+                    function(){
+                        var layer = layui.layer;
+                });
+                </script>
 <script>
   function del(id,obj)
   {
      var a = confirm('您确定要删除吗');
      if(a){
        $.get('/admin/flavour/destroy',{id:id},function(res){
-        if(res == 'ok'){
-            alert('成功删除');
+        if(res == '删除成功'){
+            layer.msg(res, {icon: 1});
             $(obj).parent().parent().remove();          
-        }else if('errr'){
-            alert('删除失败---该属性在商品中--');
         } else {
-            alert('删除失败');
+            layer.msg(res, {icon: 5});
         }
      },'json');
      }

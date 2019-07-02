@@ -45,10 +45,10 @@
           <table class="table" >
 
                <tr >
-                    <th class="center">商品Id</th>
+                    <th class="center" style="width:50px;">商品Id</th>
                     <th class="center">商品类</th>
                     <th class="center">商品名称</th>
-                    <th class="center">展示图</th>
+                    <th class="center" >展示图</th>
                     <th class="center">商品属性</th>
                     <th class="center">商品价格</th>
                     <th class="center">商品库存</th>
@@ -63,7 +63,7 @@
                  <td class="center">{{$v->id}}</td>
                  <td class="center">{{$cates_name[$v->cid]}}</td>
                  <td  class="center" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap; ">{{$v->title}}</td>
-                 <td class="center"><img src="/uploads/{{$v->showcase}}" style="width:150px;" class="img-thumbnail"></td>
+                 <td class="center"><img  src="/uploads/{{$v->showcase}}" class="img-thumbnail"></td>
 
                  <td class="center">
                   @forelse($flavour_data[$v->touch] as $val)
@@ -123,6 +123,7 @@
         var sub = confirm('您确认要删除此商品吗？');
         if(sub){
            $.get('/admin/goods/del',{id},function(res){
+            alert(res);
             if(res=='ok'){
                 alert('删除成功');
                 $(obj).parent().parent().remove();

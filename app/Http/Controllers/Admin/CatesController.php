@@ -12,6 +12,7 @@ class CatesController extends Controller
     /**
      * [ 商品分类列表 ]
      * @param Request $request [ 查询所有的数据 ]
+     * @return [type]  [视图跳转]
      */
     public function Index(Request $request)
     {
@@ -34,9 +35,8 @@ class CatesController extends Controller
     }
 
     /**
-     * Create the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * 加载添加页面
+     * @return  [type] [视图跳转]
      */
     public function Create(Request $request)
     {
@@ -52,9 +52,9 @@ class CatesController extends Controller
         return view('admin.cates.create',['cates'=>$cates,]);
     }
     /**
-     * Insert the form for creating a new insert.
-     *
-     * @return cates add
+     * 添加商品类
+     * @param Request $request [添加的参数值]
+     * @return [type] [视图跳转]
      */
     public function Insert(Request $request)
     {
@@ -91,11 +91,10 @@ class CatesController extends Controller
 
     }
     /**
-     * Show the specified resource.
+     * 加载子类
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * 显示子类
+     * @param [type] $[id&&cid] [description]
+     * @return [type] [视图跳转]
      */
     public function Show(Request $request)
     {
@@ -113,10 +112,9 @@ class CatesController extends Controller
     }
 
     /**
-     * Edit the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return [type] [cates] [edit]
+     * 加载修改页
+     * @param Request $request [类id]
+     * @return [type] [视图跳转]
      */
     public function Edit(Request $request)
     {
@@ -127,11 +125,9 @@ class CatesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return [type] [cates] [update]
+     * 类名修改
+     * @param Request $request [类id]
+     * @return [type] [视图跳转]
      */
     public function Update(Request $request)
     {
@@ -159,10 +155,9 @@ class CatesController extends Controller
 
     }
     /**
-     * Delete the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return [type] [cates] [delete]
+     * 类删除
+     * @param Request $request [类id]
+     * @return [type] [视图跳转]
      */
     public function Delete(Request $request)
     {
@@ -186,8 +181,9 @@ class CatesController extends Controller
 
     }
     /**
-     * @param     status
-     * @return    [type] [cates] [store]
+     * 修改类状态
+     * @param [type] $[id] [类id]
+     * @return    [type] [视图跳转]
      */
     public function Store(Request $request)
     {

@@ -11,23 +11,31 @@ use Illuminate\Support\Facades\Storage;
 class GoodsController extends Controller
 {
 
+    /**
+     *分类排序
+     *@return   [array,pid]
+     */
     public function tree($data,$pid)
     {
         static $list = [];
         foreach($data as $k=>$v){
-            if($pid==$v->pid){
+            if($pid == $v->pid){
                 $list[] = $v;
                 return $this->tree($data,$v->id);
             }
         }
     }
-    //公共商品分类
+    /**
+     * 公共商品分类排序
+     * @param integer [$pid]
+     * @return   [$list]
+     */
     public static function Cates_data($pid=0)
     {
         $cates  = Cates::all();
         static $list = [];
         foreach($cates as $k=>$v){
-            if($pid==$v->pid){
+            if($pid == $v->pid){
                 $list[] = $v;
                 static::Cates_data($v->id);
             }
@@ -35,7 +43,10 @@ class GoodsController extends Controller
         return $list;
 
     }
-    //分类名
+    /**
+     * 分类名赋值
+     * @return   [array]
+     */
     public static function Cates_name()
     {
         $cates  = Cates::all();
@@ -46,7 +57,10 @@ class GoodsController extends Controller
 
         return $cates_name;
     }
-    //商品属性
+    /**
+     * 商品属性赋值
+     * @return   [array]
+     */
     public static function Flavour()
     {
         $flavour = DB::table('flavour')->get();
@@ -58,9 +72,9 @@ class GoodsController extends Controller
         return $list;
     }
     /**
-     * 显示商品
+     * 商品列表
      *
-     * @return [type] [index]
+     * @return [type] [视图]
      */
     public function index(Request $request)
     {
@@ -117,15 +131,15 @@ class GoodsController extends Controller
     }
 
     /**
-     * 压入商品
+     * 商品添加
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return [type] [goods , goods_sku , flavour] [insert]
+     * @param  Request  $request [接收新商品数据]
+     * @return [bool] [视图跳转]
      */
     public function store(Request $request)
     {
         $data = $this->validate($request,[
-                'title' => 'required|regex:/^\D{6,255}$/',
+                'title' => 'required|regex:/^.*?{6,255}$/',
                 'showcase' => 'required',
                 'fname' => 'required',
                 'price' => 'required',
@@ -135,7 +149,7 @@ class GoodsController extends Controller
                 'desc' => 'required',
             ],[
                 'title.required'=>'商品名称不能为空',
-                'title.regex'=>'输入的值不能为数字且6-255字节之间(一个汉字为三个字节)',
+                'title.regex'=>'输入的值不能为数字且6-255字符',
                 'showcase.required'=>'展示图不能为空',
                 'fname.required'=>'商品属性不能为空',
                 'price.required'=>'商品价格不能为空',
@@ -195,21 +209,9 @@ class GoodsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 加载修改页面
+     * @param  Request $request [商品id]
+     * @return [view]           [视图跳转]
      */
     public function edit(Request $request)
     {
@@ -224,16 +226,18 @@ class GoodsController extends Controller
         $cates_name = GoodsController::Cates_name();
         $flavour = DB::table('flavour')->get();
         $flavour_data = GoodsController::Flavour();
-        return view('admin.goods.edit',['cates'=>$cates,'goods_sku'=>$goods_sku,'cates_name'=>$cates_name]);
+        return view('admin.goods.edit',[
+            'cates'=>$cates,
+            'goods_sku'=>$goods_sku,
+            'cates_name'=>$cates_name,
+            ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+      /**
+       * [update 商品修改]
+       * @param  Request $request [需要更新的字段]
+       * @return [view]           [视图跳转]
+       */
     public function update(Request $request)
     {
           $data = $this->validate($request,[
@@ -282,7 +286,7 @@ class GoodsController extends Controller
 
             $sku = DB::table('goods')->where('id',$id)->update($data_sku);
             if($sku){
-                return redirect("admin/goods/edit?id=".$request->input('cid',0))->with('success','修改成功');
+                return redirect("admin/goods/index")->with('success','修改成功');
             } else {
                 return back()->with('error','插入goods修改失败');
             }
@@ -297,18 +301,19 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
-    {
-
-    }
+    
+    /**
+     * 删除商品
+     * @param  Request $request [商品id]
+     * @return [json]           [是否删除成功]
+     */
     public function del(Request $request)
     {
        $id = $request->input('id',0);
 
        $store = DB::table('goods_sku')->where('id',$id)->first();
-       dd($store);
-       $sto = $store->stock;
-       if($sto==0){
+       $sto = $store->status;
+       if($sto != 0){
             DB::table('goods_sku')->delete($id);
             echo json_encode('ok');
        } else {
