@@ -63,7 +63,7 @@
       <a href="/home/headlines_data/index?id={{ $v->id }}" style="font-size:25px;color:black;">{{ $v->htitle }}</a>
     </div> 
     <div class="hides" style="float:left; width:560px;height:25px;margin-left:20px;">
-      <a><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a><a style="padding-left:355px;font-size:13px;color:#868686;">作者:{{ $v->auth }}&nbsp;{{ $v->created_at }}</a>
+      <a></a><a style="padding-left:340px;font-size:13px;color:#868686;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;{{ $v->auth }}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{ $v->created_at }}</a>
     </div>
    <div class="hides" style="font-size:15px;float:left; width:560px;height:118px;margin-left:20px;margin-top:8px;margin-bottom:50px;">
       <a href="/home/headlines_data/index?id={{ $v->id }}" class="hides" style="color:black;">{!! $v->hcontent !!}</a>

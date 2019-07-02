@@ -10,6 +10,7 @@
         <link href="/h/css/infstyle.css" rel="stylesheet" type="text/css">
         <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
         <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
+         <link href="/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
     </head>
     <body>
@@ -47,7 +48,7 @@
       <h3 class="am-article-title blog-title">
         <a href="#" style="font-size: 35px">{{ $headlines_data->htitle}}</a>
       </h3>
-      <h4 class="am-article-meta blog-meta">作者:&nbsp;{{ $headlines_data->auth}}&nbsp;&nbsp;&nbsp;{{ $headlines_data->created_at}}</h4>
+      <h4 class="am-article-meta blog-meta"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;{{ $headlines_data->auth }}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{ $headlines_data->created_at }}</h4>
 
       <div class="am-g blog-content">
         <div class="am-u-sm-12">
