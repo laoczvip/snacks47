@@ -98,7 +98,9 @@ class ShopcartController extends Controller
      */
     public function AddNum(Request $request)
     {
+
         $id = $request->input('id');
+
         if (empty($_SESSION['car'])) {
             return back();
         }else{

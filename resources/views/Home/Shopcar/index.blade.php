@@ -53,10 +53,6 @@
                             <div class="bundle-main">
                                 <ul class="item-content clearfix">
                                     <li class="td td-chk">
-                                        <div class="cart-checkbox ">
-                                            <input class="check" id="J_CheckBox_170037950254" name="items[]" value="170037950254" type="checkbox">
-                                            <label for="J_CheckBox_170037950254"></label>
-                                        </div>
                                     </li>
                                     <li class="td td-item">
                                         <div class="item-pic">
@@ -109,6 +105,7 @@
                                         <div class="td-inner">
                                             <a title="移入收藏夹" class="btn-fav" href="#">移入收藏夹</a>
                                             <a href="/delete?id={{ $v->id }}" data-point-url="#" class="delete">删除</a>
+
                                         </div>
                                     </li>
                                 </ul>
@@ -118,26 +115,9 @@
                     <img src="http://img02.hua.com/pc/images/gwc_k2.jpg">
                     @endforelse
                 <div class="float-bar-wrapper">
-                    <div id="J_SelectAll2" class="select-all J_SelectAll">
-                        <div class="cart-checkbox">
-                            <input class="check-all check" id="J_SelectAllCbx2" name="select-all" value="true" type="checkbox">
-                            <label for="J_SelectAllCbx2"></label>
-                        </div>
-                        <span>全选</span>
-                    </div>
-                    <div class="operations">
-                        <a href="#" hidefocus="true" class="deleteAll">删除</a>
-                        <a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
-                    </div>
+
                     <div class="float-bar-right">
-                        <div class="amount-sum">
-                            <span class="txt">已选商品</span>
-                            <em id="J_SelectedItemsCount">0</em><span class="txt">件</span>
-                            <div class="arrow-box">
-                                <span class="selected-items-arrow"></span>
-                                <span class="arrow"></span>
-                            </div>
-                        </div>
+
                         <div class="price-sum">
                             <span class="txt">合计:</span>
                             <strong class="price">¥<em id="J_Total">{{$pricecount}}</em></strong>

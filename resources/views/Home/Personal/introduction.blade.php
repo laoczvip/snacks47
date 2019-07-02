@@ -282,7 +282,7 @@
 							@if(!$shaky_sku)
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" onclick="add({{$goods_sku->gid}})"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" onclick="add({{$goods_sku->id}})"><i></i>加入购物车</a>
 								</div>
 							</li>
 							@endif
