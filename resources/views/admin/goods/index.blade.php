@@ -92,7 +92,7 @@
                   <div>{!! $v->desc !!}</div>
             </td >
                  <td >
-                   <a href="/admin/goods/edit?id={{$v->cid}}" class="link_icon" title="修改">&#101;</a>
+                   <a href="/admin/goods/edit?id={{$v->gid}}" class="link_icon" title="修改">&#101;</a>
                    <a href="javascript:;"  onclick="del({{$v->id}},this)" class="link_icon" title="删除">&#100;</a>
                    <a href="javascript:;" onclick="shows(this)"  class="link_icon" title="查看详情">&#118;</a>
                  </td>

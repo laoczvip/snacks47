@@ -214,7 +214,7 @@ class GoodsController extends Controller
     public function edit(Request $request)
     {
         $id = $request->input('id',0);
-        $goods_sku = DB::table('goods_sku')->where('cid',$id)->first();
+        $goods_sku = DB::table('goods_sku')->where('gid',$id)->first();
 
         $cates = GoodsController::Cates_data();
          foreach($cates as $k=>$v){
@@ -254,7 +254,6 @@ class GoodsController extends Controller
             ]);
         //商品id
         $id = $request->input('id',0);
-
          //接收值
         $data['title'] = $request->input('title','');
 
