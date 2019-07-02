@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Weds;
+use App\Http\Controllers\Home\ShopcartController;
 use DB;
+
+
 class ShakyController extends Controller
 {
     /**
@@ -49,12 +53,19 @@ class ShakyController extends Controller
             $shaky_one = DB::table('shaky')->where('id',$sids)->first();
             $shaky = DB::table('shaky_sku')->where('sid',$sids)->paginate(1);
             $shaky_one1 = DB::table('shaky_sku')->where('sid',$sids)->first();
-            
+            $count = ShopcartController::CountCar();
+            $friendly = DB::table('friendly')->where('lstatus',1)->get();
+            $weds = weds::find(1);
+
             return view('home.shakys.show',[
                     'shaky'=>$shaky,
+                    'friendly'=>$friendly,
                     'sids'=>$sids,
                     'goods_sku'=>$goods_sku,
                     'shaky_one'=>$shaky_one,
+                    'count'=>$count,
+                    'count'=>$count,
+                    'weds'=>$weds,
                     'shaky_one1'=>$shaky_one1,
                     ]);
         }
