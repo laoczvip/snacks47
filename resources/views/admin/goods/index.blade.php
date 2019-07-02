@@ -98,6 +98,9 @@
                  </td>
                </tr>
                @empty
+                <tr>
+                  <th class="center" colspan="11">暂无数据</th>
+                </tr>
                @endforelse
           </table>
           <aside class="paging">
