@@ -107,7 +107,12 @@
           </aside>
      </div>
 </section>
-
+<script src="/layui/layui.js">
+               layui.use('layer',
+                    function(){
+                        var layer = layui.layer;
+                });
+                </script>
 <script type="text/javascript">
     //绑定change事件，当下拉框内容发生变化时启动事件
       $("#wlms").bind("change",function(){
@@ -123,12 +128,11 @@
         var sub = confirm('您确认要删除此商品吗？');
         if(sub){
            $.get('/admin/goods/del',{id},function(res){
-            alert(res);
-            if(res=='ok'){
-                alert('删除成功');
+            if(res == '删除成功'){
+                 layer.msg(res, {icon: 1});
                 $(obj).parent().parent().remove();
-            }else if(res=='err') {
-          alert('删除失败');
+            } else {
+                 layer.msg(res, {icon: 5});
         }
         },'json')
         }
