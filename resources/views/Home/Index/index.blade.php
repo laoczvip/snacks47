@@ -76,7 +76,7 @@
                                                              @if($val->status==1)
                                                                 <dl class="dl-sort">
 
-                                                                    <dt><span title="蛋糕">{{$val->title}}</span></dt>
+                                                                    <dt><span title="{{$val->title}}">{{$val->title}}</span></dt>
                                                                      @forelse($val->sub as $v)
 
                                                                      @if($v->status==1)
@@ -414,7 +414,7 @@
      });
 </script>
                 <div class="clear "></div>
-
+                <span hidden>{{$i = 1}}</span>
                 @forelse($cates as $cate)
                 <div id="f1">
                 <!--甜点-->
@@ -425,7 +425,7 @@
                         <h3>每一道甜品都有一个故事</h3>
                         <div class="today-brands ">
                         @forelse($cate->sub as $val)
-                            <a href="# ">{{$val->title}}</a>
+                            <a href="/">{{$val->title}}</a>
                         @empty
                         @endforelse
                         </div>
@@ -438,18 +438,13 @@
                 <div class="am-g am-g-fixed floodFour" style="overflow: hidden;  text-overflow: ellipsis;height:480px;">
                     <div class="am-u-sm-5 am-u-md-4 text-one list ">
                         <div class="word">
-                            <a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
+                        @forelse($cate->sub as $val)
+                            <a class="outer" href="#"><span class="inner"><b class="text">{{$val->title}}</b></span></a>
+                        @empty
+                        @endforelse
                         </div>
                         <a href="# ">
-                            <div class="outer-con ">
-                                <div class="title ">
-                                开抢啦！
-                                </div>
-                                <div class="sub-title ">
-                                    零食大礼包
-                                </div>
-                            </div>
-                              <img src="/h/images/act1.png " />
+                              <img src="/h/images/act{{$i++}}.png " />
                         </a>
                         <div class="triangle-topright"></div>
                     </div>
