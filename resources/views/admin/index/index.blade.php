@@ -80,7 +80,6 @@
                         </div>
                         <ul class="sidebar-trans">
                              <dd><a href="/admin/flavour/index">属性列表</a></dd>
-                <dd><a href="/admin/flavour/create" >添加属性</a></dd>
                         </ul>
                     </div>
                 </dl>
