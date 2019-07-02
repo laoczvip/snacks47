@@ -66,6 +66,7 @@
                                             <div class="user DefaultAddr">
                                                     <span class="buy-user" id="name">{{ $v['consignee'] }}</span>
                                                     <span class="buy-phone" id="tel">{{ $v['atel'] }}</span>
+                                                    <input type="hidden" id="asyfgduyas" value="{{$v['id']}}">
                                             </div>
                                             <div class="default-address DefaultAddr">
                                                     <span class="buy-line-title buy-line-title-type">收货地址：</span>
@@ -256,7 +257,7 @@
                             <!--含运费小计 -->
                             <div class="buy-point-discharge ">
                                 <p class="price g_price ">
-                                    合计（含运费） <span>¥</span><em class="pay-sum" id="pprasdsaice">{{$goods_sku->price + 10 }}.00</em>
+                                    合计（含运费） <span>¥</span><em class="pay-sum" id="pprasdsaice">{{$goods_sku->price + 10 }}</em>
                                 </p>
                             </div>
                             <div id="holyshit269" class="submitOrder">
@@ -357,14 +358,17 @@
     });
 </script>
 <script>
-    let address = $('#addresss').val()
-    if(address == null || address == "" || address == undefined){
-       layer.alert('请选择收货地址', {icon: 6});
-        event.preventDefault();
-    }
+        // 默认选择第一个地址
+        let a = $("#asyfgduyas").val();
+        $('#addresss').val(a);
 
 
-     function ashjgdj(){
+        let price = $('#pprasdsaice').text();
+        // console.log(price)
+        $('#pprice').val(price);
+
+        // 添加收货地址
+        function ashjgdj(){
                 let phome = $('#user-phone').val();
                 let user = $('#user-name').val();
                 let intro = $('#user-intro').val();
@@ -402,9 +406,10 @@
 
 
 
-    let price = $('#price').text();
-    $('#pprice').val(price);
 
+
+
+    // 用户选择地址
     function asjh(id){
          $('#addresss').val(id);
     }

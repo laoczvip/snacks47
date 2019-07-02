@@ -82,7 +82,7 @@ class PurchaseController extends Controller
         $orderdetails->onum = $onum;
         $orderdetails->oid = $oid;
         $orderdetails->gid = $data['gid'];
-        $orderdetails->number = $data['num'];
+        $orderdetails->number = $data['num']+1;
         $orderdetails->price = $data['price'];
         $orderdetails->lam = $data['lam'];
         $orderdetails->flavor = $data['flavor'];

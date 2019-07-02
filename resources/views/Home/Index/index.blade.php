@@ -402,7 +402,7 @@
       clearTimeout(timer);
       obj.innerHTML = '秒杀已结束';
       if(obj.innerHTML=='秒杀已结束'){
-        $('#kaiqi').css('display','none');
+        $('.am-u-sm-3 > #kaiqi').css('display','none');
       }
       }
      }
@@ -415,8 +415,9 @@
 </script>
                 <div class="clear "></div>
                 <span hidden>{{$i = 1}}</span>
+                <span hidden>{{$a = 1}}</span>
                 @forelse($cates as $cate)
-                <div id="f1">
+                <div id="f{{$a++}}">
                 <!--甜点-->
 
                 <div class="am-container ">

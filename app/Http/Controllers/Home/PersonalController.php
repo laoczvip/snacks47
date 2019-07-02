@@ -36,8 +36,16 @@ class PersonalController extends Controller
      */
     public function Index(Request $request)
     {
-        $friendly = self::Friendly();
+
+        $user = Users::find(session('home_user')->id);
+
         $count = ShopcartController::CountCar();
+
+        $good = GoodsSku::get();
+
+        $collect = $user->collect;
+
+
         $friendly = self::Friendly();
 
         $kouwei = $request->input('a',0);
@@ -47,6 +55,9 @@ class PersonalController extends Controller
             'weds'=>$weds,
             'friendly'=>$friendly,
             'count'=>$count,
+            'user'=>$user,
+            'good'=>$good,
+            'collect'=>$collect,
             ]);
     }
 
@@ -465,9 +476,13 @@ class PersonalController extends Controller
     public function Collection()
     {
         $user = Users::find(session('home_user')->id);
+
         $count = ShopcartController::CountCar();
+
         $good = GoodsSku::get();
+
         $collect = $user->collect;
+
         $friendly = self::Friendly();
         $weds = weds::find(1);
         return view('home.personal.collection',[
