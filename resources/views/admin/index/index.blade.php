@@ -97,8 +97,6 @@
                         <ul class="sidebar-trans">
                             <dd><a href="/admin/goods">商品列表</a></dd>
                             <dd><a href="/admin/goods/create" >添加商品</a></dd>
-                <dd><a href="/admin/softdeletion">已删除的商品</a></dd>
-
                         </ul>
                     </div>
                 </dl>

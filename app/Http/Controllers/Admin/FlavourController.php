@@ -22,9 +22,9 @@ class FlavourController extends Controller
         $list[$v->touch] = $v->touch;
       }
       if($touch==''){
-        $data = DB::table('flavour')->paginate(2);
+        $data = DB::table('flavour')->paginate(5);
       } else {
-        $data = DB::table('flavour')->where('touch',$touch)->paginate(2);
+        $data = DB::table('flavour')->where('touch',$touch)->paginate(5);
       }
       return view('admin.flavour.index',['data'=>$data,'list'=>$list,'touch'=>$touch]);
     }
@@ -46,7 +46,7 @@ class FlavourController extends Controller
                 } else {
                      echo json_encode('删除失败');
                 }
-            
+
          }
     }
 

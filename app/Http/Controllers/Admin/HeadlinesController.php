@@ -20,7 +20,7 @@ class HeadlinesController extends Controller
         $search = $request->input('search');
 
          // 接收数据
-        $headlines = Headlines::where('htitle','like','%'.$search.'%')->paginate(4);
+        $headlines = Headlines::where('htitle','like','%'.$search.'%')->paginate(5);
 
         return view('admin.headlines.index',[
                      'headlines'=>$headlines,
