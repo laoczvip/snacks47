@@ -12,13 +12,12 @@
         <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
         <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
         <script src="/layer/layer.js" type="text/javascript" charset="utf-8"></script>
-
     </head>
     <body>
         <!--头 -->
         @include('home.public.hmtop')
 
-        <!-- 错误提示 -->
+    <!-- 显示错误报告 开始 -->
     @if(session('error'))
             <script>
                     layer.msg("{{session('error')}}", {icon: 5});
@@ -29,7 +28,7 @@
                     layer.msg("{{session('success')}}", {icon: 6});
             </script>
     @endif
-
+    <!-- 显示错误报告 结束 -->
             <div class="nav-table">
                        <div class="long-title"><span class="all-goods">全部分类</span></div>
                        <div class="nav-cont">
