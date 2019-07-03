@@ -63,6 +63,9 @@ class PurchaseController extends Controller
         DB::beginTransaction();
         // 用户的地址id
         $data = $request->all();
+        if (empty($data['address'])) {
+            return back();
+        }
         $uid = session('home_user')->id;
         // 生成订单号
         $onum = date('Ymd').str_pad(mt_rand(1, 99999999),5,'0',STR_PAD_LEFT);

@@ -351,20 +351,26 @@
 </html>
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script >
+
+</script>
+<script>
     layui.use(['layer', 'form'], function(){
       var layer = layui.layer
       ,form = layui.form;
 
     });
-</script>
-<script>
+
+
         // 默认选择第一个地址
         let a = $("#asyfgduyas").val();
         $('#addresss').val(a);
 
+        if (a == undefined || a == null  || a == "") {
+            layer.alert('请添加一个收货地址', {icon: 6});
+            event.preventDefault();
+        };
 
         let price = $('#pprasdsaice').text();
-        // console.log(price)
         $('#pprice').val(price);
 
         // 添加收货地址

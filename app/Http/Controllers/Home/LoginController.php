@@ -248,7 +248,6 @@ class LoginController extends Controller
         if(!empty($res[0])){
             echo "<script>alert('手机号已被注册');location.href='/register'</script>";
         }
-        die;
         if(strlen($request->input('repass'))<6){
              echo "<script>alert('用户密码的长度小于6');location.href='/register'</script>";
         }

@@ -374,22 +374,28 @@ class PersonalController extends Controller
     public function ImplementInformation(Request $request)
     {
         $res = $request->all();
-
         DB::beginTransaction();
 
+        $allow = ['image/png','image/jpeg','image/gif'];
+        if (!in_array($_FILES['ufile']['type'],$allow)) {
+                return back()->with('error','请上传图片文件!');
+        }
+        if($_FILES['ufile']['error'] == 1){
+            return back()->with('error','图片不能大于2M');
+        }
         // 假如用户换头像
         if ($request->hasFile('ufile')) {
                 // 删掉原图
             if ($request->input('file') == '/DefaultAvatar/1.jpg') {
                 $file = $request->file('ufile')->store(date('Ymd'));
             }else{
-
                 Storage::delete($request->input('file'));
                 $file = $request->file('ufile')->store(date('Ymd'));
             }
         }else{
             $file = $request->input('file');
         }
+
         // 压入数据
         $id = session('home_user')->id;
         $user = Users::find($id);
@@ -409,12 +415,13 @@ class PersonalController extends Controller
             DB::commit();
             $user_data = Users::where('id', $id)->first();
             session(['home_user'=>$user_data]);
-            return redirect("/center/information");
+            return back()->with('success','修改成功');
         }else{
             DB::rollBack();
-            return redirect("/center/information");
+            return back()->with('error','修改失败!请稍后重试');
         }
     }
+
 
 
     /**
