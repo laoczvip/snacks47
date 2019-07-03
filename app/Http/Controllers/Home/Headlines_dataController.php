@@ -54,12 +54,12 @@ class Headlines_dataController extends Controller
     	$id = $request->input('id',0);
 
     	// 上一条
-        $article_prev = self::prev($id,$request->input('id',0));
+       $article_prev = self::prev($id,$request->input('id',0));
+ 
+       // 下一条
+       $article_next = self::next($id,$request->input('id',0));
 
-        // 下一条
-        $article_next = self::next($id,$request->input('id',0));
-
-        // 获取公告里的头条
+       // 获取公告里的头条
     	$headlines_data = DB::table('headlines')->where('id',$id)->first();
 
     	$weds = weds::find(1);
@@ -85,9 +85,9 @@ class Headlines_dataController extends Controller
         $count = ShopcartController::CountCar();
       $weds = weds::find(1);
       $friendly = DB::table('friendly')->where('lstatus',1)->get();
-      $data = DB::table('headlines')->Paginate(5);
+      $data = DB::table('headlines')->where('deleted_at',null)->orderBy('id', 'desc')->Paginate(5);
       // 获取公告里的头条
-      $datas = DB::select("select  * from headlines order By id desc limit 5");
+      $datas = DB::table('headlines')->where('deleted_at',null)->orderBy('id', 'desc')->Paginate(5);
 
       return view('home.headlines_data.list',[
                   'weds'=>$weds,

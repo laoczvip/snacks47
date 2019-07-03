@@ -241,7 +241,7 @@ class GoodsController extends Controller
     public function Update(Request $request)
     {
           $data = $this->validate($request,[
-                'title' => 'required|regex:/^\D{6,255}$/',
+                'title' => 'required|regex:/^.{6,255}$/',
                 'price' => 'required',
                 'stock' => 'required',
                 'status' => 'required',

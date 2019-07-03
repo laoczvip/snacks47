@@ -165,7 +165,7 @@
 
                             <li class="title-first"><a target="_blank" href="/home/headlines_data/index?id={{ $v->id }}">
                                 <img src="/h/images/TJ2.jpg"></img>
-                                <span>[头条]</span>{{ $v->htitle }}
+                                <span></span>{{ $v->htitle }}
                             </a></li>
                            @endforeach
                     @if(!session('home_login'))
@@ -221,7 +221,7 @@
                     </div>
                     @endif
                             @foreach($headlines_desc as $k=>$v)
-                            <li><a target="_blank" href="/home/headlines_data/index?id={{ $v->id }}"><span>[特惠]</span>{{ $v->htitle }}</a></li>
+                            <li><a target="_blank" href="/home/headlines_data/index?id={{ $v->id }}"><span></span>{{ $v->htitle }}</a></li>
                             @endforeach
 
                         </ul>

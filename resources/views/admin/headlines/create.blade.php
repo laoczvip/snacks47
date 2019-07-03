@@ -39,7 +39,7 @@
                       {{ csrf_field() }}
             <ul class="ulColumn2">
                 <li>
-                    <span class="item_name" style="width:120px;">上传轮播图：</span>
+                    <span class="item_name" style="width:120px;">上传缩略图:</span>
                     <label class="uploadImg">
                         <input name="thumb" type="file" >
                         <!-- <span>上传轮播图</span> -->
@@ -54,7 +54,7 @@
 
                 <li>
                     <span class="item_name" style="width:120px;">头条作者:</span>
-                    <input type="text" name="auth" class="textbox textbox_225" value="{{ old('auth') }}" placeholder="请输入头条的描述"/>
+                    <input type="text" name="auth" class="textbox textbox_225" value="{{ old('auth') }}" placeholder="请输入头条的作者"/>
                     <!-- <span class="errorTips">错误提示信息...</span> -->
                 </li>
                 <li>
