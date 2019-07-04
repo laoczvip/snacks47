@@ -48,8 +48,8 @@
                     <td><input type="submit" class="link_btn" value="添加活动"></td>
                 </tr>
             </table>
-               
-           
+
+
         </form>
     </div>
 </section>

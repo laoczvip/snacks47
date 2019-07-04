@@ -80,7 +80,6 @@
                         </div>
                         <ul class="sidebar-trans">
                              <dd><a href="/admin/flavour/index">属性列表</a></dd>
-                <dd><a href="/admin/flavour/create" >添加属性</a></dd>
                         </ul>
                     </div>
                 </dl>
@@ -98,8 +97,6 @@
                         <ul class="sidebar-trans">
                             <dd><a href="/admin/goods">商品列表</a></dd>
                             <dd><a href="/admin/goods/create" >添加商品</a></dd>
-                <dd><a href="/admin/softdeletion">已删除的商品</a></dd>
-
                         </ul>
                     </div>
                 </dl>
@@ -315,7 +312,7 @@
                             <p class="title">服务器环境</p>
                             <span class="info">{{ $_SERVER['SERVER_SOFTWARE'] }}</span>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" style="width: 132px;">
                             <p class="title">服务器IP地址</p>
                             <span class="info">{{ $_SERVER['SERVER_ADDR'] }}</span>
                         </div>
@@ -323,8 +320,8 @@
                             <p class="title">服务器域名</p>
                             <span class="info">{{ $_SERVER['SERVER_NAME'] }}</span>
                         </div>
-                        <div class="col-md-2">
-                            <p class="title"> PHP版本</p>
+                        <div class="col-md-2" style="width:267px;">
+                            <p class="title"> 网站根目录</p>
                             <span class="info">{{ $_SERVER['DOCUMENT_ROOT'] }}</span>
                         </div>
                         <div class="col-md-2">

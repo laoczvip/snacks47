@@ -5,16 +5,17 @@
 <section class="rt_wrap content mCustomScrollbar">
      <div class="rt_content">
         <div class="page_title">
-         <h2 class="fl">活动类列表</h2>     
+         <h2 class="fl">活动类列表</h2>
+         <a href="/admin/shaky/create" class="fr top_rt_btn add_icon">添加活动</a>
         </div>
           <table class="table" style="text-align:center;">
-          
+
                <tr style="text-align:center;">
                     <th style="text-align:center;">活动Id</th>
                     <th style="text-align:center;">活动类</th>
                     <th style="text-align:center;">活动展示图</th>
                     <th style="text-align:center;">活动开启时间</th>
-                    <th style="text-align:center;">活动结束时间</th>                    
+                    <th style="text-align:center;">活动结束时间</th>
                     <th style="text-align:center;">操作</th>
                </tr>
                  @forelse($shaky as $k=>$v)
@@ -25,18 +26,18 @@
                  <td>{{$v->ctime}}</td>
                  <td>{{$v->jtime}}</td>
                  <td>
-                   <a href="javascript:;" onclick="del({{$v->id}},this)" class="link_icon"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span></a>
-                   <a href="/admin/shaky/edit?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="修改"></span></a>
-                   <a href="/admin/shakys/index?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="加入商品"></span></a>
-                   <a href="/admin/shakys/show?id={{$v->id}}" class="link_icon"><span class="glyphicon glyphicon-search" aria-hidden="true" title="查看活动商品"></span></a>
+                   <a href="javascript:;" onclick="del({{$v->id}},this)" class="link_icon" title="删除">&#100;</a>
+                   <a href="/admin/shaky/edit?id={{$v->id}}" class="link_icon" title="修改">&#101;</a>
+                   <a href="/admin/shakys/index?id={{$v->id}}" class="link_icon" title="加入商品"><span style="font-size: 19px;" class="glyphicon glyphicon-plus" aria-hidden="true" ></span></a>
+                   <a href="/admin/shakys/show?id={{$v->id}}"  title="查看活动商品" class="link_icon">&#118;</a>
                  </td>
                </tr>
                  @empty
                  @endforelse
-          </table>         
+          </table>
           <aside class="paging">
-         
-        
+
+
           </aside>
      </div>
 </section>

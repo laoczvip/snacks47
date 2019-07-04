@@ -13,15 +13,18 @@ use DB;
 
 class PurchaseController extends Controller
 {
+    /**
+     * [ 获取友情链接 ]
+     */
     public function Friendly()
     {
         return $friendly = DB::table('friendly')->where('lstatus',1)->get();
     }
 
     /**
-     * [加载下单页]
-     * @param Request $request [description]
-     * @param [type]  $id      [description]
+     * [ 加载下单页 ]
+     * @param Request $request  [ 接收商品id 口味 ]
+     * @param [ object ]  $id      [ 用户的收货地址 ]
      */
     public function Index(Request $request,$id)
     {
@@ -32,10 +35,13 @@ class PurchaseController extends Controller
 
         $flavor = $_SESSION['flavor'];
         $gid = $id;
+
         $weds = weds::find(1);
         $id = session('home_user')->id;
         $user = Address::where('uid',$id)->get();
-        $goods_sku = DB::table('goods_sku')->where('id',$gid)->first();
+        $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
+        $shaky_sku = DB::table('shaky_sku')->where('gid',$gid)->first();
+
         $address = json_decode($user,true);
         return view('home.purchase.index',[
             'weds'=>$weds,
@@ -44,21 +50,27 @@ class PurchaseController extends Controller
             'friendly'=>$friendly,
             'flavor'=>$flavor,
             'count'=>$count,
+            'shaky_sku'=>$shaky_sku,
             ]);
     }
 
     /**
-     * 付款成功,执行添加数据库
-     * @param Request $request [description]
+     * [ 付款成功,执行添加数据库 ]
+     * @param Request $request [ 接收用户购买的商品 ]
      */
     public function ExecutePurchase(Request $request)
     {
         DB::beginTransaction();
         // 用户的地址id
         $data = $request->all();
+        if (empty($data['address'])) {
+            return back();
+        }
         $uid = session('home_user')->id;
         // 生成订单号
         $onum = date('Ymd').str_pad(mt_rand(1, 99999999),5,'0',STR_PAD_LEFT);
+
+        // 添加数据库
         $order = new Order;
         $order->uid = $uid;
         $order->onum = $onum;
@@ -73,11 +85,12 @@ class PurchaseController extends Controller
         $orderdetails->onum = $onum;
         $orderdetails->oid = $oid;
         $orderdetails->gid = $data['gid'];
-        $orderdetails->number = $data['num'];
+        $orderdetails->number = $data['num']+1;
         $orderdetails->price = $data['price'];
         $orderdetails->lam = $data['lam'];
         $orderdetails->flavor = $data['flavor'];
 
+        // 把总价格的金钱
         DB::update("update salesvolume set menuy=menuy+".$data['price']."where id=1");
         DB::update("update goods_sku set buy=buy+1 where id=".$data['gid']);
         $res2  = $orderdetails->save();
@@ -95,9 +108,10 @@ class PurchaseController extends Controller
     }
 
     /**
-     * 付款成功页面
-     * @param Request $request [description]
+     * [ 付款成功页面 ]
+     * @param Request $request [ 用户下单的地址ID ]
      */
+
     public function Fukuancg(Request $request)
     {
         $count = ShopcartController::CountCar();
@@ -114,14 +128,16 @@ class PurchaseController extends Controller
     }
 
     /**
-     * [添加新的收货地址]
-     * @param Request $request [description]
+     * [ 添加新的收货地址 ]
+     * @param Request $request [ 接收新的数据 ]
      */
     public function Addres(Request $request)
     {
         $data = $request->all();
+        // 拼接用户的收货地址
         $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];
         $detailed = $data['address'];
+        // 添加到数据库
         $addres = new Address;
         $addres->uid = session('home_user')->id;
         $addres->address = $address;

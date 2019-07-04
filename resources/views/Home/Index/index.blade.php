@@ -76,7 +76,7 @@
                                                              @if($val->status==1)
                                                                 <dl class="dl-sort">
 
-                                                                    <dt><span title="蛋糕">{{$val->title}}</span></dt>
+                                                                    <dt><span title="{{$val->title}}">{{$val->title}}</span></dt>
                                                                      @forelse($val->sub as $v)
 
                                                                      @if($v->status==1)
@@ -171,7 +171,7 @@
                     @if(!session('home_login'))
                     <div class="mod-vip">
                         <div class="m-baseinfo">
-                            <a href="person/index.html">
+                            <a href="/login">
                                 <img src="/h/images/getAvatar.do.jpg">
                             </a>
                             <em>
@@ -293,11 +293,7 @@
                             <div class="icon-sale one "></div>
                                 <a href="javascript:;" onclick="urls({{$shaky_data->id}})"><h4>{{$shaky_data->sname}}</h4> </a>
                             <div class="activityMain ">
-                            @if($shaky_data->profile == null)
-                            <img src="/uploads/{{$shaky_data->profile}} " height="100%">
-                            @else
-                                <img src="/h/images/kkry.jpg " height="100%">
-                            @endif
+                                <img src="/uploads/{{$shaky_data->profile}} " height="100%">
                             </div>
 
 
@@ -406,7 +402,7 @@
       clearTimeout(timer);
       obj.innerHTML = '秒杀已结束';
       if(obj.innerHTML=='秒杀已结束'){
-        $('#kaiqi').css('display','none');
+        $('.am-u-sm-3 > #kaiqi').css('display','none');
       }
       }
      }
@@ -418,9 +414,10 @@
      });
 </script>
                 <div class="clear "></div>
-
+                <span hidden>{{$i = 1}}</span>
+                <span hidden>{{$a = 1}}</span>
                 @forelse($cates as $cate)
-                <div id="f1">
+                <div id="f{{$a++}}">
                 <!--甜点-->
 
                 <div class="am-container ">
@@ -429,7 +426,7 @@
                         <h3>每一道甜品都有一个故事</h3>
                         <div class="today-brands ">
                         @forelse($cate->sub as $val)
-                            <a href="# ">{{$val->title}}</a>
+                            <a href="/">{{$val->title}}</a>
                         @empty
                         @endforelse
                         </div>
@@ -442,18 +439,13 @@
                 <div class="am-g am-g-fixed floodFour" style="overflow: hidden;  text-overflow: ellipsis;height:480px;">
                     <div class="am-u-sm-5 am-u-md-4 text-one list ">
                         <div class="word">
-                            <a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
+                        @forelse($cate->sub as $val)
+                            <a class="outer" href="#"><span class="inner"><b class="text">{{$val->title}}</b></span></a>
+                        @empty
+                        @endforelse
                         </div>
                         <a href="# ">
-                            <div class="outer-con ">
-                                <div class="title ">
-                                开抢啦！
-                                </div>
-                                <div class="sub-title ">
-                                    零食大礼包
-                                </div>
-                            </div>
-                              <img src="/h/images/act1.png " />
+                              <img src="/h/images/act{{$i++}}.png " />
                         </a>
                         <div class="triangle-topright"></div>
                     </div>
@@ -461,31 +453,32 @@
 
 
                      @forelse($goods as $goods_data)
-                     @forelse($cate->sub as $cate_data)
-                     @forelse($cate_data->sub as $cate_datas)
 
-                     @if($goods_data->cid==$cate_datas->id)
+                         @forelse($cate->sub as $cate_data)
+                             @forelse($cate_data->sub as $cate_datas)
 
+                                 @if($goods_data->cid==$cate_datas->id)
+                                     @if($goods_data->sid == 0)
 
-                        <div class="am-u-sm-3 am-u-md-2 text-two">
-                            <div class="outer-con">
-                                <div class="title " style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:100px;">
-                                   {{$goods_data->title}}
-                                </div>
-                                <div class="sub-title ">
-                                    ¥{{$goods_data->price}}
-                                </div>
-                                <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-                            </div>
-                            <a href="/home/personal/introduction?ids={{$goods_data->gid}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
-                        </div>
+                                        <div class="am-u-sm-3 am-u-md-2 text-two">
+                                            <div class="outer-con">
+                                                <div class="title " style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:100px;">
+                                                   {{$goods_data->title}}
+                                                </div>
+                                                <div class="sub-title ">
+                                                    ¥{{$goods_data->price}}
+                                                </div>
+                                                <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+                                            </div>
+                                            <a href="/home/personal/introduction?ids={{$goods_data->gid}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
+                                        </div>
 
-
-                    @endif
-                    @empty
-                    @endforelse
-                     @empty
-                    @endforelse
+                                    @endif
+                                @endif
+                            @empty
+                            @endforelse
+                         @empty
+                        @endforelse
                      @empty
                     @endforelse
 

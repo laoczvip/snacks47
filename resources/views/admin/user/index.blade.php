@@ -5,7 +5,7 @@
  <div class="rt_content">
       <div class="page_title">
        <h2 class="fl">会员列表</h2>
-       <a href="/admin/users/create" class="fr top_rt_btn add_icon">添加新会员</a>
+       <a href="/admin/users/create" style="text-decoration:none" class="fr top_rt_btn add_icon">添加新会员</a>
       </div>
       <form action="/admin/users" method="get">
       <section class="mtb">

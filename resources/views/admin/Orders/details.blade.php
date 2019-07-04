@@ -4,6 +4,8 @@
      <div class="rt_content">
                <div class="page_title">
                  <h2 class="fl">订单详情</h2>
+       <a href="/admin/order" style="text-decoration:none" class="fr top_rt_btn add_icon">返回列表</a>
+
                </div>
                <table class="table">
                     <tr>

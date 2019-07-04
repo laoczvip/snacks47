@@ -8,11 +8,11 @@ use DB;
 class FlavourController extends Controller
 {
     /**
-     * 显示 index
+     * [ 显示 index ]
      * @param   $[name] [商品属性]
      * @return   [flavour]
      */
-    public function index(Request $request)
+    public function Index(Request $request)
     {
       $touch = $request->input('touch','');
 
@@ -22,38 +22,11 @@ class FlavourController extends Controller
         $list[$v->touch] = $v->touch;
       }
       if($touch==''){
-        $data = DB::table('flavour')->paginate(2);
+        $data = DB::table('flavour')->paginate(5);
       } else {
-        $data = DB::table('flavour')->where('touch',$touch)->paginate(2);
+        $data = DB::table('flavour')->where('touch',$touch)->paginate(5);
       }
       return view('admin.flavour.index',['data'=>$data,'list'=>$list,'touch'=>$touch]);
-    }
-
-    /**
-     * 添加 create
-     * @param [type] $[name] [添加]
-     * @return   [flavour]
-     */
-
-    public function create()
-    {
-      return view('admin/flavour/create');
-    }
-
-     /**
-     * 插入 store
-     * @param [type] $[name] [插入]
-     * @return   [flavour]
-     */
-    public function store(Request $request)
-    {
-      $fname['fname'] = $request->input('fname','');
-      $res = DB::table('flavour')->insert($fname);
-      if($res){
-        return redirect('admin/flavour/create')->with('success','添加成功');
-      } else {
-        return back()->with('error','添加失败');
-      }
     }
 
     /**
@@ -62,30 +35,27 @@ class FlavourController extends Controller
      * @return [type] [destroy]
      */
 
-    public function destroy(Request $request)
+    public function Destroy(Request $request)
     {
       $id = $request->input('id',0);
       if($id!=0){
-            $goods_sku = DB::table('goods_sku')->where('flavorties',$id)->first();
-            if(!$goods_sku){
+
                 $res = DB::table('flavour')->where('id',$id)->delete();
                 if($res){
-                     echo json_encode('ok');
+                     echo json_encode('删除成功');
                 } else {
-                     echo json_encode('err');
+                     echo json_encode('删除失败');
                 }
-            }else {
-                     echo json_encode('errr');
-            }
+
          }
     }
 
     /**
      * 修改页面
      * @param [type] $[name] [修改]
-     * @return   [edit]
+     * @return   [type] [视图跳转]
      */
-    public function edit(Request $request)
+    public function Edit(Request $request)
     {
       $id = $request->input('id',0);
       $data = DB::table('flavour')->where('id',$id)->first();
@@ -95,10 +65,10 @@ class FlavourController extends Controller
     /**
      * 修改
      * @param [type] $[name] [修改]
-     * @return   [update]
+     * @return   [type] [视图跳转]
      */
 
-    public function update(Request $request)
+    public function Update(Request $request)
     {
       $id = $request->input('id',0);
       $data['fname'] = $request->input('fname','');

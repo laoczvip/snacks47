@@ -116,46 +116,34 @@
 						<div class="tb-detail-hd">
 							<h1>
 				{{$goods_sku->title}}
+
 	          </h1>
+
 						</div>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
+							@if($shaky_sku)
 								<li class="price iteminfo_price">
+									<dt>促销价</dt>
+									<dd><em>¥</em><b class="sys_item_price">{{$shaky_sku->original-$shaky_sku->preferential}}</b>  </dd>
+								</li>
+							@else
+							<li class="price iteminfo_price">
 									<dt>促销价</dt>
 									<dd><em>¥</em><b class="sys_item_price">{{$goods_sku->price}}</b>  </dd>
 								</li>
+							@endif
+								@if($shaky_sku)
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-									<dd><em>¥</em><b class="sys_item_mktprice">{{$goods_sku->original}}</b></dd>
+									<dd><em>¥</em><b class="sys_item_mktprice">{{$shaky_sku->original}}</b></dd>
 								</li>
+								@endif
 								<div class="clear"></div>
 							</div>
 							<br>
 							<br>
-							<!--地址-->
-							<!-- <dl class="iteminfo_parameter freight">
-								<dt>配送至</dt>
-								<div class="iteminfo_freprice">
-									<div class="am-form-content address">
-										<select data-am-selected>
-											<option value="a">浙江省</option>
-											<option value="b">湖北省</option>
-										</select>
-										<select data-am-selected>
-											<option value="a">温州市</option>
-											<option value="b">武汉市</option>
-										</select>
-										<select data-am-selected>
-											<option value="a">瑞安区</option>
-											<option value="b">洪山区</option>
-										</select>
-									</div>
-									<div class="pay-logis">
-										快递<b class="sys_item_freprice">10</b>元
-									</div>
-								</div>
-							</dl> -->
 							<div class="clear"></div>
 							<!--销量-->
 							<ul class="tm-ind-panel">
@@ -215,15 +203,6 @@
 												              @endforelse
 											              </ul>
 										             </div>
-													<!-- <div class="theme-options">
-														<div class="cart-title">口味</div>
-														<ul>
-															<li class="sku-line selected" onclick="kouwei(this)">原味<i></i></li>
-															<li class="sku-line" onclick="kouwei(this)">奶油<i></i></li>
-															<li class="sku-line" onclick="kouwei(this)">炭烧<i></i></li>
-															<li class="sku-line" onclick="kouwei(this)">咸香<i></i></li>
-														</ul>
-													</div> -->
 													<div class="theme-options">
 														<div class="cart-title">包装</div>
 														<ul>
@@ -297,14 +276,18 @@
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
 
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/payment/{{$goods_sku->id}}">立即购买</a>
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="/payment/{{$goods_sku->gid}}">立即购买</a>
 								</div>
 							</li>
+							@if(!$shaky_sku)
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
 									<a id="LikBasket" title="加入购物车" onclick="add({{$goods_sku->id}})"><i></i>加入购物车</a>
 								</div>
 							</li>
+							@endif
+
+
 							<li>
 
 							</li>
@@ -904,7 +887,6 @@
 									</div>
 
 								</div>
-
 								<div class="am-tab-panel am-fade">
 									<div class="like">
 										<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
@@ -1083,14 +1065,29 @@
 });
 </script>
 	<script>
+		// 默认选择第一个口味
+		let a = $(".sku-line:first").text();
+		$.get('/center/index',{a},function(res){
+
+		})
 
 		// 口味选择
 	    function kouwei(obj){
 	    	let a = $(obj).text();
 	    	$.get('/center/index',{a},function(res){})
 	    }
+
+	    // 添加购物车
+	    function add(id){
+	    	let url = '/shopcartadd/'+id
+	    	$.get(url,function(res){
+				layer.alert('已加入购物车', {icon: 6});
+	    	})
+	    }
+
 	    // 用户收藏
 	    function ShowDiv(id){
+
 	    	let urll = $('#url').val();
 	    	let url = '/collection/'+id
 	    	$.get(url,function(res){
@@ -1121,12 +1118,7 @@
 	    	})
 	    }
 
-	    // 添加购物车
-	    function add(id){
-	    	let url = '/shopcartadd/'+id
-	    	$.get(url,function(res){
-				layer.alert('已加入购物车', {icon: 6});
-	    	})
-	    }
+
+
 	</script>
 </html>

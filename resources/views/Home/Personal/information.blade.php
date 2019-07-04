@@ -11,10 +11,24 @@
         <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
         <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
         <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
+        <script src="/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+
     </head>
     <body>
         <!--头 -->
         @include('home.public.hmtop')
+
+        <!-- 错误提示 -->
+    @if(session('error'))
+            <script>
+                    layer.msg("{{session('error')}}", {icon: 5});
+            </script>
+    @endif
+    @if(session('success'))
+            <script>
+                    layer.msg("{{session('success')}}", {icon: 6});
+            </script>
+    @endif
 
             <div class="nav-table">
                        <div class="long-title"><span class="all-goods">全部分类</span></div>
@@ -57,7 +71,8 @@
                             <p class="am-form-help">头像</p>
 
                             <div class="info-m">
-                                <div><b>账号：<i>{{session('home_user')->name}}</i></b></div>
+                                <div><b>账号：<i>{{session('home_user')->number}}</i></b></div>
+                                <div><b>昵称：<i>{{session('home_user')->name}}</i></b></div>
                                 <div class="u-level">
                                     <span class="rank r2">
                                          <s class="vip1"></s><a class="classes" href="#">铜牌会员</a>

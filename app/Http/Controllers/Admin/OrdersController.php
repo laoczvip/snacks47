@@ -12,7 +12,8 @@ use DB;
 class OrdersController extends Controller
 {
     /**
-     * [订单页]
+     * 订单页
+     *
      * @param Request $request [接收搜索内容]
      */
     public function Index(Request $request)
@@ -31,7 +32,6 @@ class OrdersController extends Controller
             $order = Order::where('onum','like','%'.$value.'%')->orderBy('created_at','desc')->paginate(8);
         }
 
-
         return view('admin.orders.index',[
             'order'=>$order,
             'params'=>$request->all(),
@@ -40,7 +40,8 @@ class OrdersController extends Controller
             ]);
     }
     /**
-     * [订单详情页]
+     * 订单详情页
+     *
      * @param [type] $id [接收订单的ID查询订单详情]
      */
     public function Details($id,$aid)
@@ -51,9 +52,11 @@ class OrdersController extends Controller
         $time  = $aorder->created_at;
         $dtype = $aorder->otype;
 
+        // 获取留言的变量
         foreach($order as $k=>$v){
             $lam = $v->lam;
         }
+
         return view('admin.orders.details',[
             'order'=>$order,
             'dtype'=>$dtype,
@@ -65,8 +68,8 @@ class OrdersController extends Controller
 
     }
     /**
-     * [后台发货按钮]
-     * @param [type] $id [订单ID]
+     * 后台发货按钮
+     * @param [ int ] $id [ 订单ID ]
      */
     public function DeliverGoods($id)
     {

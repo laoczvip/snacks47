@@ -11,52 +11,46 @@
     <section class="rt_wrap content mCustomScrollbar">
       <div class="rt_content">
       <div class="page_title">
-        <h2 class="fl">会员列表</h2>
-        <a href="/admin/banners" class="fr top_rt_btn add_icon">添加新会员</a>
+        <h2 class="fl">轮播图列表</h2>
+        <a href="/admin/banners/create" style="text-decoration:none" class="fr top_rt_btn add_icon">添加新轮播图</a>
       </div>
       <form action="/admin/banners" method="get">
         <section class="mtb">
-          <select class="select">
-             <option>会员等级</option>
-              <option>普通会员</option>
-              <option>高级会员</option>
-          </select>
-          <input type="text" name="search" value="{{ $search }}" class="textbox textbox_225" placeholder="输入头条标题查询..."/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="search" value="{{ $search }}" class="textbox textbox_225" style="height:35px;" placeholder="输入头条标题查询..."/>
           <input type="submit" value="查询" class="group_btn"/>
         </section>
       </form>
       <table class="table" style="text-align:center;">
            <tr>
-              <th style="text-align:center;">轮播图</th>
-              <th style="text-align:center;">轮播图标题</th>
-              <th style="text-align:center;">轮播图描述</th>
-              <th style="text-align:center;">轮播图跳转的地址</th>
-              <th style="text-align:center;">创建时间</th>
-              <th style="text-align:center;">状态</th>
-              <th style="text-align:center;">操作</th>
+              <th class="center">轮播图</th>
+              <th class="center">轮播图标题</th>
+              <th class="center">轮播图描述</th>
+              <th class="center">轮播图跳转的地址</th>
+              <th class="center">创建时间</th>
+              <th class="center">状态</th>
+              <th class="center">操作</th>
            </tr>
            @foreach($banners as $k=>$v)
            <tr>
-              <td class="center"><img src="/uploads/{{ $v->url }}" width="50" height="50"/></td>
-              <td>{{$v->title}}</td>
-              <td><p class="hides">{{$v->desc}}</p></td>
-              <td><p class="hides">{{$v->jump}}</p></td>
+              <td class="center"><img src="/uploads/{{ $v->url }}" width="150" height="100" /></td>
+              <td class="center"><p>{{$v->title}}</td>
+              <td class="center"><p class="hides">{{$v->desc}}</p></td>
+              <td class="center"><p class="hides" title="{{$v->jump}}">{{$v->jump}}</p></td>
               <td class="center">{{$v->created_at}}</td>
-              <td>
+              <td class="center">
                   @if($v->status == 0)
                   <kbd>未激活</kbd>
                   @else
-                  <kbd style="background: green";>激活</kbd>
+                  <kbd style="background: green;">已激活</kbd>
                   @endif
                 </td>
               <td class="center">
                   <a href="/admin/banners/{{$v->id}}/edit" title="编辑" class="link_icon">&#101;</a>
                   <a href="javascript:;" title="删除" class="link_icon" onclick="del({{ $v->id }},this)">&#100;</a>
-                 <!-- <a href="#" title="删除" class="link_icon">&#100;</a> -->
                  @if($v->status == 0)
-                 <a href="javascript:;" class="btn btn-success" style="color: white" onclick="changeStatus({{ $v->id }},0)">激活</a>
+                 <a href="javascript:;" class="btn btn-success" style="color:white;" onclick="changeStatus({{ $v->id }},0)">激活</a>
                  @else
-                  <a href="javascript:;" class="btn btn-primary" style="color: black"; onclick="changeStatus({{ $v->id }},1)">停止</a>
+                  <a href="javascript:;" class="btn btn-primary" style="color:#fff;" onclick="changeStatus({{ $v->id }},1)">停止</a>
                  @endif
               </td>
 

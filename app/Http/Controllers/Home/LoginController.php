@@ -8,11 +8,11 @@ use App\Models\Weds;
 use Hash;
 use Mail;
 use DB;
-
+use Captcha;
 class LoginController extends Controller
 {
     /**
-     * 加载登陆页面
+     * [ 加载登陆页面 ]
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,15 +28,21 @@ class LoginController extends Controller
     }
 
     /**
-     * 登陆验证
-     * @return [type] [description]
+     * [ 登陆验证 ]
+     * @return [ type ] [ 接收登录信息 ]
      */
     public function Dologin(Request $request)
     {
+
+        // 验证码验证
+        if (!Captcha::check($request->input('code'))) {
+                return 2;
+        }
+
         $number = $request->input('number','');
         $password = $request->input('password','');
 
-        // 获取用户输入的数据,进行匹配+
+        // 获取用户输入的数据,进行匹配
         $user_data = Users::where('number', $number)->first();
         if (!$user_data) {
             echo 1;
@@ -88,7 +94,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 手机验证码匹配
+     * [ 手机验证码匹配 ]
      * @param  Request $request [ 用户的手机号码 ]
      * @return [视图]           [ 返回登录页面 ]
      */
@@ -114,7 +120,7 @@ class LoginController extends Controller
         $user->password = Hash::make( $request->input('repass') );
         $user->token  = $token;
         $res = $user->save();
-        if($res){
+        if ($res) {
             return "<script>alert('修改成功,返回登录');location.href='/login'</script>";
         }else{
             return "<script>alert('修改失败,请稍后重试!!!');location.href='/login'</script>";
@@ -124,8 +130,8 @@ class LoginController extends Controller
 
 
     /**
-     * 用户退出
-     * @return [type] [description]
+     * [ 用户退出 ]
+     * @return [ 视图 ] [ 执行后跳到首页 ]
      */
     public function out()
     {
@@ -133,12 +139,10 @@ class LoginController extends Controller
         session(['home_login'=>false]);
         session(['home_user'=>null]);
         session(['type'=>false]);
-
         return redirect("/");
     }
 
 
-    //
     /**
      * [ 激活 用户 (邮件) ]
      * @param [iit] $id    [用户的ID]
@@ -170,7 +174,6 @@ class LoginController extends Controller
      */
     public function Inert(Request $request)
     {
-
         $upass = $request->input( 'upass' );
         $email = $request->input( 'email' );
         $repass = $request->input( 'repass' );
@@ -182,12 +185,13 @@ class LoginController extends Controller
             exit;
         }
 
+        //检测用户密码的长度是否小于6
         if(strlen($upass)<6){
-            //检测用户密码的长度是否小于6
             echo "no";
             exit;
         }
 
+        // 添加数据
         $user = new Users;
         $user->password = Hash::make( $upass );
         $user->email = $request->input( 'email' );
@@ -233,7 +237,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 手机验证码匹配
+     * [ 手机验证码匹配 ]
      * @param  Request $request [ 用户的手机号码 ]
      * @return [视图]           [ 返回登录页面 ]
      */
@@ -244,7 +248,6 @@ class LoginController extends Controller
         if(!empty($res[0])){
             echo "<script>alert('手机号已被注册');location.href='/register'</script>";
         }
-        die;
         if(strlen($request->input('repass'))<6){
              echo "<script>alert('用户密码的长度小于6');location.href='/register'</script>";
         }
@@ -317,7 +320,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 请求接口返回内容
+     * [ 请求接口返回内容 ]
      * @param  string $url [请求的URL地址]
      * @param  string $params [请求的参数]
      * @param  int $ipost [是否采用POST形式]

@@ -66,6 +66,7 @@
                                             <div class="user DefaultAddr">
                                                     <span class="buy-user" id="name">{{ $v['consignee'] }}</span>
                                                     <span class="buy-phone" id="tel">{{ $v['atel'] }}</span>
+                                                    <input type="hidden" id="asyfgduyas" value="{{$v['id']}}">
                                             </div>
                                             <div class="default-address DefaultAddr">
                                                     <span class="buy-line-title buy-line-title-type">收货地址：</span>
@@ -144,6 +145,8 @@
                             </div>
                             <div class="clear"></div>
                         <form action="/add" method="post" accept-charset="utf-8">
+                            <!-- 如果不是促销商品 -->
+
                             <tr class="item-list">
                                     <div class="bundle  bundle-last">
                                      {{ csrf_field() }}
@@ -171,8 +174,15 @@
                                                     <li class="td td-price">
                                                         <div class="item-price price-promo-promo">
                                                             <div class="price-content">
-                                                                <em class="J_Price price-now" >{{$goods_sku->price }}</em>
+                                                                <em class="J_Price price-now" >
+                                                                @if($shaky_sku!=null)
+                                                                    {{$shaky_sku->original-$shaky_sku->preferential }}
+                                                              <input type="hidden" value="{{$shaky_sku->original-$shaky_sku->preferential  }}" id="price" />
+                                                                @else
+                                                                {{$goods_sku->price }}
                                                               <input type="hidden" value="{{$goods_sku->price }}" id="price" />
+                                                                @endif
+                                                                </em>
 
                                                             </div>
                                                         </div>
@@ -198,7 +208,13 @@
                                                 </li>
                                                 <li class="td td-sum">
                                                     <div class="td-inner">
-                                                        <em tabindex="0" class="J_ItemSum number" id="totalPrice">{{$goods_sku->price}}</em>
+                                                        <em tabindex="0" class="J_ItemSum number" id="totalPrice">
+                                                        @if($shaky_sku!=null)
+                                                        {{$shaky_sku->original-$shaky_sku->preferential }}
+                                                        @else
+                                                        {{$goods_sku->price}}
+                                                        @endif
+                                                        </em>
                                                     <input type="hidden" id="stock" value="{{$goods_sku->stock}}">
                                                     </div>
                                                 </li>
@@ -215,6 +231,8 @@
                                             <div class="clear"></div>
                                         </div>
                                 </tr>
+
+                                <!-- 如果不是促销商品 -->
                             <div class="clear"></div>
                             </div>
 
@@ -239,7 +257,7 @@
                             <!--含运费小计 -->
                             <div class="buy-point-discharge ">
                                 <p class="price g_price ">
-                                    合计（含运费） <span>¥</span><em class="pay-sum" id="pprasdsaice">{{$goods_sku->price + 10 }}.00</em>
+                                    合计（含运费） <span>¥</span><em class="pay-sum" id="pprasdsaice">{{$goods_sku->price + 10 }}</em>
                                 </p>
                             </div>
                             <div id="holyshit269" class="submitOrder">
@@ -333,21 +351,30 @@
 </html>
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script >
+
+</script>
+<script>
     layui.use(['layer', 'form'], function(){
       var layer = layui.layer
       ,form = layui.form;
 
     });
-</script>
-<script>
-    let address = $('#addresss').val()
-    if(address == null || address == "" || address == undefined){
-       layer.alert('请选择收货地址', {icon: 6});
-        event.preventDefault();
-    }
 
 
-     function ashjgdj(){
+        // 默认选择第一个地址
+        let a = $("#asyfgduyas").val();
+        $('#addresss').val(a);
+
+        if (a == undefined || a == null  || a == "") {
+            layer.alert('请添加一个收货地址', {icon: 6});
+            event.preventDefault();
+        };
+
+        let price = $('#pprasdsaice').text();
+        $('#pprice').val(price);
+
+        // 添加收货地址
+        function ashjgdj(){
                 let phome = $('#user-phone').val();
                 let user = $('#user-name').val();
                 let intro = $('#user-intro').val();
@@ -385,9 +412,10 @@
 
 
 
-    let price = $('#price').text();
-    $('#pprice').val(price);
 
+
+
+    // 用户选择地址
     function asjh(id){
          $('#addresss').val(id);
     }

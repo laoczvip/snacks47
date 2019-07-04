@@ -65,16 +65,16 @@
                         <td>
                         <label class="uploadImg">
                             <input name="showcase" type="file" >
-                        <!-- <span>上传头像</span> -->
                         </label>
                         </td>
                     </tr>
                     <tr>
-                        <td>口味属性
-                        <input type="text" id="getInput" style="width:60px;font-size:1px;" title="" >
-                            <input type="button" value="提交" onclick="test()" />
+                        <td>口味属性</td>
+                        <td id="Checkbox"><input type="text" id="getInput" class="textbox textbox_225" style="width:60px;font-size:1px;" title="" >
+                        &nbsp;&nbsp;&nbsp;<input type="button" value="添加" onclick="test()" class="link_btn" />
+                        <span></span>
                         </td>
-                        <td id="Checkbox" ></td>
+                        <td id="Checkbox" ><span></span></td>
                     </tr>
                     <tr>
                         <td>商品价格</td>
@@ -131,7 +131,7 @@ function test() {
     var a = $(getInput).val();
 
     if(a){
-        $('#Checkbox').append("<input type='checkbox' name='fname[]' value='"+a+"' checked/ style='margin-left:10px;'>");
+        $('#Checkbox').append(a+"<input type='checkbox' name='fname[]' value='"+a+"' checked/ style='margin-left:10px;'>");
     }
 
 }

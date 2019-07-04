@@ -39,10 +39,10 @@
                                 <label for="password"><i class="am-icon-lock"></i></label>
                                 <input type="password" name="password" id="password" placeholder="请输入密码">
                             </div>
-                            <div class="user-pass" style="margin-top:1px ;">
-                                <label for="password" style="margin-top:2px ;><i class="am-icon-lock"></i></label>
-                                <input type="password" name="password"  placeholder="验证码" style="width: 194px;">
-                                <img src="{{captcha_src()}}"  " onclick="this.src='{{captcha_src()}}'+Math.random()">
+                            <div class="user-pass" style="margin-top: 5px;height: -34px;"">
+                                <label for="password" style="margin-top:3px ";><i class="am-icon-lock"></i></label>
+                                <input type="text"   id="code" placeholder="验证码" style="width: 191px;margin-top: -15px;">
+                                <img src="{{captcha_src()}}" style="cursor:pointer;position:relative;top: 7px;"" onclick="this.src='{{captcha_src()}}'+Math.random()">
                             </div>
                       </form>
                    </div>
@@ -82,13 +82,15 @@
     function login(){
             let number = $('#number').val();
             let password = $('#password').val();
-
-             $.get('/dologin',{number,password},function(res){
-                if (res == 1) {
+            let code = $('#code').val();
+             $.get('/dologin',{number,password,code},function(res){
+                if (res == 2) {
+                    layer.msg('验证码错误', {icon: 2});
+                    return false;
+                }else if(res == 1){
                     layer.msg('用户名或密码错误', {icon: 2});
                     return false;
-                };
-                console.log(res)
+                }
                 window.location.href = '/';
             },'html');
         }

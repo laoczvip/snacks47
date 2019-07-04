@@ -4,6 +4,9 @@
 
 <section class="rt_wrap content mCustomScrollbar">
      <div class="rt_content">
+      <div class="page_title">
+       <h2 class="fl">商品列表</h2>
+      </div>
         <form action="/admin/goods/index" method="get">
           <section class="mtb">
              <select class="select" name="cid" id="test" onchange="tt(this.id)">
@@ -11,9 +14,9 @@
                   @if($v->pid==0)
                   <option value="0" disabled="disabled">{{$v->title}}</option>
                   @else
-                  
+
                   <option value="{{$v->id}}">{{$v->title}}</option>
-                  @endif      
+                  @endif
                   @empty
                   @endforelse
                   <option value="0">----手动输入----</option>
@@ -40,41 +43,41 @@
 
           </script>
           <table class="table" >
-          
-               <tr >
-                    <th style="width:100px;">商品Id</th>
-                    <th style="width:100px;">商品类</th>
-                    <th style="width:100px; ">商品名称</th>
-                    <th style="width:100px;">展示图</th>
-                    <th style="width:100px;">商品属性</th>
-                    <th style="width:100px;">商品价格</th>
-                    <th style="width:100px;">商品库存</th>
-                   <!--  <th style="width:60px;">商品重量</th> -->
-                    <th style="width:100px;">商品销量</th>
-                    <th style="width:100px;">商品状态</th>
-                    <th>创建时间</th>
-                    <th>操作</th>
-               </tr>
-               @forelse($goods_sku as $k=>$v)               
-               <tr>
-                 <td>{{$v->id}}</td>
-                 <td>{{$cates_name[$v->cid]}}</td>
-                 <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap; ">{{$v->title}}</td>
-                 <td><img src="/uploads/{{$v->showcase}}" style="width:30px;" class="img-thumbnail"></td>
 
-                 <td>
+               <tr >
+                    <th class="center" style="width:50px;">商品Id</th>
+                    <th class="center">商品类</th>
+                    <th class="center">商品名称</th>
+                    <th class="center" >展示图</th>
+                    <th class="center">商品属性</th>
+                    <th class="center">商品价格</th>
+                    <th class="center">商品库存</th>
+                   <!--  <th style="width:60px;">商品重量</th> -->
+                    <th class="center">商品销量</th>
+                    <th class="center">商品状态</th>
+                    <th class="center">创建时间</th>
+                    <th class="center">操作</th>
+               </tr>
+               @forelse($goods_sku as $k=>$v)
+               <tr>
+                 <td class="center">{{$v->id}}</td>
+                 <td class="center">{{$cates_name[$v->cid]}}</td>
+                 <td  class="center" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap; ">{{$v->title}}</td>
+                 <td class="center"><img  src="/uploads/{{$v->showcase}}" class="img-thumbnail"></td>
+
+                 <td class="center">
                   @forelse($flavour_data[$v->touch] as $val)
                   <kbd style="background:green">{{$val}}</kbd>
                   </br>
                   @empty
                   @endforelse
-                    
+
                   </td>
-                 <td>{{$v->price}}</td>
-                 <td>{{$v->stock}}</td>
-                 
-                 <td>{{$v->buy}}</td>
-                 <td>
+                 <td class="center">{{$v->price}}</td>
+                 <td class="center">{{$v->stock}}</td>
+
+                 <td class="center">{{$v->buy}}</td>
+                 <td class="center">
                  @if($v->status==0)
                     <kbd>上架中...</kbd>
                  @elseif($v->status==1)
@@ -83,42 +86,36 @@
                     <kbd>已删除</kbd>
                  @endif
                  </td>
-                 <td>{{$v->created_at}}</td>
-                 <td>
-                   <a href="javascript:;"  onclick="del({{$v->id}},this)" class="link_icon"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span></a>
-                   <a href="/admin/goods/edit?id={{$v->cid}}" class="link_icon"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="修改"></span></a>
-               
-                   <a href="" type="button"  data-toggle="modal" data-target="#select" class="link_icon"><span class="glyphicon glyphicon-search" aria-hidden="true" title="查看活动商品"></span></a>
-                   <!-- 查看商品详情模态框Model -->
-                  <div class="modal fade" id="select" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document" >
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title" id="myModalLabel">{{$v->title}}</h4>
-                        </div>
-                        <div class="modal-body" style="overflow:hidden;font-size:em;">
-                          {!!$v->desc!!}
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                 <td class="center">{{$v->created_at}}</td>
+                  <td class="template" style="display:none;">
+                  <span>{{ $v->title }}</span>
+                  <div>{!! $v->desc !!}</div>
+            </td >
+                 <td >
+                   <a href="/admin/goods/edit?id={{$v->gid}}" class="link_icon" title="修改">&#101;</a>
+                   <a href="javascript:;"  onclick="del({{$v->id}},this)" class="link_icon" title="删除">&#100;</a>
+                   <a href="javascript:;" onclick="shows(this)"  class="link_icon" title="查看详情">&#118;</a>
                  </td>
                </tr>
                @empty
+                <tr>
+                  <th class="center" colspan="11">暂无数据</th>
+                </tr>
                @endforelse
-          </table>         
+          </table>
           <aside class="paging">
-         
+
               {{$goods_sku->appends(['cid'=>$cid,'name'=>$name])->links()}}
-        
+
           </aside>
      </div>
 </section>
-
+<script src="/layui/layui.js">
+               layui.use('layer',
+                    function(){
+                        var layer = layui.layer;
+                });
+                </script>
 <script type="text/javascript">
     //绑定change事件，当下拉框内容发生变化时启动事件
       $("#wlms").bind("change",function(){
@@ -134,16 +131,47 @@
         var sub = confirm('您确认要删除此商品吗？');
         if(sub){
            $.get('/admin/goods/del',{id},function(res){
-            if(res=='ok'){
-                alert('删除成功');
+            if(res == '删除成功'){
+                 layer.msg(res, {icon: 1});
                 $(obj).parent().parent().remove();
-            }else if(res=='err') {
-          alert('删除失败');
+            } else {
+                 layer.msg(res, {icon: 5});
         }
         },'json')
-        } 
-       
+        }
+
     }
 </script>
+    <script type="text/javascript">
+              function shows(obj){
 
+                //  获取标题
+                let title = $(obj).parents('tr').find('span').html();
+
+                let desc = $(obj).parents('tr').find('div').html();
+                // 赋值
+                $('#myModal .modal-title').html(title);
+                $('#myModal .modal-body').html(desc);
+
+                // 显示模态框
+                $('#myModal').modal('show')
+              }
+            </script>
+
+
+
+        <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">文章状态</h4>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                  </div>
+                </div>
+            </div>
 @endsection

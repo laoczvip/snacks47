@@ -11,11 +11,11 @@ use App\Models\Weds;
 class ShopcartController extends Controller
 {
     /**
-     * [加载购物车页面]
+     * [ 加载购物车页面 ]
      */
     public function Index()
     {
-        // $_SESSION['car'] = null;
+        // 判断购物车里是否已经有商品
         if (!empty($_SESSION['car'])) {
             $data = $_SESSION['car'];
         }else{
@@ -37,15 +37,13 @@ class ShopcartController extends Controller
     }
 
     /**
-     * [添加购物车]
-     * @param Request $request [获取商品ID查询]
-     * @param [int]  $id      [商品ID]
+     * [ 添加购物车 ]
+     * @param Request $request [ 获取商品ID查询 ]
+     * @param [ int ]  $id      [ 商品ID ]
      */
     public function ShopcartAdd(Request $request,$id)
     {
-        // $_SESSION['car'] = null;die;
-
-        if(empty($_SESSION['car'][$id])){
+        if (empty($_SESSION['car'][$id])) {
             $data = DB::table('goods_sku')->select('id','title','showcase','price')->where('id',$id)->first();
             $flavor = $_SESSION ['flavor'];
             $data->num = 1;
@@ -100,7 +98,9 @@ class ShopcartController extends Controller
      */
     public function AddNum(Request $request)
     {
+
         $id = $request->input('id');
+
         if (empty($_SESSION['car'])) {
             return back();
         }else{
@@ -199,6 +199,8 @@ class ShopcartController extends Controller
         $oid = DB::table('order')->insertGetId($data);
         if ($_SESSION['car']) {
             $order = $_SESSION['car'];
+
+            // 循环出所有购物车中的商品,逐条加入到数据库
             foreach ($order as $k => $v) {
                 $temp['gid'] = $v->id;
                 $temp['number'] = $v->num;

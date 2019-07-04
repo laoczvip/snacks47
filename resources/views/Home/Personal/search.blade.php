@@ -123,7 +123,7 @@
 								@forelse($goods_all as $good_child)
 									<li>
 										<div class="i-pic limit">
-											<a href="/home/personal/introduction?id={{$good_child->gid}}&cid={{$good_child->cid}}"><img src="/uploads/{{$good_child->showcase}}" /></a>
+											<a href="/home/personal/introduction?ids={{$good_child->gid}}"><img src="/uploads/{{$good_child->showcase}}" /></a>
 											<p class="title fl">{{$good_child->title}}</p>
 											<p class="price fl">
 												<b>¥</b>

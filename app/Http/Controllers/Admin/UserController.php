@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUsers;
@@ -14,10 +12,10 @@ use DB;
 
 class UserController extends Controller
 {
+
     /**
      * 加载用户列表页面
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request [ 所有的用户 ]
      */
     public function Index(Request $request)
     {
@@ -35,16 +33,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function Create()
     {
         return view('admin.user.create');
     }
 
     /**
-     * 执行添加用户
+     *
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+
+    /**
+     * 执行添加用户
+     * @param StoreUsers $request [ 新的数据 ]
      */
     public function Store(StoreUsers $request)
     {
@@ -90,11 +94,10 @@ class UserController extends Controller
     }
 
 
+
     /**
      * 修改用户
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param [ int ] $id [ 需要修改的ID ]
      */
     public function Edit($id)
     {
@@ -103,12 +106,11 @@ class UserController extends Controller
         return view('admin.user.edit',['user'=>$user]);
     }
 
+
     /**
-     * 修改用户信息
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 执行修改用户信息
+     * @param Request $request [ 需要更新的字段 ]
+     * @param [ int ]  $id      [ 需要修改的ID ]
      */
     public function Update(Request $request, $id)
     {
@@ -116,10 +118,11 @@ class UserController extends Controller
         // 获取头像
 
         if ($request->hasFile('ufile')) {
+            // 如果用户用的是默认头像则不删除
             if ($request->input('file') == '/DefaultAvatar/1.jpg') {
                 $file = $request->file('ufile')->store(date('Ymd'));
             }else{
-
+                // 如果用户上传头像,删除原头像
                 Storage::delete($request->input('file'));
                 $file = $request->file('ufile')->store(date('Ymd'));
             }
@@ -127,13 +130,14 @@ class UserController extends Controller
             $file = $request->input('file');
         }
 
-
+        // 更新数据库信息
         $user = Users::find($id);
         $data = $request->all();
         $user->number = $data['number'];
         $user->name = $data['name'];
         $res1 = $user->save();
 
+        // 更新用户详情表
         $userinfo = usersinfo::where('uid',$id)->first();
         $userinfo->email = $data['email'];
         $userinfo->ufile = $file;
@@ -149,19 +153,12 @@ class UserController extends Controller
     }
 
     /**
-     * 用户删除
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function Destroy($id)
-    {
-        echo 'destroy';
-    }
+    */
 
     /**
-     * 软删除
-    */
+     *  软删除列表
+     */
      public function SoftDeletion()
     {
         // 获取软删除
@@ -174,10 +171,10 @@ class UserController extends Controller
             ]);
     }
 
-    /**
-     * 软删除回复用户
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+
+   /**
+    * 恢复已被软删除用户
+    * @param [ int ] $id [ 需要恢复的用户ID ]
     */
     public function Huifu($id)
     {
@@ -191,9 +188,14 @@ class UserController extends Controller
     }
 
     /**
-     * 删除用户
+     *
      * @param  [type] $id [description]
      * @return [type]     [description]
+     */
+
+    /**
+     * 永久删除用户
+     * @param [type] $id [description]
      */
     public function Del($id)
     {

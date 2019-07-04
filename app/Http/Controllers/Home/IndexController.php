@@ -10,7 +10,10 @@ use App\Http\Controllers\Home\ShopcartController;
 
 class IndexController extends Controller
 {
-    //无限分类分类
+    //
+    /**
+     * [ 无限分类分类 ]
+     */
     public  function Cates_child()
     {
         $cates = DB::table('cates')->orderBy('path','asc')->get()->toArray();
@@ -23,15 +26,12 @@ class IndexController extends Controller
     //无限循环
     public function tree($cates_data,$pid=0)
     {
-
             $list = [];
-
             foreach ($cates_data as $k=>$v){
-                if ($v->pid == $pid){
+                if ($v->pid == $pid) {
                         $list[]= $v;
                         $v->sub = $this->tree($cates_data,$v->id);
                 }
-
         }
         return $list;
     }
@@ -40,7 +40,6 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function Index()
     {
         $count = ShopcartController::CountCar();
@@ -51,7 +50,7 @@ class IndexController extends Controller
         $goods = DB::table('goods_sku')->get()->toArray();
 
     /*************************莫薛贵***********************************/
-    $shaky = DB::table('shaky')->get();
+        $shaky = DB::table('shaky')->get();
 
 
 
@@ -144,11 +143,6 @@ class IndexController extends Controller
 
 
     /******************************************************************/
-
-
-        // $countCar = ShopcartController::CountCar();
-//
-        // dump($countCar);
 
 
 

@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Home;
-
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUsers;
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Models\Usersinfo;
@@ -37,11 +35,15 @@ class PersonalController extends Controller
      * @return [type] [ HTML页面 ]
      */
     public function Index(Request $request)
-    {
-        
-               
+    {         
         $friendly = self::Friendly();
+
+        $user = Users::find(session('home_user')->id);
         $count = ShopcartController::CountCar();
+
+        $good = GoodsSku::get();
+
+        $collect = $user->collect;
         $friendly = self::Friendly();
 
         $kouwei = $request->input('a',0);
@@ -52,50 +54,58 @@ class PersonalController extends Controller
             'weds'=>$weds,
             'friendly'=>$friendly,
             'count'=>$count,
+            'user'=>$user,
+            'good'=>$good,
+            'collect'=>$collect,
             ]);
     }
-
-
     /**
      * [ 加载购买页面 ]
      * @return [ 视图 ] [ HTML页面 ]
      */
     public function IntroDuction(Request $request)
     {
+        $weds = weds::find(1);
         error_reporting(0);
         $friendly = self::Friendly();
 
         $user = Users::find(session('home_user')->id);
         $count = ShopcartController::CountCar();
+
+        // 获取商品收藏
         $asd = $user->collect;
 
+        // 分配变量,用于判断用户是否已经收藏该商品
         foreach ($asd as $key => $v) {
             $collect[] = $v->gid;
         }
 
 
-        $weds = weds::find(1);
+
          //商品id
         $gid = $request->input('ids',0);
         $gids = $request->input('gids',0);
+
         //活动类id
         $sid = $request->input('sid',0);
+
         //判断条件：是否为活动商品
-        if($sid!=0){
+        if ($sid != 0) {
             $shaky_one = DB::table('shaky')->where('id',$sid)->first();
             $date = date('Y-m-d H:i:s',time());
             $ctime = $shaky_one->ctime;
             $jtime = $shaky_one->jtime;
-            if($ctime>$date){
+
+            if ($ctime > $date) {
                 echo json_encode('活动未开启');
 
-            } else if($ctime<$date&&$jtime<$date){
+            }else if($ctime<$date&&$jtime<$date){
                 echo json_encode('活动已结束');
             }
         }
-        if($gid!=0){
-         //所属类Id
 
+        if ($gid != 0) {
+        //所属类Id
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
 
         $cid = $goods_sku->cid;
@@ -104,9 +114,11 @@ class PersonalController extends Controller
         //商品属性
         $flavour = DB::table('flavour')->get();
         $list = [];
+
         foreach($flavour as $k=> $val){
             $list[ $val->touch][] = $val->fname;
         }
+
 
         return view('home.personal.introduction',[
                 'goods_sku'=>$goods_sku,
@@ -116,13 +128,40 @@ class PersonalController extends Controller
                 'count'=>$count,
                 'collect'=>$collect,
                 'list'=>$list,
+                'shaky_sku'=>$shaky_sku,
+                ]);
+        }
+        if ($gids != 0) {
+         //所属类Id
+
+        $goods_sku = DB::table('goods_sku')->where('gid',$gids)->first();
+        $shaky_sku = DB::table('shaky_sku')->where('gid',$gids)->first();
+        //商品属性
+        $flavour = DB::table('flavour')->get();
+        $list = [];
+        foreach($flavour as $k=> $val){
+            $list[ $val->touch][] = $val->fname;
+        }
+
+        $cid = $goods_sku->cid;
+
+        $goods_all = DB::table('goods_sku')->where('cid',$cid)->get();
+         return view('home.personal.introduction',[
+                'goods_sku'=>$goods_sku,
+                'goods_all'=>$goods_all,
+                'weds'=>$weds,
+                'friendly'=>$friendly,
+                'count'=>$count,
+                'collect'=>$collect,
+                'list'=>$list,
+                'shaky_sku'=>$shaky_sku,
                 ]);
         }
     }
 
     /**
-     * 加载搜索商品页面
-     * @return [type] [HTML页面]
+     * [ 加载搜索商品页面 ]
+     * @param Request $request [ 搜索内容 ]
      */
     public function Search(Request $request)
     {
@@ -141,7 +180,7 @@ class PersonalController extends Controller
         $weds = weds::find(1);
         //商品id
         $id = $request->input('id',0);
-        if($title!=''){
+        if ($title!='') {
             //名称搜索
             $goods_all = DB::table('goods_sku')->where('title','like','%'.$title.'%')->paginate(20);
         } else if($id!=0){
@@ -154,16 +193,16 @@ class PersonalController extends Controller
             //搜索所有
             $goods_all = DB::table('goods_sku')->paginate(20);
         }
-        if($prices!=0){
+        if($prices != 0){
 
             $goods_all = DB::table('goods_sku')->orderBy('price','asc')->paginate(20);
         }
-        if($assess!=0){
+        if($assess != 0){
 
             $goods_all = DB::table('goods_sku')->orderBy('assess','desc')->paginate(20);
         }
         //所属类Id
-        if($id!=0){
+        if($id !=0 ){
             $goods_count= DB::table('goods_sku')->where('cid',$id)->get();
         } else{
              $goods_count= DB::table('goods_sku')->where('title','like','%'.$title.'%')->get();
@@ -211,8 +250,11 @@ class PersonalController extends Controller
     public function ImplementAddres(Request $request)
     {
         $data = $request->all();
+        // 合并地址
         $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];
         $detailed = $data['address'];
+
+        // 添加数据
         $addres = new Address;
         $addres->uid = session('home_user')->id;
         $addres->address = $address;
@@ -242,8 +284,8 @@ class PersonalController extends Controller
     }
 
     /**
-     * 加载修改地址页面
-     * @param [type] $id [description]
+     * [ 加载修改地址页面 ]
+     * @param  $id [地址ID]
      */
     public function UpdateAddress($id)
     {
@@ -261,8 +303,8 @@ class PersonalController extends Controller
     }
 
     /**
-     * 执行修改地址
-     * @param Request $request [description]
+     * [ 执行修改地址 ]
+     * @param Request $request [ 需要修改的数据 ]
      */
     public function ImplementUpdateAddress(Request $request)
     {
@@ -280,9 +322,9 @@ class PersonalController extends Controller
     }
 
     /**
-     * 设置默认地址
+     * [ 设置默认地址 ]
      * @param Request $request
-     * @param [type]  $id      [需要设为默认的ID]
+     * @param [int]  $id      [ 需要设为默认的ID ]
      */
     public function DefaultAddress(Request $request,$id)
     {
@@ -307,7 +349,7 @@ class PersonalController extends Controller
 
 
     /**
-     * 加载个人信息页面
+     * [ 加载个人信息页面 ]
      * @return [type] [HTML页面]
      */
     public function Information()
@@ -323,21 +365,27 @@ class PersonalController extends Controller
     }
 
     /**
-     * 执行个人信息修改
+     * [ 执行个人信息修改 ]
      * @param Request $request [跳转页面]
      */
     public function ImplementInformation(Request $request)
     {
         $res = $request->all();
-
         DB::beginTransaction();
-        // 获取头像
 
+        $allow = ['image/png','image/jpeg','image/gif'];
+        if (!in_array($_FILES['ufile']['type'],$allow)) {
+                return back()->with('error','请上传图片文件!');
+        }
+        if($_FILES['ufile']['error'] == 1){
+            return back()->with('error','图片不能大于2M');
+        }
+        // 假如用户换头像
         if ($request->hasFile('ufile')) {
+                // 删掉原图
             if ($request->input('file') == '/DefaultAvatar/1.jpg') {
                 $file = $request->file('ufile')->store(date('Ymd'));
             }else{
-
                 Storage::delete($request->input('file'));
                 $file = $request->file('ufile')->store(date('Ymd'));
             }
@@ -345,6 +393,7 @@ class PersonalController extends Controller
             $file = $request->input('file');
         }
 
+        // 压入数据
         $id = session('home_user')->id;
         $user = Users::find($id);
         $data = $request->all();
@@ -363,17 +412,18 @@ class PersonalController extends Controller
             DB::commit();
             $user_data = Users::where('id', $id)->first();
             session(['home_user'=>$user_data]);
-            return redirect("/center/information");
+            return back()->with('success','修改成功');
         }else{
             DB::rollBack();
-            return redirect("/center/information");
+            return back()->with('error','修改失败!请稍后重试');
         }
     }
 
 
+
     /**
-     * 加载修改密码页面
-     * @return [type] [description]
+     * [ 加载修改密码页面 ]
+     * @return [ HTML ] [ 视图 ]
      */
     public function Password()
     {
@@ -408,6 +458,7 @@ class PersonalController extends Controller
             exit;
         }
 
+        // 密码加密
         if (!Hash::check($upass,$user->password)) {
             return 1;
             exit;
@@ -423,15 +474,19 @@ class PersonalController extends Controller
 
 
     /**
-     * 加载收藏页面
-     * @return [type] [description]
+     * [ 加载收藏页面 ]
+     * @return [ HTMl ] [ 收藏页面 ]
      */
     public function Collection()
     {
         $user = Users::find(session('home_user')->id);
+
         $count = ShopcartController::CountCar();
+
         $good = GoodsSku::get();
+
         $collect = $user->collect;
+
         $friendly = self::Friendly();
         $weds = weds::find(1);
         return view('home.personal.collection',[
@@ -444,9 +499,10 @@ class PersonalController extends Controller
     }
 
     /**
-     * 加载订单管理
-     * @return [type] [description]
+     * [ 加载订单管理 ]
+     * @return [ HTML object ] [ 视图,订单数据 ]
      */
+
     public function Order()
     {
         $friendly = self::Friendly();
@@ -513,9 +569,13 @@ class PersonalController extends Controller
 
         $order = OrderDetails::where('oid',$id)->get();
 
+        // 直接分配变量
         foreach ($order as $key => $v) {
+            // 订单状态
             $dtype = $v->dtype;
+            // 修改时间
             $updated_at = $v->updated_at;
+            // 数量
             $onum = $v->onum;
         }
 
@@ -537,54 +597,33 @@ class PersonalController extends Controller
      */
     public function ConfirmReceipt($id)
     {
+        $friendly = self::Friendly();
+        $weds = weds::find(1);
         $order = Order::find($id);
         $order->otype = '3';
         $res = $order->save();
+        // 修改状态为3 ( 已收货 )
         $res2 = DB::table('order_details')->where('oid',$id)->update(['dtype' => '3']);
         if ($res && $res2) {
             return  1;
         }else{
             return 2;
         }
-        $friendly = self::Friendly();
-        $weds = weds::find(1);
         return view('home.personal.comment',[
             'weds'=>$weds,
             'friendly'=>$friendly,
             ]);
     }
 
-    /**
-     *
-     */
-    /**
-     * [用户订单详情页面]
-     * @param [type] $id [订单ID]
-     */
-/*    public function Commoditydetails($id)
-    {
-        $friendly = self::Friendly();
-        $weds = weds::find(1);
-        $order = Order::find($id);
-        $aid = $order->orderdetails->aid;
-        // 收货地址
-        $address = Address::find($aid);
-        $goods = GoodsSku::get();
-        return view('home.personal.commoditydetails',[
-            'weds'=>$weds,
-            'order'=>$order,
-            'goods'=>$goods,
-            'friendly'=>$friendly,
-            'address'=>$address,
-            ]);
-    }
-*/
+
+
     /**
      * [ 用户删除订单 ]
      * @param [ int ] $id [ 订单ID ]
      */
     public function DeleteOrders($id)
     {
+        // 删除数据
         $res1 = DB::table('order')->where('id',$id)->delete();
         $res2 = DB::table('order_details')->where('oid',$id)->delete();
         if ($res1 && $res2) {

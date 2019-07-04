@@ -11,17 +11,12 @@
     <section class="rt_wrap content mCustomScrollbar">
       <div class="rt_content">
         <div class="page_title">
-          <h2 class="fl">会员列表</h2>
-          <a href="/admin/banners" class="fr top_rt_btn add_icon">添加新会员</a>
+          <h2 class="fl">头条列表</h2>
+          <a href="/admin/headlines/create" class="fr top_rt_btn add_icon">添加头条</a>
         </div>
       <form action="/admin/headlines" method="get">
         <section class="mtb">
-          <select class="select">
-             <option>会员等级</option>
-             <option>普通会员</option>
-             <option>高级会员</option>
-          </select>
-          <input type="text" name="search" value="{{ $search }}" class="textbox textbox_225" placeholder="头条标题查询..."/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="search" value="{{ $search }}" style="height:38px;" class="textbox textbox_225" placeholder="头条标题查询..."/>
           <input type="submit" value="查询" class="group_btn"/>
         </section>
       </form>
@@ -61,7 +56,7 @@
                  @if($v->status == 0)
                  <a href="javascript:;" class="btn btn-success" style="color: white" onclick="changeStatus({{ $v->id }},0)">激活</a>
                  @else
-                  <a href="javascript:;" class="btn btn-primary" style="color: black"; onclick="changeStatus({{ $v->id }},1)">停止</a>
+                  <a href="javascript:;" class="btn btn-primary" style="color: #fff"; onclick="changeStatus({{ $v->id }},1)">停止</a>
                  @endif
 
             </td>
