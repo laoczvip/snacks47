@@ -167,7 +167,7 @@ class LoginController extends Controller
 
         }
 
-        $user->status = 1;
+        $user->type = 1;
         $user->token = str_random(30);
         if ($user->save()) {
             return view('home.register.success');

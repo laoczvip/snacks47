@@ -400,9 +400,13 @@ class PersonalController extends Controller
         $res = $request->all();
         DB::beginTransaction();
 
-        $allow = ['image/png','image/jpeg','image/gif'];
-        if (!in_array($_FILES['ufile']['type'],$allow)) {
-                return back()->with('error','请上传图片文件!');
+        $file = strstr($_FILES['ufile']['name'],'.');
+
+
+        $allow = ['.png','.jpeg','.gif','.jpg'];
+
+        if (!in_array($file,$allow)) {
+            return back()->with('error','请上传图片文件!');
         }
         if($_FILES['ufile']['error'] == 1){
             return back()->with('error','图片不能大于2M');
