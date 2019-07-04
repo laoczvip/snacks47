@@ -260,7 +260,7 @@
                                     <span class="iconfont">&#xe606;</span>
                                 </div>
                                 <div class="right-text-con">
-                                    <p class="name">会员数</p>
+                                    <p class="name">用户数</p>
                                     <p><span class="color-org">
                                     @if(Request::path() == 'admin')
                                         {{$num}}
@@ -373,7 +373,7 @@
                                 trigger: "axis"
                             },
                             legend: {
-                                data: ["会员", "文章", "评论"],
+                                data: ["用户", "总商品", "总金额"],
                                 selectedMode: false,
                             },
                             toolbox: {
@@ -417,7 +417,7 @@
                             },
                             series: [
                                 {
-                                    name: "会员",
+                                    name: "用户",
                                     type: "line",
                                     smooth: true,
                                     itemStyle: {
@@ -430,7 +430,7 @@
                                     data: [10, 12, 21, 54, 260, 830, 710]
                                 },
                                 {
-                                    name: "文章",
+                                    name: "总商品",
                                     type: "line",
                                     smooth: true,
                                     itemStyle: {
@@ -443,7 +443,7 @@
                                     data: [30, 182, 434, 791, 390, 30, 10]
                                 },
                                 {
-                                    name: "评论",
+                                    name: "总金额",
                                     type: "line",
                                     smooth: true,
                                     itemStyle: {
