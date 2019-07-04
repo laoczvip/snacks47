@@ -285,6 +285,7 @@ class PersonalController extends Controller
         $weds = weds::find(1);
         //商品id
         $id = $request->input('id',0);
+        
         if ($title!='') {
             //名称搜索
             $goods_all = DB::table('goods_sku')->where('title','like','%'.$title.'%')->paginate(20);
@@ -313,7 +314,7 @@ class PersonalController extends Controller
              $goods_count= DB::table('goods_sku')->where('title','like','%'.$title.'%')->get();
         }
         $count = ShopcartController::CountCar();
-
+        
         // 购物车数量
         $num = count($goods_count);
 

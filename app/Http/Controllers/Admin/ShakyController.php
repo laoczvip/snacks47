@@ -119,12 +119,12 @@ class ShakyController extends Controller
         if($shakys==null){
              $shaky = DB::table('shaky')->where('id',$id)->delete();
              if($shaky){
-                echo json_encode('ok');
+                echo json_encode('删除成功');
              } else{
-                echo json_encode('err');
+                echo json_encode('删除失败');
              }
         } else{
-            echo json_encode('errr');
+            echo json_encode('该活动还含有子商品');
         }
        
     }

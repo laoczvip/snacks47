@@ -13,21 +13,15 @@
                     <th style="text-align:center;">排序</th>
                     <th style="text-align:center;">所属活动</th>
                     <th style="text-align:center;">商品库存</th>                     
-                    <th style="text-align:center;">活动状态</th>
+
                     <th style="text-align:center;">操作</th>
                </tr>
                  @forelse($shaky as $k=>$v)
                <tr>
                  <td >{{$v->id}}</td>
                  <td>{{$v->sid}}</td>
-                 <td>{{$v->stock}}</td>               
-                 <td>
-                  @if($v->status==0)
-                  <kbd>未开启</kbd>
-                  @else
-                  <kbd style="background:green">已开启...</kbd>
-                  @endif
-                  </td>
+                 <td>{{$v->stock}}</td>    
+
                  <td>
                    <a href="javascript:;" onclick="dels({{$v->id}},this)" class="link_icon">&#100;</a>
                    <a href="/admin/shakys/edit?id={{$v->id}}" class="link_icon">&#101;</a>
@@ -47,7 +41,7 @@
                     function(){
                         var layer = layui.layer;
                 });
-                </script>
+ </script>
 <script>
   function dels(id,obj){
      var a = confirm('您确认删除吗');

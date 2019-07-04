@@ -4,7 +4,7 @@
     <section class="rt_wrap content mCustomScrollbar">
     <div class="rt_content">
             <div class="page_title">
-                <h2 class="fl">加入秒杀活动</h2>
+                <h2 class="fl">修改活动商品</h2>
             </div>
         @if (count($errors) > 0)
         <div class="alert alert-danger" role="alert">
@@ -33,12 +33,12 @@
                     <!-- <span class="errorTips">错误提示信息...</span> -->
                 </li>
                  <li>
-                    <span class="item_name" style="width:120px;">秒杀剩余库存:</span>
+                    <span class="item_name" style="width:120px;">活动商品剩余库存:</span>
                     <input type="text" name="stock1" value="{{$shaky->stock}}">
                     <!-- <span class="errorTips">错误提示信息...</span> -->
                 </li>
                 <li>
-                    <span class="item_name" style="width:120px;">秒杀库存:</span>
+                    <span class="item_name" style="width:120px;">活动新库存:</span>
                     <input type="text" name="stock" value="">
                     <!-- <span class="errorTips">错误提示信息...</span> -->
                 </li>

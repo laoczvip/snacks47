@@ -203,7 +203,7 @@
                             <a class="am-btn-warning btn" href="/center/index">个人中心</a>
                         </div>
 
-                        <div class="member-logout" style="margin-top: -24px;margin-left: 99px;"">
+                        <div class="member-logout" style="margin-top: -24px;margin-left: 99px;">
                             <a class="am-btn-warning btn" href="/out">退出登陆</a>
                         </div>
 
@@ -414,6 +414,7 @@
                 <span hidden>{{$i = 1}}</span>
                 <span hidden>{{$a = 1}}</span>
                 @forelse($cates as $cate)
+                  @if($cate->status==1)
                 <div id="f{{$a++}}">
                 <!--甜点-->
 
@@ -423,7 +424,9 @@
                         <h3>每一道甜品都有一个故事</h3>
                         <div class="today-brands ">
                         @forelse($cate->sub as $val)
+                          @if($val->status==1)
                             <a href="/">{{$val->title}}</a>
+                          @endif
                         @empty
                         @endforelse
                         </div>
@@ -437,7 +440,9 @@
                     <div class="am-u-sm-5 am-u-md-4 text-one list ">
                         <div class="word">
                         @forelse($cate->sub as $val)
+                         @if($val->status==1)
                             <a class="outer" href="#"><span class="inner"><b class="text">{{$val->title}}</b></span></a>
+                         @endif
                         @empty
                         @endforelse
                         </div>
@@ -453,10 +458,9 @@
 
                          @forelse($cate->sub as $cate_data)
                              @forelse($cate_data->sub as $cate_datas)
-
                                  @if($goods_data->cid==$cate_datas->id)
                                      @if($goods_data->sid == 0)
-
+                                        @if($cate_datas->status==1)
                                         <div class="am-u-sm-3 am-u-md-2 text-two">
                                             <div class="outer-con">
                                                 <div class="title " style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:100px;">
@@ -469,7 +473,7 @@
                                             </div>
                                             <a href="/home/personal/introduction?ids={{$goods_data->gid}}&id={{$goods_data->id}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
                                         </div>
-
+                                      @endif
                                     @endif
                                 @endif
                             @empty
@@ -482,6 +486,7 @@
                 </div>
              <div class="clear "></div>
              </div>
+             @endif
             @empty
             @endforelse
 

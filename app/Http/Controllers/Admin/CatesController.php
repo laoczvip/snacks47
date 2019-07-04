@@ -198,9 +198,10 @@ class CatesController extends Controller
 
         $res = DB::table('cates')->where('id',$id)->update($status);
         if($res){
-            $data = DB::table('cates')->find($id);
+            $ress = DB::table('cates')->where('pid',$id)->update($status);
+                $data = DB::table('cates')->find($id);
 
-            return redirect("admin/cates/show?id=".$data->pid);
+                return redirect("admin/cates/show?id=".$data->pid);
         } else {
             return back()->with('error','修改失败');
         }

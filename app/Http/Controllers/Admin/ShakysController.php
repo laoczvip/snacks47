@@ -35,13 +35,14 @@ class ShakysController extends Controller
 
     	$id = $request->input('id',0);
         $sid = $request->input('sid',0);
-
         //确认该商品是否已经添加过
         $shaky = DB::table('shaky_sku')->where('gid',$id)->first();
+
          if($shaky){
             return back()->with('error','该商品已添加到活动列');
         }
     	$goods = DB::table('goods')->where('id',$id)->first();
+        
     	$goods_sku = DB::table('goods_sku')->where('gid',$id)->first();
     	return view('admin/shakys/create',['id'=>$id,'goods'=>$goods,'goods_sku'=>$goods_sku,'sid'=>$sid]);
     }
@@ -134,8 +135,8 @@ class ShakysController extends Controller
         //获取原价和优惠
         $original = $request->input('original',0);
         $preferential = $request->input('preferential',0);
-        if($stock<0){
-
+        if($stock < 0){
+ 
             return back()->with('error','库存数量小于0');
         }
         if($preferential>$original||$preferential<0){
@@ -148,7 +149,7 @@ class ShakysController extends Controller
                 'original' => 'required',
                 'preferential' => 'required',
             ],[
-                'stock.required'=>'库存不能为空',
+                'stock.required'=>'新库存不能为空',
                 'gid.required'=>'商品id不能为空',
                 'original.required'=>'原金额不能为空',
                 'preferential.required'=>'优惠金额不能为空',
@@ -158,6 +159,8 @@ class ShakysController extends Controller
         $sid = $request->input('sid',0); //活动类id
         $goods = DB::table('goods_sku')->where('gid',$gid)->first(); //查看商品表
         $goods_stock = $goods->stock;
+
+        if($stock1+$goods_stock>=$data['stock']){
         $gid_data['stock'] = ($stock1-$stock) + $goods_stock;  //操作活动商品的库存和原商品库存
 
         $shaky = DB::table('shaky_sku')->where('gid',$gid)->update($data); //修改活动表
@@ -168,7 +171,12 @@ class ShakysController extends Controller
                 } else {
                     return back()->with('error','修改失败');
                 }
+            } else {
+                return back()->with('error','活动暂无修改');
             }
+        } else {
+            return back()->with('error','活动库存大于原商品库存');
+        }
     }
     /**
      * 删除活动商品

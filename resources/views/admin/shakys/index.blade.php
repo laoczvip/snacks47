@@ -25,7 +25,7 @@
                   <a>已添加</a>
                   <a href="/admin/shakys/show?id={{$v->sid}}">查看</a>
                   @else
-                  <a href="/admin/shakys/create?id={{$v->id}}&sid={{$ids}}">加入活动</a>
+                  <a href="/admin/shakys/create?id={{$v->gid}}&sid={{$ids}}">加入活动</a>
                   @endif
                  </td>
                </tr>

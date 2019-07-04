@@ -41,18 +41,24 @@
           </aside>
      </div>
 </section>
+<script src="/layui/layui.js">
+               layui.use('layer',
+                    function(){
+                        var layer = layui.layer;
+                });
+ </script>
 <script>
   function del(id,obj){
      var a = confirm('您确认删除吗');
      if(a){
         $.get('/admin/shaky/del',{id:id},function(res){
-            if(res=='ok'){
+            if(res=='删除成功'){
               $(obj).parent().parent().remove();
-              alert('成功删除');
-            } else if(res=='errr'){
-              alert('该活动还含有子商品');
+              layer.msg(res, {icon: 1});
+            } else if(res=='该活动还含有子商品'){
+              layer.msg(res, {icon: 5});
             } else{
-              alert('删除失败');
+              layer.msg(res, {icon: 5});
             }
         },'json');
      }
