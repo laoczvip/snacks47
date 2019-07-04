@@ -49,7 +49,7 @@
 
                             <div class="comment-list">
                                 <div class="item-pic">
-                                    <a href="#" class="J_MakePoint">
+                                    <a href="" class="J_MakePoint">
                                         <img src="/uploads/{{$Goods_Profile[$v->gid]}}" class="itempic" style="height:100px">
                                     </a>
                                 </div>

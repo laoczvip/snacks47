@@ -6,6 +6,7 @@
      <div class="rt_content">
       <div class="page_title">
        <h2 class="fl">商品列表</h2>
+       <a href="/admin/goods/create" style="text-decoration:none" class="fr top_rt_btn add_icon">添加商品</a>
       </div>
         <form action="/admin/goods/index" method="get">
           <section class="mtb">

@@ -17,6 +17,7 @@
       overflow:hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
      </style>
 </head>
 <body>
@@ -28,7 +29,11 @@
                     <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
                         <ul class="am-slides">
                             @foreach($banners_data as $k=>$v)
-                            <li class="banner1" style="background-color: #fff;width:100px;"><a href="{{ $v->jump }}"><img src="/uploads/{{ $v->url }}"; style="width:42%;height:100%;"></a></li>
+                              <li class="banner1" style="background:url(/a/images/1560848875.jpg);width:100%;">
+                                  <a href="{{ $v->jump }}">
+                                      <img src="/uploads/{{ $v->url }}"; >
+                                   </a>
+                              </li>
                             @endforeach
                         </ul>
                     </div>
@@ -168,7 +173,7 @@
                             </a>
                             <em>
                                 Hi,<span class="s-name">请先登陆</span>
-                                <a href="#"><p>点击更多优惠活动</p></a>
+                                <a href="" ><p>点击更多优惠活动</p></a>
                             </em>
                         </div>
                         <div class="member-logout">
@@ -191,7 +196,7 @@
                             </a>
                             <em>
                                 Hi,<span class="s-name">{{  session('home_user')->name }}</span>
-                                <a href="#"><p>点击更多优惠活动</p></a>
+                                <a href="#huodong"><p>点击更多优惠活动</p></a>
                             </em>
                         </div>
                         <div class="member-logout">
@@ -269,8 +274,8 @@
                         <style>
                           .mytime{ line-height: 20px; width: 300px; margin: 0 auto;color:red;padding: :0px;}
                          </style>
-                <div class="am-container activity ">
-                    <div class="shopTitle ">
+                <div class="am-container activity " >
+                    <div class="shopTitle" id="huodong">
                         <h4>活动</h4>
                         <h3>每期活动 优惠享不停 </h3>
                         <span class="more ">
