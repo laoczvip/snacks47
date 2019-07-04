@@ -112,7 +112,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 添加商品
      *
      * @return \Illuminate\Http\Response
      */
@@ -280,7 +280,7 @@ class GoodsController extends Controller
 
         $res =  DB::table('goods_sku')->where('gid',$id)->update($data);
 
-       
+
             $data_sku['title'] = $request->input('title','');
             $data_sku['sid'] = 0;
 
@@ -290,8 +290,8 @@ class GoodsController extends Controller
             } else {
                 return back()->with('error','修改失败');
             }
-        } 
-    
+        }
+
 
     /**
      * Remove the specified resource from storage.
