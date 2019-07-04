@@ -385,7 +385,7 @@
 										<div class="attr-list-hd tm-clear">
 											<h4>产品参数：</h4></div>
 										<div class="clear"></div>
-										{!!$goods_sku->parameter!!}
+										<span style="text-align: left">{!!$goods_sku->parameter!!}</span>
 										<div class="clear"></div>
 									</div>
 

@@ -1,6 +1,13 @@
 @extends('admin.index.index')
 
 @section('center')
+<style type="text/css">
+    .hides{
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+</style>
     <section class="rt_wrap content mCustomScrollbar">
  <div class="rt_content">
       <div class="page_title">
@@ -32,19 +39,19 @@
            @foreach($del_banners as $k=>$v)
         <tr>
 
-            <td class="center"><img src="/uploads/{{ $v->url }}" width="50" height="50"/></td>
+            <td class="center" style="line-height:50px"><img src="/uploads/{{ $v->url }}" width="50" height="50"/></td>
             <td>{{$v->title}}</td>
-            <td class="center">{{$v->desc}}</td>
-            <td class="center">{{$v->jump}}</td>
-            <td class="center">{{$v->created_at}}</td>
-            <td>
+            <td class="center" style="line-height:50px">{{$v->desc}}</td>
+            <td class="hides" style="line-height:50px" title="{{$v->jump}}">{{$v->jump}}</td>
+            <td class="center" style="line-height:50px">{{$v->created_at}}</td>
+            <td style="line-height:50px">
                   @if($v->status == 0)
                   <kbd>未激活</kbd>
                   @else
                   <kbd style="background: green";>激活</kbd>
                   @endif
                 </td>
-            <td class="center">
+            <td class="center" style="line-height:50px">
                  <a href="/admin/banners/huifu/{{ $v->id }}" style="color: black" class="btn btn-info">恢复</a>
                   <a href="/admin/banners/delete_data/{{ $v->id }}" style="color: white";  class="btn btn-danger" >永久删除</a>
                  <!-- <a href="#" title="删除" class="link_icon">&#100;</a> -->
