@@ -34,7 +34,7 @@
                 <ul>
                     <li> <a href="/center/collection">收藏</a></li>
                     <li> <a href="foot.html">足迹</a></li>
-                    <li> <a href="/center/comment">评价</a></li>
+                    <li> <a href="/home/comment">评价</a></li>
                     <li> <a href="news.html">消息</a></li>
                 </ul>
             </li>

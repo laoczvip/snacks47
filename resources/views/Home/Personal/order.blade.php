@@ -522,6 +522,7 @@
                                                         @endforeach
 
                                                     </div>
+                                                    @forelse($orders as $val)
                                                     <div class="order-right">
                                                         <li class="td td-amount">
                                                             <div class="item-amount">
@@ -537,14 +538,27 @@
                                                                     <p class="order-info"><a href="logistics.html">查看物流</a></p>
                                                                 </div>
                                                             </li>
+                                                           
+                                                          
                                                             <li class="td td-change">
+                                                             @if(!isset($list[$v->onum]))
                                                                 <div class="am-btn am-btn-danger anniu" onclick="del({{$v->id}},this)">删除订单</div>
-                                                                <div class="am-btn am-btn-danger anniu" >评价商品</div>
+                                                                <a href="/home/comment/create?oid={{$v->id}}"><div class="am-btn am-btn-danger anniu" >评价商品</div></a>
+                                                                @else
+                                                                <a href="javascript:;"><div class="am-btn am-btn-success " >已评论</div></a>
+                                                            @endif
                                                             </li>
+                                                            
+                                                                 
+                                                            
+                                                           
                                                         </div>
                                                     </div>
+                                                     @empty
+                                                            @endforelse
                                                 </div>
                                             </div>
+
                                             @endif
                                             @empty
                                               <img src="/h/images/kkry.jpg">

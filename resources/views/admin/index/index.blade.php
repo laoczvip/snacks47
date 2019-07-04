@@ -175,7 +175,6 @@
                             </div>
                             <ul class="sidebar-trans">
                                 <dd><a href="/admin/comment">评论列表</a></dd>
-                                <dd><a href="/admin/comment/create" >添加评论</a></dd>
                             </ul>
                     </div>
                 </dl>

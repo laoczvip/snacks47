@@ -35,21 +35,20 @@ class PersonalController extends Controller
      * @return [type] [ HTML页面 ]
      */
     public function Index(Request $request)
-    {
+    {         
+        $friendly = self::Friendly();
 
         $user = Users::find(session('home_user')->id);
-
         $count = ShopcartController::CountCar();
 
         $good = GoodsSku::get();
 
         $collect = $user->collect;
-
-
         $friendly = self::Friendly();
 
         $kouwei = $request->input('a',0);
         $_SESSION ['flavor'] = $kouwei;
+
         $weds = weds::find(1);
         return view('home.personal.center',[
             'weds'=>$weds,
@@ -60,8 +59,6 @@ class PersonalController extends Controller
             'collect'=>$collect,
             ]);
     }
-
-
     /**
      * [ 加载购买页面 ]
      * @return [ 视图 ] [ HTML页面 ]
@@ -513,14 +510,27 @@ class PersonalController extends Controller
         $weds = weds::find(1);
         $uid = session('home_user')->id;
         $order = Order::where('uid',$uid)->orderBy('created_at', 'desc')->paginate(99);
-
+        $users = DB::table('comment')->where('uid',$uid)->get();
+        $orders = Order::where('uid',$uid)->get();
+        $list = [];
+        foreach($users as $v){
+            $list[$v->orderId]=$v->uid;
+        }
+        
+        if($list==null){
+            $list= [0];
+        }
+       
         $goods = GoodsSku::get();
+      
         return view('home.personal.order',[
             'weds'=>$weds,
             'order'=>$order,
             'goods'=>$goods,
             'count'=>$count,
             'friendly'=>$friendly,
+            'orders'=>$orders,
+            'list'=>$list,
             ]);
     }
 

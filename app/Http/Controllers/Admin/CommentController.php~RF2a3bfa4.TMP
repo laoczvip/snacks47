@@ -7,24 +7,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Models\Comment;
 use DB;
-
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 显示评论列表
+     *
      * @return \Illuminate\Http\Response
      */
     public function Index()
     {
         //商品名赋值
         $goods = DB::table('goods_sku')->get();
-
         $goods_sku = [];
         foreach($goods as $v){
-            $goods_sku[$v->id] = $v->title; 
+            $goods_sku[$v->gid] = $v->title; 
         }
-
         // 分页查询数据
         $comment = Comment::paginate(2);
         //用户名赋值

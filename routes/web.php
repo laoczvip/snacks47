@@ -303,8 +303,8 @@ Route::resource('admin/friendly','Admin\FriendlyController');
 // 后台 评论
 Route::resource('admin/comment','Admin\CommentController');
 
-
-
+// 前台 评论
+Route::resource('home/comment','Home\CommentController');
 
 
 
