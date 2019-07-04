@@ -72,9 +72,9 @@
     @endforeach
     
     <hr class="am-article-divider blog-hr">
-    <div style="width:100px;height:35px;margin-top: 20px;margin-left: 450px">
+    <div style="width:100px;height:55px;margin-top: 20px;margin-left: 450px">
       <nav aria-label="Page navigation">
-        <aside>
+        <aside style="width:250px;">
             {{ $data->links() }}
         </aside>
       </nav>
