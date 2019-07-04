@@ -462,7 +462,7 @@
                                                 </div>
                                                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
                                             </div>
-                                            <a href="/home/personal/introduction?ids={{$goods_data->gid}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
+                                            <a href="/home/personal/introduction?ids={{$goods_data->gid}}&id={{$goods_data->id}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
                                         </div>
 
                                     @endif

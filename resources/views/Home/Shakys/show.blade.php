@@ -115,20 +115,20 @@
                                     <li>
                                         <div class="i-pic limit">
                                             <a href="javascript:;" onclick="urls({{$v->gid}},{{$v->sid}})"><img src="/uploads/{{$goods_sku[$v->gid]}}"/></a>
-                                            <p class="title fl" style="height:24px;line-height:12px;">
+                                            <p class="title fl" >
                                                 <del>
                                                 <b>原价</b>
                                                 <b>¥</b>
                                                 <strong>{{$v->original}}</strong>
                                                 </del>
                                             </p>
-                                            <p class="price fl" style="height:16px;line-height:8px;">
+                                            <p class="price fl">
                                                 <b>秒杀价格</b>
                                                 <b>¥</b>
                                                 <strong>{{$v->original-$v->preferential}}</strong>
                                             </p>
-                                            <p class="number fl">
-                                                剩余库存:<span>{{$v->stock}}</span>
+                                            <p class="number f1">
+                                                &nbsp;&nbsp;剩余库存:<span>{{$v->stock}}</span>
                                             </p>
                                         </div>
                                     </li>
