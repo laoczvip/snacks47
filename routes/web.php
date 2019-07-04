@@ -141,7 +141,6 @@ Route::group(['middleware'=>'login'],function(){
 
 
 
-
 });
 
 /***************************前台*********************************/
@@ -242,8 +241,11 @@ Route::group(['middleware'=>'login'],function(){
     //秒杀商品搜索页面
     Route::get('home/shakys/show','Home\ShakyController@index');
 
+    // 前台 评论 删除
+    Route::get('home/comment/destroys','Home\CommentController@Destroy');
     // 前台 评论
     Route::resource('home/comment','Home\CommentController');
+
 
 
     // 前台头条详情
