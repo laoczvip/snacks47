@@ -102,6 +102,7 @@ class PurchaseController extends Controller
 
         // 把总价格的金钱
         DB::update("update salesvolume set menuy=menuy+".$data['price']."where id=1");
+        // 加销量
         DB::update("update goods_sku set buy=buy+1 where id=".$data['gid']);
         $res2  = $orderdetails->save();
         if ($res1 && $res2) {

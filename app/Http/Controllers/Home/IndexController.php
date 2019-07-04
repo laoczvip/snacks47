@@ -172,4 +172,9 @@ class IndexController extends Controller
        // return view('home.index.index',['cates'=>$cates]);
     }
 
+    public function Maintain()
+    {
+        return view('home.index.503');
+    }
+
 }

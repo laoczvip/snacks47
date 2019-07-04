@@ -19,6 +19,8 @@ class CollectionController extends Controller
         // 添加数据
         $collect->uid = session('home_user')->id;
         $collect->gid = $gid;
+        DB::update("update goods set collect=collect+1 where id=".$gid);
+
         $res = $collect->save();
         if ($res) {
             return 1;
@@ -36,6 +38,9 @@ class CollectionController extends Controller
         $uid = session('home_user')->id;
         // 查询用户已收藏的商品
         $res = Collect::where('uid',$uid)->where('gid',$id)->get();
+
+        DB::update("update goods set collect=collect-1 where id=".$id);
+
 
         foreach ($res as $k => $v) {
             $cid = $v->id;
