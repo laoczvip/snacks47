@@ -35,7 +35,12 @@ class PersonalController extends Controller
      * @return [type] [ HTML页面 ]
      */
     public function Index(Request $request)
-    {         
+    {
+
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $friendly = self::Friendly();
 
         $user = Users::find(session('home_user')->id);
@@ -65,6 +70,8 @@ class PersonalController extends Controller
      */
     public function IntroDuction(Request $request)
     {
+
+
         $weds = weds::find(1);
         error_reporting(0);
         $friendly = self::Friendly();
@@ -229,6 +236,10 @@ class PersonalController extends Controller
      */
     public function Addres()
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
         $weds = weds::find(1);
@@ -249,6 +260,8 @@ class PersonalController extends Controller
      */
     public function ImplementAddres(Request $request)
     {
+
+
         $data = $request->all();
         // 合并地址
         $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];
@@ -289,6 +302,10 @@ class PersonalController extends Controller
      */
     public function UpdateAddress($id)
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
         $weds = weds::find(1);
@@ -308,6 +325,8 @@ class PersonalController extends Controller
      */
     public function ImplementUpdateAddress(Request $request)
     {
+
+
         $data = $request->all();
         $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];
         $flight = Address::find($data['id']);
@@ -328,6 +347,10 @@ class PersonalController extends Controller
      */
     public function DefaultAddress(Request $request,$id)
     {
+
+        if (!session('type')) {
+            return redirect("/login");
+        };
 
         $diz = DB::table('address')->where('default', '1')->first();
 
@@ -354,6 +377,10 @@ class PersonalController extends Controller
      */
     public function Information()
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
         $weds = weds::find(1);
@@ -427,6 +454,10 @@ class PersonalController extends Controller
      */
     public function Password()
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
         $weds = weds::find(1);
@@ -444,6 +475,10 @@ class PersonalController extends Controller
 
     public function ImplementPassword(Request $request)
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $data = $request->all();
         $upass = $data['upass'];
         $user = Users::find(session('home_user')->id);
@@ -479,6 +514,10 @@ class PersonalController extends Controller
      */
     public function Collection()
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $user = Users::find(session('home_user')->id);
 
         $count = ShopcartController::CountCar();
@@ -505,6 +544,10 @@ class PersonalController extends Controller
 
     public function Order()
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $friendly = self::Friendly();
         $count = ShopcartController::CountCar();
         $weds = weds::find(1);
@@ -516,13 +559,13 @@ class PersonalController extends Controller
         foreach($users as $v){
             $list[$v->orderId]=$v->uid;
         }
-        
+
         if($list==null){
             $list= [0];
         }
-       
+
         $goods = GoodsSku::get();
-      
+
         return view('home.personal.order',[
             'weds'=>$weds,
             'order'=>$order,
@@ -540,6 +583,10 @@ class PersonalController extends Controller
      */
     public function Comment()
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $count = ShopcartController::CountCar();
         $friendly = self::Friendly();
         $weds = weds::find(1);
@@ -558,6 +605,10 @@ class PersonalController extends Controller
      */
     public function Commoditydetails($id,$aid)
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $count = ShopcartController::CountCar();
 
         $friendly = self::Friendly();
@@ -597,6 +648,10 @@ class PersonalController extends Controller
      */
     public function ConfirmReceipt($id)
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $friendly = self::Friendly();
         $weds = weds::find(1);
         $order = Order::find($id);

@@ -72,9 +72,9 @@
     @endforeach
     
     <hr class="am-article-divider blog-hr">
-    <div style="width:100px;height:35px;margin-top: 20px;margin-left: 450px">
+    <div style="width:100px;height:55px;margin-top: 20px;margin-left: 450px">
       <nav aria-label="Page navigation">
-        <aside>
+        <aside style="width:250px;">
             {{ $data->links() }}
         </aside>
       </nav>
@@ -90,7 +90,7 @@
         <div style="color: black" class="am-panel-hd">热门话题 <a style="font-size:15px;color: #868686;padding-left: 140px"; href="/home/headlines_data/list">更多...</a></div> 
         <ul class="am-list blog-list">
         @foreach($datas as $k=>$v) 
-          <li><a href="/home/headlines_data/index?id={{ $v->id }}"><p>[公告]{{ $v->htitle }}</p></a></li> 
+          <li><a href="/home/headlines_data/index?id={{ $v->id }}"><p>{{ $v->htitle }}</p></a></li> 
 
         @endforeach  
          

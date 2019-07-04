@@ -36,7 +36,8 @@ class LoginController extends Controller
 
         // 验证码验证
         if (!Captcha::check($request->input('code'))) {
-                return 2;
+                echo  2;
+                exit;
         }
 
         $number = $request->input('number','');
@@ -46,8 +47,16 @@ class LoginController extends Controller
         $user_data = Users::where('number', $number)->first();
         if (!$user_data) {
             echo 1;
+            exit;
+
         }else if (!Hash::check($password, $user_data->password)) {
             echo 1;
+            exit;
+
+        }
+        if ($user_data->type < 1 ) {
+            echo 3;
+            exit;
         }
 
         // 验证密码

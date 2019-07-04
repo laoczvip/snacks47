@@ -65,6 +65,9 @@
                 }else if(res == 2){
                     layer.msg('验证码错误', {icon: 2});
                     return false;
+                }else if(res == 3){
+                    layer.msg('权限不足', {icon: 2});
+                    return false;
                 }
                 window.location.href = '/admin';
             },'html');

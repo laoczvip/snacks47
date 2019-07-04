@@ -58,13 +58,13 @@
                     </tr>
                     <tr>
                         <td>商品名称</td>
-                        <td><input type="text" name="title" class="textbox textbox_225" value="{{ old('number') }}" placeholder="请输入4~16位字母或者数字"/></td>
+                        <td><input type="text" name="title" class="textbox textbox_225" value="{{ old('title') }}" placeholder="请输入4~16位字母或者数字"/></td>
                     </tr>
                     <tr>
                         <td>展示图</td>
                         <td>
                         <label class="uploadImg">
-                            <input name="showcase" type="file" >
+                            <input name="showcase" value="{{old('showcase')}}" type="file" >
                         </label>
                         </td>
                     </tr>
@@ -79,12 +79,12 @@
                     <tr>
                         <td>商品价格</td>
                         <td>
-                            <input type="text" name="price" class="textbox textbox_225"  placeholder="请输入4~16位字母或者数字"/>
+                            <input type="text" name="price" value="{{old('price')}}" class="textbox textbox_225"  placeholder="请输入4~16位字母或者数字"/>
                         </td>
                     </tr>
                     <tr>
                         <td>商品库存</td>
-                        <td><input type="text" name="stock" class="textbox textbox_225" value="{{ old('number') }}" placeholder="请输入4~16位字母或者数字"/></td>
+                        <td><input type="text" name="stock" class="textbox textbox_225" value="{{ old('stock') }}" placeholder="请输入4~16位字母或者数字"/></td>
                     </tr>
                     <tr>
                         <td>商品状态</td>
@@ -102,7 +102,7 @@
                                     -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 3;
                                     overflow: hidden;">
-                            <script id="content" name="parameter" type="text/plain" style="height:150px;"></script>
+                            <script id="content" name="parameter" type="text/plain" style="height:150px;">{!!old('parameter') !!}</script>
                             </div>
                         </td>
                     </tr>
@@ -114,7 +114,7 @@
                                     -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 3;
                                     overflow: hidden;">
-                        <script id="content1" name="desc" type="text/plain" style="height:200px;"></script>
+                        <script id="content1" name="desc"  type="text/plain" style="height:200px;">{!!old('desc')!!}</script>
                         </div>
                         </td>
                     </tr>

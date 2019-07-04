@@ -105,11 +105,11 @@ class IndexController extends Controller
 
     /*************************梁伟杰***********************************/
     // 获取轮播图数据
-    $banners_data = DB::table('banners')->where('status',1)->get();
+    $banners_data = DB::table('banners')->where('status',1)->Where('deleted_at',null)->Paginate(5);
 
-    $headlines_asc = DB::select("select  * from headlines where status=1 order By id asc limit 2");
+    $headlines_asc = DB::select("select  * from headlines where status=1 order By id desc limit 2");
     // 跳过最前两条信息,显示三条信息
-    $headlines_desc = DB::select("select  * from headlines where status=1 order By id asc limit 2,3");
+    $headlines_desc = DB::select("select  * from headlines where status=1 order By id desc limit 2,3");
 
     // 获取推荐商品(销量最高)的数据
     $buy = DB::select("select * from goods_sku order By buy asc limit 3");
