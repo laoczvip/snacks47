@@ -6,7 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 
         <title>评价管理</title>
-       <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+       
+
+        <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
        <link href="/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
         <link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
@@ -110,7 +113,7 @@
                                                 </td>
                                                 <td style="overflow:hidden">{!!$v->content!!}</td>
                                                 <td>{{$v->created_at}}</td>
-                                                <td><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-search" aria-hidden="true"></span></td>
+                                                <td><a href="javascript:;" onclick="del({{ $v->id }},this)"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></a></td>
                                             </tr>
                                             @empty
                                             <tr>
@@ -118,7 +121,36 @@
                                             </tr>
                                             @endforelse
                                            </table>
-                                           
+         <script src="/layui/layui.js">
+               layui.use('layer',
+                    function(){
+                        var layer = layui.layer;
+                });
+         </script>                                   
+            <script type="text/javascript">
+              // 删除
+              function del(id,obj){
+                    var a = confirm('你确定要删除吗?');
+
+                if(a){
+                   $.get('/home/comment/destroys',{id:id},function(res){
+                  // console.log(id);
+                  if(res == '删除成功'){
+                     layer.msg(res, {icon: 1});
+                    // 删除tr节点
+                    $(obj).parent().parent().remove();
+                  }else{
+                     layer.msg(res, {icon: 5});
+                  }
+                },'json');
+                
+                }
+
+               
+
+              }
+            </script>
+
                                         </div>
                                     </div>
 

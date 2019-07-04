@@ -227,12 +227,22 @@ class CommentController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * 评论 删除
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function Destroy($id)
+    public function Destroy(Request $request)
     {
-        //
+        
+        $id = $request->input('id',0);
+        // 执行删除
+        // $res = comment::destroy($id);
+        $res = DB::table('comment')->where('id',$id)->delete();
+
+        if($res){
+                echo json_encode('删除成功');
+            }else{
+                echo json_encode('删除失败');
+            }
     }
 }

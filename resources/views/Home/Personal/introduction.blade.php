@@ -407,22 +407,9 @@
 
                                     <div class="actor-new">
                                     	<div class="rate">
-                                    		<strong>100<span>%</span></strong><br> <span>好评度</span>
+                                    		<strong><span>%</span></strong><br> <span>好评度</span>
                                     	</div>
-                                        <dl>
-                                            <dt>买家印象</dt>
-                                            <dd class="p-bfc">
-                                            			<q class="comm-tags"><span>味道不错</span><em>(2177)</em></q>
-                                            			<q class="comm-tags"><span>颗粒饱满</span><em>(1860)</em></q>
-                                            			<q class="comm-tags"><span>口感好</span><em>(1823)</em></q>
-                                            			<q class="comm-tags"><span>商品不错</span><em>(1689)</em></q>
-                                            			<q class="comm-tags"><span>香脆可口</span><em>(1488)</em></q>
-                                            			<q class="comm-tags"><span>个个开口</span><em>(1392)</em></q>
-                                            			<q class="comm-tags"><span>价格便宜</span><em>(1119)</em></q>
-                                            			<q class="comm-tags"><span>特价买的</span><em>(865)</em></q>
-                                            			<q class="comm-tags"><span>皮很薄</span><em>(831)</em></q>
-                                            </dd>
-                                         </dl>
+                                       
                                     </div>
                                     <div class="clear"></div>
 									<div class="tb-r-filter-bar">
