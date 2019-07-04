@@ -77,7 +77,7 @@ class BannersController extends Controller
     /**
      * [ 软删除列表 ]
      */
-    public function Soft()
+    public function Soft() 
     {
         // 获取软删除.
         $del_banners = Banners::onlyTrashed()->get();
