@@ -13,23 +13,23 @@
       </section>
       </form>
       <table class="table">
-      
+
            <tr>
-                <th style="text-align:center;">Id</th>
-                <th style="text-align:center;">评论商品</th>
-                <th style="text-align:center;">评论用户</th>
-                <th style="text-align:center;">评论内容</th>
-                <th style="text-align:center;">评论等级</th>
-                <th style="text-align:center;">添加时间</th>
+                <th class="center">Id</th>
+                <th class="center">评论商品</th>
+                <th class="center">评论用户</th>
+                <th class="center">评论内容</th>
+                <th class="center">评论等级</th>
+                <th class="center">添加时间</th>
            </tr>
 
            @foreach($comment as $k=>$v)
            <tr>
-                <th style="text-align:center;vertical-align:middle;">{{ $v->id }}</th>
-                <th style="text-align:center;vertical-align:middle;">{{ $goods_sku[$v->gid] }}</th>
-                <th style="text-align:center;vertical-align:middle;">{{ $list[$v->uid] }}</th>
-                <th style="text-align:center;vertical-align:middle;">{!! $v->content !!}</th>
-                <th style="text-align:center;vertical-align:middle;">
+                <td class="center">{{ $v->id }}</td>
+                <td class="center">{{ $goods_sku[$v->gid] }}</td>
+                <td class="center">{{ $list[$v->uid] }}</td>
+                <td class="center">{!! $v->content !!}</td>
+                <td class="center">
                   @if( $v->rank == 1 )
                     <kbd style="background:red;">好评</kbd>
                   @elseif($v->rank == 2)
@@ -37,14 +37,14 @@
                   @else
                     <kbd style="background:#ccc">差评</kbd>
                   @endif
-                </th>
-                <th style="text-align:center;vertical-align:middle;">{{ $v->created_at }}</th>
+                </td>
+                <th class="center">{{ $v->created_at }}</th>
            </tr>
            @endforeach
 
       </table>
 
-      
+
       <aside class="paging">
             <!-- 分页 -->
            {{$comment->links()}}

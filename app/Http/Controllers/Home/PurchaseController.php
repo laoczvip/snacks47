@@ -28,6 +28,11 @@ class PurchaseController extends Controller
      */
     public function Index(Request $request,$id)
     {
+
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $friendly = self::Friendly();
 
         $count = ShopcartController::CountCar();
@@ -60,6 +65,10 @@ class PurchaseController extends Controller
      */
     public function ExecutePurchase(Request $request)
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         DB::beginTransaction();
         // 用户的地址id
         $data = $request->all();
@@ -114,6 +123,10 @@ class PurchaseController extends Controller
 
     public function Fukuancg(Request $request)
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
         $count = ShopcartController::CountCar();
 
         $friendly = self::Friendly();
@@ -133,6 +146,8 @@ class PurchaseController extends Controller
      */
     public function Addres(Request $request)
     {
+
+
         $data = $request->all();
         // 拼接用户的收货地址
         $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];

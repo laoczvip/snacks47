@@ -41,7 +41,7 @@
                             </div>
                             <div class="user-pass" style="margin-top: 5px;height: -34px;"">
                                 <label for="password" style="margin-top:3px ";><i class="am-icon-lock"></i></label>
-                                <input type="text"   id="code" placeholder="验证码" style="width: 191px;margin-top: -15px;">
+                                <input type="text"   id="code" name="code" placeholder="验证码" style="width: 191px;margin-top: -15px;">
                                 <img src="{{captcha_src()}}" style="cursor:pointer;position:relative;top: 7px;"" onclick="this.src='{{captcha_src()}}'+Math.random()">
                             </div>
                       </form>
@@ -87,8 +87,15 @@
                 if (res == 2) {
                     layer.msg('验证码错误', {icon: 2});
                     return false;
-                }else if(res == 1){
+                }
+
+                if(res == 1){
                     layer.msg('用户名或密码错误', {icon: 2});
+                    return false;
+                }
+
+                if(res == 3){
+                    layer.msg('账号未激活,请留意邮箱!', {icon: 2});
                     return false;
                 }
                 window.location.href = '/';

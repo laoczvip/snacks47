@@ -534,12 +534,11 @@
                                                             <li class="td td-status">
                                                                 <div class="item-status">
                                                                     <p class="Mystatus">交易成功</p>
-                                                                    <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
                                                                     <p class="order-info"><a href="logistics.html">查看物流</a></p>
                                                                 </div>
                                                             </li>
-                                                           
-                                                          
+
+
                                                             <li class="td td-change">
                                                              @if(!isset($list[$v->onum]))
                                                                 <div class="am-btn am-btn-danger anniu" onclick="del({{$v->id}},this)">删除订单</div>
@@ -548,14 +547,11 @@
                                                                 <a href="javascript:;"><div class="am-btn am-btn-success " >已评论</div></a>
                                                             @endif
                                                             </li>
-                                                            
-                                                                 
-                                                            
-                                                           
+
                                                         </div>
                                                     </div>
                                                      @empty
-                                                            @endforelse
+                                                    @endforelse
                                                 </div>
                                             </div>
 

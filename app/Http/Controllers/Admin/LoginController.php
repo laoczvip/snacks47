@@ -44,6 +44,11 @@ class LoginController extends Controller
             exit;
         }
 
+        if ($user_data->type != 2) {
+            echo 3;
+            exit;
+        }
+
         // 验证密码
         if (!Hash::check($password, $user_data->password)) {
             echo 1;
