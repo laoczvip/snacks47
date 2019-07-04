@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 
         <title>评价管理</title>
-       
+
 
         <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -113,49 +113,40 @@
                                             </tr>
                                             @endforelse
                                            </table>
-<<<<<<< HEAD
-=======
-         <script src="/layui/layui.js">
-               layui.use('layer',
-                    function(){
-                        var layer = layui.layer;
-                });
-         </script>                                   
-            <script type="text/javascript">
-              // 删除
-              function del(id,obj){
-                    var a = confirm('你确定要删除吗?');
 
-                if(a){
-                   $.get('/home/comment/destroys',{id:id},function(res){
-                  // console.log(id);
-                  if(res == '删除成功'){
-                     layer.msg(res, {icon: 1});
-                    // 删除tr节点
-                    $(obj).parent().parent().remove();
-                  }else{
-                     layer.msg(res, {icon: 5});
-                  }
-                },'json');
-                
-                }
-
-               
-
-              }
-            </script>
->>>>>>> origin/yandao
-
+                                     <script src="/layui/layui.js">
+                                           layui.use('layer',
+                                                function(){
+                                                    var layer = layui.layer;
+                                            });
+                                     </script>
+                                        <script type="text/javascript">
+                                          // 删除
+                                          function del(id,obj){
+                                              layer.msg('你确定要删除吗?', {
+                                                      time: 0 //不自动关闭
+                                                      ,btn: ['好的', '取消']
+                                                      ,yes: function(index){
+                                                            layer.close(index);
+                                                             $.get('/home/comment/destroys',{id:id},function(res){
+                                                                  if(res == '删除成功'){
+                                                                     layer.msg(res, {icon: 1});
+                                                                    // 删除tr节点
+                                                                    $(obj).parent().parent().remove();
+                                                                  }else{
+                                                                     layer.msg(res, {icon: 5});
+                                                                  }
+                                                                },'json');
+                                                      }
+                                                });
+                                          }
+                                        </script>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
-
                 </div>
                 <!--底部-->
                 @include('home.public.footer')
