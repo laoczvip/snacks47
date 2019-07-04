@@ -200,7 +200,7 @@ class GoodsController extends Controller
              $goodssku = DB::table('goods_sku')->insert($goodssku_data);
 
              if($goodssku){
-                return redirect('/admin/goods/create')->with('success','添加成功');
+                return redirect('/admin/goods')->with('success','添加成功');
              } else {
                 return back()->with('error','添加失败');
              }
@@ -280,20 +280,18 @@ class GoodsController extends Controller
 
         $res =  DB::table('goods_sku')->where('gid',$id)->update($data);
 
-        if($res){
+       
             $data_sku['title'] = $request->input('title','');
             $data_sku['sid'] = 0;
 
             $sku = DB::table('goods')->where('id',$id)->update($data_sku);
-            if($sku){
-                return redirect("admin/goods/index")->with('success','修改成功');
+            if($sku||$res){
+                return redirect("admin/goods")->with('success','修改成功');
             } else {
-                return back()->with('error','插入goods修改失败');
+                return back()->with('error','修改失败');
             }
-        } else {
-            return back()->with('error','goods_sku没修改');
-        }
-    }
+        } 
+    
 
     /**
      * Remove the specified resource from storage.
