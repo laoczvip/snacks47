@@ -58,51 +58,11 @@
 									</dl>
 								</li>
 								<div class="clear"></div>
-								<li class="select-list">
-									<dl id="select1">
-										<dt class="am-badge am-round">品牌</dt>
-
-										 <div class="dd-conent">
-											<dd class="select-all selected"><a href="/h/#">全部</a></dd>
-											<dd><a href="/h/#">百草味</a></dd>
-											<dd><a href="/h/#">良品铺子</a></dd>
-											<dd><a href="/h/#">新农哥</a></dd>
-											<dd><a href="/h/#">楼兰蜜语</a></dd>
-											<dd><a href="/h/#">口水娃</a></dd>
-											<dd><a href="/h/#">考拉兄弟</a></dd>
-										 </div>
-
-									</dl>
-								</li>
-								<li class="select-list">
-									<dl id="select2">
-										<dt class="am-badge am-round">种类</dt>
-										<div class="dd-conent">
-											<dd class="select-all selected"><a href="/h/#">全部</a></dd>
-											<dd><a href="/h/#">东北松子</a></dd>
-											<dd><a href="/h/#">巴西松子</a></dd>
-											<dd><a href="/h/#">夏威夷果</a></dd>
-											<dd><a href="/h/#">松子</a></dd>
-										</div>
-									</dl>
-								</li>
-								<li class="select-list">
-									<dl id="select3">
-										<dt class="am-badge am-round">选购热点</dt>
-										<div class="dd-conent">
-											<dd class="select-all selected"><a href="/h/#">全部</a></dd>
-											<dd><a href="/h/#">手剥松子</a></dd>
-											<dd><a href="/h/#">薄壳松子</a></dd>
-											<dd><a href="/h/#">进口零食</a></dd>
-											<dd><a href="/h/#">有机零食</a></dd>
-										</div>
-									</dl>
-								</li>
 
 							</ul>
 							<div class="clear"></div>
                         </div>
-							<div class="search-content">
+							<div class="search-content" style="width:100%">
 								<div class="sort">
 									<li class="first" ><a title="综合" href="/home/personal/search?title=">综合排序</a></li>
 									<li><a title="销量" href="/home/personal/search?buy=1">销量排序</a></li>
@@ -111,11 +71,11 @@
 								</div>
 								<div class="clear"></div>
 
-								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes" >
 								@forelse($goods_all as $good_child)
 									<li>
 										<div class="i-pic limit">
-											<a href="/home/personal/introduction?ids={{$good_child->gid}}"><img src="/uploads/{{$good_child->showcase}}" style="height:150px;"/></a>
+											<a href="/home/personal/introduction?ids={{$good_child->gid}}"><img src="/uploads/{{$good_child->showcase}}" style="height:209px;"/></a>
 											<p class="title fl">{{$good_child->title}}</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -132,54 +92,7 @@
 
 							</div>
 
-							<div class="search-side">
 
-								<div class="side-title">
-									经典搭配
-								</div>
-
-								<li>
-									<div class="i-pic check">
-										<img src="/h/images/cp.jpg" />
-										<p class="check-title">萨拉米 1+1小鸡腿</p>
-										<p class="price fl">
-											<b>¥</b>
-											<strong>29.90</strong>
-										</p>
-										<p class="number fl">
-											销量<span>1110</span>
-										</p>
-									</div>
-								</li>
-								<li>
-									<div class="i-pic check">
-										<img src="/h/images/cp2.jpg" />
-										<p class="check-title">ZEK 原味海苔</p>
-										<p class="price fl">
-											<b>¥</b>
-											<strong>8.90</strong>
-										</p>
-										<p class="number fl">
-											销量<span>1110</span>
-										</p>
-									</div>
-								</li>
-								<li>
-									<div class="i-pic check">
-										<img src="/h/images/cp.jpg" />
-										<p class="check-title">萨拉米 1+1小鸡腿</p>
-										<p class="price fl">
-											<b>¥</b>
-											<strong>29.90</strong>
-										</p>
-										<p class="number fl">
-											销量<span>1110</span>
-										</p>
-									</div>
-								</li>
-
-
-							</div>
 							<!--分页 -->
 						<nav aria-label="Page navigation">
 							<aside>
