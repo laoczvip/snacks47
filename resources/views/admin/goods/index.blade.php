@@ -89,7 +89,7 @@
                  <td class="center">{{$v->created_at}}</td>
                   <td class="template" style="display:none;">
                   <span>{{ $v->title }}</span>
-                  <div>{!! $v->desc !!}</div>
+                  <div >{!! $v->desc !!}</div>
             </td >
                  <td >
                    <a href="/admin/goods/edit?id={{$v->gid}}" class="link_icon" title="修改">&#101;</a>
@@ -157,8 +157,7 @@
                 $('#myModal').modal('show')
               }
             </script>
-
-
+<style> .mCS_img_loaded{width:100%;}</style>
 
         <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

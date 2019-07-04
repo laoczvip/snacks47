@@ -105,13 +105,11 @@
                                 <div class="clear"></div>
 
                                 @if($shaky_one1 == null)
-                                <div style="margin:50px auto; text-align:center;font-size:64px">-------------暂无资源----------</div>
+                                <div style="margin:20px auto; text-align:center;">-------------暂无资源----------</div>
                                 @else
                                 <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
                                 @forelse($shaky as $k=>$v)
-
-
-
+                                
                                     <li>
                                         <div class="i-pic limit">
                                             <a href="javascript:;" onclick="urls({{$v->gid}},{{$v->sid}})"><img src="/uploads/{{$goods_sku[$v->gid]}}"/></a>

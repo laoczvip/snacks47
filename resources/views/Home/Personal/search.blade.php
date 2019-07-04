@@ -87,6 +87,7 @@
 										</div>
 									</li>
 								@empty
+								<div style="text-align:center; margin:20px auto;">---暂无资源----</div>
 								@endforelse
 								</ul>
 
