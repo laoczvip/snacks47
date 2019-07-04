@@ -26,21 +26,13 @@
 	<body>
 		@include('home.public.hmtop')
 			<div class="nav-table">
-					   <div class="long-title"><span class="all-goods">全部分类</span></div>
-					   <div class="nav-cont">
-							<ul>
-								<li class="index"><a href="/h/#">首页</a></li>
-                                <li class="qc"><a href="/h/#">闪购</a></li>
-                                <li class="qc"><a href="/h/#">限时抢</a></li>
-                                <li class="qc"><a href="/h/#">团购</a></li>
-                                <li class="qc last"><a href="/h/#">大包装</a></li>
-							</ul>
-						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div>
-						</div>
-			</div>
+                <div class="long-title"><span class="all-goods">全部分类</span></div>
+                 <div class="nav-cont">
+                      <ul>
+                            <li class="index"><a href="/index.php">首页</a></li>
+                      </ul>
+                </div>
+            </div>
 				<ol class="am-breadcrumb am-breadcrumb-slash">
 					<li><a href="/h/#">首页</a></li>
 					<li><a href="/h/#">分类</a></li>

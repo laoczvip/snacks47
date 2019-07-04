@@ -120,9 +120,12 @@
             $.post('/carriedchangepassword',{number,phone},function(res){
                 if (res == 0) {
                     layer.msg('账号或手机号不存在');
-                };
+                    return false;
+                }else if(res == 3){
+                    layer.msg('用户不存在或者已被删除');
+                    return false;
+                }
             })
-
 
 
             if ($('#dyMobileButton').html() == '获取') {
@@ -157,22 +160,26 @@
     }
 
         // 电话注册结束
+        function update(){
+            let upass = $('#upass').val();
+            let repass = $('#repass').val();
+            let code = $('#code').val();
 
-    function update(){
-        let upass = $('#upass').val();
-        let repass = $('#repass').val();
-        let code = $('#code').val();
-        console.log(code)
-        if(upass != repass){
+            if(upass == null || upass == "" || upass == undefined){
+                layer.msg('请输入密码', function(){} );
+                event.preventDefault();
+            }
+
+            if(upass != repass){
                 layer.msg('两次密码不一致', function(){} );
-            event.preventDefault();
-        }
+                event.preventDefault();
+            }
 
-        if(code == null || code == "" || code == undefined){
-            layer.msg('请输入验证码', function(){} );
-            event.preventDefault();
+            if(code == null || code == "" || code == undefined){
+                layer.msg('请输入验证码', function(){} );
+                event.preventDefault();
+            }
         }
-    }
 </script>
 
 </html>1

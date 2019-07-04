@@ -91,14 +91,20 @@ class LoginController extends Controller
         $phone = $request->input('phone');
         // 查询对应的账号
         $user = Users::where('number',$number)->first();
+        if (empty($user)) {
+            return 3;
+            exit;
+        }
         $tel =  $user->userinfo->tel;
-        // 判断密码是否跟数据库一致
+
+
+        // 判断手机号码是否跟数据库一致
         if ($phone != $tel) {
             return 0;
-            die;
+            exit;
         }else{
             return 1;
-            die;
+            exit;
         }
     }
 

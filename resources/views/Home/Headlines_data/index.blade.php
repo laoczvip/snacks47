@@ -23,24 +23,16 @@
       </article>
     </header>
             <div class="nav-table">
-             <div class="long-title"><span class="all-goods">全部分类</span></div>
-             <div class="nav-cont">
-              <ul>
-                <li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
-              </ul>
-                <div class="nav-extra">
-                  <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-                  <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+                <div class="long-title"><span class="all-goods">全部分类</span></div>
+                 <div class="nav-cont">
+                      <ul>
+                            <li class="index"><a href="/index.php">首页</a></li>
+                      </ul>
                 </div>
             </div>
-      </div>
-      
-      <b class="line"></b> 
-      
+
+      <b class="line"></b>
+
 <!--文章 -->
 <div class="am-g am-g-fixed blog-g-fixed bloglist">
   <div class="am-u-md-9">
@@ -53,11 +45,11 @@
       <div class="am-g blog-content">
         <div class="am-u-sm-12">
           <p>{!! $headlines_data->hcontent !!}！</p>
-          
-          
+
+
 
         </div>
-  
+
       </div>
 
     </article>
@@ -68,7 +60,7 @@
       @if($article_prev)
       <li class="am-pagination-prev"><a href="/home/headlines_data/index?id={{ $article_prev->id }}">&laquo; 上一篇</a></li>
       @endif
-      
+
       @if($article_next)
       <li class="am-pagination-next"><a href="/home/headlines_data/index?id={{ $article_next->id }}">下一篇 &raquo;</a></li>
       @endif
@@ -79,14 +71,14 @@
     <div class="am-panel-group">
 
       <section class="am-panel am-panel-default">
-        <div style="color: black" class="am-panel-hd">热门话题 <a style="font-size:15px;color: #868686;padding-left: 140px"; href="/home/headlines_data/list">更多...</a></div> 
+        <div style="color: black" class="am-panel-hd">热门话题 <a style="font-size:15px;color: #868686;padding-left: 140px"; href="/home/headlines_data/list">更多...</a></div>
         <ul class="am-list blog-list">
         @foreach($datas as $k=>$v)
-          <li><a href="/home/headlines_data/index?id={{ $v->id }}"><p>{{ $v->htitle}}</p></a></li> 
+          <li><a href="/home/headlines_data/index?id={{ $v->id }}"><p>{{ $v->htitle}}</p></a></li>
 
-        @endforeach  
-        
-        </ul> 
+        @endforeach
+
+        </ul>
       </section>
 
     </div>

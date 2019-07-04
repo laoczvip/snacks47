@@ -14,7 +14,8 @@
         <ul class="message-l">
             <div class="topMessage">
                 <div class="menu-hd">
-                    <a href="/login" target="_top" class="h">您好!&nbsp;&nbsp;{{session('home_user')->name }}</a>
+                    <a href="/center/index" target="_top" class="h">您好!&nbsp;&nbsp;{{session('home_user')->name }}</a>
+                    <a href="/out" target="_top" class="h">退出</a>
                 </div>
             </div>
         </ul>

@@ -16,7 +16,7 @@
 
         <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
         <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
-       
+
 
     </head>
 
@@ -24,21 +24,13 @@
         <!--头 -->
         @include('home.public.hmtop')
         <div class="nav-table">
-            <div class="long-title"><span class="all-goods">全部分类</span></div>
-            <div class="nav-cont">
-                <ul>
-                    <li class="index"><a href="#">首页</a></li>
-                    <li class="qc"><a href="#">闪购</a></li>
-                    <li class="qc"><a href="#">限时抢</a></li>
-                    <li class="qc"><a href="#">团购</a></li>
-                    <li class="qc last"><a href="#">大包装</a></li>
-                </ul>
-                <div class="nav-extra">
-                    <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-                    <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+                <div class="long-title"><span class="all-goods">全部分类</span></div>
+                 <div class="nav-cont">
+                      <ul>
+                            <li class="index"><a href="/index.php">首页</a></li>
+                      </ul>
                 </div>
             </div>
-        </div>
         <b class="line"></b>
         <div class="center">
             <div class="col-main">
@@ -55,7 +47,7 @@
 
                             <ul class="am-avg-sm-2 am-tabs-nav am-nav am-nav-tabs">
                                 <li class="am-active"><a href="#tab1">所有评价</a></li>
-                              
+
                             </ul>
                             <style>
                                .comment-list table{
@@ -67,7 +59,7 @@
                                 }
                                 .comment-list table tr{
                                     border-bottom:1px dashed #ccc;
-                                     
+
                                 }
                                 .comment-list table td{
                                     height:100px;
@@ -83,7 +75,7 @@
 
                                     <div class="comment-main">
                                         <div class="comment-list">
-                                      
+
                                             <table>
                                             <tr>
                                                 <th>商品图片</th>
@@ -98,7 +90,7 @@
                                                 <td><img width="150" style="text-align:center;vertical-align:middle;" class="img-thumbnail"  src="/uploads/{{$Goods_Profile[$v->gid]}}"></td>
                                                 <td>{{$Goods_Name[$v->gid]}}</td>
                                                 <td>
-                                                
+
                                                     @if($v->rank==1)
                                                     <i style="background-color:red;">好评</i>
                                                     @elseif($v->rank==2)
@@ -106,7 +98,7 @@
                                                     @else
                                                     <i style="background-color:#ccc;">差评</i>
                                                     @endif
-                                                
+
                                                 </td>
                                                 <td style="overflow:hidden">{!!$v->content!!}</td>
                                                 <td>{{$v->created_at}}</td>
@@ -118,12 +110,12 @@
                                             </tr>
                                             @endforelse
                                            </table>
-                                           
+
                                         </div>
                                     </div>
 
                                 </div>
-                          
+
                             </div>
                         </div>
 

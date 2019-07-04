@@ -244,7 +244,7 @@ class PersonalController extends Controller
         $count = ShopcartController::CountCar();
         $weds = weds::find(1);
         $id = session('home_user')->id;
-        $user = Address::where('uid',$id)->get();
+        $user = Address::where('uid',$id)->orderBy('default', 'desc')->get();
         $address = json_decode($user,true);
         return view('home.personal.addres',[
             'address'=>$address,
@@ -400,23 +400,26 @@ class PersonalController extends Controller
         $res = $request->all();
         DB::beginTransaction();
 
-        $file = strstr($_FILES['ufile']['name'],'.');
 
-
-        $allow = ['.png','.jpeg','.gif','.jpg'];
-
-        if (!in_array($file,$allow)) {
-            return back()->with('error','请上传图片文件!');
-        }
-        if($_FILES['ufile']['error'] == 1){
-            return back()->with('error','图片不能大于2M');
-        }
         // 假如用户换头像
         if ($request->hasFile('ufile')) {
                 // 删掉原图
             if ($request->input('file') == '/DefaultAvatar/1.jpg') {
                 $file = $request->file('ufile')->store(date('Ymd'));
             }else{
+                $file = strstr($_FILES['ufile']['name'],'.');
+
+
+                $allow = ['.png','.jpeg','.gif','.jpg'];
+
+                if (!in_array($file,$allow)) {
+                    return back()->with('error','请上传图片文件!');
+                }
+                if($_FILES['ufile']['error'] == 1){
+                    return back()->with('error','图片不能大于2M');
+                }
+
+
                 Storage::delete($request->input('file'));
                 $file = $request->file('ufile')->store(date('Ymd'));
             }

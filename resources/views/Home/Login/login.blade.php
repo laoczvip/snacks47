@@ -59,9 +59,9 @@
                 <div class="partner">
                         <h3>合作账号</h3>
                     <div class="am-btn-group">
-                        <li><a href="#"><i class="am-icon-qq am-icon-sm"></i><span>QQ登录</span></a></li>
-                        <li><a href="#"><i class="am-icon-weibo am-icon-sm"></i><span>微博登录</span> </a></li>
-                        <li><a href="#"><i class="am-icon-weixin am-icon-sm"></i><span>微信登录</span> </a></li>
+                        <li><a href="#" onclick="a()"><i class="am-icon-qq am-icon-sm"></i><span>QQ登录</span></a></li>
+                        <li><a href="#" onclick="a()"><i class="am-icon-weibo am-icon-sm"></i><span>微博登录</span> </a></li>
+                        <li><a href="#" onclick="a()"><i class="am-icon-weixin am-icon-sm"></i><span>微信登录</span> </a></li>
                     </div>
                 </div>
             </div>
@@ -74,15 +74,16 @@
     layui.use(['layer', 'form'], function(){
       var layer = layui.layer
       ,form = layui.form;
-      // layer.alert('见到你真的很高兴', {icon: 6});
 
     });
 </script>
 <script>
+
+
     function login(){
-            let number = $('#number').val();
-            let password = $('#password').val();
-            let code = $('#code').val();
+            var number = $('#number').val();
+            var password = $('#password').val();
+            var code = $('#code').val();
              $.get('/dologin',{number,password,code},function(res){
                 if (res == 2) {
                     layer.msg('验证码错误', {icon: 2});
@@ -102,7 +103,9 @@
             },'html');
         }
 
-
+    function a(){
+            layer.msg('正在开发中哦', {icon: 6});
+    }
 </script>
 
-</html>1
+</html>

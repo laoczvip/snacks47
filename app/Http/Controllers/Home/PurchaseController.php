@@ -43,7 +43,8 @@ class PurchaseController extends Controller
 
         $weds = weds::find(1);
         $id = session('home_user')->id;
-        $user = Address::where('uid',$id)->get();
+        $user = Address::where('uid',$id) ->orderBy('default', 'desc')->get();
+
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
         $shaky_sku = DB::table('shaky_sku')->where('gid',$gid)->first();
 

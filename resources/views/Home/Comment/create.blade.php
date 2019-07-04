@@ -19,22 +19,14 @@
     <body>
         <!--头 -->
         @include('home.public.hmtop')
-      
+
             <div class="nav-table">
-                       <div class="long-title"><span class="all-goods">全部分类</span></div>
-                       <div class="nav-cont">
-                            <ul>
-                                <li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
-                            </ul>
-                            <div class="nav-extra">
-                                <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-                                <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-                            </div>
-                        </div>
+                <div class="long-title"><span class="all-goods">全部分类</span></div>
+                 <div class="nav-cont">
+                      <ul>
+                            <li class="index"><a href="/index.php">首页</a></li>
+                      </ul>
+                </div>
             </div>
             <b class="line"></b>
         <div class="center">
@@ -52,7 +44,7 @@
                         <div class="comment-main">
                         <span hidden>{{$a=0}}{{$b=0}}{{$c=0}}{{$d=0}}{{$e=0}}{{$f=0}}
                         {{$g=0}}{{$h=0}}{{$i=0}}{{$j=0}}{{$k=0}}{{$l=0}}</span>
-                        <div id="count" hidden>{{count($comment)}}</div> 
+                        <div id="count" hidden>{{count($comment)}}</div>
                         @forelse($comment as $v)
 
                             <div class="comment-list">
@@ -63,7 +55,7 @@
                                 </div>
 
                                 <div class="item-title">
-                                    
+
                                     <div class="item-name">
                                         <a href="#">
                                             <p class="item-basic-info">{{$Goods_Name[$v->gid]}}</p>
@@ -83,11 +75,11 @@
                                             @empty
                                             @endforelse
                                             </span>
-                                            
+
                                         </div>
                                         <div class="item-price">
                                             价格：<strong>{{$Goods_Price[$v->gid]}}</strong>
-                                        </div>                                      
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="clear"></div>
@@ -121,35 +113,35 @@
                                 function one(id,obj){
                                     var name = document.getElementById(obj)
                                     name.value = 1;
-                                    
+
                                 }
                                 function one1(id,obj){
-                                    
+
                                     var name = document.getElementById(obj)
                                     name.value = 2;
                                 }
                                 function one2(id,obj){
-                                  
+
                                     var name = document.getElementById(obj)
                                     name.value = 3;
                                 }
-                            </script>  
+                            </script>
                                 <div class="info-btn">
                                     <button class="am-btn am-btn-danger">发表评论</button>
-                                </div>                          
+                                </div>
                     <script type="text/javascript">
                         $(document).ready(function() {
-                            $(".comment-list .item-opinion li").click(function() {  
+                            $(".comment-list .item-opinion li").click(function() {
                                 $(this).prevAll().children('i').removeClass("active");
                                 $(this).nextAll().children('i').removeClass("active");
                                 $(this).children('i').addClass("active");
-                                
+
                             });
                      })
-                    </script>                   
-                    
-                                                
-                            
+                    </script>
+
+
+
                         </div>
 
                     </div>
@@ -158,11 +150,11 @@
                 </div>
                 <!--底部-->
             @include('home.public.footer')
-                
+
             </div>
 
             @include('home.public.list')
-            
+
         </div>
 
     </body>

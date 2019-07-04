@@ -30,7 +30,7 @@
         <div class="login-banner-bg">
             <span></span>
             <img src="/h/images/big.jpg" /></div>
-        <div class="login-box">
+        <div class="login-box" style="height: 353px;">
             <div class="am-tabs" id="doc-my-tabs">
                 <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
                     <li class="am-active">
@@ -75,8 +75,9 @@
                                         <input type="password" name="repass" id="repass"  placeholder="确认密码">
                                     </div>
                                     <br>
-                                    <input type="button" onclick="inert()"  value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+                                    <input style="margin-left: 17px;width: 110px;" type="button" onclick="inert()"  value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
                             </form>
+                            <a href="/login"><input style="width: 110px;margin-top: -20px;font-size:20px;height: 42px;margin-left: 53px;" type="button" value="返回登录" class="am-btn am-btn-primary am-btn-sm am-fl"></a>
                         </div>
                 <!-- 邮箱注册结束 -->
 

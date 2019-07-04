@@ -1,13 +1,13 @@
 <div class="footer">
     <div class="footer-hd">
         <p>
-            <a href="#">恒望科技</a>
+            <a href="https://www.jd.com/">京东商城</a>
             <b>|</b>
-            <a href="#">商城首页</a>
+            <a href="/">商城首页</a>
             <b>|</b>
-            <a href="#">支付宝</a>
+            <a href="https://www.alipay.com/">支付宝</a>
             <b>|</b>
-            <a href="#">物流</a>
+            <a href="http://www.chawuliu.cn/">物流</a>
         </p>
     </div>
 
@@ -27,11 +27,10 @@
     <br>
      <div class="footer-bd">
         <p>
-            <a href="#">关于恒望</a>
-            <a href="#">合作伙伴</a>
-            <a href="#">联系我们</a>
-            <a href="#">网站地图</a>
-            <em>© 2015-2025 Hengwang.com 版权所有</em>
+            <a onclick="a()">关于恒望</a>
+            <a onclick="a()">合作伙伴</a>
+            <a onclick="a()">联系我们</a>
+            <em>{{$weds->cright}}</em>
         </p>
     </div>
     <!-- 友情链接 结束 -->
@@ -43,4 +42,8 @@
       var layer = layui.layer
       ,form = layui.form;
     });
+
+    function a(){
+        layer.alert('正在开发中哦~', {icon: 6});
+    }
 </script>
