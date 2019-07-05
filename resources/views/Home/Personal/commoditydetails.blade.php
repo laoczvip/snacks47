@@ -301,7 +301,6 @@
                     if (res == 1) {
                         layer.close(index);
                         $('#qdsh').attr('disabled','disabled');
-
                         layer.alert('感谢你本次的购物', {icon: 6});
                     };
                 })

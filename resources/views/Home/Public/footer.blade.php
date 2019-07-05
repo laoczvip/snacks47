@@ -3,7 +3,7 @@
         <p>
             <a href="https://www.jd.com/">京东商城</a>
             <b>|</b>
-            <a href="/">商城首页</a>
+            <a href="/index.php">商城首页</a>
             <b>|</b>
             <a href="https://www.alipay.com/">支付宝</a>
             <b>|</b>

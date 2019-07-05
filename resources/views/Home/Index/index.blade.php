@@ -425,7 +425,7 @@
                         <div class="today-brands ">
                         @forelse($cate->sub as $val)
                           @if($val->status==1)
-                            <a href="/">{{$val->title}}</a>
+                            <a href="/index.php">{{$val->title}}</a>
                           @endif
                         @empty
                         @endforelse

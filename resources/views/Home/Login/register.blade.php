@@ -21,7 +21,7 @@
 
 
     <div class="login-boxtitle">
-        <a href="/">
+        <a href="/index.php">
             <img alt="" src="/uploads/{{ $weds->logo }}" />
         </a>
     </div>

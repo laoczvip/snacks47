@@ -97,7 +97,7 @@
                     layer.msg('账号未激活,请留意邮箱!', {icon: 2});
                     return false;
                 }
-                window.location.href = '/';
+                window.location.href = '/index.php';
             },'html');
         }
 

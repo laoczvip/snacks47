@@ -154,7 +154,7 @@ class LoginController extends Controller
         session(['home_login'=>false]);
         session(['home_user'=>null]);
         session(['type'=>false]);
-        return redirect("/");
+        return redirect("/index.php");
     }
 
 

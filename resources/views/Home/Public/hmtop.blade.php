@@ -44,9 +44,9 @@
             <!--悬浮搜索框-->
 
             <div class="nav white">
-                <!-- <div class="logo"><img src="/h/images/logo.png" /></div> -->
+                <div class="logo"><img src="/uploads/{{$weds->logo}}"></div>
                 <div class="logoBig" style="margin-left: -131px;">
-                    <li><a href="/"><img src="/uploads/{{$weds->logo}}" style="width: 180%;"/></a></li>
+                    <li><a href="/index.php"><img src="/uploads/{{$weds->logo}}" style="width: 180%;"/></a></li>
                 </div>
 
                 <div class="search-bar pr">
