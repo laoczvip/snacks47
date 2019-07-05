@@ -103,7 +103,6 @@
                                     </li>
                                     <li class="td td-op">
                                         <div class="td-inner">
-                                            <a title="移入收藏夹" class="btn-fav" href="#">移入收藏夹</a>
                                             <a href="/delete?id={{ $v->id }}" data-point-url="#" class="delete">删除</a>
 
                                         </div>

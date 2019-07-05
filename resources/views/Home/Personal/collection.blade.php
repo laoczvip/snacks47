@@ -38,8 +38,6 @@
                         <div class="you-like">
                             <div class="s-bar">
                                 我的收藏
-                                <a class="am-badge am-badge-danger am-round">降价</a>
-                                <a class="am-badge am-badge-danger am-round">下架</a>
                             </div>
                             <div class="s-content">
                             @forelse($collect as $k=>$v)
@@ -61,15 +59,8 @@
                                                 <span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">{{ $vv->price }}</em></span>
                                                 <span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">68.00</em></span>
                                             </div>
-                                            <div class="s-extra-box">
-                                                <span class="s-comment">好评: 98.03%</span>
-                                                <span class="s-sales">月销: 219</span>
-                                            </div>
                                         </div>
                                         <div class="s-tp">
-                                            <span class="ui-btn-loading-before">找相似</span>
-                                            <i class="am-icon-shopping-cart"></i>
-                                            <span class="ui-btn-loading-before buy">加入购物车</span>
                                             <p>
                                                 <a href="javascript:;" class="c-nodo J_delFav_btn">取消收藏</a>
                                             </p>

@@ -22,7 +22,7 @@ class PersonalController extends Controller
 {
 
     /**
-     * [ ÓÑÇéÁ´½Ó ]
+     * [ å‹æƒ…é“¾æ¥ ]
      */
     public function Friendly()
     {
@@ -31,8 +31,8 @@ class PersonalController extends Controller
 
 
     /**
-     * [ ¼ÓÔØ¸öÈËÖĞĞÄÒ³Ãæ ]
-     * @return [type] [ HTMLÒ³Ãæ ]
+     * [ åŠ è½½ä¸ªäººä¸­å¿ƒé¡µé¢ ]
+     * @return  [ HTMLé¡µé¢ ]
      */
     public function Index(Request $request)
     {
@@ -66,8 +66,8 @@ class PersonalController extends Controller
     }
 
     /**
-     *ÓÃ»§Í·Ïñ¸³Öµ
-     *@return [type] [ÓÃ»§Í·Ïñ] 
+     * [ ç”¨æˆ·å¤´åƒèµ‹å€¼ ]
+     *@return [type] [ ç”¨æˆ·å¤´åƒ ]
      */
     public function User_Ufile()
     {
@@ -80,8 +80,8 @@ class PersonalController extends Controller
     }
 
     /**
-     *ÓÃ»§Ãû×Ö¸³Öµ
-     *@return [type] [ÓÃ»§Í·Ïñ] 
+     *[ ç”¨æˆ·åå­—èµ‹å€¼ ]
+     *@return [type] [ ç”¨æˆ·åç§° ]
      */
     public function User_Name()
     {
@@ -93,26 +93,24 @@ class PersonalController extends Controller
         return $list;
     }
 
-     /**
-     * Display a listing of the resource.
-     * »ñÈ¡ÉÌÆ·¿ÚÎ¶
-     * @return \Illuminate\Http\Response
+    /**
+     * [ è·å–å•†å“å£å‘³ ]
      */
     public function Order_details()
     {
-        //ÉÌÆ·ÊôĞÔ
+        //å•†å“å±æ€§
         $goods = DB::table('order_details')->get();
         $list = [];
         foreach($goods as $v){
             $list[$v->gid] = $v->flavor;
         }
-        
+
         return $list;
     }
-    
+
     /**
-     * [ ¼ÓÔØ¹ºÂòÒ³Ãæ ]
-     * @return [ ÊÓÍ¼ ] [ HTMLÒ³Ãæ ]
+     * [ åŠ è½½è´­ä¹°é¡µé¢ ]
+     * @return [ è§†å›¾  ] [ HTMLé¡µé¢ ]
      */
     public function IntroDuction(Request $request)
     {
@@ -125,29 +123,29 @@ class PersonalController extends Controller
         $user = Users::find(session('home_user')->id);
 
         $count = ShopcartController::CountCar();
-        // ÓÃ»§Í·Ïñ
+        // ç”¨æˆ·å¤´åƒ
         $User_Ufile = PersonalController::User_Ufile();
 
-        // ÓÃ»§Ãû³Æ
+        // ç”¨æˆ·åç§°
         $User_Name = PersonalController::User_Name();
 
-        // ÉÌÆ·¿ÚÎ¶
+        // å•†å“å£å‘³
         $Order_details = PersonalController::Order_details();
-        
-        // »ñÈ¡ÉÌÆ·ÊÕ²Ø
+
+        // è·å–å•†å“æ”¶è—
         $asd = $user->collect;
 
-        // ·ÖÅä±äÁ¿,ÓÃÓÚÅĞ¶ÏÓÃ»§ÊÇ·ñÒÑ¾­ÊÕ²Ø¸ÃÉÌÆ·
+        // åˆ†é…å˜é‡,ç”¨äºåˆ¤æ–­ç”¨æˆ·æ˜¯å¦å·²ç»æ”¶è—è¯¥å•†å“
         foreach ($asd as $key => $v) {
             $collect[] = $v->gid;
         }
 
-         // ÉÌÆ·id
+         // å•†å“id
         $gid = $request->input('ids',0);
         $gids = $request->input('gids',0);
-        // ½ÓÊÕÉÌÆ·ÏêÇéid
+        // æ¥æ”¶å•†å“è¯¦æƒ…id
         $id = $request->input('id',0);
-        // »î¶¯Ààid
+        // æ´»åŠ¨ç±»id
         $sid = $request->input('sid',0);
 
         if($id != 0){
@@ -155,8 +153,8 @@ class PersonalController extends Controller
         } else {
             $comment_gid = 0;
         }
-        // dd($comment_gid);
-        // ¶ÁÈ¡Ïà¹ØÉÌÆ·ÆÀÂÛ
+
+        // è¯»å–ç›¸å…³å•†å“è¯„è®º
         $comment = DB::table('comment')->where('gid',$comment_gid)->get();
         $haoping = 0;
         $zhongping = 0;
@@ -164,22 +162,22 @@ class PersonalController extends Controller
         $haopingdu = 0;
         foreach($comment as $v){
             if($v->rank==1){
-                // ºÃÆÀÊı
+                // å¥½è¯„æ•°
                 $haoping = count($v->rank);
             } else if($v->rank==2){
-                // ÖĞÆÀÊı
+                // ä¸­è¯„æ•°
                 $zhongping = count($v->rank);
             } else if($v->rank==3){
-                 // ²îÆÀÊı
+                 // å·®è¯„æ•°
                 $chaping = count($v->rank);
             }
-           
+
         }
-        // ºÃÆÀ¶È
+        // å¥½è¯„åº¦
         $haopingdu = ($haoping+$zhongping+$chaping)/3;
         $haopingdu = $haopingdu * 100 ;
         $haopingdu = round($haopingdu,1);
-        // ÅĞ¶ÏÌõ¼ş£ºÊÇ·ñÎª»î¶¯ÉÌÆ·
+        // åˆ¤æ–­æ¡ä»¶ï¼šæ˜¯å¦ä¸ºæ´»åŠ¨å•†å“
         if ($sid != 0) {
             $shaky_one = DB::table('shaky')->where('id',$sid)->first();
             $date = date('Y-m-d H:i:s',time());
@@ -187,21 +185,21 @@ class PersonalController extends Controller
             $jtime = $shaky_one->jtime;
 
             if ($ctime > $date) {
-                echo json_encode('»î¶¯Î´¿ªÆô');
+                echo json_encode('æ´»åŠ¨æœªå¼€å¯');
 
             }else if($ctime<$date&&$jtime<$date){
-                echo json_encode('»î¶¯ÒÑ½áÊø');
+                echo json_encode('æ´»åŠ¨å·²ç»“æŸ');
             }
         }
 
         if ($gid != 0) {
-        //ËùÊôÀàId
+        //æ‰€å±ç±»Id
         $goods_sku = DB::table('goods_sku')->where('gid',$gid)->first();
 
         $cid = $goods_sku->cid;
         $shaky_sku = false;
         $goods_all = DB::table('goods_sku')->where('cid',$cid)->paginate(10);
-        //ÉÌÆ·ÊôĞÔ
+        //å•†å“å±æ€§
         $flavour = DB::table('flavour')->get();
         $list = [];
 
@@ -230,11 +228,11 @@ class PersonalController extends Controller
                 ]);
         }
         if ($gids != 0) {
-         //ËùÊôÀàId
+         //æ‰€å±ç±»Id
 
         $goods_sku = DB::table('goods_sku')->where('gid',$gids)->first();
         $shaky_sku = DB::table('shaky_sku')->where('gid',$gids)->first();
-        //ÉÌÆ·ÊôĞÔ
+        //å•†å“å±æ€§
         $flavour = DB::table('flavour')->get();
         $list = [];
         foreach($flavour as $k=> $val){
@@ -265,38 +263,38 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ ¼ÓÔØËÑË÷ÉÌÆ·Ò³Ãæ ]
-     * @param Request $request [ ËÑË÷ÄÚÈİ ]
+     * [ åŠ è½½æœç´¢å•†å“é¡µé¢ ]
+     * @param Request $request [ æœç´¢å†…å®¹ ]
      */
     public function Search(Request $request)
     {
-        // ½ÓÊÕËÑË÷¿òĞÅÏ¢
+        // æ¥æ”¶æœç´¢æ¡†ä¿¡æ¯
         $title =$request->input('title','');
-        // ½ÓÊÕÏúÁ¿
+        // æ¥æ”¶é”€é‡
         $buys = $request->input('buy',0);
-       // ½ÓÊÕ¼Û¸ñ
+       // æ¥æ”¶ä»·æ ¼
         $prices = $request->input('price',0);
-        // ½ÓÊÕÆÀ¼Û
+        // æ¥æ”¶è¯„ä»·
         $assess = $request->input('assess',0);
 
 
         $friendly = self::Friendly();
 
         $weds = weds::find(1);
-        //ÉÌÆ·id
+        //å•†å“id
         $id = $request->input('id',0);
-        
+
         if ($title!='') {
-            //Ãû³ÆËÑË÷
+            //åç§°æœç´¢
             $goods_all = DB::table('goods_sku')->where('title','like','%'.$title.'%')->paginate(20);
         } else if($id!=0){
-            // ÀàËÑË÷
+            // ç±»æœç´¢
             $goods_all = DB::table('goods_sku')->where('cid',$id)->paginate(20);
         } else if($buys!=0){
             $goods_all = DB::table('goods_sku')->orderBy('buy','desc')->paginate(20);
 
         } else {
-            //ËÑË÷ËùÓĞ
+            //æœç´¢æ‰€æœ‰
             $goods_all = DB::table('goods_sku')->paginate(20);
         }
         if($prices != 0){
@@ -307,15 +305,15 @@ class PersonalController extends Controller
 
             $goods_all = DB::table('goods_sku')->orderBy('assess','desc')->paginate(20);
         }
-        //ËùÊôÀàId
+        //æ‰€å±ç±»Id
         if($id !=0 ){
             $goods_count= DB::table('goods_sku')->where('cid',$id)->get();
         } else{
              $goods_count= DB::table('goods_sku')->where('title','like','%'.$title.'%')->get();
         }
         $count = ShopcartController::CountCar();
-        
-        // ¹ºÎï³µÊıÁ¿
+
+        // è´­ç‰©è½¦æ•°é‡
         $num = count($goods_count);
 
         return view('home.personal.search',[
@@ -330,8 +328,8 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ ¼ÓÔØÊÕ»õµØÖ·Ò³Ãæ ]
-     * @return [ ÊÓÍ¼ ] [ HTMLÒ³Ãæ ]
+     * [ åŠ è½½æ”¶è´§åœ°å€é¡µé¢ ]
+     * @return [ è§†å›¾ ] [ HTMLé¡µé¢ ]
      */
     public function Addres()
     {
@@ -354,19 +352,19 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ Ìí¼ÓÊÕ»õµØÖ· ]
-     * @param Request $request [ ½ÓÊÕÓÃ»§µÄĞÂµØÖ· ]
+     * [ æ·»åŠ æ”¶è´§åœ°å€ ]
+     * @param Request $request [ æ¥æ”¶ç”¨æˆ·çš„æ–°åœ°å€ ]
      */
     public function ImplementAddres(Request $request)
     {
 
 
         $data = $request->all();
-        // ºÏ²¢µØÖ·
-        $address = $data['s1'].'ÊĞ'.$data['s2'].'Ê¡'.$data['s3'];
+        // åˆå¹¶åœ°å€
+        $address = $data['s1'].'ÃŠÃ'.$data['å¸‚'].'çœ'.$data['s3'];
         $detailed = $data['address'];
 
-        // Ìí¼ÓÊı¾İ
+        // æ·»åŠ æ•°æ®
         $addres = new Address;
         $addres->uid = session('home_user')->id;
         $addres->address = $address;
@@ -382,8 +380,8 @@ class PersonalController extends Controller
 
 
     /**
-     * [ É¾³ıÊÕ»õµØÖ· ]
-     * @param [ int ] $id [ µØÖ·µÄID ]
+     * [  åˆ é™¤æ”¶è´§åœ°å€     ]
+     * @param [ int ] $id [ åœ°å€çš„ID ]
      */
     public function DeleteAddress($id)
     {
@@ -396,8 +394,8 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ ¼ÓÔØĞŞ¸ÄµØÖ·Ò³Ãæ ]
-     * @param  $id [µØÖ·ID]
+     * [ åŠ è½½ä¿®æ”¹åœ°å€é¡µé¢ ]
+     * @param  $id [ åœ°å€ID ]
      */
     public function UpdateAddress($id)
     {
@@ -419,15 +417,15 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ Ö´ĞĞĞŞ¸ÄµØÖ· ]
-     * @param Request $request [ ĞèÒªĞŞ¸ÄµÄÊı¾İ ]
+     * [ æ‰§è¡Œä¿®æ”¹åœ°å€ ]
+     * @param Request $request [ éœ€è¦ä¿®æ”¹çš„æ•°æ® ]
      */
     public function ImplementUpdateAddress(Request $request)
     {
 
 
         $data = $request->all();
-        $address = $data['s1'].'ÊĞ'.$data['s2'].'Ê¡'.$data['s3'];
+        $address = $data['s1'].'çœ'.$data['s2'].'å¸‚'.$data['s3'];
         $flight = Address::find($data['id']);
         $flight->address = $address;
         $flight->consignee = $data['consignee'];
@@ -440,9 +438,9 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ ÉèÖÃÄ¬ÈÏµØÖ· ]
+     * [ ç”¨æˆ·è®¾ç½®é»˜è®¤åœ°å€ ]
      * @param Request $request
-     * @param [int]  $id      [ ĞèÒªÉèÎªÄ¬ÈÏµÄID ]
+     * @param [int]  $id      [ ç”¨æˆ·åœ°å€çš„ID ]
      */
     public function DefaultAddress(Request $request,$id)
     {
@@ -471,8 +469,8 @@ class PersonalController extends Controller
 
 
     /**
-     * [ ¼ÓÔØ¸öÈËĞÅÏ¢Ò³Ãæ ]
-     * @return [type] [HTMLÒ³Ãæ]
+     * [ åŠ è½½ä¸ªäººä¿¡æ¯é¡µé¢ ]
+     * @return [ è§†å›¾ ] [ HTMLé¡µé¢ ]
      */
     public function Information()
     {
@@ -491,8 +489,8 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ Ö´ĞĞ¸öÈËĞÅÏ¢ĞŞ¸Ä ]
-     * @param Request $request [Ìø×ªÒ³Ãæ]
+     * [ æ‰§è¡Œä¸ªäººä¿¡æ¯ä¿®æ”¹ ]
+     * @param Request $request [ éœ€è¦æ›´æ–°çš„ä¿¡æ¯ ]
      */
     public function ImplementInformation(Request $request)
     {
@@ -500,9 +498,9 @@ class PersonalController extends Controller
         DB::beginTransaction();
 
 
-        // ¼ÙÈçÓÃ»§»»Í·Ïñ
+        // å‡å¦‚ç”¨æˆ·æ¢å¤´åƒ
         if ($request->hasFile('ufile')) {
-                // É¾µôÔ­Í¼
+                // åˆ æ‰åŸå›¾
             if ($request->input('file') == '/DefaultAvatar/1.jpg') {
                 $file = $request->file('ufile')->store(date('Ymd'));
             }else{
@@ -512,10 +510,10 @@ class PersonalController extends Controller
                 $allow = ['.png','.jpeg','.gif','.jpg'];
 
                 if (!in_array($file,$allow)) {
-                    return back()->with('error','ÇëÉÏ´«Í¼Æ¬ÎÄ¼ş!');
+                    return back()->with('error','è¯·ä¸Šä¼ å›¾ç‰‡æ–‡ä»¶!');
                 }
                 if($_FILES['ufile']['error'] == 1){
-                    return back()->with('error','Í¼Æ¬²»ÄÜ´óÓÚ2M');
+                    return back()->with('error','æ–‡ä»¶ä¸èƒ½å¤§äº2M');
                 }
 
 
@@ -526,7 +524,7 @@ class PersonalController extends Controller
             $file = $request->input('file');
         }
 
-        // Ñ¹ÈëÊı¾İ
+        // æ‰§è¡Œä¿®æ”¹ä¿¡æ¯
         $id = session('home_user')->id;
         $user = Users::find($id);
         $data = $request->all();
@@ -545,18 +543,18 @@ class PersonalController extends Controller
             DB::commit();
             $user_data = Users::where('id', $id)->first();
             session(['home_user'=>$user_data]);
-            return back()->with('success','ĞŞ¸Ä³É¹¦');
+            return back()->with('success','ä¿®æ”¹æˆåŠŸ');
         }else{
             DB::rollBack();
-            return back()->with('error','ĞŞ¸ÄÊ§°Ü!ÇëÉÔºóÖØÊÔ');
+            return back()->with('error','ä¿®æ”¹å¤±è´¥,è¯·ç¨åé‡è¯•!!');
         }
     }
 
 
 
     /**
-     * [ ¼ÓÔØĞŞ¸ÄÃÜÂëÒ³Ãæ ]
-     * @return [ HTML ] [ ÊÓÍ¼ ]
+     * [ åŠ è½½ä¿®æ”¹å¯†ç é¡µé¢ ]
+     * @return [ HTML ] [ è§†å›¾ ]
      */
     public function Password()
     {
@@ -575,8 +573,8 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ Ö´ĞĞĞŞ¸ÄÃÜÂë ]
-     * @param Request $request [ ½ÓÊÕÓÃ»§µÄĞÂÃÜÂë ]
+     * [ æ‰§è¡Œä¿®æ”¹å¯†ç  ]
+     * @param Request $request [ æ¥æ”¶ç”¨æˆ·çš„æ–°å¯†ç  ]
      */
 
     public function ImplementPassword(Request $request)
@@ -594,16 +592,17 @@ class PersonalController extends Controller
         }
 
         if(strlen($data['password'])<6){
-            //¼ì²âÓÃ»§ÃÜÂëµÄ³¤¶ÈÊÇ·ñĞ¡ÓÚ6
+            //æ£€æµ‹ç”¨æˆ·å¯†ç çš„é•¿åº¦æ˜¯å¦å°äº6
             return 3;
             exit;
         }
 
-        // ÃÜÂë¼ÓÃÜ
+        // å¯†ç åŠ å¯†
         if (!Hash::check($upass,$user->password)) {
             return 1;
             exit;
         }
+        // æ›´æ–°æ•°æ®åº“ä¿¡æ¯
         $user->password = Hash::make($upass);
         $res = $user->save();
         if ($res) {
@@ -615,8 +614,8 @@ class PersonalController extends Controller
 
 
     /**
-     * [ ¼ÓÔØÊÕ²ØÒ³Ãæ ]
-     * @return [ HTMl ] [ ÊÕ²ØÒ³Ãæ ]
+     * [ åŠ è½½æ”¶è—é¡µé¢ ]
+     * @return [ HTMl ] [ æ”¶è—é¡µ ]
      */
     public function Collection()
     {
@@ -644,8 +643,8 @@ class PersonalController extends Controller
     }
 
     /**
-     * [ ¼ÓÔØ¶©µ¥¹ÜÀí ]
-     * @return [ HTML object ] [ ÊÓÍ¼,¶©µ¥Êı¾İ ]
+     * [ åŠ è½½è®¢å•ç®¡ç† ]
+     * @return [ HTML object ] [ è§†å›¾,è®¢å•æ•°æ® ]
      */
 
     public function Order()
@@ -684,7 +683,7 @@ class PersonalController extends Controller
     }
 
     /**
-     * ÆÀ¼Û¹ÜÀí
+     * è¯„è®ºé¡µé¢
      * @return [type] [description]
      */
     public function Comment()
@@ -705,9 +704,9 @@ class PersonalController extends Controller
 
 
     /**
-     * [ ÓÃ»§¶©µ¥ÏêÇéÒ³Ãæ ]
-     * @param [int] $id  [ ¶©µ¥ID ]
-     * @param [int] $aid [ µØÖ·ID ]
+     * [ ç”¨æˆ·è®¢å•è¯¦æƒ…é¡µé¢ ]
+     * @param [int] $id  [ è®¢å•ID ]
+     * @param [int] $aid [ åœ°å€ID ]
      */
     public function Commoditydetails($id,$aid)
     {
@@ -720,19 +719,19 @@ class PersonalController extends Controller
         $friendly = self::Friendly();
 
         $weds = weds::find(1);
-        // ÊÕ»õµØÖ·
 
+        // è·å–ç”¨æˆ·çš„æ”¶è´§åœ°å€
         $address = Address::find($aid);
 
         $order = OrderDetails::where('oid',$id)->get();
 
-        // Ö±½Ó·ÖÅä±äÁ¿
+        // ç›´æ¥åˆ†é…å˜é‡
         foreach ($order as $key => $v) {
-            // ¶©µ¥×´Ì¬
+            // è®¢å•çŠ¶æ€
             $dtype = $v->dtype;
-            // ĞŞ¸ÄÊ±¼ä
+            // ä¿®æ”¹æ—¶é—´
             $updated_at = $v->updated_at;
-            // ÊıÁ¿
+            // æ•°é‡
             $onum = $v->onum;
         }
 
@@ -749,8 +748,8 @@ class PersonalController extends Controller
             ]);
     }
     /**
-     * [ ÓÃ»§È·¶¨ÊÕ»õ ]
-     * @param [ int ] $id [¶©µ¥ID]
+     * [ ç”¨æˆ·ç¡®å®šæ”¶è´§ ]
+     * @param [ int ] $id [ è®¢å•ID ]
      */
     public function ConfirmReceipt($id)
     {
@@ -763,7 +762,7 @@ class PersonalController extends Controller
         $order = Order::find($id);
         $order->otype = '3';
         $res = $order->save();
-        // ĞŞ¸Ä×´Ì¬Îª3 ( ÒÑÊÕ»õ )
+        // ä¿®æ”¹çŠ¶æ€ä¸º3 ( å·²æ”¶è´§ )
         $res2 = DB::table('order_details')->where('oid',$id)->update(['dtype' => '3']);
         if ($res && $res2) {
             return  1;
@@ -779,12 +778,12 @@ class PersonalController extends Controller
 
 
     /**
-     * [ ÓÃ»§É¾³ı¶©µ¥ ]
-     * @param [ int ] $id [ ¶©µ¥ID ]
+     * [ ç”¨æˆ·åˆ é™¤è®¢å• ]
+     * @param [ int ] $id [ è®¢å•ID ]
      */
     public function DeleteOrders($id)
     {
-        // É¾³ıÊı¾İ
+        // åˆ é™¤æ•°æ®
         $res1 = DB::table('order')->where('id',$id)->delete();
         $res2 = DB::table('order_details')->where('oid',$id)->delete();
         if ($res1 && $res2) {

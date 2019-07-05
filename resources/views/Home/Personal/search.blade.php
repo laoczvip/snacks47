@@ -37,13 +37,8 @@
 					<div class="am-g am-g-fixed">
 						<div class="am-u-sm-12 am-u-md-12">
 	                  	<div class="theme-popover">
-							<div class="searchAbout">
-								<span class="font-pale">相关搜索：</span>
-								<a title="坚果" href="/h/#">坚果</a>
-								<a title="瓜子" href="/h/#">瓜子</a>
-								<a title="鸡腿" href="/h/#">豆干</a>
-
-							</div>
+	                  	<br>
+	                  	<br>
 							<ul class="select">
 								<p class="title font-normal">
 									<span class="fl">松子</span>
