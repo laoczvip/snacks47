@@ -66,6 +66,8 @@
                                             <div class="user DefaultAddr">
                                                     <span class="buy-user" id="name">{{ $v['consignee'] }}</span>
                                                     <span class="buy-phone" id="tel">{{ $v['atel'] }}</span>
+                                                    <input type="hidden" id="asyfgduyas" value="{{$v['id']}}">
+
                                             </div>
                                             <div class="default-address DefaultAddr">
                                                     <span class="buy-line-title buy-line-title-type">收货地址：</span>
@@ -319,6 +321,10 @@
     </body>
 
 <script>
+    // 默认选择第一个地址
+    var a = $("#asyfgduyas").val();
+    $('#addresss').val(a);
+
     function asjh(id){
          $('#addresss').val(id);
     }

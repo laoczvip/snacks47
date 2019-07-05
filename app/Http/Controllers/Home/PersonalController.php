@@ -361,7 +361,7 @@ class PersonalController extends Controller
 
         $data = $request->all();
         // 合并地址
-        $address = $data['s1'].'ÊÐ'.$data['市'].'省'.$data['s3'];
+        $address = $data['s1'].'市'.$data['s2'].'省'.$data['s3'];
         $detailed = $data['address'];
 
         // 添加数据

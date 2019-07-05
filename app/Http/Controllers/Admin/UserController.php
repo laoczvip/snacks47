@@ -39,12 +39,6 @@ class UserController extends Controller
         return view('admin.user.create');
     }
 
-    /**
-     *
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     /**
      * 执行添加用户
@@ -69,7 +63,6 @@ class UserController extends Controller
         $user->type = $data['type'];
         $user->password = Hash::make($data['upass']);
         $user->token = str_random(30);
-        $user->status = 1;
         $res1  = $user->save();
         if ($res1) {
             // 获取uid

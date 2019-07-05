@@ -34,7 +34,7 @@
         <tr>
             <td class="center">{{ $v->id }}</td>
             <td class="center"><img src="/uploads/{{ $v->userinfo->ufile }}" width="50" height="50"/></td>
-            <td>{{ $v->name }}</td>
+            <td class="center">{{ $v->name }}</td>
             <td class="center">{{ $v->number }}</td>
             <td class="center">{{ $v->userinfo->tel or '暂无数据'   }}</td>
             <td class="center"><p>{{ $v->userinfo->email  or '暂无数据' }}</p></td>
