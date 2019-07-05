@@ -68,6 +68,7 @@
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes" >
 								@forelse($goods_all as $good_child)
+									@if($good_child->status==0)
 									<li>
 										<div class="i-pic limit">
 											<a href="/home/personal/introduction?ids={{$good_child->gid}}"><img src="/uploads/{{$good_child->showcase}}" style="height:209px;"/></a>
@@ -81,6 +82,7 @@
 											</p>
 										</div>
 									</li>
+									@endif
 								@empty
 								<div style="text-align:center; margin:20px auto;">---暂无资源----</div>
 								@endforelse

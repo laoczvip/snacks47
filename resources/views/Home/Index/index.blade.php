@@ -440,6 +440,7 @@
                     <div class="am-u-sm-5 am-u-md-4 text-one list ">
                         <div class="word">
                         @forelse($cate->sub as $val)
+
                          @if($val->status==1)
                             <a class="outer" href="#"><span class="inner"><b class="text">{{$val->title}}</b></span></a>
                          @endif
@@ -461,18 +462,20 @@
                                  @if($goods_data->cid==$cate_datas->id)
                                      @if($goods_data->sid == 0)
                                         @if($cate_datas->status==1)
-                                        <div class="am-u-sm-3 am-u-md-2 text-two">
-                                            <div class="outer-con">
-                                                <div class="title " style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:100px;">
-                                                   {{$goods_data->title}}
-                                                </div>
-                                                <div class="sub-title ">
-                                                    ¥{{$goods_data->price}}
-                                                </div>
-                                                <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-                                            </div>
-                                            <a href="/home/personal/introduction?ids={{$goods_data->gid}}&id={{$goods_data->id}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
-                                        </div>
+                                          @if($goods_data->status==0)
+                                          <div class="am-u-sm-3 am-u-md-2 text-two">
+                                              <div class="outer-con">
+                                                  <div class="title " style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:100px;">
+                                                     {{$goods_data->title}}
+                                                  </div>
+                                                  <div class="sub-title ">
+                                                      ¥{{$goods_data->price}}
+                                                  </div>
+                                                  <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+                                              </div>
+                                              <a href="/home/personal/introduction?ids={{$goods_data->gid}}&id={{$goods_data->id}}"><img  height="60%" src="/uploads/{{$goods_data->showcase}}" /></a>
+                                          </div>
+                                          @endif
                                       @endif
                                     @endif
                                 @endif

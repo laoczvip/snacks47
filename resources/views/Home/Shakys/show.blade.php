@@ -30,7 +30,7 @@
            <div class="search">
             <div class="search-list">
             <div class="nav-table">
-                       <div class="long-title"><span class="all-goods">秒杀商品</span></div>
+                       <div class="long-title"><span class="all-goods">活动商品</span></div>
 
                        <div class="nav-cont">
                             <ul>
