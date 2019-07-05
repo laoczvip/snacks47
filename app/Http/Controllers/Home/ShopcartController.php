@@ -15,6 +15,8 @@ class ShopcartController extends Controller
      */
     public function Index()
     {
+
+
         // 判断购物车里是否已经有商品
         if (!empty($_SESSION['car'])) {
             $data = $_SESSION['car'];
@@ -153,6 +155,11 @@ class ShopcartController extends Controller
      */
     public function Payment()
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
+
+
         if (!empty($_SESSION['car'])) {
             $data = $_SESSION['car'];
         }else{
