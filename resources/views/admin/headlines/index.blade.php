@@ -90,11 +90,11 @@
 								let hcontent = $(obj).parent().next().find('div').first().html();
 
 								// 赋值
-								$('#myModal .modal-title').html(htitle);
-								$('#myModal .modal-body').html(hcontent);
+								$('#myModals .modal-title').html(htitle);
+								$('#myModals .modal-body').html(hcontent);
 
 								// 显示模态框
-								$('#myModal').modal('show')
+								$('#myModals').modal('show')
 							}
 						</script>
 
@@ -113,7 +113,7 @@
         </script>
 
 				<!-- Modal -->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							  <div class="modal-dialog" role="document">
 							    <div class="modal-content">
 							      <div class="modal-header">
@@ -134,6 +134,31 @@
 							    </div>
 							  </div>
 						</div>
+
+            <!-- Modal 查看文章-->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">文章状态</h4>
+                    </div>
+                    <div class="modal-body">
+                    <form action="/admin/headlines/changeStatus" method="get">
+                  <input type="hidden" name="id" value="">
+                  <div class="form-group">
+                  <br>
+                        未开启:<input type="radio" name="status" value="0" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        开启:<input type="radio" name="status" value="1">
+                  </div>
+                  <input type="submit" class="btn btn-success">
+                </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            
       <!-- 显示页码 -->
       <aside class="paging">
         {{ $headlines->appends(['search'=>$search])->links() }}
