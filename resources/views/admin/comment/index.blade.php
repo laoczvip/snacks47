@@ -1,14 +1,21 @@
 @extends('admin.index.index')
 
 @section('center')
+<style type="text/css">
+    .center{
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+</style>
     <section class="rt_wrap content mCustomScrollbar">
  <div class="rt_content">
       <div class="page_title">
        <h2 class="fl">评论列表</h2>
       </div>
-      <form action="friendly" method="get">
+      <form action="" method="get">
       <section class="mtb">
-         <input type="text" name="find" class="textbox textbox_225" placeholder="查询..." autocomplete="Off"/>
+         <input type="text" name="find" class="textbox textbox_225" placeholder="请输入要查找的评论内容..." autocomplete="Off"/>
          <input type="submit" value="查询" class="group_btn"/>
       </section>
       </form>
@@ -47,7 +54,7 @@
 
       <aside class="paging">
             <!-- 分页 -->
-           {{$comment->links()}}
+           {{ $comment->appends($params)->links() }}
       </aside>
  </div>
 

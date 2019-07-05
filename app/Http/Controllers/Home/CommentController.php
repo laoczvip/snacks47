@@ -92,6 +92,9 @@ class CommentController extends Controller
      */
     public function Index(Request $request)
     {
+        if (!session('type')) {
+            return redirect("/login");
+        };
         $data = DB::table('comment');
         $uid = session('home_user')->id;
         $oid = $request->input('oid',0);

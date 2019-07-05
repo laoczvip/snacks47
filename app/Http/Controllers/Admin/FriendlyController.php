@@ -12,7 +12,7 @@ class FriendlyController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 友情链接列表 显示
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -29,18 +29,16 @@ class FriendlyController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * 友情链接 添加
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
         return view('admin.friendly.create');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * 数据上传库
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -87,20 +85,9 @@ class FriendlyController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified resource.
-     *
+     * 友情链接显示修改页面 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -113,9 +100,6 @@ class FriendlyController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
      * @param  友情链接 修改
      * @return \Illuminate\Http\Response
      */
@@ -156,7 +140,6 @@ class FriendlyController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      *执行删除
      * @param  友情链接 删除
      * @return \Illuminate\Http\Response
