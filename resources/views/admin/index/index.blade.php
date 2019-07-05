@@ -13,16 +13,14 @@
         <script type="text/javascript" src="/a/js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-
-
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
         <link rel="stylesheet" href="/a/css/switcher.css">
         <!-- 首页统计 -->
         <link rel="stylesheet" type="text/css" href="/aa/css/admin.css"/>
         <script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
         <script src="/aa/echarts/echarts.js"></script>
         <script type="text/javascript" src="/utf8-php/ueditor.config.js"></script>
+
         <!-- 编辑器源码文件 -->
         <script type="text/javascript" src="/utf8-php/ueditor.all.js"></script>
     </head>
@@ -272,7 +270,7 @@
                         <li class="col-sm-12 col-md-4 col-xs-12">
                             <a style="text-decoration:none" href="javascript:;" class="clearfix">
                                 <div class="icon-bg bg-blue f-l">
-                                    <span class="iconfont">&#xe602;</span>
+                                    <span class="iconfont">&#xe502;</span>
                                 </div>
                                 <div class="right-text-con">
                                     <p class="name">商品数量</p>
@@ -286,7 +284,7 @@
                         <li class="col-sm-12 col-md-4 col-xs-12">
                             <a style="text-decoration:none" href="javascript:;" class="clearfix">
                                 <div class="icon-bg bg-green f-l">
-                                    <span class="iconfont">&#xe605;</span>
+                                    <span class="iconfont">&#xe600;</span>
                                 </div>
                                 <div class="right-text-con">
                                     <p class="name">总营业额</p>

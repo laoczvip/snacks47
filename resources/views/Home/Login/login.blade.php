@@ -15,10 +15,9 @@
     <link rel="icon" href="/uploads/{{ $weds->icon }}"/>
     <script src="/layui/layui.js"></script>
 </head>
-
 <body>
     <div class="login-boxtitle">
-        <a href="/"><img alt="logo" src="/h/images/logobig.png" /></a>
+        <a href="/index.php"><img alt="logo" src="/uploads/{{ $weds->logo }}" /></a>
     </div>
     <div class="login-banner">
         <div class="login-main">
