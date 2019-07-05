@@ -298,21 +298,21 @@
 						<ul class="like_list">
 							<li>
 								<div class="s_picBox">
-									<a class="s_pic" href="/h/#"><img src="/h/images/cp.jpg"></a>
+									<a class="s_pic" onclick="asdasdasd()"><img src="/h/images/cp.jpg"></a>
 								</div> <a class="txt" target="_blank" href="/h/#">萨拉米 1+1小鸡腿</a>
 								<div class="info-box"> <span class="info-box-price">¥ 29.90</span> <span class="info-original-price">￥ 199.00</span> </div>
 							</li>
 							<li class="plus_icon"><i>+</i></li>
 							<li>
 								<div class="s_picBox">
-									<a class="s_pic" href="/h/#"><img src="/h/images/cp2.jpg"></a>
+									<a class="s_pic" onclick="asdasdasd()"><img src="/h/images/cp2.jpg"></a>
 								</div> <a class="txt" target="_blank" href="/h/#">ZEK 原味海苔</a>
 								<div class="info-box"> <span class="info-box-price">¥ 8.90</span> <span class="info-original-price">￥ 299.00</span> </div>
 							</li>
 							<li class="plus_icon"><i>=</i></li>
 							<li class="total_price">
 								<p class="combo_price"><span class="c-title">套餐价:</span><span>￥35.00</span> </p>
-								<p class="save_all">共省:<span>￥463.00</span></p> <a href="/h/#" class="buy_now">立即购买</a> </li>
+								<p class="save_all">共省:<span>￥463.00</span></p> <a  class="buy_now" onclick="asdasdasd()">立即购买</a> </li>
 							<li class="plus_icon"><i class="am-icon-angle-right"></i></li>
 						</ul>
 					</div>
@@ -332,7 +332,7 @@
 						     	@forelse($goods_all as $good_child)
 							      <li class="first">
 							      	<div class="p-img">
-							      		<a  href="/home/personal/introduction?id={{$good_child->gid}}&cid={{$good_child->cid}}"> <img class="" src="/uploads/{{$good_child->showcase}}"> </a>
+							      		<a  href="/home/personal/introduction?ids={{$good_child->gid}}&cid={{$good_child->cid}}"> <img class="" src="/uploads/{{$good_child->showcase}}"> </a>
 							      	</div>
 							      	<div class="p-name"><a href="/h/#">
 							      		{{$good_child->title}}
@@ -362,7 +362,7 @@
 									</a>
 
 								</li>
-								
+
 							</ul>
 
 							<div class="am-tabs-bd">
@@ -397,7 +397,7 @@
                                     	<div class="rate">
                                     		<strong><span>{{$haopingdu}}%</span></strong><br> <span>好评度</span>
                                     	</div>
-                                       
+
                                     </div>
                                     <div class="clear"></div>
 									<div class="tb-r-filter-bar">
@@ -477,14 +477,14 @@
 									<div class="clear"></div>
 
 									<!--分页 -->
-									
+
 									<div class="clear"></div>
 
 									<div class="tb-reviewsft">
 										<div class="tb-rate-alert type-attention">购买前请查看该商品的 <a href="/h/#" target="_blank">购物保障</a>，明确您的售后保障权益。</div>
 									</div>
 
-							
+
 							</div>
 
 						</div>
@@ -562,7 +562,9 @@
 	    	})
 	    }
 
-
+	    function asdasdasd(){
+	    	layer.msg('正在开发中', {icon: 6});
+	    }
 
 	</script>
 </html>
