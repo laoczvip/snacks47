@@ -42,9 +42,8 @@
                 </div>
             </div>
 				<ol class="am-breadcrumb am-breadcrumb-slash">
-					<li><a href="/h/#">首页</a></li>
-					<li><a href="/h/#">分类</a></li>
-					<li class="am-active">内容</li>
+					<li><a href="/index.php">首页</a></li>
+					<li class="am-active">商品详情</li>
 				</ol>
 				<script type="text/javascript">
 					$(function() {});
