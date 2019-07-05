@@ -100,12 +100,12 @@
                         <hr/>
                         <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
                             @forelse($address as $k=>$v)
-                            <li onclick="defaultAddr({{$v['id']}})" class="user-addresslist
+                            <li  class="user-addresslist
                             @if($v['default'] == 1)
                             defaultAddr
                             @endif
                             ">
-                                <span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
+                                <span class="new-option-r" onclick="defaultAddr({{$v['id']}})"><i class="am-icon-check-circle"></i>默认地址</span>
                                 <p class="new-tit new-p-re">
                                     <span class="new-txt">{{$v['consignee']}}</span>
                                     <span class="new-txt-rd2">{{$v['atel']}}</span>

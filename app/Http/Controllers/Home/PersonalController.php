@@ -38,7 +38,7 @@ class PersonalController extends Controller
     {
 
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $friendly = self::Friendly();
@@ -334,7 +334,7 @@ class PersonalController extends Controller
     public function Addres()
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $friendly = self::Friendly();
@@ -400,7 +400,7 @@ class PersonalController extends Controller
     public function UpdateAddress($id)
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $friendly = self::Friendly();
@@ -446,7 +446,7 @@ class PersonalController extends Controller
     {
 
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $diz = DB::table('address')->where('default', '1')->first();
@@ -475,7 +475,7 @@ class PersonalController extends Controller
     public function Information()
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $friendly = self::Friendly();
@@ -559,7 +559,7 @@ class PersonalController extends Controller
     public function Password()
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $friendly = self::Friendly();
@@ -580,7 +580,7 @@ class PersonalController extends Controller
     public function ImplementPassword(Request $request)
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $data = $request->all();
@@ -603,7 +603,7 @@ class PersonalController extends Controller
             exit;
         }
         // 更新数据库信息
-        $user->password = Hash::make($upass);
+        $user->password = Hash::make($data['password']);
         $res = $user->save();
         if ($res) {
             return 4;
@@ -620,7 +620,7 @@ class PersonalController extends Controller
     public function Collection()
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $user = Users::find(session('home_user')->id);
@@ -650,7 +650,7 @@ class PersonalController extends Controller
     public function Order()
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $friendly = self::Friendly();
@@ -689,7 +689,7 @@ class PersonalController extends Controller
     public function Comment()
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $count = ShopcartController::CountCar();
@@ -711,7 +711,7 @@ class PersonalController extends Controller
     public function Commoditydetails($id,$aid)
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $count = ShopcartController::CountCar();
@@ -754,7 +754,7 @@ class PersonalController extends Controller
     public function ConfirmReceipt($id)
     {
         if (!session('type')) {
-            return redirect("/login");
+            return redirect("/index.php/login");
         };
 
         $friendly = self::Friendly();
