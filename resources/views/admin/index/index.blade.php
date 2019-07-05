@@ -20,6 +20,7 @@
         <script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
         <script src="/aa/echarts/echarts.js"></script>
         <script type="text/javascript" src="/utf8-php/ueditor.config.js"></script>
+        <link rel="icon" href="/a/images/ico.png"/>
 
         <!-- 编辑器源码文件 -->
         <script type="text/javascript" src="/utf8-php/ueditor.all.js"></script>

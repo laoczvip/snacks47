@@ -22,7 +22,7 @@
         @endif
             <ul class="message-r">
                 <div class="topMessage home">
-                    <div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
+                    <div class="menu-hd"><a href="/index.php" target="_top" class="h">商城首页</a></div>
                 </div>
                 <div class="topMessage my-shangcheng">
                     <div class="menu-hd MyShangcheng"><a href="/center/index" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -45,8 +45,8 @@
 
             <div class="nav white">
                 <!-- <div class="logo"><img src="/h/images/logo.png" /></div> -->
-                <div class="logoBig">
-                    <li><a href="/"><img src="/uploads/{{$weds->logo}}" /></a></li>
+                <div class="logoBig" style="margin-left: -131px;">
+                    <li><a href="/"><img src="/uploads/{{$weds->logo}}" style="width: 180%;"/></a></li>
                 </div>
 
                 <div class="search-bar pr">
